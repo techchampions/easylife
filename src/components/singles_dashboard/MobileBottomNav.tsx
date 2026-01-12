@@ -1,23 +1,18 @@
 import React from "react";
-import MobileNavItem from "./MobileNavItem";
-import { CirclePile, Home, MessageCircle, Search } from "lucide-react";
+import { Home, MessageCircle, Search } from "lucide-react";
+import MobileNavItem from "../couples_dashboard/MobileNavItem";
 const MobileBottomNav: React.FC = () => {
   const NAVITEMS = [
-    { label: "Home", icon: <Home size={25} />, path: "/couples" },
+    { label: "Home", icon: <Home size={25} />, path: "/singles" },
     {
       label: "Discover",
       icon: <Search size={25} />,
-      path: "/couples/discover",
-    },
-    {
-      label: "Mentorship",
-      icon: <CirclePile size={25} />,
-      path: "/couples/mentorship",
+      path: "/singles/discover",
     },
     {
       label: "Messages",
       icon: <MessageCircle size={25} />,
-      path: "/couples/messages",
+      path: "/singles/messages",
     },
   ];
   return (

@@ -30,10 +30,12 @@ const ProfilePicture: React.FC = () => {
       .required("Phone number is required")
       .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
       .min(10, "Phone number too short"),
-    spousephoneNumber: Yup.string()
-      .required("Phone number is required")
-      .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
-      .min(10, "Phone number too short"),
+    ...(maritalStatus === "married" && {
+      spousephoneNumber: Yup.string()
+        .required("Phone number is required")
+        .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
+        .min(10, "Phone number too short"),
+    }),
     ...(maritalStatus === "married" && {
       spouseProfilePicture: Yup.mixed().required(
         "Spouse's picture is required"
@@ -44,7 +46,11 @@ const ProfilePicture: React.FC = () => {
     modal.openModal(<PersonalValues3 />);
   };
   return (
-    <div className="flex flex-col w-lg   max-w-xs md:max-w-lg max-h-[75vh] overflow-y-scroll scrollbar-hide">
+    <div
+      className={`flex flex-col w-lg   max-w-xs ${
+        maritalStatus === "married" ? " md:max-w-lg" : "md:max-w-sm"
+      } max-h-[75vh] overflow-y-scroll scrollbar-hide`}
+    >
       <div
         className="flex items-center gap-2 cursor-pointer absolute top-4 left-4"
         onClick={goBack}
@@ -100,20 +106,26 @@ const ProfilePicture: React.FC = () => {
                     />
                   )}
                 </div>
-                <div className="grid md:grid-cols-2 gap-2">
+                <div
+                  className={`grid ${
+                    maritalStatus === "married" && "md:grid-cols-2"
+                  } gap-2`}
+                >
                   <div className="space-y-1">
                     <div className="text-base">What`s your phone No.?</div>
                     <InputField name="phoneNumber" placeholder="Phone number" />
                   </div>
-                  <div className="space-y-1">
-                    <div className="text-base">
-                      What`s your Spouse phone No.?
+                  {maritalStatus === "married" && (
+                    <div className="space-y-1">
+                      <div className="text-base">
+                        What`s your Spouse phone No.?
+                      </div>
+                      <InputField
+                        name="spousephoneNumber"
+                        placeholder="Phone number"
+                      />
                     </div>
-                    <InputField
-                      name="spousephoneNumber"
-                      placeholder="Phone number"
-                    />
-                  </div>
+                  )}
                 </div>
               </div>
               <div className="flex justify-center w-full gap-4 mt-4">

@@ -5,12 +5,10 @@ import { useUserStore } from "../zustand/user.state";
 import SinglesRoutes from "./Singles.Route";
 import CouplesRoutes from "./Couples.Route";
 import CouplesLayout from "../pages/couples/Layout";
-import CouplesIndex from "../pages/couples/Index";
 import LandingRoute from "./Landing.Route";
 import LandingPageLayout from "../pages/landing/Layout";
 import Toast from "../components/global/Toast";
 import Modal from "../components/global/Modal";
-import SinglesPageIndex from "../pages/singles/Index";
 import LandingPageIndex from "../pages/landing";
 import About from "../pages/landing/About";
 import Contact from "../pages/landing/Contact";
@@ -20,6 +18,7 @@ import Messages from "../pages/general_dashboard/Messages";
 import Notifications from "../pages/general_dashboard/Notifications";
 import ProfileScreen from "../pages/general_dashboard/Profile";
 import SocialFeedPage from "../pages/couples/Mentorship";
+import Index from "../pages/general_dashboard/Index";
 const SinglesLayout = lazy(() => import("../pages/singles/Layout"));
 
 const AppRoutes = () => {
@@ -50,10 +49,11 @@ const AppRoutes = () => {
 
             <Route path="/singles/*" element={<SinglesRoutes />}>
               <Route element={<SinglesLayout />}>
-                <Route index element={<SinglesPageIndex />} />
+                <Route index element={<Index />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="discover" element={<Discover />} />
                 <Route path="messages" element={<Messages />} />
+                <Route path="profile" element={<ProfileScreen />} />
                 <Route path="notifications" element={<Notifications />} />
               </Route>
             </Route>
@@ -61,7 +61,7 @@ const AppRoutes = () => {
             {/* Login Route */}
             <Route path="/couples/*" element={<CouplesRoutes />}>
               <Route element={<CouplesLayout />}>
-                <Route index element={<CouplesIndex />} />
+                <Route index element={<Index />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="discover" element={<Discover />} />
                 <Route path="messages" element={<Messages />} />

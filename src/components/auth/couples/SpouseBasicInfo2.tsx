@@ -9,6 +9,7 @@ import InputField from "../../form/InputField";
 import Button from "../../global/Button";
 import SpouseBasicInfo from "./SpouseBasicInfo";
 import MarriageHistory from "./MarriageHistory";
+import TagsInput from "../../form/TagsInputFied";
 
 const validationSchema = Yup.object().shape({
   //   address: Yup.string().required("required"),
@@ -26,7 +27,10 @@ const validationSchema = Yup.object().shape({
   spouse_nationality: Yup.string().required("required"),
   spouse_raceOrTribe: Yup.string().required("required"),
   spouse_religion: Yup.string().required("required"),
-  spouse_languages: Yup.string().required("required"),
+  spouse_languages: Yup.array()
+    .of(Yup.string().trim().min(2))
+    .max(12, "Too many interests")
+    .min(1, "Add at least one interest"),
 });
 
 const SpouseBasicInfo2: React.FC = () => {
@@ -55,13 +59,13 @@ const SpouseBasicInfo2: React.FC = () => {
     spouse_nationality: spouse_nationality || "",
     spouse_raceOrTribe: spouse_raceOrTribe || "",
     spouse_religion: spouse_religion || "",
-    spouse_languages: spouse_language || "",
+    spouse_languages: spouse_language,
   };
   const goBack = () => {
     modal.openModal(<SpouseBasicInfo />);
   };
   return (
-    <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh]">
+    <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh] max-h-[75vh] overflow-y-scroll scrollbar-hide">
       <div
         className="flex items-center gap-2 cursor-pointer absolute top-4 left-4"
         onClick={goBack}
@@ -159,11 +163,10 @@ const SpouseBasicInfo2: React.FC = () => {
                   </div>
                   <div className="space-y-1">
                     <div className="text-lg">spouse_Languages spoken?</div>
-                    <InputField
+                    <TagsInput
                       name="spouse_languages"
-                      type="text"
-                      placeholder="E.g. English, Yoruba"
-                      className="text-2xl font-bold rounded-xl py-3"
+                      placeholder="E.g. English... (press enter)"
+                      className=" font-bold rounded-xl"
                     />
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { ArrowLeft, ArrowRight, Info } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
 import { useModal } from "../../zustand/modal.state";
 import InputField from "../form/InputField";
@@ -10,6 +10,7 @@ import SpouseBasicInfo from "./couples/SpouseBasicInfo";
 import LocationAutocomplete from "../form/AutoLocationInput";
 import BioData from "./BioData";
 import { useOnboardingFormData } from "../../zustand/onboardingData.state";
+import TagsInput from "../form/TagsInputFied";
 
 const validationSchema = Yup.object().shape({
   //   address: Yup.string().required("required"),
@@ -27,7 +28,10 @@ const validationSchema = Yup.object().shape({
   nationality: Yup.string().required("required"),
   raceOrTribe: Yup.string().required("required"),
   religion: Yup.string().required("required"),
-  languages: Yup.string().required("required"),
+  languages: Yup.array()
+    .of(Yup.string().trim().min(2))
+    .max(12, "Too many interests")
+    .min(1, "Add at least one interest"),
 });
 
 const BasicInfo2: React.FC = () => {
@@ -57,13 +61,13 @@ const BasicInfo2: React.FC = () => {
     nationality: nationality || "",
     raceOrTribe: raceOrTribe || "",
     religion: religion || "",
-    languages: language || "",
+    languages: language,
   };
   const goBack = () => {
     modal.openModal(<BasicInfo />);
   };
   return (
-    <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh]">
+    <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh] max-h-[75vh] overflow-y-scroll scrollbar-hide">
       <div
         className="flex items-center gap-2 cursor-pointer absolute top-4 left-4"
         onClick={goBack}
@@ -162,15 +166,14 @@ const BasicInfo2: React.FC = () => {
                   </div>
                   <div className="space-y-1">
                     <div className="text-lg">Languages spoken?</div>
-                    <InputField
+                    <TagsInput
                       name="languages"
-                      type="text"
-                      placeholder="E.g. English, Yoruba"
-                      className="text-2xl font-bold rounded-xl py-3"
+                      placeholder="E.g. English... (press enter)"
+                      className="font-bold rounded-xl"
                     />
                   </div>
                 </div>
-                <div className="flex justify-center w-full gap-4 mt-4">
+                <div className="flex justify-center w-full gap-4 mt-3">
                   <Button
                     label="Proceed"
                     // label={`${
@@ -186,7 +189,6 @@ const BasicInfo2: React.FC = () => {
                     // isLoading={isLoading}
                     loadingText="Checking email..."
                     disabled={!isValid}
-                    icon={!isValid ? <Info /> : null}
                     rightIcon={<ArrowRight />}
                   />
                 </div>

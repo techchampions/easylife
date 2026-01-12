@@ -49,7 +49,7 @@ const SpouseBasicInfo: React.FC = () => {
     return null;
   };
   return (
-    <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh]">
+    <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh] max-h-[75vh] overflow-y-scroll scrollbar-hide">
       <div
         className="flex items-center gap-2 cursor-pointer absolute top-4 left-4"
         onClick={goBack}
