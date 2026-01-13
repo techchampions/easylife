@@ -6,7 +6,7 @@ import Button from "../global/Button";
 import { useModal } from "../../zustand/modal.state";
 import { useUserStore } from "../../zustand/user.state";
 import Login from "../auth/Login";
-import GetStarted from "../auth/GetStarted";
+import Signup from "../auth/Signup";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,7 +30,7 @@ export default function Navbar() {
       } else {
         navigate("/couples");
       }
-    } else openModal(<GetStarted />);
+    } else openModal(<Signup />);
   };
   const openLoginModal = () => {
     openModal(<Login />);

@@ -9,7 +9,7 @@ const RightSideBar: React.FC = () => {
     { user: "Susan", message: "How are you doing?" },
   ];
   return (
-    <div className="space-y-4 p-5 flex flex-col">
+    <div className="space-y-4 p-5 flex flex-col h-screen">
       <div className="bg-white rounded-2xl p-5">
         <div className="flex items-start gap-2">
           <div className="">

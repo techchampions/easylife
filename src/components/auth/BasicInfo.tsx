@@ -13,7 +13,10 @@ import { useOnboardingFormData } from "../../zustand/onboardingData.state";
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("required"),
   lastName: Yup.string().required("required"),
-  email: Yup.string().required("required"),
+  phone: Yup.string()
+    .required("Phone number is required")
+    .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
+    .min(10, "Phone number too short"),
   dateOfBirth: Yup.string().required("required"),
   placeOfBirth: Yup.string().required("required"),
 });
@@ -25,14 +28,14 @@ const BasicInfo: React.FC = () => {
     setOnboardingFormData,
     firstName,
     lastName,
-    email,
+    singleUserPhone,
     dateOfBirth,
     placeOfBirth,
   } = useOnboardingFormData();
   const initialValues = {
     firstName: firstName || "",
     lastName: lastName || "",
-    email: email || "",
+    phone: singleUserPhone || "",
     dateOfBirth: dateOfBirth || "",
     placeOfBirth: placeOfBirth || "",
     langs: [],
@@ -70,7 +73,7 @@ const BasicInfo: React.FC = () => {
             setOnboardingFormData({
               firstName: values.firstName,
               lastName: values.lastName,
-              email: values.email,
+              singleUserPhone: values.phone,
               dateOfBirth: values.dateOfBirth,
               placeOfBirth: values.placeOfBirth,
             });
@@ -80,7 +83,7 @@ const BasicInfo: React.FC = () => {
           {({ isValid, values }) => {
             return (
               <Form className="flex flex-col gap-8 justify-between min-h-55">
-                <CheckEmail email={values.email} />
+                <CheckEmail email={values.phone} />
                 <div className="space-y-5">
                   <div className="space-y-1">
                     <div className="text-lg">What is your name?</div>
@@ -100,11 +103,11 @@ const BasicInfo: React.FC = () => {
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <div className="text-lg">What is your Email address?</div>
+                    <div className="text-lg">What is your Phone No.?</div>
                     <InputField
-                      name="email"
+                      name="phone"
                       type="text"
-                      placeholder="Email address"
+                      placeholder="Phone Number"
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>

@@ -7,7 +7,12 @@ interface Props {
 const Header: React.FC<Props> = ({ name }) => {
   return (
     <div className="bg-white rounded-2xl p-5 my-5 w-[95%] md:w-full mx-auto flex items-center justify-between">
-      <div className="capitalize text-2xl md:text-4xl font-bold">{name}</div>
+      <div className="md:hidden w-1/3">
+        <img src="/images/logo.png" alt="" className=" h-12" />
+      </div>
+      <div className="hidden md:block capitalize text-2xl md:text-4xl font-bold">
+        {name}
+      </div>
       <div className="flex md:hidden items-center gap-5">
         <Link to={"/couples/notifications"}>
           <Bell />

@@ -54,6 +54,7 @@ export const useOnboardingFormData = create<OnboardingFormData>((set) => ({
   profilePicture: null,
   spouseProfilePicture: null,
   otherIssues: "",
+  spousePhone: "",
   setOnboardingFormData: (details) =>
     set((state) => ({ ...state, ...details })),
 
@@ -112,5 +113,6 @@ export const useOnboardingFormData = create<OnboardingFormData>((set) => ({
       profilePicture: null,
       spouseProfilePicture: null,
       otherIssues: "",
+      spousePhone: "",
     }),
 }));

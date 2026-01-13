@@ -111,6 +111,7 @@ type OnboardingFormData = {
   profilePicture: File | null;
   spouseProfilePicture: File | null;
   otherIssues: string;
+  spousePhone: string;
   setOnboardingFormData: (
     details: Partial<
       Omit<

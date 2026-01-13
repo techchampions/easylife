@@ -1,25 +1,26 @@
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-// import { useLogin } from "../../hooks/Auth";
+// import { useSignup } from "../../hooks/Auth";
 import Button from "../global/Button";
 import { useModal } from "../../zustand/modal.state";
 import { Eye, EyeOff } from "lucide-react";
 import InputField from "../form/InputField";
-import Signup from "./Signup";
+import Login from "./Login";
+import GetStarted from "./GetStarted";
 
-const Login = () => {
+const Signup = () => {
   const { openModal } = useModal();
   const [showPassword, setShowPassword] = useState(false);
   //   const { mutate: login, isPending } = useLogin();
   // Password visibility toggle logic
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const initialValues = {
-    username: "",
+    email: "",
     password: "",
   };
   const validationSchema = Yup.object({
-    username: Yup.string().required("Required"),
+    email: Yup.string().required("Required"),
     password: Yup.string().required("Required"),
   });
   const handleSubmit = (
@@ -27,30 +28,30 @@ const Login = () => {
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     setSubmitting(false);
+    openModal(<GetStarted />);
     // login(values);
   };
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      // onSubmit={handleSubmit}
+      validateOnMount
       onSubmit={(values, { setSubmitting }) =>
         handleSubmit(values, setSubmitting)
       }
     >
-      {() => (
-        <Form className="space-y-3 flex flex-col px-4 w-fit max-w-sm md:max-w-md">
+      {({ isSubmitting, isValid }) => (
+        <Form className="space-y-3 flex flex-col px-4 w-md max-w-sm md:max-w-md">
           <div className="">
-            <img src="/images/logo.png" alt="" className="w-[45%] " />
-            <div className="pb-4">
-              <h1 className="font-medium text-3xl text-black">Welcome back!</h1>
-              <p className="text-sm text-gray-500">
-                Please enter your valid email address and password
-              </p>
+            <img src="/images/intro.png" alt="" className="w-[40%] mx-auto" />
+            <div className="pb-4 text-center">
+              <h1 className="font-medium text-3xl text-black">
+                Welcome to EasyLife Marriage Mentorship
+              </h1>
             </div>
           </div>
           {/* Render based on state */}
-          <InputField name="username" placeholder="Username" />
+          <InputField name="email" placeholder="Email address" />
           <InputField
             name="password"
             type={showPassword ? "text" : "password"}
@@ -86,19 +87,19 @@ const Login = () => {
           <Button
             type="submit"
             // isLoading={isSubmitting || isPending}
-            // disabled={isSubmitting || !isValid}
-            label="Log In"
-            loadingText="Logging In"
-            className="w-full py-2 rounded-full mt-10"
+            disabled={isSubmitting || !isValid}
+            label="Sign up"
+            loadingText="Loading..."
+            className="w-full py-2 rounded-full mt-10 bg-secondary"
           />
           {/* Link to switch between forms */}
           <p className="text-sm flex gap-1 items-center text-center justify-center">
             <>
-              Are you new?{" "}
+              Already have an account?{" "}
               <Button
-                label="Create an Account"
+                label="Login"
                 className=" ml-1 bg-transparent! text-secondary! font-medium w-fit! underline"
-                onClick={() => openModal(<Signup />)}
+                onClick={() => openModal(<Login />)}
               />
             </>
           </p>
@@ -108,4 +109,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

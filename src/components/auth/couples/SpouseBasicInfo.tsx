@@ -13,7 +13,10 @@ import SpouseBasicInfo2 from "./SpouseBasicInfo2";
 const validationSchema = Yup.object().shape({
   spouse_firstName: Yup.string().required("required"),
   spouse_lastName: Yup.string().required("required"),
-  spouse_email: Yup.string().required("required"),
+  phone: Yup.string()
+    .required("Phone number is required")
+    .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
+    .min(10, "Phone number too short"),
   spouse_dateOfBirth: Yup.string().required("required"),
   spouse_placeOfBirth: Yup.string().required("required"),
 });
@@ -25,14 +28,14 @@ const SpouseBasicInfo: React.FC = () => {
     setOnboardingFormData,
     spouse_firstName,
     spouse_lastName,
-    spouse_email,
+    spousePhone,
     spouse_dateOfBirth,
     spouse_placeOfBirth,
   } = useOnboardingFormData();
   const initialValues = {
     spouse_firstName: spouse_firstName || "",
     spouse_lastName: spouse_lastName || "",
-    spouse_email: spouse_email || "",
+    phone: spousePhone || "",
     spouse_dateOfBirth: spouse_dateOfBirth || "",
     spouse_placeOfBirth: spouse_placeOfBirth || "",
   };
@@ -69,7 +72,7 @@ const SpouseBasicInfo: React.FC = () => {
             setOnboardingFormData({
               spouse_firstName: values.spouse_firstName,
               spouse_lastName: values.spouse_lastName,
-              spouse_email: values.spouse_email,
+              spousePhone: values.phone,
               spouse_dateOfBirth: values.spouse_dateOfBirth,
               spouse_placeOfBirth: values.spouse_placeOfBirth,
             });
@@ -79,7 +82,7 @@ const SpouseBasicInfo: React.FC = () => {
           {({ isValid, values }) => {
             return (
               <Form className="flex flex-col gap-8 justify-between min-h-55">
-                <CheckEmail email={values.spouse_email} />
+                <CheckEmail email={values.phone} />
                 <div className="space-y-5">
                   <div className="space-y-1">
                     <div className="text-lg">What is your name?</div>
@@ -99,11 +102,11 @@ const SpouseBasicInfo: React.FC = () => {
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <div className="text-lg">What is your Email address?</div>
+                    <div className="text-lg">What is your Phone No.?</div>
                     <InputField
-                      name="spouse_email"
+                      name="phone"
                       type="text"
-                      placeholder="Email address"
+                      placeholder="Phone Number"
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
@@ -127,18 +130,8 @@ const SpouseBasicInfo: React.FC = () => {
                 <div className="flex justify-center w-full gap-4 mt-4">
                   <Button
                     label="Proceed"
-                    // label={`${
-                    //   data?.success
-                    //     ? "User with email already exist"
-                    //     : "Proceed"
-                    // }`}
-                    // className={`${
-                    //   data?.success ? "bg-red-700" : "bg-adron-green"
-                    // } rounded-lg`}
                     className="bg-secondary"
                     type="submit"
-                    // isLoading={isLoading}
-                    loadingText="Checking email..."
                     disabled={!isValid}
                     icon={!isValid ? <Info /> : null}
                     rightIcon={<ArrowRight />}

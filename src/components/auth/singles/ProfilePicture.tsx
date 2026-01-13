@@ -6,12 +6,14 @@ import { useModal } from "../../../zustand/modal.state";
 import PersonalValues3 from "./PersonalValues3";
 import ImageInput from "../../form/ImageInput";
 import Button from "../../global/Button";
-import InputField from "../../form/InputField";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
-import SetPassword from "../SetPassword";
+import Congrats from "../Congrats";
+import { useUserStore } from "../../../zustand/user.state";
 
 const ProfilePicture: React.FC = () => {
   const modal = useModal();
+  const { setIsLoggedIn, setUser } = useUserStore();
+
   const {
     profilePicture,
     spouseProfilePicture,
@@ -21,21 +23,21 @@ const ProfilePicture: React.FC = () => {
   const initialValues = {
     profilePicture: profilePicture || null,
     spouseProfilePicture: spouseProfilePicture || null,
-    phoneNumber: "",
-    spousephoneNumber: "",
+    // phoneNumber: "",
+    // spousephoneNumber: "",
   };
   const validationSchema = Yup.object().shape({
     profilePicture: Yup.mixed().required("required"),
-    phoneNumber: Yup.string()
-      .required("Phone number is required")
-      .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
-      .min(10, "Phone number too short"),
-    ...(maritalStatus === "married" && {
-      spousephoneNumber: Yup.string()
-        .required("Phone number is required")
-        .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
-        .min(10, "Phone number too short"),
-    }),
+    // phoneNumber: Yup.string()
+    //   .required("Phone number is required")
+    //   .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
+    //   .min(10, "Phone number too short"),
+    // ...(maritalStatus === "married" && {
+    //   spousephoneNumber: Yup.string()
+    //     .required("Phone number is required")
+    //     .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
+    //     .min(10, "Phone number too short"),
+    // }),
     ...(maritalStatus === "married" && {
       spouseProfilePicture: Yup.mixed().required(
         "Spouse's picture is required"
@@ -73,7 +75,28 @@ const ProfilePicture: React.FC = () => {
               profilePicture: values.profilePicture,
               spouseProfilePicture: values.spouseProfilePicture,
             });
-            modal.openModal(<SetPassword />);
+            setIsLoggedIn(true);
+            setUser({
+              role: maritalStatus === "married" ? 0 : 1,
+              id: 0,
+              email: "string",
+              phone_number: "string",
+              referral_code: "string",
+              first_name: "string",
+              last_name: "string",
+              country: "string",
+              state: "string",
+              lga: "string",
+              otp_verified_at: "string",
+              email_verified_at: "string",
+              profile_picture: "string",
+              gender: "string",
+              address: "string",
+              created_at: "string",
+              updated_at: "string",
+            });
+
+            modal.openModal(<Congrats />);
           }}
         >
           {({ isValid }) => (
@@ -106,7 +129,7 @@ const ProfilePicture: React.FC = () => {
                     />
                   )}
                 </div>
-                <div
+                {/* <div
                   className={`grid ${
                     maritalStatus === "married" && "md:grid-cols-2"
                   } gap-2`}
@@ -126,7 +149,7 @@ const ProfilePicture: React.FC = () => {
                       />
                     </div>
                   )}
-                </div>
+                </div> */}
               </div>
               <div className="flex justify-center w-full gap-4 mt-4">
                 <Button
