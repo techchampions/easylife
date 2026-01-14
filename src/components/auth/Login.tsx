@@ -7,10 +7,14 @@ import { useModal } from "../../zustand/modal.state";
 import { Eye, EyeOff } from "lucide-react";
 import InputField from "../form/InputField";
 import Signup from "./Signup";
+import { useUserStore } from "../../zustand/user.state";
+import { useToast } from "../../zustand/toast.state";
 
 const Login = () => {
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
   const [showPassword, setShowPassword] = useState(false);
+  const { setIsLoggedIn, setUser } = useUserStore();
+  const { showToast } = useToast();
   //   const { mutate: login, isPending } = useLogin();
   // Password visibility toggle logic
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
@@ -27,6 +31,28 @@ const Login = () => {
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     setSubmitting(false);
+    setIsLoggedIn(true);
+    setUser({
+      role: 0,
+      id: 0,
+      email: "string",
+      phone_number: "string",
+      referral_code: "string",
+      first_name: "string",
+      last_name: "string",
+      country: "string",
+      state: "string",
+      lga: "string",
+      otp_verified_at: "string",
+      email_verified_at: "string",
+      profile_picture: "string",
+      gender: "string",
+      address: "string",
+      created_at: "string",
+      updated_at: "string",
+    });
+    showToast("user loggedin successfully", "success");
+    closeModal();
     // login(values);
   };
   return (

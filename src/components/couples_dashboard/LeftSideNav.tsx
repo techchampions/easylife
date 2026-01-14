@@ -9,8 +9,12 @@ import {
   UserCircle,
 } from "lucide-react";
 import NavItem from "./NavItem";
+import { useUserStore } from "../../zustand/user.state";
+import { useToast } from "../../zustand/toast.state";
 
 function SideNav() {
+  const { reset } = useUserStore();
+  const { showToast } = useToast();
   const navItems = [
     { label: "Home", icon: <Home className="w-4 h-4" />, path: "/couples" },
     {
@@ -60,7 +64,13 @@ function SideNav() {
           ))}
         </nav>
         <nav className="space-y-2 p-2">
-          <button className="flex items-center w-full px-7 py-1.75 text-[12px] text-red-500 rounded-full justify-center">
+          <button
+            className="cursor-pointer flex items-center w-full px-7 py-1.75 text-[12px] text-red-500 rounded-full justify-center"
+            onClick={() => {
+              reset();
+              showToast("user logged out successfully", "success");
+            }}
+          >
             <LogOut className="mr-2  w-4 h-4" />
             Logout
           </button>

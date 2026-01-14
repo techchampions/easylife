@@ -7,7 +7,8 @@ import { useModal } from "../../zustand/modal.state";
 import { Eye, EyeOff } from "lucide-react";
 import InputField from "../form/InputField";
 import Login from "./Login";
-import GetStarted from "./GetStarted";
+import { Link } from "react-router-dom";
+import VerifyEmail from "./VerifyEmail";
 
 const Signup = () => {
   const { openModal } = useModal();
@@ -28,7 +29,8 @@ const Signup = () => {
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     setSubmitting(false);
-    openModal(<GetStarted />);
+    console.log(values);
+    openModal(<VerifyEmail />);
     // login(values);
   };
   return (
@@ -42,13 +44,14 @@ const Signup = () => {
     >
       {({ isSubmitting, isValid }) => (
         <Form className="space-y-3 flex flex-col px-4 w-md max-w-sm md:max-w-md">
-          <div className="">
-            <img src="/images/intro.png" alt="" className="w-[40%] mx-auto" />
-            <div className="pb-4 text-center">
-              <h1 className="font-medium text-3xl text-black">
-                Welcome to EasyLife Marriage Mentorship
-              </h1>
-            </div>
+          <div className="mb-8">
+            <h1 className="font-medium text-3xl text-black">
+              Signup with Email
+            </h1>
+            <p className="text-sm">
+              Please enter your email address. We will send you a 4-digit code
+              to verify your account.
+            </p>
           </div>
           {/* Render based on state */}
           <InputField name="email" placeholder="Email address" />
@@ -71,18 +74,18 @@ const Signup = () => {
             }
           />
           {/* Forgot Password Link */}
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2 text-xs px-6">
-              <input
-                type="checkbox"
-                id="remember"
-                className="text-adron-green"
-              />
-              <label htmlFor="remember">Remember me</label>
-            </div>
-            <span className="text-[#FF4A1B] text-xs cursor-pointer">
-              Forgot password?
-            </span>
+          <div className="flex items-center space-x-2 text-xs px-2">
+            <input
+              type="checkbox"
+              id="agree"
+              className="text-primary bg-white"
+            />
+            <label htmlFor="agree">
+              By creating an account, you agree with our{" "}
+              <Link to={`/terms`} className="underline text-primary">
+                Terms of Service
+              </Link>
+            </label>
           </div>
           <Button
             type="submit"
