@@ -33,7 +33,7 @@ const Button: React.FC<ButtonProps> = ({
       className={`w-full bg-primary text-white py-2 rounded-xl cursor-pointer transition duration-300 ${className} ${
         disabled || isLoading
           ? "opacity-50 cursor-not-allowed"
-          : "hover:bg-primary/50"
+          : "hover:opacity-80"
       }`}
     >
       {isLoading ? (

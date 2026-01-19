@@ -11,8 +11,8 @@ import { useToast } from "../../../zustand/toast.state";
 import SpouseBasicInfo2 from "./SpouseBasicInfo2";
 
 const validationSchema = Yup.object().shape({
-  previouslyMarried: Yup.string().required("required"),
-  prevMarriageChildren: Yup.string().when("previouslyMarried", {
+  previously_married: Yup.string().required("required"),
+  prev_marriage_children: Yup.string().when("previously_married", {
     is: "yes",
     then: (schema) => schema.required("required"),
     otherwise: (schema) => schema.notRequired(),
@@ -24,17 +24,17 @@ const MarriageHistory: React.FC = () => {
   const { showToast } = useToast();
   const {
     setOnboardingFormData,
-    previouslyMarried,
-    maritalStatus,
-    prevMarriageChildren,
+    previously_married,
+    marital_status,
+    prev_marriage_children,
   } = useOnboardingFormData();
   const prevMarriageOption = [
     { label: "yes", value: "yes" },
     { label: "no", value: "no" },
   ];
   const initialValues = {
-    previouslyMarried: previouslyMarried || "",
-    prevMarriageChildren: prevMarriageChildren || "",
+    previously_married: previously_married || "",
+    prev_marriage_children: prev_marriage_children || "",
   };
   const goBack = () => {
     modal.openModal(<SpouseBasicInfo2 />);
@@ -42,13 +42,15 @@ const MarriageHistory: React.FC = () => {
 
   const handleProceed = async (values: typeof initialValues) => {
     setOnboardingFormData({
-      previouslyMarried: values.previouslyMarried,
-      prevMarriageChildren:
-        values.previouslyMarried === "yes" ? values.prevMarriageChildren : "",
+      previously_married: values.previously_married,
+      prev_marriage_children:
+        values.previously_married === "yes"
+          ? values.prev_marriage_children
+          : "",
     });
-    if (!maritalStatus)
+    if (!marital_status)
       showToast("Marital status not selected... pls review form", "info");
-    // if (maritalStatus === "single") modal.openModal(<BioData />);
+    // if (marital_status === "single") modal.openModal(<BioData />);
     modal.openModal(<CouplesInfo1 />);
   };
   return (
@@ -79,19 +81,19 @@ const MarriageHistory: React.FC = () => {
                   </div>
                   <RadioGroup
                     options={prevMarriageOption}
-                    name="previouslyMarried"
+                    name="previously_married"
                     orientation="horizontal"
                     optionClassName="min-w-[calc(50%-8px)]"
                   />
                 </div>
-                {values.previouslyMarried === "yes" && (
+                {values.previously_married === "yes" && (
                   <div className="space-y-4">
                     <div className="text-2xl font-bold">
                       Do you have children from your previous marriage?
                     </div>
                     <RadioGroup
                       options={prevMarriageOption}
-                      name="prevMarriageChildren"
+                      name="prev_marriage_children"
                       orientation="horizontal"
                       optionClassName="min-w-[calc(50%-8px)]"
                     />

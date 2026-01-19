@@ -9,11 +9,12 @@ import Button from "../global/Button";
 import RadioGroup from "../form/RadioGroup";
 import MaritalStatus from "./MaritalStatus";
 import { useOnboardingFormData } from "../../zustand/onboardingData.state";
+import { useGetUser } from "../../hooks/query/useUser";
 // import { useVerifyMarkerter } from "@/data/hooks";
 
 const validationSchema = Yup.object().shape({
   isReferred: Yup.string().required("required"),
-  referralID: Yup.string().when("isReferred", {
+  referral_id: Yup.string().when("isReferred", {
     is: "yes",
     then: (schema) => schema.required("required"),
     otherwise: (schema) => schema.notRequired(),
@@ -21,14 +22,15 @@ const validationSchema = Yup.object().shape({
 });
 
 const GetStarted: React.FC = () => {
+  useGetUser();
   const modal = useModal();
   const [ID, setID] = useState("");
-  const { referralID, setOnboardingFormData } = useOnboardingFormData();
+  const { referral_id, setOnboardingFormData } = useOnboardingFormData();
   const isReferredOption = [
     { label: "yes", value: "yes" },
     { label: "no", value: "no" },
   ];
-  const initialValues = { referralID: referralID || "", isReferred: "" };
+  const initialValues = { referral_id: referral_id || "", isReferred: "" };
   // const { data, isLoading, isError } = useVerifyMarkerter(ID || "");
   const goBack = () => {
     modal.openModal(<GetStarted />);
@@ -46,7 +48,7 @@ const GetStarted: React.FC = () => {
 
   const handleProceed = async (values: typeof initialValues) => {
     setOnboardingFormData({
-      referralID: values.referralID,
+      referral_id: values.referral_id,
     });
     modal.openModal(<MaritalStatus />);
   };
@@ -83,7 +85,7 @@ const GetStarted: React.FC = () => {
         >
           {({ isValid, values }) => (
             <Form className="flex flex-col justify-between">
-              <ValidateReferralCode code={values.referralID} />
+              <ValidateReferralCode code={values.referral_id} />
               <div className="space-y-4">
                 <div className="space-y-4">
                   <div className="">Were you referred by someone?</div>
@@ -97,7 +99,7 @@ const GetStarted: React.FC = () => {
                 {values.isReferred === "yes" && (
                   <div className="flex flex-col gap-4">
                     <InputField
-                      name="referralID"
+                      name="referral_id"
                       type="text"
                       placeholder=" Enter referral code"
                       className="text-2xl font-bold rounded-xl py-3"

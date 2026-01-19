@@ -11,16 +11,16 @@ import HusbandAssessment from "./HusbandAssessment";
 
 const validationSchema = Yup.object().shape({
   marriageLength: Yup.string().required("required"),
-  whySignup: Yup.string().required("required"),
+  why_signup: Yup.string().required("required"),
 });
 
 const CouplesInfo1: React.FC = () => {
   const modal = useModal();
-  const { whySignup, marriageLenght, setOnboardingFormData } =
+  const { why_signup, marriage_length, setOnboardingFormData } =
     useOnboardingFormData();
   const initialValues = {
-    marriageLength: marriageLenght || "",
-    whySignup: whySignup || "",
+    marriageLength: marriage_length || "",
+    why_signup: why_signup || "",
   };
   const goBack = () => {
     modal.openModal(<MarriageHistory />);
@@ -44,8 +44,8 @@ const CouplesInfo1: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              marriageLenght: values.marriageLength,
-              whySignup: values.whySignup,
+              marriage_length: values.marriageLength,
+              why_signup: values.why_signup,
             });
             modal.openModal(<HusbandAssessment />);
           }}
@@ -72,7 +72,7 @@ const CouplesInfo1: React.FC = () => {
                       training and mentorship?{" "}
                     </div>
                     <InputField
-                      name="whySignup"
+                      name="why_signup"
                       type="textarea"
                       placeholder="Please indictate if any."
                       className="text-2xl font-bold rounded-xl py-3"

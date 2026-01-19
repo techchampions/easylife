@@ -34,8 +34,8 @@ const AppRoutes = () => {
               element={
                 <Navigate
                   to={
-                    isLoggedIn
-                      ? user?.role === 1
+                    isLoggedIn && user?.role
+                      ? user.role === 1
                         ? "/singles"
                         : "/couples"
                       : "/"

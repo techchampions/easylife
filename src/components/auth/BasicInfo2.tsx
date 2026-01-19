@@ -26,7 +26,7 @@ const validationSchema = Yup.object().shape({
     .required("required"),
 
   nationality: Yup.string().required("required"),
-  raceOrTribe: Yup.string().required("required"),
+  race_or_tribe: Yup.string().required("required"),
   religion: Yup.string().required("required"),
   languages: Yup.array()
     .of(Yup.string().trim().min(2))
@@ -44,8 +44,8 @@ const BasicInfo2: React.FC = () => {
     country,
     religion,
     language,
-    raceOrTribe,
-    maritalStatus,
+    race_or_tribe,
+    marital_status,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
@@ -59,7 +59,7 @@ const BasicInfo2: React.FC = () => {
     },
     address: address || "",
     nationality: nationality || "",
-    raceOrTribe: raceOrTribe || "",
+    race_or_tribe: race_or_tribe || "",
     religion: religion || "",
     languages: language,
   };
@@ -85,7 +85,7 @@ const BasicInfo2: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              raceOrTribe: values.raceOrTribe,
+              race_or_tribe: values.race_or_tribe,
               religion: values.religion,
               language: values.languages,
               nationality: values.nationality,
@@ -93,10 +93,11 @@ const BasicInfo2: React.FC = () => {
               state: values.location.state,
               city: values.location.city,
             });
-            if (maritalStatus === "married")
+            if (marital_status === "married")
               modal.openModal(<SpouseBasicInfo />);
 
-            if (maritalStatus === "single") modal.openModal(<BioData />);
+            if (marital_status === "single") modal.openModal(<BioData />);
+            console.log(marital_status);
           }}
         >
           {({ isValid, values, setFieldValue }) => {
@@ -148,7 +149,7 @@ const BasicInfo2: React.FC = () => {
                     <div className="space-y-1">
                       <div className="text-lg">What is your race/tribe?</div>
                       <InputField
-                        name="raceOrTribe"
+                        name="race_or_tribe"
                         type="text"
                         placeholder="Eg. Yoruba, Ibo"
                         className="text-2xl font-bold rounded-xl py-3"

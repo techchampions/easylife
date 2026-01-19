@@ -10,24 +10,24 @@ import { useOnboardingFormData } from "../../zustand/onboardingData.state";
 import GetStarted from "./GetStarted";
 
 const validationSchema = Yup.object().shape({
-  maritalStatus: Yup.string().required("required"),
+  marital_status: Yup.string().required("required"),
 });
 
 const MaritalStatus: React.FC = () => {
   const modal = useModal();
-  const { setOnboardingFormData, maritalStatus } = useOnboardingFormData();
+  const { setOnboardingFormData, marital_status } = useOnboardingFormData();
   const statusOption = [
     { label: "single", value: "single" },
     { label: "married", value: "married" },
   ];
-  const initialValues = { maritalStatus: maritalStatus || "" };
+  const initialValues = { marital_status: marital_status || "" };
   const goBack = () => {
     modal.openModal(<GetStarted />);
   };
 
   const handleProceed = async (values: typeof initialValues) => {
     setOnboardingFormData({
-      maritalStatus: values.maritalStatus,
+      marital_status: values.marital_status,
     });
     modal.openModal(<BasicInfo />);
   };
@@ -65,7 +65,7 @@ const MaritalStatus: React.FC = () => {
                   </div>
                   <RadioGroup
                     options={statusOption}
-                    name="maritalStatus"
+                    name="marital_status"
                     orientation="horizontal"
                     optionClassName="min-w-[calc(50%-8px)]"
                   />

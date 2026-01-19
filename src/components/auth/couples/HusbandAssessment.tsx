@@ -10,23 +10,23 @@ import MarriageHistory from "./MarriageHistory";
 import WifeAssessment from "./WifeAssessment";
 
 const validationSchema = Yup.object().shape({
-  marriageIssues: Yup.string().required("required"),
+  marriage_issues: Yup.string().required("required"),
   aboutSpousePositive: Yup.string().required("required"),
 });
 const HusbandAssessment: React.FC = () => {
   const modal = useModal();
   const {
-    aboutWifeNegative,
-    aboutWifePositive,
-    marriageIssues,
-    changesToWife,
+    about_wife_negative,
+    about_wife_positive,
+    marriage_issues,
+    changes_to_wife,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
-    marriageIssues: marriageIssues || "",
-    aboutSpousePositive: aboutWifePositive || "",
-    aboutSpouseNegative: aboutWifeNegative || "",
-    changesToSpouse: changesToWife || "",
+    marriage_issues: marriage_issues || "",
+    aboutSpousePositive: about_wife_positive || "",
+    aboutSpouseNegative: about_wife_negative || "",
+    changesToSpouse: changes_to_wife || "",
   };
   const goBack = () => {
     modal.openModal(<MarriageHistory />);
@@ -57,10 +57,10 @@ const HusbandAssessment: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              marriageIssues: values.marriageIssues,
+              marriage_issues: values.marriage_issues,
 
-              aboutWifePositive: values.aboutSpousePositive,
-              aboutWifeNegative: values.aboutSpouseNegative,
+              about_wife_positive: values.aboutSpousePositive,
+              about_wife_negative: values.aboutSpouseNegative,
             });
             modal.openModal(<WifeAssessment />);
           }}
@@ -75,7 +75,7 @@ const HusbandAssessment: React.FC = () => {
                       want resolved?{" "}
                     </div>
                     <InputField
-                      name="marriageIssues"
+                      name="marriage_issues"
                       type="textarea"
                       placeholder="Please indictate if here."
                       className="text-2xl font-bold rounded-xl py-3"

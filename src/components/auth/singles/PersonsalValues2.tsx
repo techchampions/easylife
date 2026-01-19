@@ -10,17 +10,20 @@ import PersonalValues from "./PersonalValues";
 import PersonalValues3 from "./PersonalValues3";
 
 const validationSchema = Yup.object().shape({
-  SingleUsertypeOfSpouse: Yup.string().required("required"),
-  singleUserTolerance: Yup.string().required("required"),
+  single_user_type_of_spouse: Yup.string().required("required"),
+  single_user_tolerance: Yup.string().required("required"),
 });
 
 const PersonalValues2: React.FC = () => {
   const modal = useModal();
-  const { setOnboardingFormData, SingleUsertypeOfSpouse, singleUserTolerance } =
-    useOnboardingFormData();
+  const {
+    setOnboardingFormData,
+    single_user_type_of_spouse,
+    single_user_tolerance,
+  } = useOnboardingFormData();
   const initialValues = {
-    SingleUsertypeOfSpouse: SingleUsertypeOfSpouse || "",
-    singleUserTolerance: singleUserTolerance || "",
+    single_user_type_of_spouse: single_user_type_of_spouse || "",
+    single_user_tolerance: single_user_tolerance || "",
   };
   const goBack = () => {
     modal.openModal(<PersonalValues />);
@@ -42,8 +45,8 @@ const PersonalValues2: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              SingleUsertypeOfSpouse: values.SingleUsertypeOfSpouse,
-              singleUserTolerance: values.singleUserTolerance,
+              single_user_type_of_spouse: values.single_user_type_of_spouse,
+              single_user_tolerance: values.single_user_tolerance,
             });
             modal.openModal(<PersonalValues3 />);
           }}
@@ -57,7 +60,7 @@ const PersonalValues2: React.FC = () => {
                       What will you never tolerate or endure from a spouse?
                     </div>
                     <InputField
-                      name="singleUserTolerance"
+                      name="single_user_tolerance"
                       type="textarea"
                       placeholder="Please inidicate here."
                       className="text-2xl font-bold rounded-xl py-3"
@@ -68,7 +71,7 @@ const PersonalValues2: React.FC = () => {
                       What kind of spouse are you looking for?
                     </div>
                     <InputField
-                      name="SingleUsertypeOfSpouse"
+                      name="single_user_type_of_spouse"
                       type="textarea"
                       placeholder="Please inidicate here."
                       className="text-2xl font-bold rounded-xl py-3"

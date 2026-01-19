@@ -11,14 +11,14 @@ import BasicInfo2 from "./BasicInfo2";
 import { useOnboardingFormData } from "../../zustand/onboardingData.state";
 
 const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required("required"),
-  lastName: Yup.string().required("required"),
+  first_name: Yup.string().required("required"),
+  last_name: Yup.string().required("required"),
   phone: Yup.string()
     .required("Phone number is required")
     .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
     .min(10, "Phone number too short"),
-  dateOfBirth: Yup.string().required("required"),
-  placeOfBirth: Yup.string().required("required"),
+  date_of_birth: Yup.string().required("required"),
+  place_of_birth: Yup.string().required("required"),
 });
 
 const BasicInfo: React.FC = () => {
@@ -26,18 +26,18 @@ const BasicInfo: React.FC = () => {
   const [emailToCheck, setEmailToCheck] = useState("");
   const {
     setOnboardingFormData,
-    firstName,
-    lastName,
-    singleUserPhone,
-    dateOfBirth,
-    placeOfBirth,
+    first_name,
+    last_name,
+    single_user_phone,
+    date_of_birth,
+    place_of_birth,
   } = useOnboardingFormData();
   const initialValues = {
-    firstName: firstName || "",
-    lastName: lastName || "",
-    phone: singleUserPhone || "",
-    dateOfBirth: dateOfBirth || "",
-    placeOfBirth: placeOfBirth || "",
+    first_name: first_name || "",
+    last_name: last_name || "",
+    phone: single_user_phone || "",
+    date_of_birth: date_of_birth || "",
+    place_of_birth: place_of_birth || "",
     langs: [],
   };
   const goBack = () => {
@@ -71,11 +71,11 @@ const BasicInfo: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              firstName: values.firstName,
-              lastName: values.lastName,
-              singleUserPhone: values.phone,
-              dateOfBirth: values.dateOfBirth,
-              placeOfBirth: values.placeOfBirth,
+              first_name: values.first_name,
+              last_name: values.last_name,
+              single_user_phone: values.phone,
+              date_of_birth: values.date_of_birth,
+              place_of_birth: values.place_of_birth,
             });
             modal.openModal(<BasicInfo2 />);
           }}
@@ -89,13 +89,13 @@ const BasicInfo: React.FC = () => {
                     <div className="text-lg">What is your name?</div>
                     <div className="grid md:grid-cols-2 gap-2">
                       <InputField
-                        name="firstName"
+                        name="first_name"
                         type="text"
                         placeholder="First Name"
                         className="text-2xl font-bold rounded-xl py-3"
                       />
                       <InputField
-                        name="lastName"
+                        name="last_name"
                         type="text"
                         placeholder="Last Name"
                         className="text-2xl font-bold rounded-xl py-3"
@@ -114,14 +114,14 @@ const BasicInfo: React.FC = () => {
                   <div className="space-y-1">
                     <div className="text-lg">What is your date of birth?</div>
                     <DatePickerInput
-                      name="dateOfBirth"
+                      name="date_of_birth"
                       placeholder={`DD-MM-YYYY`}
                     />
                   </div>
                   <div className="space-y-1">
                     <div className="text-lg">Where is your place of birth?</div>
                     <InputField
-                      name="placeOfBirth"
+                      name="place_of_birth"
                       type="text"
                       placeholder="Place of birth"
                       className="text-2xl font-bold rounded-xl py-3"

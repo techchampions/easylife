@@ -16,11 +16,11 @@ const validationSchema = Yup.object().shape({
 
 const PersonalValues: React.FC = () => {
   const modal = useModal();
-  const { setOnboardingFormData, singleUserStrenght, singleUserWeakness } =
+  const { setOnboardingFormData, single_user_strength, single_user_weakness } =
     useOnboardingFormData();
   const initialValues = {
-    strenght: singleUserStrenght || "",
-    weakness: singleUserWeakness || "",
+    strenght: single_user_strength || "",
+    weakness: single_user_weakness || "",
   };
   const goBack = () => {
     modal.openModal(<BioData />);
@@ -44,8 +44,8 @@ const PersonalValues: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              singleUserStrenght: values.strenght,
-              singleUserWeakness: values.weakness,
+              single_user_strength: values.strenght,
+              single_user_weakness: values.weakness,
             });
             modal.openModal(<PersonalValues2 />);
           }}

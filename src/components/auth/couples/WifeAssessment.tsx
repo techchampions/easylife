@@ -10,23 +10,23 @@ import MarriageHistory from "./MarriageHistory";
 import ProfilePicture from "../singles/ProfilePicture";
 
 const validationSchema = Yup.object().shape({
-  marriageIssues: Yup.string().required("required"),
+  marriage_issues: Yup.string().required("required"),
   aboutSpousePositive: Yup.string().required("required"),
 });
 const WifeAssessment: React.FC = () => {
   const modal = useModal();
   const {
-    aboutHusbandNegative,
-    aboutHusbandPositive,
-    marriageIssues,
-    changesToHusband,
+    about_husband_negative,
+    about_husband_positive,
+    marriage_issues,
+    changes_to_husband,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
-    marriageIssues: marriageIssues || "",
-    aboutSpousePositive: aboutHusbandPositive || "",
-    aboutSpouseNegative: aboutHusbandNegative || "",
-    changesToSpouse: changesToHusband || "",
+    marriage_issues: marriage_issues || "",
+    aboutSpousePositive: about_husband_positive || "",
+    aboutSpouseNegative: about_husband_negative || "",
+    changesToSpouse: changes_to_husband || "",
   };
   const goBack = () => {
     modal.openModal(<MarriageHistory />);
@@ -56,10 +56,10 @@ const WifeAssessment: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              marriageIssues: values.marriageIssues,
+              marriage_issues: values.marriage_issues,
 
-              aboutHusbandPositive: values.aboutSpousePositive,
-              aboutHusbandNegative: values.aboutSpouseNegative,
+              about_husband_positive: values.aboutSpousePositive,
+              about_husband_negative: values.aboutSpouseNegative,
             });
             modal.openModal(<ProfilePicture />);
           }}
@@ -74,7 +74,7 @@ const WifeAssessment: React.FC = () => {
                       want resolved?{" "}
                     </div>
                     <InputField
-                      name="marriageIssues"
+                      name="marriage_issues"
                       type="textarea"
                       placeholder="Please indictate if here."
                       className="text-2xl font-bold rounded-xl py-3"

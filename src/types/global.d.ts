@@ -1,3 +1,38 @@
+//API TYPES
+type ApiError = {
+  response?: {
+    data?: {
+      errors?: Record<string, string[]>;
+      message?: string;
+    };
+  };
+  status: number;
+  message?: string;
+};
+
+// AUTHENTICATION TYPES
+
+interface LoginPayload {
+  email: string;
+  password: string;
+}
+interface RegisterPayload {
+  email: string;
+  password: string;
+}
+
+type LoginError = {
+  status: boolean;
+  message: string;
+  token: string;
+  otpVerified: boolean;
+  profileCompleted: boolean;
+};
+type RegisterError = {
+  error: string;
+  errors: { username: string[]; email: string[]; password: string[] };
+};
+
 // TOAST TYPES
 type ToastType = "success" | "error" | "info" | "message";
 
@@ -58,60 +93,60 @@ interface LandingNavItem {
 
 // ONBOARDING USER DATA
 type OnboardingFormData = {
-  referralID: string;
-  firstName: string;
-  lastName: string;
+  referral_id: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  spouse_firstName: string;
-  spouse_lastName: string;
+  spouse_first_name: string;
+  spouse_last_name: string;
   spouse_email: string;
-  maritalStatus: "single" | "married" | string;
-  dateOfBirth: string;
-  placeOfBirth: string;
-  spouse_dateOfBirth: string;
-  spouse_placeOfBirth: string;
-  previouslyMarried: string;
-  prevMarriageChildren: string;
+  marital_status: "single" | "married" | string;
+  date_of_birth: string;
+  place_of_birth: string;
+  spouse_date_of_birth: string;
+  spouse_place_of_birth: string;
+  previously_married: string;
+  prev_marriage_children: string;
   address: string;
   state: string;
   city: string;
   country: string;
   nationality: string;
-  raceOrTribe: string;
+  race_or_tribe: string;
   religion: string;
   language: string[];
   height: string;
   size: string;
   spouse_nationality: string;
-  spouse_raceOrTribe: string;
+  spouse_race_or_tribe: string;
   spouse_religion: string;
   spouse_language: string[];
   spouse_height: string;
   spouse_size: string;
-  healthChallenges: string;
+  health_challenges: string;
   disabilities: string;
-  spouse_healthChallenges: string;
+  spouse_health_challenges: string;
   spouse_disabilities: string;
-  singleUserStrenght: string;
-  marriageLenght: string;
-  whySignup: string;
-  marriageIssues: string;
-  aboutHusbandPositive: string;
-  aboutWifePositive: string;
-  aboutHusbandNegative: string;
-  aboutWifeNegative: string;
-  changesToWife: string;
-  changesToHusband: string;
-  singleUserWeakness: string;
-  singleUserTolerance: string;
-  SingleUsertypeOfSpouse: string;
-  singleUserSellingPoint: string;
-  singleUserTablePack: string;
-  singleUserPhone: string;
-  profilePicture: File | null;
-  spouseProfilePicture: File | null;
-  otherIssues: string;
-  spousePhone: string;
+  single_user_strength: string;
+  marriage_length: string;
+  why_signup: string;
+  marriage_issues: string;
+  about_husband_positive: string;
+  about_wife_positive: string;
+  about_husband_negative: string;
+  about_wife_negative: string;
+  changes_to_wife: string;
+  changes_to_husband: string;
+  single_user_weakness: string;
+  single_user_tolerance: string;
+  single_user_type_of_spouse: string;
+  single_user_selling_point: string;
+  single_user_table_pack: string;
+  single_user_phone: string;
+  profile_picture: File | null;
+  spouse_profile_picture: File | null;
+  other_issues: string;
+  spouse_phone: string;
   setOnboardingFormData: (
     details: Partial<
       Omit<

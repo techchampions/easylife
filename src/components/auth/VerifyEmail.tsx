@@ -8,6 +8,7 @@ import {
 import Button from "../global/Button";
 import { useModal } from "../../zustand/modal.state";
 import GetStarted from "./GetStarted";
+import { useVerifyOTP } from "../../hooks/mutattions/useAuth";
 
 interface OTPProps {
   length?: number;
@@ -15,6 +16,7 @@ interface OTPProps {
 
 const VerifyEmail: React.FC<OTPProps> = ({ length = 4 }) => {
   const { openModal } = useModal();
+  const { mutate: verify, isPending } = useVerifyOTP();
   const [otp, setOtp] = useState<string[]>(new Array(length).fill(""));
   const [timer, setTimer] = useState<number>(59);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -62,7 +64,9 @@ const VerifyEmail: React.FC<OTPProps> = ({ length = 4 }) => {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    openModal(<GetStarted />);
+    const enteredOtp = otp.join("");
+    verify(enteredOtp);
+    // openModal(<GetStarted />);
     // const enteredOtp = otp.join("");
     // try {
     //   const response = await apiClient.post("/verify-otp", {
@@ -138,8 +142,8 @@ const VerifyEmail: React.FC<OTPProps> = ({ length = 4 }) => {
           isDisabled ? "cursor-not-allowed" : "hover:bg-secondary/80 text-white"
         }`}
         onClick={handleSubmit}
-        disabled={isDisabled}
-        isLoading={isSubmitting}
+        disabled={isDisabled || isPending}
+        isLoading={isSubmitting || isPending}
       />
 
       <p className="text-sm text-gray-500">

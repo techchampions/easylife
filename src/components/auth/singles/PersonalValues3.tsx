@@ -10,17 +10,20 @@ import PersonalValues2 from "./PersonsalValues2";
 import ProfilePicture from "./ProfilePicture";
 
 const validationSchema = Yup.object().shape({
-  singleUserSellingPoint: Yup.string().required("required"),
-  singleUserTablePack: Yup.string().required("required"),
+  single_user_selling_point: Yup.string().required("required"),
+  single_user_table_pack: Yup.string().required("required"),
 });
 
 const PersonalValues3: React.FC = () => {
   const modal = useModal();
-  const { setOnboardingFormData, singleUserSellingPoint, singleUserTablePack } =
-    useOnboardingFormData();
+  const {
+    setOnboardingFormData,
+    single_user_selling_point,
+    single_user_table_pack,
+  } = useOnboardingFormData();
   const initialValues = {
-    singleUserSellingPoint: singleUserSellingPoint || "",
-    singleUserTablePack: singleUserTablePack || "",
+    single_user_selling_point: single_user_selling_point || "",
+    single_user_table_pack: single_user_table_pack || "",
   };
   const goBack = () => {
     modal.openModal(<PersonalValues2 />);
@@ -42,8 +45,8 @@ const PersonalValues3: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              singleUserSellingPoint: values.singleUserSellingPoint,
-              singleUserTablePack: values.singleUserTablePack,
+              single_user_selling_point: values.single_user_selling_point,
+              single_user_table_pack: values.single_user_table_pack,
             });
             modal.openModal(<ProfilePicture />);
           }}
@@ -57,7 +60,7 @@ const PersonalValues3: React.FC = () => {
                       Why should your spouse to be marry you?{" "}
                     </div>
                     <InputField
-                      name="singleUserSellingPoint"
+                      name="single_user_selling_point"
                       type="textarea"
                       placeholder="Please inidicate here."
                       className="text-2xl font-bold rounded-xl py-3"
@@ -69,7 +72,7 @@ const PersonalValues3: React.FC = () => {
                       make it successful and enjoyable?{" "}
                     </div>
                     <InputField
-                      name="singleUserTablePack"
+                      name="single_user_table_pack"
                       type="textarea"
                       placeholder="Please inidicate here."
                       className="text-2xl font-bold rounded-xl py-3"

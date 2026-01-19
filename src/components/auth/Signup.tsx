@@ -1,19 +1,19 @@
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-// import { useSignup } from "../../hooks/Auth";
 import Button from "../global/Button";
 import { useModal } from "../../zustand/modal.state";
 import { Eye, EyeOff } from "lucide-react";
 import InputField from "../form/InputField";
 import Login from "./Login";
 import { Link } from "react-router-dom";
-import VerifyEmail from "./VerifyEmail";
+// import VerifyEmail from "./VerifyEmail";
+import { useRegister } from "../../hooks/mutattions/useAuth";
 
 const Signup = () => {
   const { openModal } = useModal();
   const [showPassword, setShowPassword] = useState(false);
-  //   const { mutate: login, isPending } = useLogin();
+  const { mutate: register, isPending } = useRegister();
   // Password visibility toggle logic
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const initialValues = {
@@ -29,9 +29,7 @@ const Signup = () => {
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     setSubmitting(false);
-    console.log(values);
-    openModal(<VerifyEmail />);
-    // login(values);
+    register(values);
   };
   return (
     <Formik
@@ -89,7 +87,7 @@ const Signup = () => {
           </div>
           <Button
             type="submit"
-            // isLoading={isSubmitting || isPending}
+            isLoading={isSubmitting || isPending}
             disabled={isSubmitting || !isValid}
             label="Sign up"
             loadingText="Loading..."

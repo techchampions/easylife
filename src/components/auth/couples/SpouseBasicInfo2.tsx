@@ -25,7 +25,7 @@ const validationSchema = Yup.object().shape({
     .required("required"),
 
   spouse_nationality: Yup.string().required("required"),
-  spouse_raceOrTribe: Yup.string().required("required"),
+  spouse_race_or_tribe: Yup.string().required("required"),
   spouse_religion: Yup.string().required("required"),
   spouse_languages: Yup.array()
     .of(Yup.string().trim().min(2))
@@ -43,7 +43,7 @@ const SpouseBasicInfo2: React.FC = () => {
     country,
     spouse_religion,
     spouse_language,
-    spouse_raceOrTribe,
+    spouse_race_or_tribe,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
@@ -57,7 +57,7 @@ const SpouseBasicInfo2: React.FC = () => {
     },
     address: address || "",
     spouse_nationality: spouse_nationality || "",
-    spouse_raceOrTribe: spouse_raceOrTribe || "",
+    spouse_race_or_tribe: spouse_race_or_tribe || "",
     spouse_religion: spouse_religion || "",
     spouse_languages: spouse_language,
   };
@@ -83,7 +83,7 @@ const SpouseBasicInfo2: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              spouse_raceOrTribe: values.spouse_raceOrTribe,
+              spouse_race_or_tribe: values.spouse_race_or_tribe,
               spouse_religion: values.spouse_religion,
               spouse_language: values.spouse_languages,
               spouse_nationality: values.spouse_nationality,
@@ -145,7 +145,7 @@ const SpouseBasicInfo2: React.FC = () => {
                     <div className="space-y-1">
                       <div className="text-lg">What is your race/tribe?</div>
                       <InputField
-                        name="spouse_raceOrTribe"
+                        name="spouse_race_or_tribe"
                         type="text"
                         placeholder="Eg. Yoruba, Ibo"
                         className="text-2xl font-bold rounded-xl py-3"

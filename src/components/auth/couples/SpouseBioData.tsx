@@ -20,7 +20,7 @@ const BioData: React.FC = () => {
   const {
     spouse_height,
     spouse_size,
-    spouse_healthChallenges,
+    spouse_health_challenges,
     spouse_disabilities,
     setOnboardingFormData,
   } = useOnboardingFormData();
@@ -40,7 +40,7 @@ const BioData: React.FC = () => {
   const initialValues = {
     spouse_height: spouse_height || "",
     spouse_size: spouse_size || "",
-    spouse_healthX: spouse_healthChallenges || "",
+    spouse_healthX: spouse_health_challenges || "",
     spouse_diabilities: spouse_disabilities || "",
   };
   const goBack = () => {
@@ -67,7 +67,7 @@ const BioData: React.FC = () => {
             setOnboardingFormData({
               spouse_height: values.spouse_height,
               spouse_size: values.spouse_size,
-              spouse_healthChallenges: values.spouse_healthX,
+              spouse_health_challenges: values.spouse_healthX,
               spouse_disabilities: values.spouse_diabilities,
             });
             modal.openModal(<MarriageHistory />);

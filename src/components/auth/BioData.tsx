@@ -22,7 +22,7 @@ const BioData: React.FC = () => {
   const {
     height,
     size,
-    healthChallenges,
+    health_challenges,
     disabilities,
     setOnboardingFormData,
   } = useOnboardingFormData();
@@ -42,7 +42,7 @@ const BioData: React.FC = () => {
   const initialValues = {
     height: height || "",
     size: size || "",
-    healthX: healthChallenges || "",
+    healthX: health_challenges || "",
     diabilities: disabilities || "",
   };
   const goBack = () => {
@@ -69,7 +69,7 @@ const BioData: React.FC = () => {
             setOnboardingFormData({
               height: values.height,
               size: values.size,
-              healthChallenges: values.healthX,
+              health_challenges: values.healthX,
               disabilities: values.diabilities,
             });
             modal.openModal(<PersonalValues />);

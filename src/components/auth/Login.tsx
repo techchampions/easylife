@@ -7,23 +7,22 @@ import { useModal } from "../../zustand/modal.state";
 import { Eye, EyeOff } from "lucide-react";
 import InputField from "../form/InputField";
 import Signup from "./Signup";
-import { useUserStore } from "../../zustand/user.state";
-import { useToast } from "../../zustand/toast.state";
+// import { useUserStore } from "../../zustand/user.state";
+import { useLogin } from "../../hooks/mutattions/useAuth";
 
 const Login = () => {
-  const { openModal, closeModal } = useModal();
+  const { openModal } = useModal();
   const [showPassword, setShowPassword] = useState(false);
-  const { setIsLoggedIn, setUser } = useUserStore();
-  const { showToast } = useToast();
-  //   const { mutate: login, isPending } = useLogin();
+  // const { setIsLoggedIn, setUser } = useUserStore();
+  const { mutate: login, isPending } = useLogin();
   // Password visibility toggle logic
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const initialValues = {
-    username: "",
+    email: "",
     password: "",
   };
   const validationSchema = Yup.object({
-    username: Yup.string().required("Required"),
+    email: Yup.string().required("Required"),
     password: Yup.string().required("Required"),
   });
   const handleSubmit = (
@@ -31,40 +30,41 @@ const Login = () => {
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     setSubmitting(false);
-    setIsLoggedIn(true);
-    setUser({
-      role: 0,
-      id: 0,
-      email: "string",
-      phone_number: "string",
-      referral_code: "string",
-      first_name: "string",
-      last_name: "string",
-      country: "string",
-      state: "string",
-      lga: "string",
-      otp_verified_at: "string",
-      email_verified_at: "string",
-      profile_picture: "string",
-      gender: "string",
-      address: "string",
-      created_at: "string",
-      updated_at: "string",
-    });
-    showToast("user loggedin successfully", "success");
-    closeModal();
-    // login(values);
+    // setIsLoggedIn(true);
+    // setUser({
+    //   role: 0,
+    //   id: 0,
+    //   email: "string",
+    //   phone_number: "string",
+    //   referral_code: "string",
+    //   first_name: "string",
+    //   last_name: "string",
+    //   country: "string",
+    //   state: "string",
+    //   lga: "string",
+    //   otp_verified_at: "string",
+    //   email_verified_at: "string",
+    //   profile_picture: "string",
+    //   gender: "string",
+    //   address: "string",
+    //   created_at: "string",
+    //   updated_at: "string",
+    // });
+    // showToast("user loggedin successfully", "success");
+    // closeModal();
+    login(values);
   };
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
+      validateOnMount
       // onSubmit={handleSubmit}
       onSubmit={(values, { setSubmitting }) =>
         handleSubmit(values, setSubmitting)
       }
     >
-      {() => (
+      {({ isSubmitting, isValid }) => (
         <Form className="space-y-3 flex flex-col px-4 w-fit max-w-sm md:max-w-md">
           <div className="">
             <img src="/images/logo.png" alt="" className="w-[45%] " />
@@ -76,7 +76,7 @@ const Login = () => {
             </div>
           </div>
           {/* Render based on state */}
-          <InputField name="username" placeholder="Username" />
+          <InputField name="email" placeholder="Email Address" />
           <InputField
             name="password"
             type={showPassword ? "text" : "password"}
@@ -111,8 +111,8 @@ const Login = () => {
           </div>
           <Button
             type="submit"
-            // isLoading={isSubmitting || isPending}
-            // disabled={isSubmitting || !isValid}
+            isLoading={isSubmitting || isPending}
+            disabled={isSubmitting || !isValid}
             label="Log In"
             loadingText="Logging In"
             className="w-full py-2 rounded-full mt-10"

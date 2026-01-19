@@ -22,7 +22,7 @@ const Welcome = () => {
         onClick={() => openModal(<Signup />)}
         label="Create with Email"
         icon={<Mail />}
-        className="w-full py-2 rounded-full! mt-2 bg-secondary hover:bg-secondary/80 w-fit! px-8 mx-auto"
+        className="py-2 rounded-full! mt-2 bg-secondary hover:bg-secondary/80 w-fit! px-8 mx-auto"
       />
       {/* Link to switch between forms */}
       <div className="">

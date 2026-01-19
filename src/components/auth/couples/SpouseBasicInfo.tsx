@@ -11,14 +11,14 @@ import BasicInfo2 from "../BasicInfo2";
 import SpouseBasicInfo2 from "./SpouseBasicInfo2";
 
 const validationSchema = Yup.object().shape({
-  spouse_firstName: Yup.string().required("required"),
-  spouse_lastName: Yup.string().required("required"),
+  spouse_first_name: Yup.string().required("required"),
+  spouse_last_name: Yup.string().required("required"),
   phone: Yup.string()
     .required("Phone number is required")
     .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
     .min(10, "Phone number too short"),
-  spouse_dateOfBirth: Yup.string().required("required"),
-  spouse_placeOfBirth: Yup.string().required("required"),
+  spouse_date_of_birth: Yup.string().required("required"),
+  spouse_place_of_birth: Yup.string().required("required"),
 });
 
 const SpouseBasicInfo: React.FC = () => {
@@ -26,18 +26,18 @@ const SpouseBasicInfo: React.FC = () => {
   const [emailToCheck, setEmailToCheck] = useState("");
   const {
     setOnboardingFormData,
-    spouse_firstName,
-    spouse_lastName,
-    spousePhone,
-    spouse_dateOfBirth,
-    spouse_placeOfBirth,
+    spouse_first_name,
+    spouse_last_name,
+    spouse_phone,
+    spouse_date_of_birth,
+    spouse_place_of_birth,
   } = useOnboardingFormData();
   const initialValues = {
-    spouse_firstName: spouse_firstName || "",
-    spouse_lastName: spouse_lastName || "",
-    phone: spousePhone || "",
-    spouse_dateOfBirth: spouse_dateOfBirth || "",
-    spouse_placeOfBirth: spouse_placeOfBirth || "",
+    spouse_first_name: spouse_first_name || "",
+    spouse_last_name: spouse_last_name || "",
+    phone: spouse_phone || "",
+    spouse_date_of_birth: spouse_date_of_birth || "",
+    spouse_place_of_birth: spouse_place_of_birth || "",
   };
   const goBack = () => {
     modal.openModal(<BasicInfo2 />);
@@ -70,11 +70,11 @@ const SpouseBasicInfo: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              spouse_firstName: values.spouse_firstName,
-              spouse_lastName: values.spouse_lastName,
-              spousePhone: values.phone,
-              spouse_dateOfBirth: values.spouse_dateOfBirth,
-              spouse_placeOfBirth: values.spouse_placeOfBirth,
+              spouse_first_name: values.spouse_first_name,
+              spouse_last_name: values.spouse_last_name,
+              spouse_phone: values.phone,
+              spouse_date_of_birth: values.spouse_date_of_birth,
+              spouse_place_of_birth: values.spouse_place_of_birth,
             });
             modal.openModal(<SpouseBasicInfo2 />);
           }}
@@ -88,13 +88,13 @@ const SpouseBasicInfo: React.FC = () => {
                     <div className="text-lg">What is your name?</div>
                     <div className="grid md:grid-cols-2 gap-2">
                       <InputField
-                        name="spouse_firstName"
+                        name="spouse_first_name"
                         type="text"
                         placeholder="First Name"
                         className="text-2xl font-bold rounded-xl py-3"
                       />
                       <InputField
-                        name="spouse_lastName"
+                        name="spouse_last_name"
                         type="text"
                         placeholder="Last Name"
                         className="text-2xl font-bold rounded-xl py-3"
@@ -113,14 +113,14 @@ const SpouseBasicInfo: React.FC = () => {
                   <div className="space-y-1">
                     <div className="text-lg">What is your date of birth?</div>
                     <DatePickerInput
-                      name="spouse_dateOfBirth"
+                      name="spouse_date_of_birth"
                       placeholder={`DD-MM-YYYY`}
                     />
                   </div>
                   <div className="space-y-1">
                     <div className="text-lg">Where is your place of birth?</div>
                     <InputField
-                      name="spouse_placeOfBirth"
+                      name="spouse_place_of_birth"
                       type="text"
                       placeholder="Place of birth"
                       className="text-2xl font-bold rounded-xl py-3"
