@@ -3,13 +3,15 @@ import { useUserStore } from "../zustand/user.state";
 
 const LandingRoute = () => {
   const { isLoggedIn, user } = useUserStore();
-  if (isLoggedIn && user?.role) {
-    if (user.role === 1) {
-      return <Navigate to="/singles" replace />;
-    } else {
+  if (isLoggedIn && user?.marital_status) {
+    if (user.marital_status === "married") {
       return <Navigate to="/couples" replace />;
     }
-  } else return <Outlet />;
+    if (user.marital_status === "single") {
+      return <Navigate to="/singles" replace />;
+    }
+  }
+  return <Outlet />;
 };
 
 export default LandingRoute;

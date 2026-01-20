@@ -5,13 +5,12 @@ const SinglesRoutes = () => {
   const { isLoggedIn, user } = useUserStore();
 
   // Redirect UNAUTHENTICATED users to login with return URL
-  if (isLoggedIn && user?.role) {
-    if (user.role === 1) {
+  if (isLoggedIn && user?.marital_status) {
+    if (user.marital_status === "single") {
       return <Outlet />;
     }
     return <Navigate to="/couples" replace />;
-  }
-  return <Navigate to="/" replace />;
+  } else return <Navigate to="/" replace />;
 };
 
 export default SinglesRoutes;

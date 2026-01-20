@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { useToast } from "../../zustand/toast.state";
 import { useUserStore } from "../../zustand/user.state";
-import { login, register, verifyOTP } from "../../services/endpoints";
+import { login, register, sendOTP, verifyOTP } from "../../services/endpoints";
 import { useModal } from "../../zustand/modal.state";
 import VerifyEmail from "../../components/auth/VerifyEmail";
 import GetStarted from "../../components/auth/GetStarted";
@@ -36,7 +36,7 @@ export const useLogin = () => {
         showToast(errorMessage, "error");
         if (errorData.otpVerified === false) {
           openModal(<VerifyEmail />);
-        } else if (!errorData.profileCompleted === false) {
+        } else if (errorData.profileCompleted === false) {
           openModal(<GetStarted />);
         }
       } else {
@@ -176,7 +176,17 @@ export const logout = async () => {
   // window.location.reload(); // Optional: Refresh page to clear UI state
   showToast("Logged out successfully!", "success"); // Show logout success message
 };
-
+export const useSendOTP = () => {
+  return useMutation({
+    mutationFn: sendOTP,
+    onSuccess() {
+      showToast("OTP sent to your email", "success");
+    },
+    onError() {
+      showToast("Failed to send OTP... try resending", "error");
+    },
+  });
+};
 export const useVerifyOTP = () => {
   const queryClient = useQueryClient();
 

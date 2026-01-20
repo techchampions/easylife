@@ -45,25 +45,149 @@ interface ToastStore {
 }
 
 // USER GLOBAL STATE
-type User = {
+interface GetUserResponse {
+  success: boolean;
+  user: User;
+  interests: string[] | null;
+  photos: string[] | null;
+  permission: Permission;
+}
+
+interface User {
   id: number;
   email: string;
-  phone_number: string;
-  referral_code: string;
-  first_name: string;
-  last_name: string;
-  role: number;
+
+  first_name: string | null;
+  last_name: string | null;
+
   country: string | null;
   state: string | null;
+  city: string | null;
+  address: string | null;
   lga: string | null;
+
+  is_admin: 0 | 1;
+  is_verify: 0 | 1;
+  notification_enabled: 0 | 1;
+
+  date_of_birth: string | null;
+  place_of_birth: string | null;
+  nationality: string | null;
+  race_or_tribe: string | null;
+  religion: string | null;
+  language: string | null;
+
+  gender: string | null;
+  marital_status: "single" | "married" | null;
+  previously_married: string | null;
+  have_children: string | null;
+  number_of_children: number | null;
+
+  height: string | null;
+  size: string | null;
+  genotype: string | null;
+  blood_group: string | null;
+
+  health_challenges: string | null;
+  disabilities: string | null;
+
+  occupation: string | null;
+  annual_income: string | null;
+  level_of_education: string | null;
+
+  short_bio: string | null;
+
+  min_age: number | null;
+  max_age: number | null;
+
+  plan_id: number | null;
+  plan: Plan | null;
+
+  device_id: string;
+
   otp_verified_at: string | null;
   email_verified_at: string | null;
+  profile_completed_at: string | null;
+
   profile_picture: string | null;
-  gender: string | null;
-  address: string | null;
+  photos: string[] | null;
+  interests: string[] | null;
+
+  // Spouse info
+  spouse_first_name: string | null;
+  spouse_last_name: string | null;
+  spouse_email: string | null;
+  spouse_date_of_birth: string | null;
+  spouse_place_of_birth: string | null;
+  spouse_nationality: string | null;
+  spouse_race_or_tribe: string | null;
+  spouse_religion: string | null;
+  spouse_language: string | null;
+  spouse_height: string | null;
+  spouse_size: string | null;
+  spouse_health_challenges: string | null;
+  spouse_disabilities: string | null;
+  spouse_profile_picture: string | null;
+
+  // Questionnaire fields
+  single_user_strength: string | null;
+  single_user_weakness: string | null;
+  single_user_tolerance: string | null;
+  single_user_type_of_spouse: string | null;
+  single_user_selling_point: string | null;
+  single_user_table_pack: string | null;
+  single_user_phone: string | null;
+
+  marriage_length: string | null;
+  why_signup: string | null;
+  marriage_issues: string | null;
+  about_husband_positive: string | null;
+  about_wife_positive: string | null;
+  about_husband_negative: string | null;
+  about_wife_negative: string | null;
+  changes_to_wife: string | null;
+  changes_to_husband: string | null;
+  other_issues: string | null;
+
+  referral_id: string | null;
+
   created_at: string;
   updated_at: string;
-};
+}
+
+interface Permission {
+  id: number;
+  user_id: number;
+
+  conversation: 0 | 1;
+  story: 0 | 1;
+  webiner_access: 0 | 1;
+  mentorship: 0 | 1;
+  verifiedaccount: 0 | 1;
+  notify_new_reg: 0 | 1;
+
+  search_type: "local" | "global";
+  count_views: number;
+  message_count: number;
+
+  is_locked: 0 | 1;
+
+  created_at: string;
+  updated_at: string;
+}
+
+interface Plan {
+  id: number;
+  name: string;
+  price: number;
+}
+interface UserFilterParams {
+  keyword?: string;
+  plan_id?: string;
+  country?: string;
+  min_age?: string;
+  max_age?: string;
+}
 
 type UserState = {
   user: User | null;
@@ -157,3 +281,69 @@ type OnboardingFormData = {
   ) => void;
   resetOnboardingFormData: () => void;
 };
+
+// ALL USERS RESPONSE
+
+interface AllUsersResponse {
+  success: boolean;
+  users: PaginatedUsers;
+}
+
+interface PaginatedUsers {
+  data: UserListItem[];
+  current: number;
+  prev: number | null;
+  next: number | null;
+  total: number;
+}
+
+interface UserListItem {
+  id: number;
+  email: string;
+
+  first_name: string;
+  last_name: string;
+
+  country: string | null;
+  state: string | null;
+  lga: string | null;
+
+  date_of_birth: string | null;
+  otp_verified_at: string | null;
+  profile_completed_at: string | null;
+  email_verified_at: string | null;
+
+  profile_picture: string | null;
+  photos: string[] | null;
+
+  gender: "male" | "female" | string;
+
+  notification_enabled: 0 | 1;
+
+  interests: string[] | null;
+
+  marital_status: string | null;
+  have_children: string | null;
+  number_of_children: number | null;
+
+  height: string | null;
+  genotype: string | null;
+  blood_group: string | null;
+
+  nationality: string | null;
+  religion: string | null;
+
+  level_of_education: string | null;
+  occupation: string | null;
+  annual_income: string | null;
+
+  short_bio: string | null;
+
+  device_id: string;
+
+  created_at: string;
+  updated_at: string;
+
+  plan_id: number | null;
+  plan_name: string | null;
+}

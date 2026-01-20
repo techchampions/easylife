@@ -3,14 +3,12 @@ import { useUserStore } from "../zustand/user.state";
 
 const CouplesRoutes = () => {
   const { isLoggedIn, user } = useUserStore();
-
   // Redirect UNAUTHENTICATED users to login with return URL
-  if (isLoggedIn && user?.role) {
-    if (user.role === 0) {
+  if (isLoggedIn && user?.marital_status) {
+    if (user.marital_status === "married") {
       return <Outlet />;
-    } else {
-      return <Navigate to="/singles" replace />;
     }
+    return <Navigate to="/singles" replace />;
   } else return <Navigate to="/" replace />;
 };
 

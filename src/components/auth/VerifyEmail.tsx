@@ -6,17 +6,15 @@ import {
   type KeyboardEvent,
 } from "react";
 import Button from "../global/Button";
-import { useModal } from "../../zustand/modal.state";
-import GetStarted from "./GetStarted";
-import { useVerifyOTP } from "../../hooks/mutattions/useAuth";
+import { useSendOTP, useVerifyOTP } from "../../hooks/mutattions/useAuth";
 
 interface OTPProps {
   length?: number;
 }
 
 const VerifyEmail: React.FC<OTPProps> = ({ length = 4 }) => {
-  const { openModal } = useModal();
   const { mutate: verify, isPending } = useVerifyOTP();
+  const { mutate: resend, isPending: isResending, isSuccess } = useSendOTP();
   const [otp, setOtp] = useState<string[]>(new Array(length).fill(""));
   const [timer, setTimer] = useState<number>(59);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -90,18 +88,10 @@ const VerifyEmail: React.FC<OTPProps> = ({ length = 4 }) => {
   };
 
   const handleResendOTP = async () => {
-    // try {
-    //   const response = await apiClient.post("/resend-otp");
-    //   if (response.data.success) {
-    //     showToast("OTP resent successfully!", "success");
-    //     setTimer(59);
-    //   } else {
-    //     throw new Error("Failed to resend OTP");
-    //   }
-    // } catch (error) {
-    //   showToast("Failed to resend OTP. Please try again.", "error");
-    //   console.log(error);
-    // }
+    resend();
+    if (isSuccess) {
+      setTimer(59);
+    }
   };
 
   return (
@@ -109,7 +99,7 @@ const VerifyEmail: React.FC<OTPProps> = ({ length = 4 }) => {
       <h4 className="text-5xl font-bold text-primary">
         00:{timer < 10 ? `0${timer}` : timer}
       </h4>
-      <p className="text-gray-500 text-sm mb-8 w-[200px] text-center">
+      <p className="text-gray-500 text-sm mb-8 w-50 text-center">
         Type the verification code sent to your email
       </p>
 
@@ -148,13 +138,17 @@ const VerifyEmail: React.FC<OTPProps> = ({ length = 4 }) => {
 
       <p className="text-sm text-gray-500">
         Didn’t get the code?{" "}
-        <button
-          className="text-adron-green"
-          onClick={handleResendOTP}
-          disabled={timer > 0}
-        >
-          {timer > 0 ? `Resend in ${timer}s` : "Resend code"}
-        </button>
+        {isResending ? (
+          <span className="text-primary">Resending...</span>
+        ) : (
+          <button
+            className="text-primary cursor-pointer"
+            onClick={handleResendOTP}
+            disabled={timer > 0}
+          >
+            {timer > 0 ? `Resend in ${timer}s` : "Resend code"}
+          </button>
+        )}
       </p>
     </div>
   );

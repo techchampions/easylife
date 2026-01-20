@@ -19,10 +19,13 @@ import Notifications from "../pages/general_dashboard/Notifications";
 import ProfileScreen from "../pages/general_dashboard/Profile";
 import SocialFeedPage from "../pages/couples/Mentorship";
 import Index from "../pages/general_dashboard/Index";
+import { useGetUser } from "../hooks/query/useUser";
+import ChatScreen from "../pages/general_dashboard/ChatScreen";
 const SinglesLayout = lazy(() => import("../pages/singles/Layout"));
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useUserStore();
+  useGetUser();
 
   return (
     <>
@@ -34,8 +37,8 @@ const AppRoutes = () => {
               element={
                 <Navigate
                   to={
-                    isLoggedIn && user?.role
-                      ? user.role === 1
+                    isLoggedIn && user?.marital_status
+                      ? user.marital_status === "single"
                         ? "/singles"
                         : "/couples"
                       : "/"
@@ -53,8 +56,10 @@ const AppRoutes = () => {
                 <Route path="settings" element={<Settings />} />
                 <Route path="discover" element={<Discover />} />
                 <Route path="messages" element={<Messages />} />
+                <Route path="messages/:id" element={<ChatScreen />} />
                 <Route path="profile" element={<ProfileScreen />} />
                 <Route path="notifications" element={<Notifications />} />
+                <Route path="mentorship" element={<SocialFeedPage />} />
               </Route>
             </Route>
 
@@ -65,6 +70,7 @@ const AppRoutes = () => {
                 <Route path="settings" element={<Settings />} />
                 <Route path="discover" element={<Discover />} />
                 <Route path="messages" element={<Messages />} />
+                <Route path="messages/:id" element={<ChatScreen />} />
                 <Route path="notifications" element={<Notifications />} />
                 <Route path="profile" element={<ProfileScreen />} />
                 <Route path="mentorship" element={<SocialFeedPage />} />

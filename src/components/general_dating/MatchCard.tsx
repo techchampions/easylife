@@ -1,7 +1,12 @@
 import { Heart, MessageCircle, Star } from "lucide-react";
 import React from "react";
-
-const MatchCard: React.FC = () => {
+import { Link } from "react-router-dom";
+import { useUserStore } from "../../zustand/user.state";
+interface Props {
+  user: UserListItem;
+}
+const MatchCard: React.FC<Props> = ({ user }) => {
+  const { user: userState } = useUserStore();
   return (
     <div className="flex flex-col h-70 gap-2 ">
       <div className="flex-1 overflow-hidden rounded-2xl relative">
@@ -10,9 +15,21 @@ const MatchCard: React.FC = () => {
           alt=""
           className="object-cover h-full w-full"
         />
-        <div className="absolute bottom-0 bg-linear-to-t from-black to-black/10 text-white px-2 py-4 w-full">
-          <div className="">Faiye Uduma</div>
-          <div className="text-xs text-gray-300">Lagos, Nigeria</div>
+        <div className="absolute bottom-0 bg-linear-to-t from-black to-transparent text-white px-2 py-4 w-full">
+          <div className="flex items-center gap-2">
+            <img
+              src={""}
+              alt=""
+              className="h-7 w-7 rounded-full bg-amber-300"
+            />
+
+            <div className="">
+              {user.first_name} {user.last_name}
+            </div>
+          </div>
+          <div className="text-xs text-gray-300">
+            {user.state}, {user.country}
+          </div>
         </div>
       </div>
       <div className="flex items-center justify-center gap-4">
@@ -22,9 +39,14 @@ const MatchCard: React.FC = () => {
         <div className="bg-red-500/10 rounded-full text-red-500 p-2">
           <Heart />
         </div>
-        <div className="bg-primary/10 rounded-full text-primary p-2">
+        <Link
+          to={`/${
+            user?.marital_status === "married" ? "couples" : "singles"
+          }/messages/${userState?.id}`}
+          className="bg-primary/10 rounded-full text-primary p-2"
+        >
           <MessageCircle />
-        </div>
+        </Link>
       </div>
     </div>
   );

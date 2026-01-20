@@ -5,8 +5,11 @@ import InputField from "../../components/form/InputField";
 import Button from "../../components/global/Button";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import MatchCardList from "../../components/general_dating/MatchCardList";
+import { useFilterUsers } from "../../hooks/query/useGetAllUsers";
 
 const Discover: React.FC = () => {
+  const params: UserFilterParams = {};
+  const { data, isError, isLoading } = useFilterUsers(params);
   const initialValues = {
     query: "",
     minAge: 18,
@@ -108,7 +111,7 @@ const Discover: React.FC = () => {
         </Formik>
       </div>
       <div className="mt-10 px-4">
-        <MatchCardList />
+        <MatchCardList users={[]} isError={isError} isLoading={isLoading} />
       </div>
     </div>
   );

@@ -1,23 +1,35 @@
 import React from "react";
 import MobileNavItem from "./MobileNavItem";
 import { CirclePile, Home, MessageCircle, Search } from "lucide-react";
+import { useUserStore } from "../../zustand/user.state";
 const MobileBottomNav: React.FC = () => {
+  const { user } = useUserStore();
   const NAVITEMS = [
-    { label: "Home", icon: <Home size={25} />, path: "/couples" },
+    {
+      label: "Home",
+      icon: <Home size={25} />,
+      path: `/${user?.marital_status === "married" ? "couples" : "singles"}`,
+    },
     {
       label: "Discover",
       icon: <Search size={25} />,
-      path: "/couples/discover",
+      path: `/${
+        user?.marital_status === "married" ? "couples" : "singles"
+      }/discover`,
     },
     {
       label: "Mentorship",
       icon: <CirclePile size={25} />,
-      path: "/couples/mentorship",
+      path: `/${
+        user?.marital_status === "married" ? "couples" : "singles"
+      }/mentorship`,
     },
     {
       label: "Messages",
       icon: <MessageCircle size={25} />,
-      path: "/couples/messages",
+      path: `/${
+        user?.marital_status === "married" ? "couples" : "singles"
+      }/messages`,
     },
   ];
   return (

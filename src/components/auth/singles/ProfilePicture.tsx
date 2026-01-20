@@ -268,9 +268,18 @@ const ProfilePicture: React.FC = () => {
             if (other_issues) {
               payload.append("other_issues", other_issues);
             }
+            if (values.profile_picture) {
+              payload.append("profile_picture", values.profile_picture);
+            }
+            if (values.spouse_profile_picture) {
+              payload.append(
+                "spouse_profile_picture",
+                values.spouse_profile_picture
+              );
+            }
 
             proceed(payload, {
-              onSuccess(data) {
+              onSuccess() {
                 modal.openModal(<Congrats />);
               },
             });

@@ -3,8 +3,11 @@
 import React from "react";
 import { Edit, MapPin } from "lucide-react";
 import Header from "../../components/global/Header";
+import { useUserStore } from "../../zustand/user.state";
+import { calculateAge } from "../../utils/calculate_age";
 
 const ProfileScreen: React.FC = () => {
+  const { user } = useUserStore();
   return (
     <>
       <Header name="Profile" />
@@ -25,11 +28,14 @@ const ProfileScreen: React.FC = () => {
               <div className="flex items-end justify-between">
                 <div>
                   <h1 className="text-3xl font-bold text-white">
-                    Dasha Daria, 24
+                    {user?.first_name && user.last_name
+                      ? user?.first_name + " " + user.last_name
+                      : "Upadte your profile"}
+                    , {calculateAge(user?.date_of_birth)} Yrs
                   </h1>
                   <p className="text-white flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-green-400" />
-                    Georgia, Tbilisi
+                    {user?.state}, {user?.country}
                   </p>
                 </div>
               </div>
@@ -45,18 +51,20 @@ const ProfileScreen: React.FC = () => {
             <div className="grid grid-cols-2 gap-6 text-sm">
               <div>
                 <p className="text-gray-500">Live in:</p>
-                <p className="font-medium">Tbilisi, Georgia</p>
+                <p className="font-medium line-clamp-2 truncate">
+                  {user?.address}
+                </p>
               </div>
               <div>
                 <p className="text-gray-500">Relationship:</p>
-                <p className="font-medium">Single</p>
+                <p className="font-medium capitalize">{user?.marital_status}</p>
               </div>
               <div>
-                <p className="text-gray-500">Hometown:</p>
-                <p className="font-medium">Saint Petersburg, Russia</p>
+                <p className="text-gray-500">Place of birth:</p>
+                <p className="font-medium">{user?.place_of_birth}</p>
               </div>
               <div>
-                <p className="text-gray-500">Family plans:</p>
+                <p className="text-gray-500">No. of children:</p>
                 <p className="font-medium">No kids</p>
               </div>
               <div>
@@ -64,12 +72,12 @@ const ProfileScreen: React.FC = () => {
                 <p className="font-medium">Businesswoman</p>
               </div>
               <div>
-                <p className="text-gray-500">Smoke:</p>
-                <p className="font-medium">Sometimes</p>
+                <p className="text-gray-500">Religion:</p>
+                <p className="font-medium">{user?.religion}</p>
               </div>
               <div>
-                <p className="text-gray-500">Education:</p>
-                <p className="font-medium">Bachelor of Software Engineering</p>
+                <p className="text-gray-500">Race/Tribe:</p>
+                <p className="font-medium">{user?.race_or_tribe}</p>
               </div>
               <div>
                 <p className="text-gray-500">Drink:</p>
@@ -77,7 +85,9 @@ const ProfileScreen: React.FC = () => {
               </div>
               <div>
                 <p className="text-gray-500">Languages:</p>
-                <p className="font-medium">English, Russian</p>
+                <p className="font-medium capitalize">
+                  {user?.language}, Russian
+                </p>
               </div>
               <div>
                 <p className="text-gray-500">Marijuana:</p>

@@ -1,10 +1,12 @@
 import { Bell, Settings, UserCircle } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUserStore } from "../../zustand/user.state";
 interface Props {
   name: string;
 }
 const Header: React.FC<Props> = ({ name }) => {
+  const { user } = useUserStore();
   return (
     <div className="bg-white rounded-2xl p-5 my-5 w-[95%] md:w-full mx-auto flex items-center justify-between">
       <div className="md:hidden w-1/3">
@@ -14,13 +16,25 @@ const Header: React.FC<Props> = ({ name }) => {
         {name}
       </div>
       <div className="flex md:hidden items-center gap-5">
-        <Link to={"/couples/notifications"}>
+        <Link
+          to={`/${
+            user?.marital_status === "married" ? "couples" : "singles"
+          }/notifications`}
+        >
           <Bell />
         </Link>
-        <Link to={"/couples/settings"}>
+        <Link
+          to={`/${
+            user?.marital_status === "married" ? "couples" : "singles"
+          }/settings`}
+        >
           <Settings />
         </Link>
-        <Link to={"/couples/profile"}>
+        <Link
+          to={`/${
+            user?.marital_status === "married" ? "couples" : "singles"
+          }/profile`}
+        >
           <UserCircle />
         </Link>
       </div>

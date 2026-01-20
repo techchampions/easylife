@@ -13,39 +13,55 @@ import { useUserStore } from "../../zustand/user.state";
 import { useToast } from "../../zustand/toast.state";
 
 function SideNav() {
-  const { reset } = useUserStore();
+  const { reset, user } = useUserStore();
   const { showToast } = useToast();
   const navItems = [
-    { label: "Home", icon: <Home className="w-4 h-4" />, path: "/couples" },
+    {
+      label: "Home",
+      icon: <Home className="w-4 h-4" />,
+      path: `/${user?.marital_status === "married" ? "couples" : "singles"}`,
+    },
     {
       label: "Discover",
       icon: <Search className="w-4 h-4" />,
-      path: "/couples/discover",
+      path: `/${
+        user?.marital_status === "married" ? "couples" : "singles"
+      }/discover`,
     },
     {
       label: "Meassages",
       icon: <MessageCircle className="w-4 h-4" />,
-      path: "/couples/messages",
+      path: `/${
+        user?.marital_status === "married" ? "couples" : "singles"
+      }/messages`,
     },
     {
       label: "Mentorship",
       icon: <CirclePile className="w-4 h-4" />,
-      path: "/couples/mentorship",
+      path: `/${
+        user?.marital_status === "married" ? "couples" : "singles"
+      }/mentorship`,
     },
     {
       label: "Notifications",
       icon: <Bell className="w-4 h-4" />,
-      path: "/couples/notifications",
+      path: `/${
+        user?.marital_status === "married" ? "couples" : "singles"
+      }/notifications`,
     },
     {
       label: "Profile",
       icon: <UserCircle className="w-4 h-4" />,
-      path: "/couples/profile",
+      path: `/${
+        user?.marital_status === "married" ? "couples" : "singles"
+      }/profile`,
     },
     {
       label: "Settings",
       icon: <Settings className="w-4 h-4" />,
-      path: "/couples/settings",
+      path: `/${
+        user?.marital_status === "married" ? "couples" : "singles"
+      }/settings`,
     },
   ];
   return (

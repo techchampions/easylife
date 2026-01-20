@@ -1,8 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import SideNav from "../../components/singles_dashboard/LeftSideNav";
+// import SideNav from "../../components/singles_dashboard/LeftSideNav";
 import RightSideBar from "../../components/general_dating/RightSideBar";
-import MobileBottomNav from "../../components/singles_dashboard/MobileBottomNav";
+import MobileBottomNav from "../../components/couples_dashboard/MobileBottomNav";
+import SideNav from "../../components/couples_dashboard/LeftSideNav";
+// import MobileBottomNav from "../../components/singles_dashboard/MobileBottomNav";
 
 const Layout: React.FC = () => {
   return (

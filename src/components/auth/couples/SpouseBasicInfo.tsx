@@ -9,6 +9,7 @@ import DatePickerInput from "../../form/DatePickerInput";
 import Button from "../../global/Button";
 import BasicInfo2 from "../BasicInfo2";
 import SpouseBasicInfo2 from "./SpouseBasicInfo2";
+import { formatDateSimple } from "../../../utils/formatter";
 
 const validationSchema = Yup.object().shape({
   spouse_first_name: Yup.string().required("required"),
@@ -73,7 +74,9 @@ const SpouseBasicInfo: React.FC = () => {
               spouse_first_name: values.spouse_first_name,
               spouse_last_name: values.spouse_last_name,
               spouse_phone: values.phone,
-              spouse_date_of_birth: values.spouse_date_of_birth,
+              spouse_date_of_birth: formatDateSimple(
+                values.spouse_date_of_birth
+              ),
               spouse_place_of_birth: values.spouse_place_of_birth,
             });
             modal.openModal(<SpouseBasicInfo2 />);

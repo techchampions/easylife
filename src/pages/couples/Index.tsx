@@ -5,7 +5,7 @@ import MatchCardList from "../../components/general_dating/MatchCardList";
 const CouplesIndex: React.FC = () => {
   return (
     <div>
-      <Header name="Home" />
+      <Header name="Homes" />
       <div className="p-4">
         <MatchCardList />
       </div>

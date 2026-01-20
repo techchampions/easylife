@@ -4,10 +4,11 @@ import { getUser } from "../../services/endpoints";
 import { useEffect } from "react";
 
 export const useGetUser = () => {
-  const { setUser, setIsLoggedIn } = useUserStore();
-  const queryResult = useQuery<any, Error>({
+  const { setUser, setIsLoggedIn, token } = useUserStore();
+  const queryResult = useQuery<GetUserResponse, Error>({
     queryKey: ["user-profile"],
     queryFn: getUser,
+    enabled: !!token,
   });
 
   useEffect(() => {

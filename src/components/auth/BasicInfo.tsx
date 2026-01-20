@@ -9,6 +9,7 @@ import Button from "../global/Button";
 import DatePickerInput from "../form/DatePickerInput";
 import BasicInfo2 from "./BasicInfo2";
 import { useOnboardingFormData } from "../../zustand/onboardingData.state";
+import { formatDateSimple } from "../../utils/formatter";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required("required"),
@@ -74,7 +75,7 @@ const BasicInfo: React.FC = () => {
               first_name: values.first_name,
               last_name: values.last_name,
               single_user_phone: values.phone,
-              date_of_birth: values.date_of_birth,
+              date_of_birth: formatDateSimple(values.date_of_birth),
               place_of_birth: values.place_of_birth,
             });
             modal.openModal(<BasicInfo2 />);

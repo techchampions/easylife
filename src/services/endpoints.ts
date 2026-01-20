@@ -25,8 +25,8 @@ export const register = async (payload: RegisterPayload) => {
   return response.data;
 };
 
-export const getUser = async (): Promise<any> => {
-  const response = await api.get("/user-info");
+export const getUser = async (): Promise<GetUserResponse> => {
+  const response = await api.get("/user-profile");
   return response.data;
 };
 
@@ -39,10 +39,45 @@ export const verifyOTP = async (otp: number | string) => {
   });
   return response.data;
 };
+export const sendOTP = async () => {
+  const response = await api.post("/resend-otp", {
+    headers: { "Content-Type": "application/json" },
+  });
+  return response.data;
+};
 
 export const onboardingUpdateUserProfile = async (payload: FormData) => {
   const response = await api.post("/update-user-auth", payload, {
     headers: { "Content-Type": "application/json" },
   });
+  return response.data;
+};
+
+export const getAllUsers = async (page: number): Promise<AllUsersResponse> => {
+  const response = await api.get(`/user-info?page=${page}`);
+  return response.data;
+};
+
+export const filterUsers = async (
+  // page: number,
+  filters: UserFilterParams = {} // Use the defined type
+) => {
+  const params = new URLSearchParams({
+    // page: String(page),
+  });
+  if (filters.min_age) {
+    params.append("min_age", String(filters.min_age));
+  }
+  if (filters.max_age) {
+    params.append("max_age", String(filters.max_age));
+  }
+  if (filters.keyword) {
+    params.append("keyword", String(filters.keyword));
+  }
+  if (filters.country) {
+    params.append("country", String(filters.country));
+  }
+  const endpoint = `/search?${params.toString()}`;
+  const response = await api.get(endpoint);
   return response.data;
 };
