@@ -21,6 +21,7 @@ import SocialFeedPage from "../pages/couples/Mentorship";
 import Index from "../pages/general_dashboard/Index";
 import { useGetUser } from "../hooks/query/useUser";
 import ChatScreen from "../pages/general_dashboard/ChatScreen";
+import MatchProfileScreen from "../pages/general_dashboard/MatchProfile";
 const SinglesLayout = lazy(() => import("../pages/singles/Layout"));
 
 const AppRoutes = () => {
@@ -36,13 +37,14 @@ const AppRoutes = () => {
               path="/"
               element={
                 <Navigate
-                  to={
-                    isLoggedIn && user?.marital_status
-                      ? user.marital_status === "single"
-                        ? "/singles"
-                        : "/couples"
-                      : "/"
-                  }
+                  to={isLoggedIn && user?.marital_status ? "/dashboard" : "/"}
+                  // to={
+                  //   isLoggedIn && user?.marital_status
+                  //     ? user.marital_status === "single"
+                  //       ? "/singles"
+                  //       : "/couples"
+                  //     : "/"
+                  // }
                   replace
                 />
               }
@@ -50,7 +52,7 @@ const AppRoutes = () => {
 
             {/* Protected Routes - Dashboard */}
 
-            <Route path="/singles/*" element={<SinglesRoutes />}>
+            {/* <Route path="/singles/*" element={<SinglesRoutes />}>
               <Route element={<SinglesLayout />}>
                 <Route index element={<Index />} />
                 <Route path="settings" element={<Settings />} />
@@ -58,13 +60,17 @@ const AppRoutes = () => {
                 <Route path="messages" element={<Messages />} />
                 <Route path="messages/:id" element={<ChatScreen />} />
                 <Route path="profile" element={<ProfileScreen />} />
+                <Route
+                  path="matchprofile/:id"
+                  element={<MatchProfileScreen />}
+                />
                 <Route path="notifications" element={<Notifications />} />
                 <Route path="mentorship" element={<SocialFeedPage />} />
               </Route>
             </Route>
-
+ */}
             {/* Login Route */}
-            <Route path="/couples/*" element={<CouplesRoutes />}>
+            <Route path="/dashboard/*" element={<CouplesRoutes />}>
               <Route element={<CouplesLayout />}>
                 <Route index element={<Index />} />
                 <Route path="settings" element={<Settings />} />
@@ -73,6 +79,10 @@ const AppRoutes = () => {
                 <Route path="messages/:id" element={<ChatScreen />} />
                 <Route path="notifications" element={<Notifications />} />
                 <Route path="profile" element={<ProfileScreen />} />
+                <Route
+                  path="matchprofile/:id"
+                  element={<MatchProfileScreen />}
+                />
                 <Route path="mentorship" element={<SocialFeedPage />} />
               </Route>
             </Route>

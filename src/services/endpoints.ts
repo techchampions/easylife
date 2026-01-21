@@ -77,7 +77,14 @@ export const filterUsers = async (
   if (filters.country) {
     params.append("country", String(filters.country));
   }
-  const endpoint = `/search?${params.toString()}`;
+  const endpoint = `/users/search?${params.toString()}`;
   const response = await api.get(endpoint);
+  return response.data;
+};
+
+export const sendMessage = async (payload: FormData) => {
+  const response = await api.post("/chat/sendmessage", payload, {
+    headers: { "Content-Type": "application/json" },
+  });
   return response.data;
 };
