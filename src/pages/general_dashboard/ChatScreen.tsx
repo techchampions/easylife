@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ItemMessagePlaceholder from "../../components/general_dating/ItemMessagePaceholder";
 import {
   Bell,
@@ -9,16 +9,21 @@ import {
   UserCircle,
 } from "lucide-react";
 import { useUserStore } from "../../zustand/user.state";
+import ChatArea from "../../components/general_dating/ChatArea";
 
 const ChatScreen: React.FC = () => {
   const { user } = useUserStore();
   const params = useParams();
   const id = params.id;
+  const navigate = useNavigate();
   return (
-    <div>
+    <div className="">
       <div className="bg-white rounded-2xl p-5 my-5 w-[95%] md:w-full mx-auto flex items-center justify-between">
         <div className="w-1/3 flex gap-2 items-center">
-          <div className="rounded-full p-2 flex justify-center items-center hover:bg-gray-200">
+          <div
+            onClick={() => navigate(-1)}
+            className="rounded-full p-2 flex justify-center items-center hover:bg-gray-200"
+          >
             <ChevronLeft />
           </div>
           <div className="flex items-center gap-1">
@@ -54,7 +59,8 @@ const ChatScreen: React.FC = () => {
           </Link>
         </div>
       </div>
-      <div className="">
+      <div className="px-4 md:px-0">
+        <ChatArea />
         <ItemMessagePlaceholder
           icon={<MessageCircle />}
           title="No messages yet"

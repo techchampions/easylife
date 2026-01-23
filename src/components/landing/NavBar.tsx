@@ -26,12 +26,8 @@ export default function Navbar() {
   }, []);
   const getStarted = () => {
     if (isLoggedIn) {
-      if (user?.role) {
-        if (user.role === 1) {
-          navigate("/singles");
-        } else {
-          navigate("/couples");
-        }
+      if (user?.marital_status) {
+        navigate("/dashboard");
       } else openModal(<GetStarted />);
     } else openModal(<Welcome />);
   };
@@ -164,6 +160,11 @@ export default function Navbar() {
             </ul>
 
             <div className="mt-8 space-y-3">
+              <Button
+                label="Login"
+                onClick={openLoginModal}
+                className="bg-secondary"
+              />
               <Button
                 label="Get Started"
                 onClick={getStarted}

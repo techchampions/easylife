@@ -10,14 +10,16 @@ import {
   Star,
 } from "lucide-react";
 import Header from "../../components/global/Header";
-import { useUserStore } from "../../zustand/user.state";
 import { calculateAge } from "../../utils/calculate_age";
 import { useSendMessage } from "../../hooks/mutattions/useMessaging";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useGetUserByID } from "../../hooks/query/useGetAllUsers";
 
 const MatchProfileScreen: React.FC = () => {
-  const { user } = useUserStore();
   const { mutate: startChat, isPending } = useSendMessage();
+  const params = useParams();
+  const id = params.id;
+  const { data, isLoading, isError } = useGetUserByID(id || "");
   const navigate = useNavigate();
   const handleChatUser = () => {
     const payload = new FormData();
@@ -28,6 +30,7 @@ const MatchProfileScreen: React.FC = () => {
       },
     });
   };
+  const user = data?.user;
 
   return (
     <>

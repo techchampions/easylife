@@ -29,6 +29,12 @@ export const getUser = async (): Promise<GetUserResponse> => {
   const response = await api.get("/user-profile");
   return response.data;
 };
+export const getUserByID = async (
+  id: number | string
+): Promise<GetUserResponse> => {
+  const response = await api.get(`/user-profile/${id}`);
+  return response.data;
+};
 
 export const verifyOTP = async (otp: number | string) => {
   const payload = new FormData();
@@ -82,7 +88,9 @@ export const filterUsers = async (
   return response.data;
 };
 
-export const sendMessage = async (payload: FormData) => {
+export const sendMessage = async (
+  payload: FormData
+): Promise<MessagesResponse> => {
   const response = await api.post("/chat/sendmessage", payload, {
     headers: { "Content-Type": "application/json" },
   });

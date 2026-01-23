@@ -2,9 +2,9 @@ import { Suspense, lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Loader from "../components/global/Loader";
 import { useUserStore } from "../zustand/user.state";
-import SinglesRoutes from "./Singles.Route";
+// import SinglesRoutes from "./Singles.Route";
 import CouplesRoutes from "./Couples.Route";
-import CouplesLayout from "../pages/couples/Layout";
+// import CouplesLayout from "../pages/couples/Layout";
 import LandingRoute from "./Landing.Route";
 import LandingPageLayout from "../pages/landing/Layout";
 import Toast from "../components/global/Toast";
@@ -22,7 +22,8 @@ import Index from "../pages/general_dashboard/Index";
 import { useGetUser } from "../hooks/query/useUser";
 import ChatScreen from "../pages/general_dashboard/ChatScreen";
 import MatchProfileScreen from "../pages/general_dashboard/MatchProfile";
-const SinglesLayout = lazy(() => import("../pages/singles/Layout"));
+import SinglesPageIndex from "../pages/singles/Index";
+const CouplesLayout = lazy(() => import("../pages/couples/Layout"));
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useUserStore();
@@ -72,7 +73,16 @@ const AppRoutes = () => {
             {/* Login Route */}
             <Route path="/dashboard/*" element={<CouplesRoutes />}>
               <Route element={<CouplesLayout />}>
-                <Route index element={<Index />} />
+                <Route
+                  index
+                  element={
+                    user?.marital_status === "married" ? (
+                      <Index />
+                    ) : (
+                      <SinglesPageIndex />
+                    )
+                  }
+                />
                 <Route path="settings" element={<Settings />} />
                 <Route path="discover" element={<Discover />} />
                 <Route path="messages" element={<Messages />} />

@@ -5,9 +5,12 @@ import { Edit, MapPin } from "lucide-react";
 import Header from "../../components/global/Header";
 import { useUserStore } from "../../zustand/user.state";
 import { calculateAge } from "../../utils/calculate_age";
+import { useModal } from "../../zustand/modal.state";
+import UpdateProfile from "../../components/general_dating/UpdateProfile";
 
 const ProfileScreen: React.FC = () => {
   const { user } = useUserStore();
+  const modal = useModal();
   return (
     <>
       <Header name="Profile" />
@@ -20,7 +23,10 @@ const ProfileScreen: React.FC = () => {
               alt="Dasha Daria"
               className="w-full h-96 object-cover"
             />
-            <div className="absolute top-4 right-4 bg-secondary/50 p-2 rounded-full text-white">
+            <div
+              onClick={() => modal.openModal(<UpdateProfile />)}
+              className="cursor-pointer absolute top-4 right-4 bg-secondary/50 p-2 rounded-full text-white"
+            >
               {" "}
               <Edit />
             </div>

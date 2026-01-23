@@ -1,4 +1,4 @@
-import { MessageSquare, MoreHorizontal, Share2, ThumbsUp } from "lucide-react";
+import { MoreHorizontal, Share2, ThumbsUp } from "lucide-react";
 import React from "react";
 const FEEDS = [
   {
@@ -133,10 +133,10 @@ const FeedsList: React.FC = () => {
                 <ThumbsUp className="w-5 h-5" />
                 <span className="text-sm">{feed.likes} likes</span>
               </button>
-              <button className="flex items-center gap-2 hover:text-blue-600 transition">
+              {/* <button className="flex items-center gap-2 hover:text-blue-600 transition">
                 <MessageSquare className="w-5 h-5" />
                 <span className="text-sm">{feed.comments} comments</span>
-              </button>
+              </button> */}
               <button className="hover:text-blue-600 transition">
                 <Share2 className="w-5 h-5" />
               </button>

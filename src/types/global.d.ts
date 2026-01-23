@@ -347,3 +347,30 @@ interface UserListItem {
   plan_id: number | null;
   plan_name: string | null;
 }
+
+// MESSAGING TYPES
+
+interface MessagesResponse {
+  success: boolean;
+  messages: Message[];
+}
+
+interface Message {
+  id: number;
+  user_id: string;
+  conversation: string;
+  message: string;
+  attach: string | null;
+  created_at: string; // ISO date string
+  updated_at: string; // ISO date string
+  is_delivered: "0" | "1";
+  receiver: string;
+  user: MessageUser;
+}
+
+interface MessageUser {
+  id: number;
+  firstName: string;
+  lastName: string;
+  profile_picture: string;
+}

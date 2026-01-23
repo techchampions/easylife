@@ -8,7 +8,7 @@ import VerifyEmail from "../../components/auth/VerifyEmail";
 import GetStarted from "../../components/auth/GetStarted";
 
 const { showToast } = useToast.getState();
-const { openModal } = useModal.getState();
+const { openModal, closeModal } = useModal.getState();
 const { setUser, setIsLoggedIn, setToken } = useUserStore.getState();
 export const useLogin = () => {
   const queryClient = useQueryClient();
@@ -23,6 +23,7 @@ export const useLogin = () => {
       // setUser(response.user);
       setToken(response.token);
       setIsLoggedIn(true);
+      closeModal();
     },
     onError: (error: AxiosError<LoginError>) => {
       // Check if this is an Axios error with response data

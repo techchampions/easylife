@@ -1,6 +1,6 @@
 import "./App.css";
-import { QueryProvider } from "./services/QueryProvider";
 import AppRoutes from "./routes/App.Routes";
+import { QueryProvider } from "./services/QueryProvider";
 
 function App() {
   return (
