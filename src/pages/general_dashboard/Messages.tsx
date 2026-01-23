@@ -5,16 +5,20 @@ import { MessageCircle } from "lucide-react";
 import ConversationList from "../../components/general_dating/ConversationList";
 
 const Messages: React.FC = () => {
+  const show = true;
   return (
     <div>
       <Header name="Messages" />
       <div className="">
-        <ConversationList />
-        <ItemMessagePlaceholder
-          icon={<MessageCircle />}
-          title="No messages yet"
-          message="You don't have any messages at the moment. "
-        />
+        {show ? (
+          <ConversationList />
+        ) : (
+          <ItemMessagePlaceholder
+            icon={<MessageCircle />}
+            title="No messages yet"
+            message="You don't have any messages at the moment. "
+          />
+        )}
       </div>
     </div>
   );

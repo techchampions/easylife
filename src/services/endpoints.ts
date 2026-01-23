@@ -31,7 +31,7 @@ export const getUser = async (): Promise<GetUserResponse> => {
 };
 export const getUserByID = async (
   id: number | string
-): Promise<GetUserResponse> => {
+): Promise<GetUserBYIDResponse> => {
   const response = await api.get(`/user-profile/${id}`);
   return response.data;
 };

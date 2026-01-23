@@ -31,39 +31,68 @@ const ChatArea: React.FC = () => {
     },
     {
       is_sender: false,
-      msg: "Hi",
+      msg: " sfkfjskf skfjskfj sfkjskfjsfnj sjf skjf fskjf skjfj sjksfkjfk sfjkjfksf ksfjkjsf sfjksjfk.",
       time: "15:30",
     },
     {
       is_sender: false,
-      msg: "Hi",
+      msg: "ffdkj dgd gd gdg d gd g dgdg",
+      time: "15:30",
+    },
+    {
+      is_sender: true,
+      msg: "ffdkj dgd gd gdg d gd g dgdg",
+      time: "15:30",
+    },
+    {
+      is_sender: false,
+      msg: "ffdkj dgd gd gdg d gd g dgdg",
+      time: "15:30",
+    },
+    {
+      is_sender: true,
+      msg: "ffdkj dgd gd gdg d gd g dgdg",
+      time: "15:30",
+    },
+    {
+      is_sender: false,
+      msg: "ffdkj dgd gd gdg d gd g dgdg",
+      time: "15:30",
+    },
+    {
+      is_sender: false,
+      msg: "ffdkj dgd gd gdg d gd g dgdg",
       time: "15:30",
     },
   ];
   return (
-    <div className="flex flex-col gap-2 md:gap-4 h-[72vh] md:h-[77vh] max-h-[72vh] md:max-h-[75vh]">
-      <div className="flex-1 bg-white p-8 rounded-3xl">
-        {messages.map((item, index) => (
-          <div
-            className={`flex w-full ${item.is_sender && "justify-end"}`}
-            key={index}
-          >
+    <div className="flex flex-col gap-2 md:gap-4 h-[72vh] md:h-[78vh] max-h-[72vh] md:max-h-[80vh] scrollbar-hide">
+      <div className="flex-1 bg-white rounded-3xl max-h-[80%] p-8 scrollbar-hide">
+        <div className="h-full overflow-y-auto scrollbar-hide">
+          {messages.map((item, index) => (
             <div
-              className={`flex flex-col rounded-lg px-2 py-1 ${
-                item.is_sender ? "bg-secondary/20" : "bg-gray-50"
-              }`}
+              className={`flex w-full ${item.is_sender && "justify-end"}`}
+              key={index}
             >
-              <div className="">{item.msg}</div>
-              <div
-                className={`${
-                  item.is_sender ? "text-right" : "text-left"
-                } text-xs text-gray-500`}
-              >
-                {item.time}
+              <div className={`flex flex-col max-w-2/3`}>
+                <div
+                  className={`text-sm px-3 py-1 rounded-lg ${
+                    item.is_sender ? "bg-secondary text-white" : "bg-gray-100"
+                  }`}
+                >
+                  {item.msg}
+                </div>
+                <div
+                  className={`${
+                    item.is_sender ? "text-right" : "text-left"
+                  } text-xs text-gray-400`}
+                >
+                  {item.time}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       <div className="bg-white rounded-3xl p-4">
         <Formik initialValues={initialValues} onSubmit={() => {}}>

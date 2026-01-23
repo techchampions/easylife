@@ -60,12 +60,15 @@ const ChatScreen: React.FC = () => {
         </div>
       </div>
       <div className="px-4 md:px-0">
-        <ChatArea />
-        <ItemMessagePlaceholder
-          icon={<MessageCircle />}
-          title="No messages yet"
-          message="You don't have any messages at the moment. "
-        />
+        {id ? (
+          <ChatArea />
+        ) : (
+          <ItemMessagePlaceholder
+            icon={<MessageCircle />}
+            title="No messages yet"
+            message="You don't have any messages at the moment. "
+          />
+        )}
       </div>
     </div>
   );

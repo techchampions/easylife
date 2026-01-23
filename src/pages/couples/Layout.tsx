@@ -12,7 +12,7 @@ const CouplesLayout: React.FC = () => {
       </div>
 
       <main className="md:col-span-2 min-h-screen max-h-screen overflow-y-scroll scrollbar-hide">
-        <div className="flex-1 overflow-y-auto pb-20 md:pb-0">
+        <div className="flex-1 overflow-y-auto scrollbar-hide pb-20 md:pb-0">
           {/* This div takes all available height and scrolls independently */}
           <Outlet />
         </div>

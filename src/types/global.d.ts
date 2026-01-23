@@ -52,6 +52,10 @@ interface GetUserResponse {
   photos: string[] | null;
   permission: Permission;
 }
+interface GetUserBYIDResponse {
+  success: boolean;
+  user_profile: User;
+}
 
 interface User {
   id: number;
@@ -286,7 +290,7 @@ type OnboardingFormData = {
 
 interface AllUsersResponse {
   success: boolean;
-  users: PaginatedUsers;
+  users: UserListItem[];
 }
 
 interface PaginatedUsers {
