@@ -90,7 +90,7 @@ const ProfilePicture: React.FC = () => {
     }),
   });
   const goBack = () => {
-    modal.openModal(<PersonalValues3 />);
+    modal.open(<PersonalValues3 />);
   };
   return (
     <div
@@ -280,7 +280,7 @@ const ProfilePicture: React.FC = () => {
 
             proceed(payload, {
               onSuccess() {
-                modal.openModal(<Congrats />);
+                modal.open(<Congrats />);
               },
             });
           }}

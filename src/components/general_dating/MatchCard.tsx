@@ -11,11 +11,16 @@ const MatchCard: React.FC<Props> = ({ user }) => {
   const { mutate: startChat, isPending } = useSendMessage();
   const navigate = useNavigate();
   const handleChatUser = () => {
-    const payload = new FormData();
-    payload.append("reciever", String(user.id));
+    const payload = {
+      receiver: user.id,
+    };
+    // const payload = new FormData();
+    // payload.append("reciever", String(user.id));
     startChat(payload, {
-      onSuccess() {
-        navigate(`/couples/messages/${user.id}`);
+      onSuccess(data) {
+        navigate(
+          `/dashboard/messages/${user.id}/chat/${data.compose.conversation}`
+        );
       },
     });
   };
@@ -26,14 +31,20 @@ const MatchCard: React.FC<Props> = ({ user }) => {
         className="flex-1 overflow-hidden rounded-2xl relative"
       >
         <img
-          src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+          src={
+            user.profile_picture ||
+            "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+          }
           alt=""
           className="object-cover h-full w-full"
         />
         <div className="absolute bottom-0 bg-linear-to-t from-black to-transparent text-white px-2 py-4 w-full">
           <div className="flex items-center gap-2">
             <img
-              src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+              src={
+                user.profile_picture ||
+                "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+              }
               alt=""
               className="h-7 w-7 rounded-full bg-amber-300 object-cover"
             />

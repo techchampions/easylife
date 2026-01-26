@@ -26,7 +26,7 @@ const PersonalValues2: React.FC = () => {
     single_user_tolerance: single_user_tolerance || "",
   };
   const goBack = () => {
-    modal.openModal(<PersonalValues />);
+    modal.open(<PersonalValues />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh]">
@@ -48,7 +48,7 @@ const PersonalValues2: React.FC = () => {
               single_user_type_of_spouse: values.single_user_type_of_spouse,
               single_user_tolerance: values.single_user_tolerance,
             });
-            modal.openModal(<PersonalValues3 />);
+            modal.open(<PersonalValues3 />);
           }}
         >
           {({ isValid }) => {

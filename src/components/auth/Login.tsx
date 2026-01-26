@@ -11,7 +11,7 @@ import Signup from "./Signup";
 import { useLogin } from "../../hooks/mutattions/useAuth";
 
 const Login = () => {
-  const { openModal } = useModal();
+  const modal = useModal();
   const [showPassword, setShowPassword] = useState(false);
   // const { setIsLoggedIn, setUser } = useUserStore();
   const { mutate: login, isPending } = useLogin();
@@ -124,7 +124,7 @@ const Login = () => {
               <Button
                 label="Create an Account"
                 className=" ml-1 bg-transparent! text-secondary! font-medium w-fit! underline"
-                onClick={() => openModal(<Signup />)}
+                onClick={() => modal.open(<Signup />)}
               />
             </>
           </p>

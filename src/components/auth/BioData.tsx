@@ -46,7 +46,7 @@ const BioData: React.FC = () => {
     diabilities: disabilities || "",
   };
   const goBack = () => {
-    modal.openModal(<BasicInfo2 />);
+    modal.open(<BasicInfo2 />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md max-h-[75vh] overflow-y-scroll scrollbar-hide">
@@ -72,7 +72,7 @@ const BioData: React.FC = () => {
               health_challenges: values.healthX,
               disabilities: values.diabilities,
             });
-            modal.openModal(<PersonalValues />);
+            modal.open(<PersonalValues />);
           }}
         >
           {({ isValid }) => {

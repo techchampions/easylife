@@ -54,7 +54,7 @@ export const sendOTP = async () => {
 
 export const onboardingUpdateUserProfile = async (payload: FormData) => {
   const response = await api.post("/update-user-auth", payload, {
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "multipart/form-data" },
   });
   return response.data;
 };
@@ -89,10 +89,21 @@ export const filterUsers = async (
 };
 
 export const sendMessage = async (
-  payload: FormData
+  payload: MessagePayload
 ): Promise<MessagesResponse> => {
   const response = await api.post("/chat/sendmessage", payload, {
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "multipart/form-data" },
   });
+  return response.data;
+};
+
+export const getMessages = async (
+  conversation_id: string
+): Promise<GetMessagesResponse> => {
+  const response = await api.get(`/chat/messages/${conversation_id}`);
+  return response.data;
+};
+export const getConversations = async (): Promise<ConversationsResponse> => {
+  const response = await api.get(`/chat/conversations`);
   return response.data;
 };

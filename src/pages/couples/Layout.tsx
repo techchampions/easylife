@@ -6,7 +6,7 @@ import RightSideBar from "../../components/general_dating/RightSideBar";
 
 const CouplesLayout: React.FC = () => {
   return (
-    <div className="w-full bg-secondary/5 min-h-screen max-h-screen overflow-hidden grid md:grid-cols-4">
+    <div className="bg-secondary/5 min-h-screen w-screen min-w-screen max-w-screen max-h-screen overflow-hidden grid md:grid-cols-4">
       <div className="hidden md:block">
         <SideNav />
       </div>

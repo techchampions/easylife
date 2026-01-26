@@ -19,12 +19,15 @@ const ProfileScreen: React.FC = () => {
           {/* Header with Profile Picture */}
           <div className="relative rounded-2xl overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+              src={
+                user?.profile_picture ||
+                "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+              }
               alt="Dasha Daria"
               className="w-full h-96 object-cover"
             />
             <div
-              onClick={() => modal.openModal(<UpdateProfile />)}
+              onClick={() => modal.open(<UpdateProfile />)}
               className="cursor-pointer absolute top-4 right-4 bg-secondary/50 p-2 rounded-full text-white"
             >
               {" "}

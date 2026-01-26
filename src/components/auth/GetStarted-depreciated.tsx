@@ -25,8 +25,8 @@ const GetStarted: React.FC = () => {
   const modal = useModal();
   const handleSubmit = (values: typeof initialValues) => {
     if (values.isMember === "yes") {
-      modal.openModal(<LogIn />);
-    } else modal.openModal(<Referral />);
+      modal.open(<LogIn />);
+    } else modal.open(<Referral />);
   };
   return (
     <div className="w-sm max-w-xs md:max-w-sm">
@@ -52,7 +52,7 @@ const GetStarted: React.FC = () => {
               <Button
                 label="Cancel"
                 className="bg-gray-700! hover:bg-adron-black rounded-lg"
-                onClick={() => modal.closeModal()}
+                onClick={() => modal.close()}
               />
               <Button
                 label="Proceed"

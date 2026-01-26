@@ -23,7 +23,7 @@ const CouplesInfo1: React.FC = () => {
     why_signup: why_signup || "",
   };
   const goBack = () => {
-    modal.openModal(<MarriageHistory />);
+    modal.open(<MarriageHistory />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md max-h-[75vh] overflow-y-scroll scrollbar-hide">
@@ -47,7 +47,7 @@ const CouplesInfo1: React.FC = () => {
               marriage_length: values.marriageLength,
               why_signup: values.why_signup,
             });
-            modal.openModal(<HusbandAssessment />);
+            modal.open(<HusbandAssessment />);
           }}
         >
           {({ isValid }) => {

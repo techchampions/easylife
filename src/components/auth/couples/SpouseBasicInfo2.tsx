@@ -62,7 +62,7 @@ const SpouseBasicInfo2: React.FC = () => {
     spouse_languages: spouse_language,
   };
   const goBack = () => {
-    modal.openModal(<SpouseBasicInfo />);
+    modal.open(<SpouseBasicInfo />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh] max-h-[75vh] overflow-y-scroll scrollbar-hide">
@@ -91,7 +91,7 @@ const SpouseBasicInfo2: React.FC = () => {
               state: values.location.state,
               city: values.location.city,
             });
-            modal.openModal(<MarriageHistory />);
+            modal.open(<MarriageHistory />);
           }}
         >
           {({ isValid, values, setFieldValue }) => {

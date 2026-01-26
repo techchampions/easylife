@@ -26,7 +26,7 @@ const PersonalValues3: React.FC = () => {
     single_user_table_pack: single_user_table_pack || "",
   };
   const goBack = () => {
-    modal.openModal(<PersonalValues2 />);
+    modal.open(<PersonalValues2 />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh]">
@@ -48,7 +48,7 @@ const PersonalValues3: React.FC = () => {
               single_user_selling_point: values.single_user_selling_point,
               single_user_table_pack: values.single_user_table_pack,
             });
-            modal.openModal(<ProfilePicture />);
+            modal.open(<ProfilePicture />);
           }}
         >
           {({ isValid }) => {

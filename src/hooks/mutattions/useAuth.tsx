@@ -8,7 +8,7 @@ import VerifyEmail from "../../components/auth/VerifyEmail";
 import GetStarted from "../../components/auth/GetStarted";
 
 const { showToast } = useToast.getState();
-const { openModal, closeModal } = useModal.getState();
+const modal = useModal.getState();
 const { setUser, setIsLoggedIn, setToken } = useUserStore.getState();
 export const useLogin = () => {
   const queryClient = useQueryClient();
@@ -23,7 +23,7 @@ export const useLogin = () => {
       // setUser(response.user);
       setToken(response.token);
       setIsLoggedIn(true);
-      closeModal();
+      modal.close();
     },
     onError: (error: AxiosError<LoginError>) => {
       // Check if this is an Axios error with response data
@@ -36,9 +36,9 @@ export const useLogin = () => {
         }
         showToast(errorMessage, "error");
         if (errorData.otpVerified === false) {
-          openModal(<VerifyEmail />);
+          modal.open(<VerifyEmail />);
         } else if (errorData.profileCompleted === false) {
-          openModal(<GetStarted />);
+          modal.open(<GetStarted />);
         }
       } else {
         // Handle non-Axios errors or network errors
@@ -60,7 +60,7 @@ export const useLogin = () => {
 //       setUser(response.user);
 //       setIsLoggedIn(true);
 //       setToken(response.token);
-//       openModal(<VerifyEmail />);
+//       modal.open(<VerifyEmail />);
 //     },
 //     onError: (error: AxiosError<RegisterError>) => {
 //       // Check if this is an Axios error with response data
@@ -100,7 +100,7 @@ export const useRegister = () => {
       setUser(response.user);
       setIsLoggedIn(true);
       setToken(response.token);
-      openModal(<VerifyEmail />);
+      modal.open(<VerifyEmail />);
     },
     onError: (error: AxiosError<RegisterError>) => {
       // Check if this is an Axios error with response data
@@ -201,7 +201,7 @@ export const useVerifyOTP = () => {
       // setUser(response.user);
       // setIsLoggedIn(true);
       // setToken(response.token);
-      openModal(<GetStarted />);
+      modal.open(<GetStarted />);
     },
     onError: (error: AxiosError<RegisterError>) => {
       showToast("failed otp verification", "error");

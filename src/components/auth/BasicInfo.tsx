@@ -1,6 +1,6 @@
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { ArrowLeft, ArrowRight, Info } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useModal } from "../../zustand/modal.state";
 import MaritalStatus from "./MaritalStatus";
@@ -10,10 +10,12 @@ import DatePickerInput from "../form/DatePickerInput";
 import BasicInfo2 from "./BasicInfo2";
 import { useOnboardingFormData } from "../../zustand/onboardingData.state";
 import { formatDateSimple } from "../../utils/formatter";
+import RadioGroup from "../form/RadioGroup";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required("required"),
   last_name: Yup.string().required("required"),
+  gender: Yup.string().required("required"),
   phone: Yup.string()
     .required("Phone number is required")
     .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
@@ -25,10 +27,16 @@ const validationSchema = Yup.object().shape({
 const BasicInfo: React.FC = () => {
   const modal = useModal();
   const [emailToCheck, setEmailToCheck] = useState("");
+  const genderOption = [
+    { label: "male", value: "male" },
+    { label: "female", value: "female" },
+  ];
+
   const {
     setOnboardingFormData,
     first_name,
     last_name,
+    gender,
     single_user_phone,
     date_of_birth,
     place_of_birth,
@@ -36,13 +44,14 @@ const BasicInfo: React.FC = () => {
   const initialValues = {
     first_name: first_name || "",
     last_name: last_name || "",
+    gender: gender || "",
     phone: single_user_phone || "",
     date_of_birth: date_of_birth || "",
     place_of_birth: place_of_birth || "",
     langs: [],
   };
   const goBack = () => {
-    modal.openModal(<MaritalStatus />);
+    modal.open(<MaritalStatus />);
   };
   const CheckEmail = ({ email }: { email: string }) => {
     useEffect(() => {
@@ -75,10 +84,11 @@ const BasicInfo: React.FC = () => {
               first_name: values.first_name,
               last_name: values.last_name,
               single_user_phone: values.phone,
+              gender: values.gender,
               date_of_birth: formatDateSimple(values.date_of_birth),
               place_of_birth: values.place_of_birth,
             });
-            modal.openModal(<BasicInfo2 />);
+            modal.open(<BasicInfo2 />);
           }}
         >
           {({ isValid, values }) => {
@@ -113,6 +123,16 @@ const BasicInfo: React.FC = () => {
                     />
                   </div>
                   <div className="space-y-1">
+                    <div className="text-lg">What is your gender?</div>
+                    <RadioGroup
+                      options={genderOption}
+                      name="gender"
+                      orientation="horizontal"
+                      optionClassName="min-w-[calc(50%-8px)]"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
                     <div className="text-lg">What is your date of birth?</div>
                     <DatePickerInput
                       name="date_of_birth"
@@ -132,20 +152,10 @@ const BasicInfo: React.FC = () => {
                 <div className="flex justify-center w-full gap-4 mt-4">
                   <Button
                     label="Proceed"
-                    // label={`${
-                    //   data?.success
-                    //     ? "User with email already exist"
-                    //     : "Proceed"
-                    // }`}
-                    // className={`${
-                    //   data?.success ? "bg-red-700" : "bg-adron-green"
-                    // } rounded-lg`}
                     className="bg-secondary"
                     type="submit"
-                    // isLoading={isLoading}
                     loadingText="Checking email..."
                     disabled={!isValid}
-                    icon={!isValid ? <Info /> : null}
                     rightIcon={<ArrowRight />}
                   />
                 </div>

@@ -27,7 +27,7 @@ function SideNav() {
       path: `/dashboard/discover`,
     },
     {
-      label: "Meassages",
+      label: "Messages",
       icon: <MessageCircle className="w-4 h-4" />,
       path: `/dashboard/messages`,
     },

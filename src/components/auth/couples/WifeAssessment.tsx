@@ -29,7 +29,7 @@ const WifeAssessment: React.FC = () => {
     changesToSpouse: changes_to_husband || "",
   };
   const goBack = () => {
-    modal.openModal(<MarriageHistory />);
+    modal.open(<MarriageHistory />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md max-h-[75vh] overflow-y-scroll scrollbar-hide">
@@ -61,7 +61,7 @@ const WifeAssessment: React.FC = () => {
               about_husband_positive: values.aboutSpousePositive,
               about_husband_negative: values.aboutSpouseNegative,
             });
-            modal.openModal(<ProfilePicture />);
+            modal.open(<ProfilePicture />);
           }}
         >
           {({ isValid }) => {

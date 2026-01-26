@@ -41,7 +41,7 @@ const SpouseBasicInfo: React.FC = () => {
     spouse_place_of_birth: spouse_place_of_birth || "",
   };
   const goBack = () => {
-    modal.openModal(<BasicInfo2 />);
+    modal.open(<BasicInfo2 />);
   };
   const CheckEmail = ({ email }: { email: string }) => {
     useEffect(() => {
@@ -79,7 +79,7 @@ const SpouseBasicInfo: React.FC = () => {
               ),
               spouse_place_of_birth: values.spouse_place_of_birth,
             });
-            modal.openModal(<SpouseBasicInfo2 />);
+            modal.open(<SpouseBasicInfo2 />);
           }}
         >
           {({ isValid, values }) => {

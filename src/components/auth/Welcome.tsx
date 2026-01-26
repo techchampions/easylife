@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Signup from "./Signup";
 
 const Welcome = () => {
-  const { openModal } = useModal();
+  const modal = useModal();
   return (
     <div className="space-y-3 flex flex-col px-4 w-md max-w-sm md:max-w-md">
       <div className="">
@@ -19,7 +19,7 @@ const Welcome = () => {
       </div>
       {/* Render based on state */}
       <Button
-        onClick={() => openModal(<Signup />)}
+        onClick={() => modal.open(<Signup />)}
         label="Create with Email"
         icon={<Mail />}
         className="py-2 rounded-full! mt-2 bg-secondary hover:bg-secondary/80 w-fit! px-8 mx-auto"
@@ -32,7 +32,7 @@ const Welcome = () => {
             <Button
               label="Login"
               className=" ml-1 bg-transparent! text-secondary! font-medium w-fit! underline"
-              onClick={() => openModal(<Login />)}
+              onClick={() => modal.open(<Login />)}
             />
           </>
         </p>

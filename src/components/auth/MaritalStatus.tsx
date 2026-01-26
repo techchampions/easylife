@@ -22,14 +22,14 @@ const MaritalStatus: React.FC = () => {
   ];
   const initialValues = { marital_status: marital_status || "" };
   const goBack = () => {
-    modal.openModal(<GetStarted />);
+    modal.open(<GetStarted />);
   };
 
   const handleProceed = async (values: typeof initialValues) => {
     setOnboardingFormData({
       marital_status: values.marital_status,
     });
-    modal.openModal(<BasicInfo />);
+    modal.open(<BasicInfo />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md">

@@ -84,3 +84,23 @@ export const formatDateSimple = (dateString: string): string => {
 
   return `${year}/${month}/${day}`;
 };
+
+export const formatTimeAgo = (date: string) => {
+  const now = new Date();
+  const past = new Date(date);
+  const diff = Math.floor((now.getTime() - past.getTime()) / 1000);
+
+  if (diff < 60) return "Just now";
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+
+  return `${Math.floor(diff / 86400)}d ago`;
+};
+
+export const formatTime = (date: string) => {
+  const time = new Date(date).toLocaleTimeString("en-NG", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  return time;
+};

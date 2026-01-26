@@ -33,7 +33,7 @@ const GetStarted: React.FC = () => {
   const initialValues = { referral_id: referral_id || "", isReferred: "" };
   // const { data, isLoading, isError } = useVerifyMarkerter(ID || "");
   const goBack = () => {
-    modal.openModal(<GetStarted />);
+    modal.open(<GetStarted />);
   };
 
   const ValidateReferralCode = ({ code }: { code: string }) => {
@@ -50,7 +50,7 @@ const GetStarted: React.FC = () => {
     setOnboardingFormData({
       referral_id: values.referral_id,
     });
-    modal.openModal(<MaritalStatus />);
+    modal.open(<MaritalStatus />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md max-h-[75vh] overflow-y-scroll scrollbar-hide">
@@ -79,7 +79,7 @@ const GetStarted: React.FC = () => {
           //   setID(values.marketerId);
           //   if (data?.success) {
           //     setSubscribeFormData({ marketID: values.marketerId });
-          //     action.openModal(<InputPersonalInfo property={property} />);
+          //     action.open(<InputPersonalInfo property={property} />);
           //   }
           // }}
         >

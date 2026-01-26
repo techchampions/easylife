@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { useRegister } from "../../hooks/mutattions/useAuth";
 
 const Signup = () => {
-  const { openModal } = useModal();
+  const modal = useModal();
   const [showPassword, setShowPassword] = useState(false);
   const { mutate: register, isPending } = useRegister();
   // Password visibility toggle logic
@@ -100,7 +100,7 @@ const Signup = () => {
               <Button
                 label="Login"
                 className=" ml-1 bg-transparent! text-secondary! font-medium w-fit! underline"
-                onClick={() => openModal(<Login />)}
+                onClick={() => modal.open(<Login />)}
               />
             </>
           </p>

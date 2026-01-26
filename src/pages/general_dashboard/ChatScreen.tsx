@@ -8,60 +8,57 @@ import {
   Settings,
   UserCircle,
 } from "lucide-react";
-import { useUserStore } from "../../zustand/user.state";
 import ChatArea from "../../components/general_dating/ChatArea";
+import { useGetMessages } from "../../hooks/query/useMessaging";
+import { useGetUserByID } from "../../hooks/query/useGetAllUsers";
 
 const ChatScreen: React.FC = () => {
-  const { user } = useUserStore();
   const params = useParams();
-  const id = params.id;
+  const conversation_id = params.conversation_id;
+  const receiver = params.receiver;
+  const { data: userData } = useGetUserByID(receiver || "");
+  const user = userData?.user_profile;
+  useGetMessages(conversation_id || "");
   const navigate = useNavigate();
   return (
     <div className="">
-      <div className="bg-white rounded-2xl p-5 my-5 w-[95%] md:w-full mx-auto flex items-center justify-between">
-        <div className="w-1/3 flex gap-2 items-center">
+      <div className="bg-white rounded-2xl p-5 my-2 md:my-5 w-[95%] md:w-full mx-auto flex items-center justify-between">
+        <div className="flex gap-2 items-center">
           <div
             onClick={() => navigate(-1)}
             className="rounded-full p-2 flex justify-center items-center hover:bg-gray-200"
           >
             <ChevronLeft />
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <img
-              src="/images/logo.png"
+              src={
+                user?.profile_picture ||
+                "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+              }
               alt=""
-              className="w-7 h-7 rounded-full bg-amber-400"
+              className="w-10 h-10 rounded-full object-cover"
             />
-            <div className="text-left capitalize text-lg font-bold">Alfred</div>
+            <div className="text-left capitalize text-lg font-bold">
+              {user?.first_name} {user?.last_name}
+            </div>
           </div>
         </div>
         <div className="flex items-center gap-5">
-          <Link
-            to={`/${
-              user?.marital_status === "married" ? "couples" : "singles"
-            }/notifications`}
-          >
+          <Link to={`/dashboard/notifications`}>
             <Bell />
           </Link>
-          <Link
-            to={`/${
-              user?.marital_status === "married" ? "couples" : "singles"
-            }/settings`}
-          >
+          <Link to={`/dashboard/settings`}>
             <Settings />
           </Link>
-          <Link
-            to={`/${
-              user?.marital_status === "married" ? "couples" : "singles"
-            }/profile`}
-          >
+          <Link to={`/dashboard/profile`}>
             <UserCircle />
           </Link>
         </div>
       </div>
       <div className="px-4 md:px-0">
-        {id ? (
-          <ChatArea />
+        {conversation_id ? (
+          <ChatArea receiver={Number(receiver)} messages={[]} />
         ) : (
           <ItemMessagePlaceholder
             icon={<MessageCircle />}

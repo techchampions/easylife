@@ -23,7 +23,7 @@ const PersonalValues: React.FC = () => {
     weakness: single_user_weakness || "",
   };
   const goBack = () => {
-    modal.openModal(<BioData />);
+    modal.open(<BioData />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh]">
@@ -47,7 +47,7 @@ const PersonalValues: React.FC = () => {
               single_user_strength: values.strenght,
               single_user_weakness: values.weakness,
             });
-            modal.openModal(<PersonalValues2 />);
+            modal.open(<PersonalValues2 />);
           }}
         >
           {({ isValid }) => {

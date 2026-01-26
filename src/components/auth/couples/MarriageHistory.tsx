@@ -37,7 +37,7 @@ const MarriageHistory: React.FC = () => {
     prev_marriage_children: prev_marriage_children || "",
   };
   const goBack = () => {
-    modal.openModal(<SpouseBasicInfo2 />);
+    modal.open(<SpouseBasicInfo2 />);
   };
 
   const handleProceed = async (values: typeof initialValues) => {
@@ -50,8 +50,8 @@ const MarriageHistory: React.FC = () => {
     });
     if (!marital_status)
       showToast("Marital status not selected... pls review form", "info");
-    // if (marital_status === "single") modal.openModal(<BioData />);
-    modal.openModal(<CouplesInfo1 />);
+    // if (marital_status === "single") modal.open(<BioData />);
+    modal.open(<CouplesInfo1 />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md">

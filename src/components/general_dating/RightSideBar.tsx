@@ -1,16 +1,16 @@
-import { Mail, MapPin, UserCircle } from "lucide-react";
+import { Mail, MapPin, MessageCircle, UserCircle } from "lucide-react";
 import React from "react";
 import { useUserStore } from "../../zustand/user.state";
 import { Link } from "react-router-dom";
+import { useGetCoonversations } from "../../hooks/query/useMessaging";
+import ConversationList from "./ConversationList";
+import { ConversationListSkeleton } from "../loaders/ConversationSkeleton";
+import ItemMessagePlaceholder from "./ItemMessagePaceholder";
 
 const RightSideBar: React.FC = () => {
-  const messages = [
-    { user: "Frank", message: "How are you doing?" },
-    { user: "Ikuku", message: "Let's get the party started" },
-    { user: "Kadri", message: "Soosar is KING!" },
-    { user: "Susan", message: "How are you doing?" },
-  ];
   const { user } = useUserStore();
+  const { data, isLoading } = useGetCoonversations();
+
   return (
     <div className="space-y-4 p-5 hidden md:flex flex-col w-full">
       <div className="bg-white rounded-2xl p-5 w-full">
@@ -50,7 +50,19 @@ const RightSideBar: React.FC = () => {
       </div>
       <div className="bg-white rounded-2xl p-5 space-y-5 flex-1">
         <div className="text-xl font-bold">Messages</div>
-        <div className="space-y-2 divide-y divide-zinc-200">
+        {isLoading ? (
+          <ConversationListSkeleton />
+        ) : data?.conversations && data.conversations.length > 0 ? (
+          <ConversationList conversation={data?.conversations} />
+        ) : (
+          <ItemMessagePlaceholder
+            icon={<MessageCircle />}
+            title="No messages yet"
+            message="You don't have any messages at the moment. "
+            size="small"
+          />
+        )}
+        {/* <div className="space-y-2 divide-y divide-zinc-200">
           {messages.map((item, index) => (
             <div
               className="flex items-center gap-2 w-full text-gray-800"
@@ -70,7 +82,7 @@ const RightSideBar: React.FC = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

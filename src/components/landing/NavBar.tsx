@@ -11,7 +11,7 @@ import GetStarted from "../auth/GetStarted";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const { openModal } = useModal();
+  const { open } = useModal();
   const { isLoggedIn, user } = useUserStore();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,11 +28,11 @@ export default function Navbar() {
     if (isLoggedIn) {
       if (user?.marital_status) {
         navigate("/dashboard");
-      } else openModal(<GetStarted />);
-    } else openModal(<Welcome />);
+      } else open(<GetStarted />);
+    } else open(<Welcome />);
   };
   const openLoginModal = () => {
-    openModal(<Login />);
+    open(<Login />);
   };
   const navLinks: LandingNavItem[] = [
     {

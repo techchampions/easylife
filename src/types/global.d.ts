@@ -209,8 +209,8 @@ type UserState = {
 interface ModalState {
   isOpen: boolean;
   content: ReactNode | null;
-  openModal: (content: ReactNode) => void;
-  closeModal: () => void;
+  open: (content: ReactNode) => void;
+  close: () => void;
 }
 
 // LANDING PAGE NAV ITEM
@@ -225,6 +225,7 @@ type OnboardingFormData = {
   first_name: string;
   last_name: string;
   email: string;
+  gender: string;
   spouse_first_name: string;
   spouse_last_name: string;
   spouse_email: string;
@@ -357,8 +358,21 @@ interface UserListItem {
 interface MessagesResponse {
   success: boolean;
   messages: Message[];
+  receiver: string;
+  compose: Compose;
 }
 
+interface Compose {
+  id: number;
+  sender: number;
+  receiver: number;
+  sender_unread: number;
+  receiver_unread: number;
+  conversation: string;
+  last_message: string | null;
+  created_at: string;
+  updated_at: string;
+}
 interface Message {
   id: number;
   user_id: string;
@@ -377,4 +391,38 @@ interface MessageUser {
   firstName: string;
   lastName: string;
   profile_picture: string;
+}
+
+interface MessagePayload {
+  receiver: number;
+  message?: string;
+}
+
+interface GetMessagesResponse {
+  status: boolean;
+  messages: Message[];
+}
+
+interface ConversationUser {
+  id: number;
+  first_name: string;
+  last_name: string;
+  profile_picture: string | null;
+}
+
+interface Conversation {
+  id: number;
+  sender: ConversationUser;
+  receiver: ConversationUser;
+  sender_unread: number;
+  receiver_unread: number;
+  conversation: string;
+  last_message: string | null;
+  created_at: string; // ISO date string
+  updated_at: string; // ISO date string
+}
+
+interface ConversationsResponse {
+  success: boolean;
+  conversations: Conversation[];
 }

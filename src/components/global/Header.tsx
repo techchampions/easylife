@@ -8,7 +8,7 @@ interface Props {
 const Header: React.FC<Props> = ({ name }) => {
   // const { user } = useUserStore();
   return (
-    <div className="bg-white rounded-2xl p-5 my-5 w-[95%] md:w-full mx-auto flex items-center justify-between">
+    <div className="bg-white rounded-2xl p-5 my-2 md:my-5 w-[95%] md:w-full mx-auto flex items-center justify-between">
       <div className="md:hidden w-1/3">
         <img src="/images/logo.png" alt="" className=" h-12" />
       </div>

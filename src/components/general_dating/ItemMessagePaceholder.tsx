@@ -5,20 +5,32 @@ interface ItemMessagePlaceholderProps {
   title?: string;
   message?: string;
   icon?: React.ReactNode; // This allows you to pass any React element as an icon
+  size?: "screen" | "small";
 }
 
 const ItemMessagePlaceholder: React.FC<ItemMessagePlaceholderProps> = ({
   title,
   message,
   icon,
+  size = "screen",
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center mt-40 text-center">
+    <div
+      className={`flex flex-col items-center justify-center text-center ${
+        size === "screen" ? "mt-40" : "mt-0"
+      } `}
+    >
       <div className="bg-secondary/20 rounded-full p-4">
         {icon || <Search />}
       </div>
       <h2 className="mt-4 text-xl font-semibold text-gray-800">{title}</h2>
-      <p className="mt-2 text-gray-500 lg:px-48 px-5">{message}</p>
+      <p
+        className={`mt-2 text-gray-500 ${
+          size === "screen" ? "lg:px-48 px-5" : "px-4"
+        }`}
+      >
+        {message}
+      </p>
     </div>
   );
 };

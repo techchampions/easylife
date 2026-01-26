@@ -64,7 +64,7 @@ const BasicInfo2: React.FC = () => {
     languages: language,
   };
   const goBack = () => {
-    modal.openModal(<BasicInfo />);
+    modal.open(<BasicInfo />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh] max-h-[75vh] overflow-y-scroll scrollbar-hide">
@@ -93,10 +93,9 @@ const BasicInfo2: React.FC = () => {
               state: values.location.state,
               city: values.location.city,
             });
-            if (marital_status === "married")
-              modal.openModal(<SpouseBasicInfo />);
+            if (marital_status === "married") modal.open(<SpouseBasicInfo />);
 
-            if (marital_status === "single") modal.openModal(<BioData />);
+            if (marital_status === "single") modal.open(<BioData />);
             console.log(marital_status);
           }}
         >

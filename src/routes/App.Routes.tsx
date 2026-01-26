@@ -86,7 +86,10 @@ const AppRoutes = () => {
                 <Route path="settings" element={<Settings />} />
                 <Route path="discover" element={<Discover />} />
                 <Route path="messages" element={<Messages />} />
-                <Route path="messages/:id" element={<ChatScreen />} />
+                <Route
+                  path="messages/:receiver/chat/:conversation_id"
+                  element={<ChatScreen />}
+                />
                 <Route path="notifications" element={<Notifications />} />
                 <Route path="profile" element={<ProfileScreen />} />
                 <Route
