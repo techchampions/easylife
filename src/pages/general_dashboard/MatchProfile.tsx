@@ -23,17 +23,20 @@ const MatchProfileScreen: React.FC = () => {
   const params = useParams();
   const id = params.id;
   const { data, isLoading, isError } = useGetUserByID(id || "");
+  const user = data?.user_profile;
   const navigate = useNavigate();
   const handleChatUser = () => {
-    const payload = new FormData();
-    payload.append("reciever", String(user?.id));
-    startChat(payload, {
-      onSuccess() {
-        navigate(`/couples/messages/${user?.id}`);
-      },
-    });
+    if (user) {
+      const payload = {
+        receiver: user.id,
+      };
+      startChat(payload, {
+        onSuccess() {
+          navigate(`/couples/messages/${user?.id}`);
+        },
+      });
+    }
   };
-  const user = data?.user_profile;
   if (isError) {
     return (
       <ItemMessagePlaceholder

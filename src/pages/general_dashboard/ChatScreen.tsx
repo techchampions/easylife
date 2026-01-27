@@ -18,7 +18,7 @@ const ChatScreen: React.FC = () => {
   const receiver = params.receiver;
   const { data: userData } = useGetUserByID(receiver || "");
   const user = userData?.user_profile;
-  useGetMessages(conversation_id || "");
+  const { data, isLoading } = useGetMessages(conversation_id || "");
   const navigate = useNavigate();
   return (
     <div className="">
@@ -58,7 +58,11 @@ const ChatScreen: React.FC = () => {
       </div>
       <div className="px-4 md:px-0">
         {conversation_id ? (
-          <ChatArea receiver={Number(receiver)} messages={[]} />
+          <ChatArea
+            receiver={Number(receiver)}
+            messages={data?.messages || []}
+            isLoading={isLoading}
+          />
         ) : (
           <ItemMessagePlaceholder
             icon={<MessageCircle />}

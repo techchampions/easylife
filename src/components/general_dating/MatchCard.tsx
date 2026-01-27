@@ -59,18 +59,15 @@ const MatchCard: React.FC<Props> = ({ user }) => {
         </div>
       </Link>
       <div className="flex items-center justify-center gap-4">
-        <div className="bg-yellow-500/10 rounded-full text-yellow-500 p-2">
+        <div className="bg-yellow-500/10 rounded-full text-yellow-500 p-2 cursor-pointer">
           <Star />
         </div>
-        <div className="bg-red-500/10 rounded-full text-red-500 p-2">
+        <div className="bg-red-500/10 rounded-full text-red-500 p-2 cursor-pointer">
           <Heart />
         </div>
         <div
           onClick={handleChatUser}
-          // to={`/${
-          //   userState?.marital_status === "married" ? "couples" : "singles"
-          // }/messages/${userState?.id}`}
-          className="bg-primary/10 rounded-full text-primary p-2"
+          className="bg-primary/10 rounded-full text-primary p-2 cursor-pointer"
         >
           {isPending ? <Loader2 className="animate-spin" /> : <MessageCircle />}
         </div>

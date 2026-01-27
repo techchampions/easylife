@@ -101,6 +101,7 @@ export const formatTime = (date: string) => {
   const time = new Date(date).toLocaleTimeString("en-NG", {
     hour: "2-digit",
     minute: "2-digit",
+    hour12: true,
   });
   return time;
 };
