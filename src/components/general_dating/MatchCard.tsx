@@ -27,7 +27,7 @@ const MatchCard: React.FC<Props> = ({ user }) => {
   return (
     <div className="flex flex-col h-70 gap-2 ">
       <Link
-        to={`matchprofile/${user.id}`}
+        to={`/dashboard/matchprofile/${user.id}`}
         className="flex-1 overflow-hidden rounded-2xl relative"
       >
         <img

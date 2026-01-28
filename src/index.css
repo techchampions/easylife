@@ -39,6 +39,9 @@
   --font-adron-ultra: Gotham-Ultra; */
 }
 
+a, button {
+  cursor: pointer;
+}
 
 /* a {
   font-weight: 500;

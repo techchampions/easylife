@@ -187,10 +187,16 @@ interface Plan {
 }
 interface UserFilterParams {
   keyword?: string;
-  plan_id?: string;
+  page?: number;
   country?: string;
   min_age?: string;
   max_age?: string;
+}
+
+interface DiscoverResponse {
+  success: boolean;
+  message: string;
+  result: PaginatedUsers;
 }
 
 type UserState = {
@@ -425,4 +431,67 @@ interface Conversation {
 interface ConversationsResponse {
   success: boolean;
   conversations: Conversation[];
+}
+interface NotificationsResponse {
+  success: boolean;
+  users: Notification[];
+}
+
+interface Notification {
+  id: number;
+  title: string;
+  content: string;
+  user_id: number;
+  is_read: number;
+  conversation: string;
+  created_at: string;
+  updated_at: string;
+  profile_viewer: number;
+}
+
+//mMENTORSHIP
+interface PaginationLink {
+  url: string | null;
+  label: string;
+  active: boolean;
+}
+interface Mentorship {
+  id: number;
+  title: string;
+  content: string;
+  is_published: boolean;
+  photos: string[] | null;
+  user_type: number;
+  likes: number;
+  dislikes: number;
+  slug: string;
+  user_id: number;
+  created_at: string;
+  updated_at: string;
+  user: MentorshipUser | null;
+}
+interface MentorshipUser {
+  id: number;
+  first_name: string;
+  email: string;
+}
+interface PaginatedMentorships {
+  current_page: number;
+  data: Mentorship[];
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  links: PaginationLink[];
+  next_page_url: string | null;
+  path: string;
+  per_page: number;
+  prev_page_url: string | null;
+  to: number;
+  total: number;
+}
+interface GetMentorshipsResponse {
+  success: boolean;
+  data: PaginatedMentorships;
+  message: string;
 }

@@ -8,9 +8,10 @@ import {
   Settings,
   UserCircle,
 } from "lucide-react";
-import ChatArea from "../../components/general_dating/ChatArea";
+// import ChatArea from "../../components/general_dating/ChatArea";
 import { useGetMessages } from "../../hooks/query/useMessaging";
 import { useGetUserByID } from "../../hooks/query/useGetAllUsers";
+import ChatArea from "../../components/general_dating/ChatArea2";
 
 const ChatScreen: React.FC = () => {
   const params = useParams();

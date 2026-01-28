@@ -10,10 +10,18 @@ import {
   LogOut,
 } from "lucide-react";
 import Header from "../../components/global/Header";
+import { useModal } from "../../zustand/modal.state";
+import UpdateProfile from "../../components/general_dating/UpdateProfile";
 
 const Settings = () => {
+  const modal = useModal();
   const menuItems = [
-    { icon: User, label: "Edit Profile", color: "text-gray-700" },
+    {
+      icon: User,
+      label: "Edit Profile",
+      color: "text-gray-700",
+      onclick: modal.open(<UpdateProfile />),
+    },
     { icon: Lock, label: "Update Password", color: "text-gray-700" },
     { icon: CreditCard, label: "My Subscription", color: "text-gray-700" },
     { icon: Shield, label: "Privacy", color: "text-gray-700" },
@@ -38,7 +46,10 @@ const Settings = () => {
               {item.dividerAbove && (
                 <div className="border-t border-gray-200" />
               )}
-              <button className="w-full px-6 py-5 flex items-center gap-4 hover:bg-gray-50 transition-colors text-left">
+              <button
+                // onClick={() => item.onclick}
+                className="w-full px-6 py-5 flex items-center gap-4 hover:bg-gray-50 transition-colors text-left"
+              >
                 <item.icon
                   className={`w-6 h-6 ${item.color}`}
                   strokeWidth={1.5}

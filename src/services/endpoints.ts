@@ -65,12 +65,14 @@ export const getAllUsers = async (page: number): Promise<AllUsersResponse> => {
 };
 
 export const filterUsers = async (
-  // page: number,
   filters: UserFilterParams = {} // Use the defined type
-) => {
+): Promise<DiscoverResponse> => {
   const params = new URLSearchParams({
     // page: String(page),
   });
+  if (filters.page) {
+    params.append("page", String(filters.page));
+  }
   if (filters.min_age) {
     params.append("min_age", String(filters.min_age));
   }
@@ -83,7 +85,7 @@ export const filterUsers = async (
   if (filters.country) {
     params.append("country", String(filters.country));
   }
-  const endpoint = `/users/search?${params.toString()}`;
+  const endpoint = `/search?${params.toString()}`;
   const response = await api.get(endpoint);
   return response.data;
 };
@@ -105,5 +107,26 @@ export const getMessages = async (
 };
 export const getConversations = async (): Promise<ConversationsResponse> => {
   const response = await api.get(`/chat/conversations`);
+  return response.data;
+};
+export const getNotifications = async (): Promise<NotificationsResponse> => {
+  const response = await api.get(`/notifications`);
+  return response.data;
+};
+export const getMentorshipPost = async (): Promise<GetMentorshipsResponse> => {
+  const response = await api.get(`/mentorships`);
+  return response.data;
+};
+
+export const likePost = async (id: number) => {
+  const response = await api.post(`/mentorships/${id}/like`, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+  return response.data;
+};
+export const dislikePost = async (id: number) => {
+  const response = await api.post(`/mentorships/${id}/dislike`, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
   return response.data;
 };

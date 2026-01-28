@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useUserStore } from "../../zustand/user.state";
-import { getUser } from "../../services/endpoints";
+import { getNotifications, getUser } from "../../services/endpoints";
 import { useEffect } from "react";
 
 export const useGetUser = () => {
@@ -19,4 +19,11 @@ export const useGetUser = () => {
   }, [queryResult.data, setUser, setIsLoggedIn]);
 
   return queryResult;
+};
+
+export const useGetNotifications = () => {
+  return useQuery({
+    queryKey: ["notifications"],
+    queryFn: () => getNotifications(),
+  });
 };

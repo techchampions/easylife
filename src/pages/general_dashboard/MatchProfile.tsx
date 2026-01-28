@@ -2,7 +2,6 @@
 
 import React from "react";
 import {
-  Edit,
   Heart,
   Info,
   Loader2,
@@ -61,10 +60,7 @@ const MatchProfileScreen: React.FC = () => {
                 alt="Dasha Daria"
                 className="w-full h-96 object-cover"
               />
-              <div className="absolute top-4 right-4 bg-secondary/50 p-2 rounded-full text-white">
-                {" "}
-                <Edit />
-              </div>
+
               <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-6 pt-10">
                 <div className="flex items-end justify-between">
                   <div>

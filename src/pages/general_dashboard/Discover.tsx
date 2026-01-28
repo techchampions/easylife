@@ -3,12 +3,15 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import InputField from "../../components/form/InputField";
 import Button from "../../components/global/Button";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { Search, SlidersHorizontal, UserRoundSearch, X } from "lucide-react";
 import MatchCardList from "../../components/general_dating/MatchCardList";
 import { useFilterUsers } from "../../hooks/query/useGetAllUsers";
+import ItemMessagePlaceholder from "../../components/general_dating/ItemMessagePaceholder";
 
 const Discover: React.FC = () => {
-  const params: UserFilterParams = {};
+  const [params, setParams] = useState<UserFilterParams>({
+    page: 1,
+  });
   const { data, isError, isLoading } = useFilterUsers(params);
   const initialValues = {
     query: "",
@@ -28,7 +31,16 @@ const Discover: React.FC = () => {
           initialValues={initialValues}
           validationSchema={validationSchema}
           validateOnMount
-          onSubmit={() => {}}
+          onSubmit={(values) => {
+            setParams({
+              page: 1,
+              keyword: values.query,
+              min_age: String(values.minAge),
+              max_age: String(values.maxAge),
+              country: values.location,
+            });
+            setshowFilterModal(false);
+          }}
         >
           {({ isValid }) => {
             return (
@@ -51,12 +63,12 @@ const Discover: React.FC = () => {
                     </button>
                   </div>
                   <div className="">
-                    <button
+                    <div
                       className="bg-secondary/50 hover:bg-secondary cursor-pointer text-white p-4 rounded-lg flex items-center gap-2 h-full"
                       onClick={() => setshowFilterModal(true)}
                     >
                       <SlidersHorizontal /> <span>Filter</span>
-                    </button>
+                    </div>
                   </div>
                 </div>
                 {showFilterModal && (
@@ -111,7 +123,19 @@ const Discover: React.FC = () => {
         </Formik>
       </div>
       <div className="mt-10 px-4">
-        <MatchCardList users={[]} isError={isError} isLoading={isLoading} />
+        {data && data?.result.data.length > 0 ? (
+          <MatchCardList
+            users={data?.result.data || []}
+            isError={isError}
+            isLoading={isLoading}
+          />
+        ) : (
+          <ItemMessagePlaceholder
+            title="No user found"
+            message="Oops... no user matching your search."
+            icon={<UserRoundSearch />}
+          />
+        )}
       </div>
     </div>
   );
