@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Formik, Form } from "formik";
 import InputField from "../form/InputField";
 import { Loader2, SendHorizontal } from "lucide-react";
@@ -21,6 +21,13 @@ const ChatArea: React.FC<Props> = ({ receiver, messages, isLoading }) => {
   const { mutate, isPending } = useSendMessage();
   const { user } = useUserStore();
   const { showToast } = useToast();
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, [messages]);
 
   // Group messages by date
   const groupMessagesByDate = (messages: Message[]) => {
@@ -96,10 +103,8 @@ const ChatArea: React.FC<Props> = ({ receiver, messages, isLoading }) => {
                   </div>
                   <div
                     className={`${
-                      item.user.id === user?.id
-                        ? "text-right mr-2"
-                        : "text-left ml-2"
-                    } text-xs text-gray-400 mt-1`}
+                      item.user.id === user?.id ? "text-right" : "text-left"
+                    } text-xs text-gray-400 mt-0`}
                   >
                     {formatTime(item.updated_at)}
                   </div>
@@ -108,6 +113,7 @@ const ChatArea: React.FC<Props> = ({ receiver, messages, isLoading }) => {
             ))}
           </div>
         ))}
+        <div ref={bottomRef} />
       </div>
     );
   };
