@@ -40,11 +40,19 @@ export default function Navbar() {
       href: "/",
     },
     {
-      label: "About us",
+      label: "About",
       href: "/about-us/",
     },
     {
-      label: "Contact Us",
+      label: "Features",
+      href: "/about-us/",
+    },
+    {
+      label: "Subscribe",
+      href: "/about-us/",
+    },
+    {
+      label: "Contact",
       href: "/contact/",
     },
   ];

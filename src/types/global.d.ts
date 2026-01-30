@@ -1,3 +1,11 @@
+// LANDING PAGE TYPES
+interface ContentType {
+  icon: React.ReactNode;
+  title: string;
+  desc?: string;
+  list?: string[];
+}
+
 //API TYPES
 type ApiError = {
   response?: {
@@ -493,5 +501,10 @@ interface PaginatedMentorships {
 interface GetMentorshipsResponse {
   success: boolean;
   data: PaginatedMentorships;
+  message: string;
+}
+interface GetMentorshipsResponsePostById {
+  success: boolean;
+  data: Mentorship;
   message: string;
 }

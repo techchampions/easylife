@@ -1,0 +1,20 @@
+import Button from "../global/Button";
+
+const BottomCTA = () => {
+  return (
+    <div className="min-w-full md:min-w-xl">
+      <div className="bg-linear-to-r from-black to-primary text-white p-10 rounded-2xl flex items-end gap-4">
+        <div className="md:text-lg w-3/5">
+          If You Really Wish To Get Married Easily, Stay Married, And Enjoy Your
+          Marriage To The Full.
+        </div>
+        <Button
+          label="Join us now"
+          className="bg-white text-black! w-2/5! h-fit!"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default BottomCTA;

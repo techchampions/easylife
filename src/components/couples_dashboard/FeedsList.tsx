@@ -6,7 +6,9 @@ import {
   useLikePost,
 } from "../../hooks/mutattions/useMentorship";
 import FeedsSkeleton from "../loaders/FeedSkeleton";
+import { Link, useNavigate } from "react-router-dom";
 const FeedsList: React.FC = () => {
+  const navigate = useNavigate();
   const { data, isLoading } = useGetMentorshipPost();
   const { mutate: like } = useLikePost();
   const { mutate: dislike } = useDislikePost();
@@ -25,8 +27,13 @@ const FeedsList: React.FC = () => {
           <div className="bg-white rounded-2xl p-2" key={index}>
             <div className="px-4 pt-4 pb-3">
               <div className="flex items-start justify-between">
-                <div className="">
-                  <div className="text-lg font-medium">{feed.title}</div>
+                <div className="flex flex-col">
+                  <Link
+                    to={`/dashboard/mentorship/post/${feed.id}`}
+                    className="text-lg font-medium hover:underline underline-offset-1 cursor-pointer"
+                  >
+                    {feed.title}
+                  </Link>
                   <em className="text-gray-600 text-sm">Posted by Admin</em>
                 </div>
                 {/* <div className="flex items-center gap-3">

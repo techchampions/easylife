@@ -117,6 +117,12 @@ export const getMentorshipPost = async (): Promise<GetMentorshipsResponse> => {
   const response = await api.get(`/mentorships`);
   return response.data;
 };
+export const getMentorshipPostById = async (
+  id: number
+): Promise<GetMentorshipsResponsePostById> => {
+  const response = await api.get(`/mentorships/${id}`);
+  return response.data;
+};
 
 export const likePost = async (id: number) => {
   const response = await api.post(`/mentorships/${id}/like`, {

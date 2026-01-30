@@ -23,6 +23,7 @@ import { useGetUser } from "../hooks/query/useUser";
 import ChatScreen from "../pages/general_dashboard/ChatScreen";
 import MatchProfileScreen from "../pages/general_dashboard/MatchProfile";
 import SinglesPageIndex from "../pages/singles/Index";
+import PostDetail from "../pages/general_dashboard/PostDetail";
 const CouplesLayout = lazy(() => import("../pages/couples/Layout"));
 
 const AppRoutes = () => {
@@ -97,6 +98,7 @@ const AppRoutes = () => {
                   element={<MatchProfileScreen />}
                 />
                 <Route path="mentorship" element={<SocialFeedPage />} />
+                <Route path="mentorship/post/:id" element={<PostDetail />} />
               </Route>
             </Route>
             <Route path="/" element={<LandingRoute />}>

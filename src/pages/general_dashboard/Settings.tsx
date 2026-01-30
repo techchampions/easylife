@@ -10,17 +10,17 @@ import {
   LogOut,
 } from "lucide-react";
 import Header from "../../components/global/Header";
-import { useModal } from "../../zustand/modal.state";
-import UpdateProfile from "../../components/general_dating/UpdateProfile";
+// import { useModal } from "../../zustand/modal.state";
+// import UpdateProfile from "../../components/general_dating/UpdateProfile";
 
 const Settings = () => {
-  const modal = useModal();
+  // const modal = useModal();
   const menuItems = [
     {
       icon: User,
       label: "Edit Profile",
       color: "text-gray-700",
-      onclick: modal.open(<UpdateProfile />),
+      // onclick: modal.open(<UpdateProfile />),
     },
     { icon: Lock, label: "Update Password", color: "text-gray-700" },
     { icon: CreditCard, label: "My Subscription", color: "text-gray-700" },
