@@ -25,6 +25,22 @@ export const register = async (payload: RegisterPayload) => {
   return response.data;
 };
 
+export const forgotPassword = async (email: string) => {
+  const payload = {
+    email,
+  };
+  const response = await api.post("/forget-password", payload, {
+    headers: { "Content-Type": "application/json" },
+  });
+  return response.data;
+};
+export const changePassword = async (payload: PasswordPayload) => {
+  const response = await api.post("/change-password", payload, {
+    headers: { "Content-Type": "application/json" },
+  });
+  return response.data;
+};
+
 export const getUser = async (): Promise<GetUserResponse> => {
   const response = await api.get("/user-profile");
   return response.data;

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Button from "../global/Button";
+import { useModal } from "../../zustand/modal.state";
+import Welcome from "../auth/Welcome";
 
 const HeroSlider: React.FC = () => {
+  const modal = useModal();
   // Sample slides data
   const items = [
     {
@@ -47,9 +50,12 @@ const HeroSlider: React.FC = () => {
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 10000);
   };
+  const handleCTA = () => {
+    modal.open(<Welcome />);
+  };
 
   return (
-    <div className="relative w-full h-full overflow-hidden rounded-4xl">
+    <div className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-4xl">
       {/* Slides */}
       <div
         className="flex h-full transition-transform duration-500 ease-in-out"
@@ -70,6 +76,7 @@ const HeroSlider: React.FC = () => {
                   )}
                   {slide.title && <p className="text-xl mb-4">{slide.title}</p>}
                   <Button
+                    onClick={handleCTA}
                     label="Join us now!"
                     className="bg-white text-black!"
                   />

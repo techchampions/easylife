@@ -9,6 +9,7 @@ import InputField from "../form/InputField";
 import Signup from "./Signup";
 // import { useUserStore } from "../../zustand/user.state";
 import { useLogin } from "../../hooks/mutattions/useAuth";
+import ForgotPassword from "./ForgotPassword";
 
 const Login = () => {
   const modal = useModal();
@@ -105,7 +106,10 @@ const Login = () => {
               />
               <label htmlFor="remember">Remember me</label>
             </div>
-            <span className="text-[#FF4A1B] text-xs cursor-pointer">
+            <span
+              className="text-[#FF4A1B] text-xs cursor-pointer"
+              onClick={() => modal.open(<ForgotPassword />)}
+            >
               Forgot password?
             </span>
           </div>

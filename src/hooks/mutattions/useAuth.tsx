@@ -2,10 +2,19 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { useToast } from "../../zustand/toast.state";
 import { useUserStore } from "../../zustand/user.state";
-import { login, register, sendOTP, verifyOTP } from "../../services/endpoints";
+import {
+  changePassword,
+  forgotPassword,
+  login,
+  register,
+  sendOTP,
+  verifyOTP,
+} from "../../services/endpoints";
 import { useModal } from "../../zustand/modal.state";
 import VerifyEmail from "../../components/auth/VerifyEmail";
 import GetStarted from "../../components/auth/GetStarted";
+import ChangePassword from "../../components/auth/ChangePassword";
+import Login from "../../components/auth/Login";
 
 const { showToast } = useToast.getState();
 const modal = useModal.getState();
@@ -254,6 +263,45 @@ export const useVerifyOTP = () => {
       // else {
       //   showToast("Registration failed. Please try again later.", "error");
       // }
+    },
+  });
+};
+
+export const useForgotPassword = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: forgotPassword,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["user"],
+      });
+      showToast(`OTP sent to your email`, "success");
+      modal.open(<ChangePassword />);
+    },
+    onError: (error: AxiosError<ForgotPasswordError>) => {
+      if (error.response) {
+        showToast(error.response?.data.message, "error");
+      } else showToast("Failed to send OTP", "error");
+    },
+  });
+};
+export const useChangePassword = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: changePassword,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["user"],
+      });
+      showToast(`Password changed successfully`, "success");
+      modal.open(<Login />);
+    },
+    onError: (error: AxiosError<ForgotPasswordError>) => {
+      if (error.response) {
+        showToast(error.response?.data.message, "error");
+      } else showToast("Failed to change password", "error");
     },
   });
 };

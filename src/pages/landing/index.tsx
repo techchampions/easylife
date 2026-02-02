@@ -14,12 +14,12 @@ const LandingPageIndex: React.FC = () => {
       <div className="">
         <FeaturesSection />
       </div>
-      <div className="py-30 bg-white">
-        <div className="w-[80%] mx-auto">
+      <div className="py-10 md:py-20 bg-white">
+        <div className="w-[90%] md:w-[80%] mx-auto">
           <WhoWeAre />
         </div>
       </div>
-      <div className="p-4">
+      <div className="py-10 md:py-20 px-2">
         <BottomCTA />
       </div>
     </div>

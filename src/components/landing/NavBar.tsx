@@ -82,8 +82,8 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   `transition-colors duration-300 ${
                     isActive
-                      ? "text-blue-600 font-bold"
-                      : "text-black hover:text-soosar"
+                      ? "text-secondary font-bold"
+                      : "text-gray-500 hover:text-gray-700"
                   }`
                 }
               >

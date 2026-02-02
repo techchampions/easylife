@@ -36,7 +36,7 @@ const CONTENTS: ContentType[] = [
 ];
 const FeaturesSection: React.FC = () => {
   return (
-    <div className="w-full my-7">
+    <div className="w-full mt-7">
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 p-4 md:p-8">
         {CONTENTS.map((content, index) => (
           <ContentCard key={index} content={content} />

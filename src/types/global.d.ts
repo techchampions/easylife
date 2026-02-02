@@ -28,6 +28,11 @@ interface RegisterPayload {
   email: string;
   password: string;
 }
+interface PasswordPayload {
+  otp: string;
+  password: string;
+  password_confirmation: string;
+}
 
 type LoginError = {
   status: boolean;
@@ -40,6 +45,9 @@ type RegisterError = {
   error: string;
   errors: { username: string[]; email: string[]; password: string[] };
 };
+interface ForgotPasswordError {
+  message: string;
+}
 
 // TOAST TYPES
 type ToastType = "success" | "error" | "info" | "message";

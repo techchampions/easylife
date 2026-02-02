@@ -55,7 +55,7 @@ const InputField: React.FC<InputFieldProps> = ({
           type={isTextarea ? undefined : type}
           placeholder={placeholder}
           rows={isTextarea ? rows : undefined}
-          className={` text-gray-900 text-base rounded-lg focus:ring-0 block w-full px-5 outline-none resize-none ${
+          className={`text-gray-900 text-base rounded-lg focus:ring-0 block w-full px-5 outline-none resize-none ${
             isTextarea ? "min-h-15" : ""
           }`}
         />
