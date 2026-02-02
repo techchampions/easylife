@@ -34,6 +34,16 @@ export default function Navbar() {
   const openLoginModal = () => {
     open(<Login />);
   };
+  const handleScrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   const navLinks: LandingNavItem[] = [
     {
       label: "Home",
@@ -41,18 +51,18 @@ export default function Navbar() {
     },
     {
       label: "About",
-      href: "/about-us/",
+      href: "#about-us",
     },
     {
       label: "Features",
-      href: "/about-us/",
+      href: "#features",
     },
     {
       label: "Subscribe",
       href: "/about-us/",
     },
     {
-      label: "Contact",
+      label: "Help",
       href: "/contact/",
     },
   ];
@@ -76,19 +86,28 @@ export default function Navbar() {
         <ul className="hidden lg:flex flex-1 justify-center space-x-10 text-base relative">
           {navLinks.map((link) => (
             <li key={link.href} className={clsx("relative", "group")}>
-              <NavLink
-                to={link.href}
-                end
-                className={({ isActive }) =>
-                  `transition-colors duration-300 ${
-                    isActive
-                      ? "text-secondary font-bold"
-                      : "text-gray-500 hover:text-gray-700"
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
+              {link.href.startsWith("#") ? (
+                <button
+                  onClick={() => handleScrollTo(link.href.replace("#", ""))}
+                  className="text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                  {link.label}
+                </button>
+              ) : (
+                <NavLink
+                  to={link.href}
+                  end
+                  className={({ isActive }) =>
+                    `transition-colors duration-300 ${
+                      isActive
+                        ? "text-secondary font-bold"
+                        : "text-gray-500 hover:text-gray-700"
+                    }`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              )}
             </li>
           ))}
         </ul>

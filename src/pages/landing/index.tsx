@@ -11,7 +11,17 @@ const LandingPageIndex: React.FC = () => {
         <HeroSlider />
         {/* <h1 className="text-4xl font-bold text-center">Slider Section</h1> */}
       </div>
-      <div className="">
+      <div id="about-us" />
+      <div id="features" className="">
+        <div className="space-y-4 text-center mt-10">
+          <h2 className="text-4xl font-bold">About Us</h2>
+          <p className="w-md md:w-xl mx-auto">
+            This is EASYLIFE MARRIAGE ACADEMY, Powered By EASYLONA
+            INTERNATIONAL, This platform is for those who are married, who wish
+            to get married, who wish to stay married, and who wish to enjoy
+            their marriages to the full.
+          </p>
+        </div>
         <FeaturesSection />
       </div>
       <div className="py-10 md:py-20 bg-white">
