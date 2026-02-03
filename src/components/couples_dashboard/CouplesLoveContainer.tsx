@@ -45,7 +45,7 @@ const CouplesLoveContainer: React.FC = () => {
           <div className="space-y-2">
             <div className="h-82 w-full rounded-2xl overflow-hidden">
               <img
-                src={user?.profile_picture || ""}
+                src={user?.spouse_profile_picture || ""}
                 alt=""
                 className="w-full h-full object-cover brightness-75"
               />

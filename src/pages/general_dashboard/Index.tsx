@@ -1,16 +1,16 @@
 import React from "react";
 // import Header from "../../components/global/Header";
-import MatchCardList from "../../components/general_dating/MatchCardList";
+// import MatchCardList from "../../components/general_dating/MatchCardList";
 import { useGetAllUsersInfinite } from "../../hooks/query/useGetAllUsers";
-import InfiniteScroll from "react-infinite-scroll-component";
-import LoadingMore from "../../components/loaders/LoadingMore";
+// import InfiniteScroll from "react-infinite-scroll-component";
+// import LoadingMore from "../../components/loaders/LoadingMore";
 import CouplesLoveContainer from "../../components/couples_dashboard/CouplesLoveContainer";
 import { Link } from "react-router-dom";
 
 const Index: React.FC = () => {
-  const { data, fetchNextPage, hasNextPage, isLoading, isError } =
-    useGetAllUsersInfinite();
-  const users = data?.pages.flatMap((page) => page.users) || [];
+  // const { data, fetchNextPage, hasNextPage, isLoading, isError } =
+  useGetAllUsersInfinite();
+  // const users = data?.pages.flatMap((page) => page.users) || [];
   const pills = ["discover", "Subscribe", "messages"];
 
   return (
@@ -44,7 +44,7 @@ const Index: React.FC = () => {
       <div className="mt-5 mb-10 px-4 md:px-0">
         <CouplesLoveContainer />
       </div>
-      <div className="py-4 px-4 md:px-0 text-2xl font-medium">Singles</div>
+      {/* <div className="py-4 px-4 md:px-0 text-2xl font-medium">Singles</div>
       <InfiniteScroll
         className="p-4 md:p-0 overflow-x-hidden!"
         dataLength={users.length}
@@ -56,7 +56,7 @@ const Index: React.FC = () => {
         }
       >
         <MatchCardList users={users} isError={isError} isLoading={isLoading} />
-      </InfiniteScroll>
+      </InfiniteScroll> */}
     </div>
   );
 };

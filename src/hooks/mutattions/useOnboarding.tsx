@@ -13,6 +13,7 @@ export const useOnboarding = () => {
       queryClient.invalidateQueries({
         queryKey: ["user-profile"],
       });
+      showToast("User Profile updated", "success");
     },
     onError: () => {
       // Handle any other errors

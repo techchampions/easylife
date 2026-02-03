@@ -3,7 +3,7 @@ import ContactForm from "../../components/landing/ContactForm";
 
 const Contact = () => {
   return (
-    <div className="flex justify-center items-center my-4">
+    <div className="flex justify-center items-center my-30">
       <div className="w-[95%] md:w-[70%] flex flex-col md:flex-row gap-4">
         <div className="w-full md:w-2/5 space-y-8">
           <div className="space-y-4">
