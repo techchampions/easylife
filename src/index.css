@@ -1,7 +1,9 @@
 @import "tailwindcss";
+@import "./assets/fonts/fonts.css";
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: "GT Walsheim Pro";
   line-height: 1.5;
   font-weight: 400;
 

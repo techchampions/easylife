@@ -13,12 +13,19 @@ const CONTENT = {
 };
 const WhoWeAre: React.FC = () => {
   return (
-    <div className="grid md:grid-cols-2 gap-8 md:gap-0">
-      <div className="space-y-4">
-        <h2 className="text-4xl font-bold">{CONTENT.title}</h2>
-        <p>{CONTENT.desc}</p>
+    <div className="grid md:grid-cols-2 gap-8">
+      <div className="h-full w-full rounded-2xl overflow-hidden">
+        <img
+          src="/public/images/couple (2).jpeg"
+          alt=""
+          className="object-cover h-full w-full"
+        />
       </div>
-      <div className="bg-linear-to-tr from-black to-secondary p-10 text-white rounded-2xl">
+      <div className="bg-linear-to-tr from-transparent to-transparent p-10 text-white rounded-2xl">
+        <div className="space-y-4 mb-10">
+          <h2 className="text-4xl font-bold">{CONTENT.title}</h2>
+          <p>{CONTENT.desc}</p>
+        </div>
         <ul className="list-disc list-outside space-y-4">
           {CONTENT.list.map((item, i) => (
             <li key={i}>{item}</li>

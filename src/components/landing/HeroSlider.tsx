@@ -10,12 +10,12 @@ const HeroSlider: React.FC = () => {
     {
       id: 1,
       title: "Slider 1",
-      banner: "/public/images/relationship.svg",
+      banner: "/public/images/banner1.jpeg",
     },
     {
       id: 2,
       title: "Slider 2",
-      banner: "/public/images/welcome.svg",
+      banner: "/public/images/banner1.jpeg",
     },
   ];
 
@@ -55,7 +55,7 @@ const HeroSlider: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-4xl">
+    <div className="relative w-full h-full overflow-hidden">
       {/* Slides */}
       <div
         className="flex h-full transition-transform duration-500 ease-in-out"
@@ -69,16 +69,16 @@ const HeroSlider: React.FC = () => {
               className="w-full h-full object-cover"
             />
             {(slide.title || slide.title) && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/30 bg-opacity-30 text-white p-8">
-                <div className="w-66.25 max-w-67.5">
-                  {slide.title && (
+              <div className="absolute inset-0 flex items-end justify-center bg-black/30 bg-opacity-30 text-white p-8">
+                <div className="w-66.25 max-w-67.5 md:w-100 md:max-w-100 p-4">
+                  {/* {slide.title && (
                     <h2 className="text-4xl font-bold mb-2">{slide.title}</h2>
                   )}
-                  {slide.title && <p className="text-xl mb-4">{slide.title}</p>}
+                  {slide.title && <p className="text-xl mb-4">{slide.title}</p>} */}
                   <Button
                     onClick={handleCTA}
                     label="Join us now!"
-                    className="bg-white text-black!"
+                    className="bg-white text-primary! text-2xl font-bold"
                   />
                 </div>
               </div>

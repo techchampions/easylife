@@ -47,7 +47,7 @@ export default function Navbar() {
   const navLinks: LandingNavItem[] = [
     {
       label: "Home",
-      href: "/",
+      href: "/#",
     },
     {
       label: "About",
@@ -59,7 +59,7 @@ export default function Navbar() {
     },
     {
       label: "Subscribe",
-      href: "/about-us/",
+      href: "#subscribe",
     },
     {
       label: "Help",
@@ -70,11 +70,11 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 z-50 w-full transition-colors duration-300 backdrop-blur-md ${
-        scrolled ? "bg-transparent shadow" : "bg-transparent"
+        scrolled ? "bg-black/30 shadow" : "bg-transparent"
       }`}
     >
       <nav className="w-full px-4 md:max-w-[90%] mx-auto flex justify-between items-center pt-4 pb-1">
-        <div className=" flex items-center space-x-2 h-15">
+        <div className=" flex items-center space-x-2 h-18">
           <img
             src="/images/logo.png"
             alt="Easy Life Logo"
@@ -83,7 +83,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Nav */}
-        <ul className="hidden lg:flex flex-1 justify-center space-x-10 text-base relative">
+        <ul className="hidden lg:flex flex-1 justify-center space-x-10 text-base relative font-bold">
           {navLinks.map((link) => (
             <li key={link.href} className={clsx("relative", "group")}>
               {link.href.startsWith("#") ? (
@@ -100,7 +100,7 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     `transition-colors duration-300 ${
                       isActive
-                        ? "text-secondary font-bold"
+                        ? "text-secondary"
                         : "text-gray-500 hover:text-gray-700"
                     }`
                   }
@@ -167,20 +167,31 @@ export default function Navbar() {
             <ul className="flex flex-col space-y-5 flex-1">
               {navLinks.map((link, index) => (
                 <li key={`${link.href}-${index}`}>
-                  <div>
-                    <NavLink
-                      to={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={({ isActive }) =>
-                        `text-base block ${
-                          isActive
-                            ? "text-primary font-bold"
-                            : "text-gray-700 hover:text-primary"
-                        }`
-                      }
-                    >
-                      {link.label}
-                    </NavLink>
+                  <div className="font-bold">
+                    {link.href.startsWith("#") ? (
+                      <button
+                        onClick={() =>
+                          handleScrollTo(link.href.replace("#", ""))
+                        }
+                        className="text-gray-500 hover:text-gray-700 transition-colors"
+                      >
+                        {link.label}
+                      </button>
+                    ) : (
+                      <NavLink
+                        to={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={({ isActive }) =>
+                          `text-base block ${
+                            isActive
+                              ? "text-primary"
+                              : "text-gray-700 hover:text-primary"
+                          }`
+                        }
+                      >
+                        {link.label}
+                      </NavLink>
+                    )}
                   </div>
                 </li>
               ))}
