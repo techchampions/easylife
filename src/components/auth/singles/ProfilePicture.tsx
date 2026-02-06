@@ -30,6 +30,7 @@ const ProfilePicture: React.FC = () => {
     language,
     height,
     size,
+    gender,
     health_challenges,
     disabilities,
     previously_married,
@@ -132,6 +133,9 @@ const ProfilePicture: React.FC = () => {
             }
             if (single_user_phone) {
               payload.append("single_user_phone", single_user_phone);
+            }
+            if (gender) {
+              payload.append("gender", gender);
             }
             if (address) {
               payload.append("address", address);

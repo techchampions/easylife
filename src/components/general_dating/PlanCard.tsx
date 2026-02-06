@@ -14,7 +14,7 @@ interface Props {
 
 const PlanCard: React.FC<Props> = ({ item }) => {
   return (
-    <div className="py-10 px-5 lg:p-20 space-y-8 rounded-4xl shadow-xl bg-white text-primary flex flex-col">
+    <div className="space-y-8 text-primary flex flex-col">
       <div className="flex-1 space-y-4">
         <div className="text-center">
           <div className="text-2xl font-semibold">{item.title}</div>

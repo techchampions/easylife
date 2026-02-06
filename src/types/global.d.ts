@@ -229,9 +229,11 @@ type UserState = {
 
 // MODAL TYPES
 interface ModalState {
+  isCloseable: boolean;
   isOpen: boolean;
   content: ReactNode | null;
   open: (content: ReactNode) => void;
+  openStrong: (content: ReactNode) => void;
   close: () => void;
 }
 

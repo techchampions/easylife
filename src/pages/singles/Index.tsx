@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const SinglesPageIndex: React.FC = () => {
   const { data, isLoading, isError } = useGetAllUsers(1);
   const users = data?.users || [];
+
   const pills = ["discover", "mentorship", "messages"];
   return (
     <div>

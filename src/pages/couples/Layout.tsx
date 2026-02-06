@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import SideNav from "../../components/couples_dashboard/LeftSideNav";
 import MobileBottomNav from "../../components/couples_dashboard/MobileBottomNav";
 import RightSideBar from "../../components/general_dating/RightSideBar";
+import Subscription from "../../components/general_dating/Subscription";
+import { useModal } from "../../zustand/modal.state";
 
 const CouplesLayout: React.FC = () => {
+  const modal = useModal();
+  const hasSubscribed = false;
+  const openedRef = useRef(false);
+
+  useEffect(() => {
+    if (!hasSubscribed && !openedRef.current) {
+      openedRef.current = true;
+      modal.openStrong(<Subscription />);
+    }
+  }, [hasSubscribed, modal]); // 👈 modal removed
+
   return (
     <div className="bg-secondary/5 min-h-screen w-screen min-w-screen max-w-screen max-h-screen overflow-hidden grid md:grid-cols-4">
       <div className="hidden md:block">

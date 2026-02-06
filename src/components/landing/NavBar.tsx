@@ -7,7 +7,7 @@ import { useModal } from "../../zustand/modal.state";
 import { useUserStore } from "../../zustand/user.state";
 import Login from "../auth/Login";
 import Welcome from "../auth/Welcome";
-import GetStarted from "../auth/GetStarted";
+// import GetStarted from "../auth/GetStarted";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,7 +28,7 @@ export default function Navbar() {
     if (isLoggedIn) {
       if (user?.marital_status) {
         navigate("/dashboard");
-      } else open(<GetStarted />);
+      } else open(<Welcome />);
     } else open(<Welcome />);
   };
   const openLoginModal = () => {
