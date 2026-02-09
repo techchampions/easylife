@@ -35,7 +35,7 @@ const PlanCard: React.FC<Props> = ({ item }) => {
           ))}
         </ul>
       </div>
-      <Button label="Select" />
+      <Button label="Subscribe" />
     </div>
   );
 };

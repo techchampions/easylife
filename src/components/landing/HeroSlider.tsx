@@ -11,11 +11,13 @@ const HeroSlider: React.FC = () => {
       id: 1,
       title: "Slider 1",
       banner: "/public/images/banner1.jpeg",
+      mobile_banner: "/public/images/mobile-banner1.jpeg",
     },
     {
       id: 2,
       title: "Slider 2",
-      banner: "/public/images/banner1.jpeg",
+      banner: "/public/images/banner2.jpeg",
+      mobile_banner: "/public/images/mobile-banner2.jpeg",
     },
   ];
 
@@ -66,10 +68,15 @@ const HeroSlider: React.FC = () => {
             <img
               src={slide.banner}
               alt={slide.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover hidden md:block"
+            />
+            <img
+              src={slide.mobile_banner}
+              alt={slide.title}
+              className="w-full h-full object-cover md:hidden"
             />
             {(slide.title || slide.title) && (
-              <div className="absolute inset-0 flex items-end justify-center bg-black/30 bg-opacity-30 text-white p-8">
+              <div className="absolute inset-0 flex items-end justify-center bg-black/20 bg-opacity-30 text-white p-8">
                 <div className="w-66.25 max-w-67.5 md:w-100 md:max-w-100 p-4">
                   {/* {slide.title && (
                     <h2 className="text-4xl font-bold mb-2">{slide.title}</h2>
@@ -78,7 +85,7 @@ const HeroSlider: React.FC = () => {
                   <Button
                     onClick={handleCTA}
                     label="Join us now!"
-                    className="bg-white text-primary! text-2xl font-bold"
+                    className="bg-white text-primary! text-2xl font-bold hidden md:block"
                   />
                 </div>
               </div>
