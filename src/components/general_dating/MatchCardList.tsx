@@ -23,9 +23,18 @@ const MatchCardList: React.FC<Props> = ({ users, isError, isLoading }) => {
   }
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 space-y-10">
-      {users.map((user, index) => (
+      {/* {users.map((user, index) => (
         <MatchCard key={index} user={user} />
-      ))}
+      ))} */}
+      {Array.isArray(users) && users.length > 0 ? (
+        users.map((user, index) => <MatchCard key={index} user={user} />)
+      ) : (
+        <ItemMessagePlaceholder
+          title="No users found"
+          message="Try again later."
+          icon={<UserRoundSearch />}
+        />
+      )}
     </div>
   );
 };

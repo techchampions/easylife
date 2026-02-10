@@ -28,11 +28,22 @@ export const useLogin = () => {
         queryKey: ["user"],
       });
       // const username = response.user.first_name || response.user.username;
-      showToast(`Logged in Successfully`, "success");
       // setUser(response.user);
       setToken(response.token);
       setIsLoggedIn(true);
-      modal.close();
+      if (response.otpVerified && response.profileCompleted) {
+        showToast(`Logged in Successfully`, "success");
+        modal.close();
+      } else {
+        if (response.otpVerified === false) {
+          showToast(`welcome back, Please verify your email`, "info");
+          modal.open(<VerifyEmail />);
+        }
+        if (response.profileCompleted === false) {
+          showToast(`welcome back, Please complete your profile`, "info");
+          modal.open(<GetStarted />);
+        }
+      }
     },
     onError: (error: AxiosError<LoginError>) => {
       // Check if this is an Axios error with response data
@@ -56,45 +67,6 @@ export const useLogin = () => {
     },
   });
 };
-// export const useRegister = () => {
-//   const queryClient = useQueryClient();
-//   return useMutation({
-//     mutationFn: register,
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries({
-//         queryKey: ["user"],
-//       });
-//       // const username = response.user.first_name || response.user.username;
-//       showToast(`Logged in Successfully`, "success");
-//       setUser(response.user);
-//       setIsLoggedIn(true);
-//       setToken(response.token);
-//       modal.open(<VerifyEmail />);
-//     },
-//     onError: (error: AxiosError<RegisterError>) => {
-//       // Check if this is an Axios error with response data
-//       if (error.response) {
-//         const errorData = error.response.data.errors;
-//         // Use the error message from the response
-//         const usernameError = errorData.username[0] || null;
-//         const emailError = errorData.email[0] || null;
-//         const passwordError = errorData.password[0] || null;
-//         if (usernameError) {
-//           showToast(usernameError, "error");
-//         }
-//         if (emailError) {
-//           showToast(emailError, "error");
-//         }
-//         if (passwordError) {
-//           showToast(passwordError, "error");
-//         }
-//       } else {
-//         // Handle non-Axios errors or network errors
-//         showToast("Registeration Failed!... try again later", "error");
-//       }
-//     },
-//   });
-// };
 
 export const useRegister = () => {
   const queryClient = useQueryClient();
@@ -183,7 +155,7 @@ export const useLogout = () => {
 export const logout = async () => {
   useUserStore.getState().reset(); // Reset user store
   localStorage.removeItem("user-state"); // Clear persisted user state
-  // window.location.reload(); // Optional: Refresh page to clear UI state
+  window.location.reload(); // Optional: Refresh page to clear UI state
   showToast("Logged out successfully!", "success"); // Show logout success message
 };
 export const useSendOTP = () => {
