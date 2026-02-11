@@ -7,24 +7,24 @@ const content = {
   desc: "EasyLife offers alot of benefits and features within the ecosystem. Some of these benefits include",
   list: [
     {
-      text: "Relationship Couching / Marriage Mentorship (Singles & Couples)",
-      image: "/public/images/couple (1).jpeg",
+      text: "Relationship Coaching / Marriage Mentorship (Singles & Couples)",
+      image: "/images/couple (1).jpeg",
     },
     {
       text: " General Marriage Trainings (Singles & Couples)",
-      image: "/public/images/couple (3).jpeg",
+      image: "/images/couple (3).jpeg",
     },
     {
       text: " Marriage Connections ( Singles Only)",
-      image: "/public/images/couple (4).jpeg",
+      image: "/images/couple (4).jpeg",
     },
     {
       text: " Marriage Reconciliations (Couples Only)",
-      image: "/public/images/couple (5).jpeg",
+      image: "/images/couple (5).jpeg",
     },
     {
       text: " Coordinated Godly Match Making (Singles Only)",
-      image: "/public/images/couple (2).jpeg",
+      image: "/images/couple (2).jpeg",
     },
   ],
 };

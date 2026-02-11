@@ -6,9 +6,9 @@ import {
   useLikePost,
 } from "../../hooks/mutattions/useMentorship";
 import FeedsSkeleton from "../loaders/FeedSkeleton";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const FeedsList: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { data, isLoading } = useGetMentorshipPost();
   const { mutate: like } = useLikePost();
   const { mutate: dislike } = useDislikePost();

@@ -6,7 +6,7 @@ const subscriptions = [
     price: 50,
     duration: 3,
     list: [
-      "Relationship Couching / Marriage Mentorship",
+      "Relationship Coaching / Marriage Mentorship",
       " General Marriage Trainings",
       " Marriage Connections ",
       " Coordinated Godly Match Making ",
@@ -17,7 +17,7 @@ const subscriptions = [
     price: 60,
     duration: 6,
     list: [
-      "Relationship Couching / Marriage Mentorship",
+      "Relationship Coaching / Marriage Mentorship",
       " General Marriage Trainings",
       " Marriage Reconciliations ",
     ],
@@ -31,7 +31,7 @@ const SubscriptionSection = () => {
           EasyLife Marriage Academy Subscriptions
         </h2>
         <p>
-          subscribe to EasyLife marriage academy to have unlimited access to the
+          Subscribe to EasyLife marriage academy to have unlimited access to the
           platforms features and benefits, the avialable plan are as follows:
         </p>
       </div>

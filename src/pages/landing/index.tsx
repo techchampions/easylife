@@ -17,10 +17,10 @@ const LandingPageIndex: React.FC = () => {
         <div className="space-y-4 text-center">
           <h2 className="text-4xl font-black">About Us</h2>
           <p className="w-full md:w-xl mx-auto px-4">
-            This is EASYLIFE MARRIAGE ACADEMY, Powered By EASYLONA
-            INTERNATIONAL, This platform is for those who are married, who wish
-            to get married, who wish to stay married, and who wish to enjoy
-            their marriages to the full.
+            This is <b>EASYLIFE MARRIAGE ACADEMY</b>, Powered By{" "}
+            <b>EASYLONA INTERNATIONAL</b>, This platform is for those who are
+            married, who wish to get married, who wish to stay married, and who
+            wish to enjoy their marriages to the full.
           </p>
         </div>
         <MissionVision />

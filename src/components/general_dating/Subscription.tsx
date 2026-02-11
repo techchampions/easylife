@@ -8,7 +8,7 @@ const subscriptions = [
     duration: 3,
     type: "single",
     list: [
-      "Relationship Couching / Marriage Mentorship",
+      "Relationship Coaching / Marriage Mentorship",
       " General Marriage Trainings",
       " Marriage Connections ",
       " Coordinated Godly Match Making ",
@@ -20,7 +20,7 @@ const subscriptions = [
     duration: 6,
     type: "married",
     list: [
-      "Relationship Couching / Marriage Mentorship",
+      "Relationship Coaching / Marriage Mentorship",
       " General Marriage Trainings",
       " Marriage Reconciliations ",
     ],
@@ -36,7 +36,7 @@ const Subscription = () => {
           EasyLife Marriage Academy Subscription
         </h2>
         <p className="text-xs md:text-sm">
-          subscribe to{" "}
+          Subscribe to{" "}
           <span className="capitalize font-bold">
             {user?.marital_status} EasyLife marriage academy{" "}
           </span>{" "}

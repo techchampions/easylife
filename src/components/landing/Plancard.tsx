@@ -8,7 +8,6 @@ interface Props {
     price: number;
     duration: number;
     list: string[];
-    type: string;
   };
 }
 

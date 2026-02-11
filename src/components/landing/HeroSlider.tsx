@@ -10,14 +10,14 @@ const HeroSlider: React.FC = () => {
     {
       id: 1,
       title: "Slider 1",
-      banner: "/public/images/banner1.jpeg",
-      mobile_banner: "/public/images/mobile-banner1.jpeg",
+      banner: "/images/banner1.jpeg",
+      mobile_banner: "/images/mobile-banner1.jpeg",
     },
     {
       id: 2,
       title: "Slider 2",
-      banner: "/public/images/banner2.jpeg",
-      mobile_banner: "/public/images/mobile-banner2.jpeg",
+      banner: "/images/banner2.jpeg",
+      mobile_banner: "/images/mobile-banner2.jpeg",
     },
   ];
 

@@ -16,7 +16,7 @@ const WhoWeAre: React.FC = () => {
     <div className="grid md:grid-cols-2 gap-8">
       <div className="h-full w-full rounded-2xl overflow-hidden">
         <img
-          src="/public/images/couple (2).jpeg"
+          src="/images/couple (2).jpeg"
           alt=""
           className="object-cover h-full w-full"
         />

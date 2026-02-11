@@ -37,8 +37,11 @@ export const useGetAllUsersInfinite = () => {
 
     getNextPageParam: (data) => {
       // Most common patterns — choose one that matches your API
-      if (!data.users.next) return undefined;
-      return data.users.current + 1;
+      // if (!data.users.next) return undefined;
+      // return data.users.current + 1;
+      if (!data) {
+        return undefined;
+      }
 
       // Alternative styles:
       // return lastPage.nextPage ?? undefined;
