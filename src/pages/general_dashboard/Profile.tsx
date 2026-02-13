@@ -14,7 +14,7 @@ const ProfileScreen: React.FC = () => {
   return (
     <>
       <Header name="Profile" />
-      <div className="overflow-hidden p-3">
+      <div className="overflow-hidden p-3 md:p-0">
         <div className="space-y-10">
           {/* Header with Profile Picture */}
           <div className="relative rounded-2xl overflow-hidden">

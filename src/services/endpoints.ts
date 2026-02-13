@@ -68,6 +68,13 @@ export const sendOTP = async () => {
   return response.data;
 };
 
+export const verifyReferalCode = async (
+  referal_id: string
+): Promise<VerifyReferalCodeResponse> => {
+  const response = await api.get(`/verify_referral/${referal_id}`);
+  return response.data;
+};
+
 export const onboardingUpdateUserProfile = async (payload: FormData) => {
   const response = await api.post("/update-user-auth", payload, {
     headers: { "Content-Type": "multipart/form-data" },

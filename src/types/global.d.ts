@@ -49,6 +49,11 @@ interface ForgotPasswordError {
   message: string;
 }
 
+interface VerifyReferalCodeResponse {
+  success: boolean;
+  is_exist: boolean;
+}
+
 // TOAST TYPES
 type ToastType = "success" | "error" | "info" | "message";
 

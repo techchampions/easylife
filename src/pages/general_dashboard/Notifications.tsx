@@ -8,7 +8,7 @@ const Notifications: React.FC = () => {
   return (
     <div>
       <Header name="Notifications" />
-      <div className="px-4 md:px-0">
+      <div className="p-3 md:p-0">
         <NotifcationsList
           notifications={data?.users || []}
           isError={isError}

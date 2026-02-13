@@ -9,6 +9,7 @@ import {
   register,
   sendOTP,
   verifyOTP,
+  verifyReferalCode,
 } from "../../services/endpoints";
 import { useModal } from "../../zustand/modal.state";
 import VerifyEmail from "../../components/auth/VerifyEmail";
@@ -144,9 +145,6 @@ export const useLogout = () => {
     mutationFn: logout,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["cart"],
-      });
-      queryClient.invalidateQueries({
         queryKey: ["user"],
       });
     },
@@ -224,5 +222,11 @@ export const useChangePassword = () => {
         showToast(error.response?.data.message, "error");
       } else showToast("Failed to change password", "error");
     },
+  });
+};
+
+export const useVerifyReferalCode = () => {
+  return useMutation({
+    mutationFn: verifyReferalCode,
   });
 };

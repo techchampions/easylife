@@ -56,24 +56,30 @@ const UpdateProfile = () => {
   const [tab, settab] = useState("user");
   return (
     <div className="w-md max-w-xs md:max-w-md max-h-[75vh] overflow-y-auto scrollbar-hide">
-      <div className="relative grid grid-cols-2 gap-2 bg-gray-100 rounded-lg h-11.25 mb-5">
-        <div
-          className={`absolute w-[calc(50%-5px)] h-8.75 bg-white top-1.25 flex items-center justify-center z-10 shadow-sm rounded-md transition-all duration-200 ease-out ${
-            tab === "user" ? "left-1.25" : "left-[calc(50%)]"
-          }`}
-        />
-        {tabs.map((t, i) => (
+      {user?.marital_status === "married" ? (
+        <div className="relative grid grid-cols-2 gap-2 bg-gray-100 rounded-lg h-11.25 mb-5">
           <div
-            className={`w-full flex items-center justify-center text-center capitalize cursor-pointer relative z-40 ${
-              tab === t ? "text-gray-700" : "text-gray-400"
+            className={`absolute w-[calc(50%-5px)] h-8.75 bg-white top-1.25 flex items-center justify-center z-10 shadow-sm rounded-md transition-all duration-200 ease-out ${
+              tab === "user" ? "left-1.25" : "left-[calc(50%)]"
             }`}
-            key={i}
-            onClick={() => settab(t)}
-          >
-            {t} profile
-          </div>
-        ))}
-      </div>
+          />
+          {tabs.map((t, i) => (
+            <div
+              className={`w-full flex items-center justify-center text-center capitalize cursor-pointer relative z-40 ${
+                tab === t ? "text-gray-700" : "text-gray-400"
+              }`}
+              key={i}
+              onClick={() => settab(t)}
+            >
+              {t} profile
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="font-bold text-lg mb-5 text-center bg-gray-100 p-1 rounded-lg">
+          <div className="bg-white rounded-md p-1">Update your Profile</div>
+        </div>
+      )}
 
       <Formik
         initialValues={initialValues}

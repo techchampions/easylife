@@ -1,4 +1,10 @@
-import { MoreHorizontal, Share2, ThumbsDown, ThumbsUp } from "lucide-react";
+import {
+  MoreHorizontal,
+  Newspaper,
+  Share2,
+  ThumbsDown,
+  ThumbsUp,
+} from "lucide-react";
 import React from "react";
 import { useGetMentorshipPost } from "../../hooks/query/useMentorship";
 import {
@@ -7,14 +13,24 @@ import {
 } from "../../hooks/mutattions/useMentorship";
 import FeedsSkeleton from "../loaders/FeedSkeleton";
 import { Link } from "react-router-dom";
+import ItemMessagePlaceholder from "../general_dating/ItemMessagePaceholder";
 const FeedsList: React.FC = () => {
   // const navigate = useNavigate();
-  const { data, isLoading } = useGetMentorshipPost();
+  const { data, isLoading, isError } = useGetMentorshipPost();
   const { mutate: like } = useLikePost();
   const { mutate: dislike } = useDislikePost();
   const feeds = data?.data.data ?? [];
   if (isLoading) {
     return <FeedsSkeleton />;
+  }
+  if (isError) {
+    return (
+      <ItemMessagePlaceholder
+        title="Failed to get posts"
+        message="Server error... unable to retrieve posts at the moment."
+        icon={<Newspaper />}
+      />
+    );
   }
   return (
     <div className="space-y-8">

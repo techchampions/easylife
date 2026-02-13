@@ -16,11 +16,13 @@ const Index: React.FC = () => {
   return (
     <div>
       {/* <Header name="Home" /> */}
-      <div className="bg-white rounded-2xl p-5 my-2 md:my-5 w-[95%] md:w-full mx-auto flex items-center justify-between">
-        <div className="font-bold">
-          <div className="text-gray-500">Welcome to</div>
-          <div className="capitalize text-2xl md:text-4xl ">
-            EasyLife Couples Portal
+      <div className="p-3">
+        <div className="bg-white rounded-2xl p-5 my-2 md:my-5 w-full mx-auto flex items-center justify-between">
+          <div className="font-bold">
+            <div className="text-gray-500">Welcome to</div>
+            <div className="capitalize text-2xl md:text-4xl ">
+              EasyLife Couples Portal
+            </div>
           </div>
         </div>
       </div>

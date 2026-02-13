@@ -24,6 +24,7 @@ import ChatScreen from "../pages/general_dashboard/ChatScreen";
 import MatchProfileScreen from "../pages/general_dashboard/MatchProfile";
 import SinglesPageIndex from "../pages/singles/Index";
 import PostDetail from "../pages/general_dashboard/PostDetail";
+import MySubscription from "../pages/general_dashboard/MySubscription";
 const CouplesLayout = lazy(() => import("../pages/couples/Layout"));
 
 const AppRoutes = () => {
@@ -40,38 +41,12 @@ const AppRoutes = () => {
               element={
                 <Navigate
                   to={isLoggedIn && user?.marital_status ? "/dashboard" : "/"}
-                  // to={
-                  //   isLoggedIn && user?.marital_status
-                  //     ? user.marital_status === "single"
-                  //       ? "/singles"
-                  //       : "/couples"
-                  //     : "/"
-                  // }
                   replace
                 />
               }
             />
 
             {/* Protected Routes - Dashboard */}
-
-            {/* <Route path="/singles/*" element={<SinglesRoutes />}>
-              <Route element={<SinglesLayout />}>
-                <Route index element={<Index />} />
-                <Route path="settings" element={<Settings />} />
-                <Route path="discover" element={<Discover />} />
-                <Route path="messages" element={<Messages />} />
-                <Route path="messages/:id" element={<ChatScreen />} />
-                <Route path="profile" element={<ProfileScreen />} />
-                <Route
-                  path="matchprofile/:id"
-                  element={<MatchProfileScreen />}
-                />
-                <Route path="notifications" element={<Notifications />} />
-                <Route path="mentorship" element={<SocialFeedPage />} />
-              </Route>
-            </Route>
- */}
-            {/* Login Route */}
             <Route path="/dashboard/*" element={<CouplesRoutes />}>
               <Route element={<CouplesLayout />}>
                 <Route
@@ -99,8 +74,10 @@ const AppRoutes = () => {
                 />
                 <Route path="mentorship" element={<SocialFeedPage />} />
                 <Route path="mentorship/post/:id" element={<PostDetail />} />
+                <Route path="my-subscription" element={<MySubscription />} />
               </Route>
             </Route>
+            {/* Landing Route */}
             <Route path="/" element={<LandingRoute />}>
               <Route element={<LandingPageLayout />}>
                 <Route index element={<LandingPageIndex />} />

@@ -23,7 +23,7 @@ const Messages: React.FC = () => {
       {isLoading ? (
         <ConversationListSkeleton />
       ) : (
-        <div className="">
+        <div className="p-3 md:p-0">
           {data?.conversations ? (
             <div className="min-h-[78vh] bg-white p-8 rounded-3xl">
               <ConversationList conversation={data?.conversations} />

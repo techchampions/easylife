@@ -7,7 +7,7 @@ export default function SocialFeedPage() {
   return (
     <div className="min-h-screen">
       <Header name="Mentorship" />
-      <div className="p-4">
+      <div className="p-3 md:p-0">
         <FeedsList />
       </div>
     </div>

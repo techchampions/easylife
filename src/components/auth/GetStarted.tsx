@@ -1,16 +1,16 @@
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { ArrowLeft } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useModal } from "../../zustand/modal.state";
-// import GetStarted from "./GetStarted-depreciated";
 import InputField from "../form/InputField";
 import Button from "../global/Button";
 import RadioGroup from "../form/RadioGroup";
 import MaritalStatus from "./MaritalStatus";
 import { useOnboardingFormData } from "../../zustand/onboardingData.state";
 import { useGetUser } from "../../hooks/query/useUser";
-// import { useVerifyMarkerter } from "@/data/hooks";
+import { useToast } from "../../zustand/toast.state";
+import { useVerifyReferalCode } from "../../hooks/mutattions/useAuth";
 
 const validationSchema = Yup.object().shape({
   isReferred: Yup.string().required("required"),
@@ -24,33 +24,49 @@ const validationSchema = Yup.object().shape({
 const GetStarted: React.FC = () => {
   useGetUser();
   const modal = useModal();
-  const [ID, setID] = useState("");
+  const toast = useToast();
+  const { mutateAsync: verify, isPending } = useVerifyReferalCode();
   const { referral_id, setOnboardingFormData } = useOnboardingFormData();
   const isReferredOption = [
     { label: "yes", value: "yes" },
     { label: "no", value: "no" },
   ];
   const initialValues = { referral_id: referral_id || "", isReferred: "" };
-  // const { data, isLoading, isError } = useVerifyMarkerter(ID || "");
   const goBack = () => {
     modal.open(<GetStarted />);
   };
 
-  const ValidateReferralCode = ({ code }: { code: string }) => {
-    useEffect(() => {
-      if (code && code !== ID) {
-        setID(code);
-      }
-    }, [code]);
+  // const ValidateReferralCode = ({ code }: { code: string }) => {
+  //   useEffect(() => {
+  //     if (code && code !== ID) {
+  //       setID(code);
+  //     }
+  //   }, [code]);
 
-    return null;
-  };
+  //   return null;
+  // };
 
   const handleProceed = async (values: typeof initialValues) => {
     setOnboardingFormData({
       referral_id: values.referral_id,
     });
-    modal.open(<MaritalStatus />);
+
+    if (values.isReferred === "yes") {
+      try {
+        const response = await verify(values.referral_id);
+
+        if (response?.is_exist) {
+          toast.showToast("Referral code is valid", "success");
+          modal.open(<MaritalStatus />);
+        } else {
+          toast.showToast("Invalid referral code", "error");
+        }
+      } catch {
+        toast.showToast("Something went wrong", "error");
+      }
+    } else {
+      modal.open(<MaritalStatus />);
+    }
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md max-h-[75vh] overflow-y-scroll scrollbar-hide">
@@ -75,17 +91,10 @@ const GetStarted: React.FC = () => {
           validationSchema={validationSchema}
           validateOnMount
           onSubmit={handleProceed}
-          // onSubmit={(values) => {
-          //   setID(values.marketerId);
-          //   if (data?.success) {
-          //     setSubscribeFormData({ marketID: values.marketerId });
-          //     action.open(<InputPersonalInfo property={property} />);
-          //   }
-          // }}
         >
           {({ isValid, values }) => (
             <Form className="flex flex-col justify-between">
-              <ValidateReferralCode code={values.referral_id} />
+              {/* <ValidateReferralCode code={values.referral_id} /> */}
               <div className="space-y-4">
                 <div className="space-y-4">
                   <div className="">Were you referred by someone?</div>
@@ -115,24 +124,14 @@ const GetStarted: React.FC = () => {
               </div>
               <div className="flex justify-center w-full gap-4 mt-4">
                 <Button
-                  // label={`${isError ? "Invalid Marketer code" : "Proceed"}`}
-                  label="Proceed"
-                  // className={`${
-                  //   isError ? "bg-red-700" : "bg-adron-green"
-                  // } rounded-lg`}
+                  label={`${
+                    values.isReferred === "yes" ? "Verify" : "Proceed"
+                  }`}
                   className="bg-secondary rounded-lg"
                   type="submit"
-                  // loadingText={`${
-                  //   isError
-                  //     ? "Invalid Marketer code"
-                  //     : isLoading
-                  //     ? "Verifying marketer code..."
-                  //     : "Loading..."
-                  // }`}
-                  // isLoading={isLoading}
-                  disabled={!isValid}
-                  // icon={isError ? <Info /> : null}
-                  // rightIcon={data?.success ? <ArrowRight /> : null}
+                  isLoading={isPending}
+                  loadingText="Verifying..."
+                  disabled={!isValid || isPending}
                 />
               </div>
             </Form>

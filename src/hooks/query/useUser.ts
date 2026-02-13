@@ -1,6 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useUserStore } from "../../zustand/user.state";
-import { getNotifications, getUser } from "../../services/endpoints";
+import {
+  getNotifications,
+  getUser,
+  verifyReferalCode,
+} from "../../services/endpoints";
 import { useEffect } from "react";
 
 export const useGetUser = () => {
@@ -25,5 +29,13 @@ export const useGetNotifications = () => {
   return useQuery({
     queryKey: ["notifications"],
     queryFn: () => getNotifications(),
+  });
+};
+
+export const useVerifyReferalCode = (referal_code: string) => {
+  return useQuery({
+    queryKey: ["referal_code_exists", referal_code],
+    queryFn: () => verifyReferalCode(referal_code),
+    enabled: !!referal_code,
   });
 };
