@@ -1,5 +1,5 @@
 import "./App.css";
-import AppRoutes from "./routes/app.routes";
+import AppRoutes from "./routes/app_routes";
 import { QueryProvider } from "./services/QueryProvider";
 
 function App() {
