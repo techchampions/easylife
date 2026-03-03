@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Button from "../global/Button";
+import React, { useEffect, useState } from "react";
 import { useModal } from "../../zustand/modal.state";
 import Welcome from "../auth/Welcome";
+import Button from "../global/Button";
 
 const HeroSlider: React.FC = () => {
   const modal = useModal();
@@ -16,7 +16,7 @@ const HeroSlider: React.FC = () => {
     {
       id: 2,
       title: "Slider 2",
-      banner: "/images/banner2.jpeg",
+      banner: "/images/banner2.png",
       mobile_banner: "/images/mobile-banner2.jpeg",
     },
   ];

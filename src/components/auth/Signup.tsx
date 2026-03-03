@@ -1,7 +1,6 @@
 import { Form, Formik } from "formik";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { useModal } from "../../zustand/modal.state";
 import InputField from "../form/InputField";
@@ -9,6 +8,7 @@ import Button from "../global/Button";
 import Login from "./Login";
 // import VerifyEmail from "./VerifyEmail";
 import { useRegister } from "../../hooks/mutattions/useAuth";
+import CheckboxField from "../form/CheckboxField";
 
 const Signup = () => {
   const modal = useModal();
@@ -19,12 +19,14 @@ const Signup = () => {
   const initialValues = {
     email: "",
     password: "",
-    agree: false,
+    agree: "",
   };
   const validationSchema = Yup.object({
     email: Yup.string().required("Required"),
     password: Yup.string().required("Required"),
-    agree: Yup.boolean().required("Required"),
+    agree: Yup.boolean()
+      .required("Required")
+      .oneOf([true], "You must agree to the terms"),
   });
   const handleSubmit = (
     values: typeof initialValues,
@@ -38,6 +40,8 @@ const Signup = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       validateOnMount
+      validateOnChange
+      validateOnBlur
       onSubmit={(values, { setSubmitting }) =>
         handleSubmit(values, setSubmitting)
       }
@@ -74,8 +78,14 @@ const Signup = () => {
             }
           />
           {/* Forgot Password Link */}
-          <div className="flex items-center space-x-2 text-xs px-2">
-            <input
+          <div className="flex items-center text-xs px-2">
+            <CheckboxField
+              name="agree"
+              link="terms"
+              linkText="Terms of service"
+              label="By creating an account, you agree with our"
+            />
+            {/* <input
               type="checkbox"
               id="agree"
               name="agree"
@@ -86,7 +96,7 @@ const Signup = () => {
               <Link to={`/terms`} className="underline text-primary">
                 Terms of Service
               </Link>
-            </label>
+            </label> */}
           </div>
           <Button
             type="submit"

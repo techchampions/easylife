@@ -12,7 +12,7 @@ const Congrats: React.FC = () => {
           <CheckCircle2 size={60} className="text-secondary" />
           <div className="text-2xl font-bold">Congratulations!</div>
           <div className="text-gray-700">
-            you have successfully signup for EasyLife mentorship programme.
+            You have successfully signup for EasyLife Marriage Academy.
           </div>
         </div>
       </div>
