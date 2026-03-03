@@ -1,12 +1,12 @@
 import { Form, Formik } from "formik";
-import * as Yup from "yup";
-import { useState } from "react";
-import Button from "../global/Button";
-import { useModal } from "../../zustand/modal.state";
 import { Eye, EyeOff } from "lucide-react";
-import InputField from "../form/InputField";
-import Login from "./Login";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
+import { useModal } from "../../zustand/modal.state";
+import InputField from "../form/InputField";
+import Button from "../global/Button";
+import Login from "./Login";
 // import VerifyEmail from "./VerifyEmail";
 import { useRegister } from "../../hooks/mutattions/useAuth";
 
@@ -19,10 +19,12 @@ const Signup = () => {
   const initialValues = {
     email: "",
     password: "",
+    agree: false,
   };
   const validationSchema = Yup.object({
     email: Yup.string().required("Required"),
     password: Yup.string().required("Required"),
+    agree: Yup.boolean().required("Required"),
   });
   const handleSubmit = (
     values: typeof initialValues,
@@ -76,6 +78,7 @@ const Signup = () => {
             <input
               type="checkbox"
               id="agree"
+              name="agree"
               className="text-primary bg-white"
             />
             <label htmlFor="agree">
