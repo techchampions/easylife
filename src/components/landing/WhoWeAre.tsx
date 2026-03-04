@@ -21,7 +21,7 @@ const WhoWeAre: React.FC = () => {
           className="object-cover h-full w-full"
         />
       </div>
-      <div className="bg-linear-to-tr from-transparent to-transparent p-10 text-white rounded-2xl">
+      <div className="bg-linear-to-tr from-transparent to-transparent p-10 text-black rounded-2xl">
         <div className="space-y-4 mb-10">
           <h2 className="text-4xl font-bold">{CONTENT.title}</h2>
           <p>{CONTENT.desc}</p>

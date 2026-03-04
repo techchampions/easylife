@@ -1,17 +1,17 @@
 import React from "react";
-import WhoWeAre from "../../components/landing/WhoWeAre";
 import BottomCTA from "../../components/landing/BottomCTA";
-import HeroSlider from "../../components/landing/HeroSlider";
-import MissionVision from "../../components/landing/MissionVision";
 import Features from "../../components/landing/Features";
+import HeroSection from "../../components/landing/HeroSection";
+import MissionVision from "../../components/landing/MissionVision";
 import SubscriptionSection from "../../components/landing/SubscriptionSection";
+import WhoWeAre from "../../components/landing/WhoWeAre";
 
 const LandingPageIndex: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="w-full h-[80vh] text-black">
-        <HeroSlider />
-        {/* <h1 className="text-4xl font-bold text-center">Slider Section</h1> */}
+      <div className="w-full md:h-[80vh] text-black">
+        <HeroSection />
+        {/* <HeroSlider /> */}
       </div>
       <div id="about-us" className="py-10 md:py-20">
         <div className="space-y-4 text-center">
@@ -27,7 +27,7 @@ const LandingPageIndex: React.FC = () => {
       </div>
       <div
         id="who-we-are"
-        className="w-full py-10 md:py-20 px-4 bg-linear-to-tr from-black to-secondary text-white"
+        className="w-full py-10 md:py-20 px-4 bg-secondary/20"
       >
         <div className="w-[99%] md:w-[80%] mx-auto">
           <WhoWeAre />
@@ -38,7 +38,7 @@ const LandingPageIndex: React.FC = () => {
       </div>
       <div
         id="subscribe"
-        className="w-full py-10 md:py-20 px-4 bg-linear-to-tr from-primary to-secondary text-white"
+        className="w-full py-10 md:py-20 px-4 bg-linear-to-tr from-secondary/20 to-secondary text-white"
       >
         <SubscriptionSection />
       </div>

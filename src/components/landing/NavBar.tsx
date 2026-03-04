@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { ArrowUpRightFromCircle, LogIn, Menu, X } from "lucide-react";
 import clsx from "clsx";
+import { ArrowUpRightFromCircle, LogIn, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import Button from "../global/Button";
 import { useModal } from "../../zustand/modal.state";
 import { useUserStore } from "../../zustand/user.state";
 import Login from "../auth/Login";
 import Welcome from "../auth/Welcome";
+import Button from "../global/Button";
 // import GetStarted from "../auth/GetStarted";
 
 export default function Navbar() {
@@ -62,6 +62,10 @@ export default function Navbar() {
       href: "#subscribe",
     },
     {
+      label: "App",
+      href: "#app",
+    },
+    {
       label: "Help",
       href: "/contact/",
     },
@@ -83,7 +87,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Nav */}
-        <ul className="hidden lg:flex flex-1 justify-center space-x-10 text-base relative font-bold">
+        <ul className="hidden lg:flex flex-1 justify-center space-x-15 text-base relative font-bold">
           {navLinks.map((link) => (
             <li key={link.href} className={clsx("relative", "group")}>
               {link.href.startsWith("#") ? (
@@ -114,15 +118,17 @@ export default function Navbar() {
 
         {/* Desktop Buttons */}
         <div className="hidden lg:flex space-x-2">
-          <Button
-            label="Login"
-            className="px-4 w-fit! bg-secondary"
-            onClick={openLoginModal}
-            rightIcon={<LogIn size={17} />}
-          />
+          <div className="bg-linear-to-r from bg-secondary to-secondary-light p-0.75 rounded-2xl text-white">
+            <Button
+              label="Login"
+              className="px-4 w-fit! bg-white text-secondary! hover:text-white! font-medium hover:bg-linear-to-r from-secondary to-secondary-light"
+              onClick={openLoginModal}
+              rightIcon={<LogIn size={17} />}
+            />
+          </div>
           <Button
             label="Get Started"
-            className="px-4 w-fit!"
+            className="px-4 w-fit! bg-linear-to-br rounded-2xl! font-medium from-primary to-primary-light"
             onClick={getStarted}
             rightIcon={<ArrowUpRightFromCircle size={17} />}
           />

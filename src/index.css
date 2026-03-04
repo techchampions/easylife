@@ -2,8 +2,8 @@
 @import "./assets/fonts/fonts.css";
 
 :root {
-  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
-  font-family: "GT Walsheim Pro";
+  font-family: "Hellix";
+  /* font-family: "GT Walsheim Pro"; */
   line-height: 1.5;
   font-weight: 400;
 
@@ -32,7 +32,9 @@
 
 @theme inline {
   --color-primary: #002363;
+  --color-primary-light: #6a9eff;
   --color-secondary: #902268;
+  --color-secondary-light: #f2009a;
   /* --font-adron-title: 'Cormorant Garamond', sans-serif;
   --font-adron-text-body: Gotham;
   --font-adron-thin: Gotham-thin;

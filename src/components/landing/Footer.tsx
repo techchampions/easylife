@@ -1,19 +1,19 @@
 import {
   Facebook,
   Instagram,
-  Twitter,
   Linkedin,
   Mail,
   Phone,
+  Twitter,
 } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-12">
+    <footer className="bg-secondary/20 text-black pt-12">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Brand */}
         <div>
-          <div className="text-white text-xl font-semibold mb-4 w-2/3">
+          <div className="text-black text-xl font-semibold mb-4 w-2/3">
             <img
               src="/images/logo.png"
               alt="Easy Life Logo"
@@ -28,7 +28,7 @@ const Footer = () => {
 
         {/* Links */}
         <div>
-          <h3 className="text-white font-semibold mb-4">Company</h3>
+          <h3 className="font-semibold mb-4">Company</h3>
           <ul className="space-y-2 text-sm">
             <li>
               <a href="#" className="hover:text-white">
@@ -55,7 +55,7 @@ const Footer = () => {
 
         {/* Resources */}
         <div>
-          <h3 className="text-white font-semibold mb-4">Resources</h3>
+          <h3 className="font-semibold mb-4">Resources</h3>
           <ul className="space-y-2 text-sm">
             <li>
               <a href="#" className="hover:text-white">
@@ -82,7 +82,7 @@ const Footer = () => {
 
         {/* Contact */}
         <div>
-          <h3 className="text-white font-semibold mb-4">Contact</h3>
+          <h3 className=" font-semibold mb-4">Contact</h3>
           <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-2">
               <Mail size={16} /> support@yourbrand.com
@@ -110,7 +110,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom */}
-      <div className="border-t border-gray-800 mt-10 py-6 text-center text-sm text-gray-400 flex items-center gap-10 justify-center">
+      <div className="border-t border-gray-800 mt-10 py-6 text-center text-sm text-gray-800 flex items-center gap-10 justify-center">
         <div className="">
           © {new Date().getFullYear()} YourBrand. All rights reserved.
         </div>

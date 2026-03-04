@@ -36,22 +36,37 @@ const Features = () => {
         <h2 className="text-3xl font-black">{content.title}</h2>
         <p className="w-full md:w-1/2 mx-auto">{content.desc}</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="flex flex-wrap justify-center gap-6">
+        {" "}
         {content.list.map((item, i) => (
+          // <div
+          //   className={` hover:shadow-lg relative rounded-xl overflow-hidden h-80 min-h-80 max-h-80 bg-secondary/20`}
+          //   key={i}
+          // >
           <div
-            className="hover:shadow-lg relative rounded-xl overflow-hidden"
             key={i}
+            className="
+    w-full 
+    md:w-[calc(50%-12px)] 
+    lg:w-[calc(33.333%-16px)]
+    hover:shadow-lg 
+    relative 
+    rounded-xl 
+    overflow-hidden 
+    h-80 
+    bg-secondary/20
+  "
           >
-            <div className="h-65">
+            <div className="h-1/2">
               <img
                 src={item.image}
                 alt={item.text}
                 className="object-cover h-full w-full"
               />
             </div>
-            <div className="absolute inset-0 hover:backdrop-blur-sm bg-black/50 flex justify-center items-center text-white">
-              <div className="p-4 space-y-4">
-                <p className="font-semibold text-lg">{item.text}</p>
+            <div className="flex justify-center items-center h-1/2 text-black">
+              <div className="p-4 space-y-4 flex flex-col justify-between h-full">
+                <p className="font-semibold text-lg flex-1">{item.text}</p>
                 <LinkButton
                   label="LEARN MORE"
                   rightIcon={
@@ -60,7 +75,7 @@ const Features = () => {
                       size={15}
                     />
                   }
-                  className="text-sm bg-white/20 hover:bg-white text-white hover:text-black! w-fit! px-7 mx-auto"
+                  className="text-sm bg-white text-black! w-fit! px-7 mx-auto"
                 />
               </div>
             </div>
