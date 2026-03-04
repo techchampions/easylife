@@ -1,6 +1,13 @@
+import { useModal } from "../../zustand/modal.state";
+import Welcome from "../auth/Welcome";
 import Button from "../global/Button";
 
 const HeroSection = () => {
+  const modal = useModal();
+  const getStarted = () => {
+    modal.open(<Welcome />);
+  };
+
   return (
     <main className="lg:flex flex-row lg:justify-between lg:px-28 lg:overflow-hidden">
       <div>
@@ -20,6 +27,7 @@ const HeroSection = () => {
             />
           </div>
           <Button
+            onClick={getStarted}
             className="w-fit! bg-linear-to-r from-primary to-primary-light text-white font-bold px-14 py-3 rounded-full shadow-lg hover:bg-linear-to-r hover:from-primary-light hover:to-primary mt-6 md:mt-8"
             label="GET STARTED"
           />

@@ -6,7 +6,7 @@ const BottomCTA = () => {
   const modal = useModal();
   return (
     <div className="min-w-full md:min-w-xl">
-      <div className="bg-linear-to-r from-black to-primary text-white p-10 rounded-2xl flex items-end gap-4">
+      <div className="bg-secondary/20 p-10 rounded-2xl flex items-end gap-4">
         <div className="text-sm md:text-lg w-3/5">
           If You Really Wish To Get Married Easily, Stay Married, And Enjoy Your
           Marriage To The Full.
@@ -14,7 +14,7 @@ const BottomCTA = () => {
         <Button
           onClick={() => modal.open(<Welcome />)}
           label="Join us now"
-          className="bg-white text-black! w-2/5! h-fit!"
+          className="bg-linear-to-r from-secondary to-secondary-light text-white! w-2/5! h-fit!"
         />
       </div>
     </div>
