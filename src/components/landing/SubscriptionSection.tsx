@@ -27,10 +27,10 @@ const SubscriptionSection = () => {
   return (
     <div className="w-full md:w-[70%] mx-auto space-y-10">
       <div className="text-center space-y-4">
-        <h2 className="text-3xl font-black">
+        <h2 className="text-3xl 2xl:text-5xl font-black">
           EasyLife Marriage Academy Subscriptions
         </h2>
-        <p>
+        <p className="2xl:text-xl">
           Subscribe to EasyLife marriage academy to have unlimited access to the
           platforms features and benefits, the avialable plan are as follows:
         </p>

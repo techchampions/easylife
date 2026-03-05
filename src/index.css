@@ -31,6 +31,7 @@
 
 
 @theme inline {
+  --color-custom-pink: #fdf7fd;
   --color-primary: #002363;
   --color-primary-light: #6a9eff;
   --color-secondary: #902268;

@@ -1,5 +1,5 @@
-import React from "react";
 import { Binoculars, Gem, Goal } from "lucide-react";
+import React from "react";
 import ContentCard from "./ContentCard";
 
 const CONTENTS: ContentType[] = [
@@ -16,19 +16,19 @@ const CONTENTS: ContentType[] = [
   //   ],
   // },
   {
-    icon: <Binoculars size={45} />,
+    icon: <Binoculars className="w-28 h-28 2xl:w-38 2xl:h-38 text-black" />,
     title: "Vision",
     desc: "To Make Marriage Wisdom Easily Accessible To All Those Interest.",
     // list: null,
   },
   {
-    icon: <Goal size={45} />,
+    icon: <Goal className="w-28 h-28 2xl:w-38 2xl:h-38 text-black" />,
     title: "Mission",
     desc: "To Facilitate Marriage Connections For Singles, Marriage Bonding / Reconciliation For Couples, And Long Lasting, Durable And Enjoyable Marriage For All Those Interested.",
     // list: null,
   },
   {
-    icon: <Gem size={45} />,
+    icon: <Gem className="w-28 h-28 2xl:w-38 2xl:h-38 text-black" />,
     title: "Core Values",
     desc: "Our Core Values Are Integrity, Sincerity, Spirituality, Openness And Godliness.",
     // list: null,
@@ -36,7 +36,7 @@ const CONTENTS: ContentType[] = [
 ];
 const MissionVision: React.FC = () => {
   return (
-    <div className="w-full md:w-[80%] mx-auto">
+    <div className="w-full md:w-[75%] mx-auto">
       <div className="grid lg:grid-cols-3 gap-4 p-4 md:p-8">
         {CONTENTS.map((content, index) => (
           <ContentCard key={index} content={content} />

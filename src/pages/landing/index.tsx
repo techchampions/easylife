@@ -9,12 +9,12 @@ import WhoWeAre from "../../components/landing/WhoWeAre";
 const LandingPageIndex: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="w-full md:h-[80vh] text-black">
+      <div className="w-full md:h-[80vh] text-black 2xl:mb-20">
         <HeroSection />
         {/* <HeroSlider /> */}
       </div>
       <div id="about-us" className="py-10 md:py-20">
-        <div className="space-y-4 text-center">
+        {/* <div className="space-y-4 text-center">
           <h2 className="text-4xl font-black">About Us</h2>
           <p className="w-full md:w-xl mx-auto px-4">
             This is <b>EASYLIFE MARRIAGE ACADEMY</b>, Powered By{" "}
@@ -22,7 +22,7 @@ const LandingPageIndex: React.FC = () => {
             married, who wish to get married, who wish to stay married, and who
             wish to enjoy their marriages to the full.
           </p>
-        </div>
+        </div> */}
         <MissionVision />
       </div>
       <div
@@ -33,7 +33,7 @@ const LandingPageIndex: React.FC = () => {
           <WhoWeAre />
         </div>
       </div>
-      <div id="features" className="w-full py-10 md:py-20 px-4">
+      <div id="features" className="w-full py-10 md:py-20 2xl:py-30 px-4">
         <Features />
       </div>
       <div

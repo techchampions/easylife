@@ -9,7 +9,7 @@ const HeroSection = () => {
   };
 
   return (
-    <main className="lg:flex flex-row lg:justify-between lg:px-28 lg:overflow-hidden">
+    <main className="lg:flex flex-row lg:justify-between lg:px-28 lg:overflow-hidden bg-custom-pink">
       <div>
         <div className="px-10 ml-10 mt-24 lg:p-8 lg:py-16 lg:mt-12">
           <div className="relative">
@@ -34,7 +34,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="relative flex justify-center lg:justify-start lg:absolute lg:left-175 lg:bottom-0 z-0">
+      <div className="relative flex justify-center lg:justify-start lg:absolute lg:left-175 2xl:left-250 lg:bottom-0 z-0">
         <img
           src="./images/MainContent.png"
           alt="User with Emoji"

@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary/20 text-black pt-12">
+    <footer className="bg-custom-pink text-black pt-12">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Brand */}
         <div>
@@ -20,7 +20,7 @@ const Footer = () => {
               className="w-full h-full"
             />
           </div>
-          <p className="text-sm leading-relaxed">
+          <p className="text-sm 2xl:text-xl leading-relaxed">
             Superlative Online / Offline Marriage Trainings, For Both Singles
             And Married Couples.{" "}
           </p>
@@ -28,25 +28,25 @@ const Footer = () => {
 
         {/* Links */}
         <div>
-          <h3 className="font-semibold mb-4">Company</h3>
-          <ul className="space-y-2 text-sm">
+          <h3 className="font-semibold mb-4 2xl:text-3xl">Company</h3>
+          <ul className="space-y-2 text-sm 2xl:text-xl">
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="#" className="hover:font-bold text-gray-600">
                 About
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="#" className="hover:font-bold text-gray-600">
                 Services
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="#" className="hover:font-bold text-gray-600">
                 Careers
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="#" className="hover:font-bold text-gray-600">
                 Contact
               </a>
             </li>
@@ -55,25 +55,25 @@ const Footer = () => {
 
         {/* Resources */}
         <div>
-          <h3 className="font-semibold mb-4">Resources</h3>
-          <ul className="space-y-2 text-sm">
+          <h3 className="font-semibold mb-4 2xl:text-3xl">Resources</h3>
+          <ul className="space-y-2 text-sm 2xl:text-xl">
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="#" className="hover:font-bold text-gray-600">
                 Help Center
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="#" className="hover:font-bold text-gray-600">
                 Privacy Policy
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="#" className="hover:font-bold text-gray-600">
                 Terms of Service
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="#" className="hover:font-bold text-gray-600">
                 Documentation
               </a>
             </li>
@@ -82,8 +82,8 @@ const Footer = () => {
 
         {/* Contact */}
         <div>
-          <h3 className=" font-semibold mb-4">Contact</h3>
-          <ul className="space-y-3 text-sm">
+          <h3 className=" font-semibold mb-4 2xl:text-3xl">Contact</h3>
+          <ul className="space-y-3 text-sm 2xl:text-xl">
             <li className="flex items-center gap-2">
               <Mail size={16} /> support@yourbrand.com
             </li>
@@ -110,7 +110,8 @@ const Footer = () => {
       </div>
 
       {/* Bottom */}
-      <div className="border-t border-gray-800 mt-10 py-6 text-center text-sm text-gray-800 flex items-center gap-10 justify-center">
+      <div className="w-2/3 bg-gray-200 h-px mx-auto mt-10" />
+      <div className="py-6 text-center text-sm 2xl:text-xl text-gray-800 flex items-center gap-10 justify-center">
         <div className="">
           © {new Date().getFullYear()} YourBrand. All rights reserved.
         </div>
