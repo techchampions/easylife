@@ -8,7 +8,7 @@ const ContentCard: React.FC<Props> = ({ content }) => {
   return (
     <div className="bg-white cursor-pointer hover:bg-custom-pink text-black w-full rounded-xl p-4 flex flex-col">
       <div className="p-4 space-y-1">
-        <div className="flex items-center justify-center bg-secondary/20 h-25 w-25 2xl:h-35 2xl:w-35 mx-auto rounded-full">
+        <div className="flex items-center justify-center bg-secondary/20 h-20 w-20 2xl:h-30 2xl:w-30 mx-auto rounded-full">
           {content.icon}
         </div>
         <div className="text-center font-bold text-3xl 2xl:text-5xl">
@@ -33,7 +33,7 @@ const ContentCard: React.FC<Props> = ({ content }) => {
       )}
       <LinkButton
         label="LEARN MORE"
-        className="bg-white text-gray-800! mt-4 w-fit! mx-auto px-5 2xl:text-xl"
+        className="bg-linear-to-r from-gray-100 to-secondary-light/20 hover:bg-linear-to-tr text-gray-800! mt-4 w-fit! mx-auto px-5 2xl:text-xl"
         rightIcon={
           <ArrowUpRightFromSquare className="text-gray-800" size={15} />
         }

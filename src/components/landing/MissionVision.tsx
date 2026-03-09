@@ -16,19 +16,19 @@ const CONTENTS: ContentType[] = [
   //   ],
   // },
   {
-    icon: <Binoculars className="w-20 h-20 2xl:w-30 2xl:h-30 text-black" />,
+    icon: <Binoculars className="w-15 h-15 2xl:w-20 2xl:h-20 text-black" />,
     title: "Vision",
     desc: "To Make Marriage Wisdom Easily Accessible To All Those Interest.",
     // list: null,
   },
   {
-    icon: <Goal className="w-20 h-20 2xl:w-30 2xl:h-30 text-black" />,
+    icon: <Goal className="w-15 h-15 2xl:w-20 2xl:h-20 text-black" />,
     title: "Mission",
     desc: "To Facilitate Marriage Connections For Singles, Marriage Bonding / Reconciliation For Couples, And Long Lasting, Durable And Enjoyable Marriage For All Those Interested.",
     // list: null,
   },
   {
-    icon: <Gem className="w-20 h-20 2xl:w-30 2xl:h-30 text-black" />,
+    icon: <Gem className="w-15 h-15 2xl:w-20 2xl:h-20 text-black" />,
     title: "Core Values",
     desc: "Our Core Values Are Integrity, Sincerity, Spirituality, Openness And Godliness.",
     // list: null,

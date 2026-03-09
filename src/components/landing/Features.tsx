@@ -77,7 +77,7 @@ const Features = () => {
                       size={15}
                     />
                   }
-                  className="text-sm 2xl:text-xl bg-white text-black! w-fit! px-7 mx-auto"
+                  className="text-sm 2xl:text-xl bg-linear-to-r from-gray-100 to-secondary-light/20 hover:bg-linear-to-tr text-black! w-fit! px-7 mx-auto"
                 />
               </div>
             </div>

@@ -27,7 +27,7 @@ const LandingPageIndex: React.FC = () => {
       </div>
       <div
         id="who-we-are"
-        className="w-full py-10 md:py-20 px-4 bg-secondary/20"
+        className="w-full py-10 md:py-20 px-4 bg-linear-to-tr from-gray-100 to-secondary/20"
       >
         <div className="w-[99%] md:w-[80%] mx-auto">
           <WhoWeAre />
