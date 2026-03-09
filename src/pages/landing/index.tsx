@@ -9,7 +9,7 @@ import WhoWeAre from "../../components/landing/WhoWeAre";
 const LandingPageIndex: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="w-full md:h-[80vh] text-black 2xl:mb-20">
+      <div className="w-full md:h-fit text-black 2xl:mb-20">
         <HeroSection />
         {/* <HeroSlider /> */}
       </div>

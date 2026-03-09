@@ -8,7 +8,7 @@ const ContentCard: React.FC<Props> = ({ content }) => {
   return (
     <div className="bg-white cursor-pointer hover:bg-custom-pink text-black w-full rounded-xl p-4 flex flex-col">
       <div className="p-4 space-y-1">
-        <div className="flex items-center justify-center bg-secondary/20 h-35 w-35 2xl:h-45 2xl:w-45 mx-auto rounded-full">
+        <div className="flex items-center justify-center bg-secondary/20 h-25 w-25 2xl:h-35 2xl:w-35 mx-auto rounded-full">
           {content.icon}
         </div>
         <div className="text-center font-bold text-3xl 2xl:text-5xl">

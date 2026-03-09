@@ -87,7 +87,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Nav */}
-        <ul className="hidden lg:flex flex-1 justify-center space-x-15 text-base 2xl:text-xl relative">
+        <ul className="hidden lg:flex flex-1 justify-center space-x-15 text-sm 2xl:text-base relative">
           {navLinks.map((link) => (
             <li key={link.href} className={clsx("relative", "group")}>
               {link.href.startsWith("#") ? (
