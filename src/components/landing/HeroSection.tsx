@@ -12,7 +12,7 @@ const HeroSection = () => {
     <div className="flex justify-center bg-custom-pink h-fit">
       <div className="grid md:grid-cols-2 gap-5 md:gap-0 w-full md:mx-10">
         <div className="">
-          <div className=" px-5 md:px-10 w-[80%] md:w-auto mx-auto md:ml-10 mt-18 md:mt-24 lg:p-8 lg:py-16 lg:mt-12">
+          <div className=" px-5 md:px-10 w-[80%] md:w-auto mx-auto lg:ml-10 mt-18 md:mt-24 lg:p-8 lg:py-16 lg:mt-12">
             <div className="relative">
               <h1 className="text-4xl md:text-5xl xl:text-7xl 2xl:text-[80px] font-bold text-gray-900 z-10 relative leading-tight">
                 Discover Love <br /> One Swipe at a <br /> Time

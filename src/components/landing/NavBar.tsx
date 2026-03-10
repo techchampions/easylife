@@ -78,11 +78,11 @@ export default function Navbar() {
       }`}
     >
       <nav className="w-full px-4 md:max-w-[90%] mx-auto flex justify-between items-center pt-4 pb-1">
-        <div className=" flex items-center space-x-2 h-18">
+        <div className="flex items-center space-x-2 h-18">
           <img
             src="/images/logo.png"
             alt="Easy Life Logo"
-            className="w-full h-full"
+            className="w-full h-full object-contain"
           />
         </div>
 
