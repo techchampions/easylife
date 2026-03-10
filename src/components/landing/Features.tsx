@@ -12,11 +12,11 @@ const content = {
     },
     {
       text: " General Marriage Trainings (Singles & Couples)",
-      image: "/images/couple (6).jpeg",
+      image: "/images/couple (8).jpeg",
     },
     {
       text: " Marriage Connections ( Singles Only)",
-      image: "/images/couple (8).jpeg",
+      image: "/images/couple-on-coffee-date.jpg",
     },
     {
       text: " Marriage Reconciliations (Couples Only)",
@@ -24,7 +24,7 @@ const content = {
     },
     {
       text: " Coordinated Godly Match Making (Singles Only)",
-      image: "/images/couple (10).jpeg",
+      image: "/images/religious-singles.jpg",
     },
   ],
 };
