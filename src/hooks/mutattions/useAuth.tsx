@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { useToast } from "../../zustand/toast.state";
-import { useUserStore } from "../../zustand/user.state";
+import ChangePassword from "../../components/auth/ChangePassword";
+import GetStarted from "../../components/auth/GetStarted";
+import Login from "../../components/auth/Login";
+import VerifyEmail from "../../components/auth/VerifyEmail";
 import {
   changePassword,
   forgotPassword,
@@ -12,10 +14,8 @@ import {
   verifyReferalCode,
 } from "../../services/endpoints";
 import { useModal } from "../../zustand/modal.state";
-import VerifyEmail from "../../components/auth/VerifyEmail";
-import GetStarted from "../../components/auth/GetStarted";
-import ChangePassword from "../../components/auth/ChangePassword";
-import Login from "../../components/auth/Login";
+import { useToast } from "../../zustand/toast.state";
+import { useUserStore } from "../../zustand/user.state";
 
 const { showToast } = useToast.getState();
 const modal = useModal.getState();
@@ -82,7 +82,7 @@ export const useRegister = () => {
       setUser(response.user);
       setIsLoggedIn(true);
       setToken(response.token);
-      modal.open(<VerifyEmail />);
+      modal.open(<GetStarted />);
     },
     onError: (error: AxiosError<RegisterError>) => {
       // Check if this is an Axios error with response data

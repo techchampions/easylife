@@ -1,7 +1,11 @@
-import { CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import React from "react";
+import { useModal } from "../../zustand/modal.state";
+import Subscription from "../general_dating/Subscription";
+import Button from "../global/Button";
 
 const Congrats: React.FC = () => {
+  const modal = useModal();
   return (
     <div className="w-sm max-w-xs md:max-w-sm">
       <div className="p-5">
@@ -12,8 +16,17 @@ const Congrats: React.FC = () => {
           <CheckCircle2 size={60} className="text-secondary" />
           <div className="text-2xl font-bold">Congratulations!</div>
           <div className="text-gray-700">
-            You have successfully signup for EasyLife Marriage Academy.
+            You have successfully signed up on Easylife Marriage Academy. Please
+            click the button to make payment for your subscription{" "}
           </div>
+          <Button
+            label="Proceed"
+            rightIcon={<ArrowRight />}
+            onClick={() => {
+              modal.openStrong(<Subscription />);
+            }}
+            className="mt-5 bg-secondary"
+          />
         </div>
       </div>
     </div>

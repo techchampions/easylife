@@ -24,14 +24,14 @@ const CheckboxField: React.FC<CheckboxFieldProps> = ({
   theme = "light",
   disabled = false,
 }) => {
-  const [field, meta, helpers] = useField(name);
+  const [field, meta] = useField(name);
   const hasError = meta.touched && meta.error;
 
   // Handle checkbox toggle
-  const handleChange = () => {
-    helpers.setValue(!field.value);
-    helpers.setTouched(true);
-  };
+  // const handleChange = () => {
+  //   helpers.setValue(!field.value);
+  //   helpers.setTouched(true);
+  // };
 
   return (
     <div className={`w-full text-left ${className}`}>
@@ -74,7 +74,7 @@ const CheckboxField: React.FC<CheckboxFieldProps> = ({
                  : "bg-white dark:bg-gray-800"
              }
             `}
-            onClick={handleChange}
+            // onClick={handleChange}
           >
             {field.value && (
               <Check className="w-3 h-3" />

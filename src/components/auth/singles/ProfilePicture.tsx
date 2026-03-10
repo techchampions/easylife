@@ -1,14 +1,14 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
+import * as Yup from "yup";
+import { useOnboarding } from "../../../hooks/mutattions/useOnboarding";
 import { useModal } from "../../../zustand/modal.state";
-import PersonalValues3 from "./PersonalValues3";
+import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import ImageInput from "../../form/ImageInput";
 import Button from "../../global/Button";
-import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import Congrats from "../Congrats";
-import { useOnboarding } from "../../../hooks/mutattions/useOnboarding";
+import PersonalValues3 from "./PersonalValues3";
 
 const ProfilePicture: React.FC = () => {
   const modal = useModal();
@@ -284,7 +284,7 @@ const ProfilePicture: React.FC = () => {
 
             proceed(payload, {
               onSuccess() {
-                modal.open(<Congrats />);
+                modal.openStrong(<Congrats />);
               },
             });
           }}

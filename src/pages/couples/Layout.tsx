@@ -14,7 +14,7 @@ const CouplesLayout: React.FC = () => {
   const openedRef = useRef(false);
 
   useEffect(() => {
-    if (hasSubscribed && !openedRef.current) {
+    if (!hasSubscribed && !openedRef.current) {
       openedRef.current = true;
       if (modal.isOpen) {
         return;

@@ -1,6 +1,8 @@
 import { CheckCircle } from "lucide-react";
 import React from "react";
+import { useModal } from "../../zustand/modal.state";
 import Button from "../global/Button";
+import SelectPaymentMethod from "./SelectPaymentMethod";
 
 interface Props {
   item: {
@@ -13,6 +15,7 @@ interface Props {
 }
 
 const PlanCard: React.FC<Props> = ({ item }) => {
+  const modal = useModal();
   return (
     <div className="space-y-8 text-primary flex flex-col">
       <div className="flex-1 space-y-4">
@@ -35,7 +38,12 @@ const PlanCard: React.FC<Props> = ({ item }) => {
           ))}
         </ul>
       </div>
-      <Button label="Subscribe" />
+      <Button
+        label="Subscribe"
+        onClick={() => {
+          modal.openStrong(<SelectPaymentMethod />);
+        }}
+      />
     </div>
   );
 };
