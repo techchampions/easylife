@@ -1,6 +1,6 @@
+import { X } from "lucide-react";
 import { useEffect } from "react";
 import { useModal } from "../../zustand/modal.state";
-import { X } from "lucide-react";
 const Modal = () => {
   const { isOpen, content, close, isCloseable } = useModal();
 
@@ -28,7 +28,7 @@ const Modal = () => {
     >
       <div className="p-2">
         <div
-          className="bg-white p-10 rounded-[25px] shadow-lg w-fit md:max-w-200 relative"
+          className="bg-white p-10 rounded-4xl shadow-lg w-fit md:max-w-200 relative"
           onClick={(e) => e.stopPropagation()}
         >
           {isCloseable && (

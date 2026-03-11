@@ -1,5 +1,7 @@
 import { CheckCircle } from "lucide-react";
 import React from "react";
+import { useModal } from "../../zustand/modal.state";
+import Welcome from "../auth/Welcome";
 import Button from "../global/Button";
 
 interface Props {
@@ -12,6 +14,10 @@ interface Props {
 }
 
 const PlanCard: React.FC<Props> = ({ item }) => {
+  const modal = useModal();
+  const getStarted = () => {
+    modal.open(<Welcome />);
+  };
   return (
     <div className="py-10 px-5 lg:p-20 space-y-8 rounded-4xl shadow-xl bg-white text-primary flex flex-col">
       <div className="flex-1 space-y-4 2xl:space-y-8">
@@ -38,7 +44,7 @@ const PlanCard: React.FC<Props> = ({ item }) => {
           ))}
         </ul>
       </div>
-      <Button label="Select" className="2xl:text-3xl" />
+      <Button label="Select" className="2xl:text-3xl" onClick={getStarted} />
     </div>
   );
 };

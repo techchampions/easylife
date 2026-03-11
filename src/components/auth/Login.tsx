@@ -1,20 +1,17 @@
 import { Form, Formik } from "formik";
-import * as Yup from "yup";
-import { useState } from "react";
-// import { useLogin } from "../../hooks/Auth";
-import Button from "../global/Button";
-import { useModal } from "../../zustand/modal.state";
 import { Eye, EyeOff } from "lucide-react";
-import InputField from "../form/InputField";
-import Signup from "./Signup";
-// import { useUserStore } from "../../zustand/user.state";
+import { useState } from "react";
+import * as Yup from "yup";
 import { useLogin } from "../../hooks/mutattions/useAuth";
+import { useModal } from "../../zustand/modal.state";
+import InputField from "../form/InputField";
+import Button from "../global/Button";
 import ForgotPassword from "./ForgotPassword";
+import Signup from "./Signup";
 
 const Login = () => {
   const modal = useModal();
   const [showPassword, setShowPassword] = useState(false);
-  // const { setIsLoggedIn, setUser } = useUserStore();
   const { mutate: login, isPending } = useLogin();
   // Password visibility toggle logic
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
@@ -31,28 +28,6 @@ const Login = () => {
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     setSubmitting(false);
-    // setIsLoggedIn(true);
-    // setUser({
-    //   role: 0,
-    //   id: 0,
-    //   email: "string",
-    //   phone_number: "string",
-    //   referral_code: "string",
-    //   first_name: "string",
-    //   last_name: "string",
-    //   country: "string",
-    //   state: "string",
-    //   lga: "string",
-    //   otp_verified_at: "string",
-    //   email_verified_at: "string",
-    //   profile_picture: "string",
-    //   gender: "string",
-    //   address: "string",
-    //   created_at: "string",
-    //   updated_at: "string",
-    // });
-    // showToast("user loggedin successfully", "success");
-    // closeModal();
     login(values);
   };
   return (

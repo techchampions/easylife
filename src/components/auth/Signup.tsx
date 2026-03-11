@@ -47,7 +47,7 @@ const Signup = () => {
       }
     >
       {({ isSubmitting, isValid }) => (
-        <Form className="space-y-3 flex flex-col px-4 w-md max-w-sm md:max-w-md">
+        <Form className="space-y-3 flex flex-col px-4 w-fit max-w-sm md:max-w-md">
           <div className="mb-8">
             <h1 className="font-medium text-3xl text-black">
               Signup with Email
@@ -85,18 +85,6 @@ const Signup = () => {
               linkText="Terms of service"
               label="By creating an account, you agree with our"
             />
-            {/* <input
-              type="checkbox"
-              id="agree"
-              name="agree"
-              className="text-primary bg-white"
-            />
-            <label htmlFor="agree">
-              By creating an account, you agree with our{" "}
-              <Link to={`/terms`} className="underline text-primary">
-                Terms of Service
-              </Link>
-            </label> */}
           </div>
           <Button
             type="submit"
