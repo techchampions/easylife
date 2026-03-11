@@ -85,10 +85,10 @@ const Footer = () => {
           <h3 className=" font-semibold mb-4 2xl:text-3xl">Contact</h3>
           <ul className="space-y-3 text-sm 2xl:text-xl">
             <li className="flex items-center gap-2">
-              <Mail size={16} /> support@yourbrand.com
+              <Mail size={16} /> support@easylife.com
             </li>
             <li className="flex items-center gap-2">
-              <Phone size={16} /> +234 800 000 0000
+              <Phone size={16} /> +39 351 251 3290 (Whatsapp only)
             </li>
           </ul>
 
@@ -113,7 +113,7 @@ const Footer = () => {
       <div className="w-2/3 bg-gray-200 h-px mx-auto mt-10" />
       <div className="py-6 text-center text-sm 2xl:text-xl text-gray-800 flex items-center gap-10 justify-center">
         <div className="">
-          © {new Date().getFullYear()} YourBrand. All rights reserved.
+          © {new Date().getFullYear()} EasyLife. All rights reserved.
         </div>
         <div className="">Powered By Easylona International.</div>
       </div>

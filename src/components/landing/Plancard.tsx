@@ -30,7 +30,7 @@ const PlanCard: React.FC<Props> = ({ item }) => {
 
         <ul className="space-y-3 2xl:space-y-6 p-2 2xl:p-4">
           {item.list.map((list, idx) => (
-            <li key={idx} className="flex items-center-safe gap-2">
+            <li key={idx} className="flex items-start-safe gap-2">
               {" "}
               <CheckCircle className="w-3.75 2xl:w-7" />
               <div className="flex-1 text-sm 2xl:text-xl">{list}</div>

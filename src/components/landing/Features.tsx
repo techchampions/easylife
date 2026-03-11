@@ -4,7 +4,7 @@ import LinkButton from "../global/LinkButton";
 const content = {
   icon: <Sparkle size={45} />,
   title: "Our Features",
-  desc: "EasyLife offers alot of benefits and features within the ecosystem. Some of these benefits include",
+  desc: "EasyLife offers a lot of benefits and features within the ecosystem. Some of these benefits include",
   list: [
     {
       text: "Relationship Coaching / Marriage Mentorship (Singles & Couples)",

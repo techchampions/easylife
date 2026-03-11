@@ -18,7 +18,7 @@ const CONTENTS: ContentType[] = [
   {
     icon: <Binoculars className="w-15 h-15 2xl:w-20 2xl:h-20 text-black" />,
     title: "Vision",
-    desc: "To Make Marriage Wisdom Easily Accessible To All Those Interest.",
+    desc: "To Make Marriage Wisdom Easily Accessible To All Those Interested.",
     // list: null,
   },
   {
