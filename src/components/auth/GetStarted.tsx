@@ -1,16 +1,15 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft } from "lucide-react";
 import React from "react";
+import * as Yup from "yup";
+import { useVerifyReferalCode } from "../../hooks/mutattions/useAuth";
+import { useGetUser } from "../../hooks/query/useUser";
 import { useModal } from "../../zustand/modal.state";
+import { useOnboardingFormData } from "../../zustand/onboardingData.state";
+import { useToast } from "../../zustand/toast.state";
 import InputField from "../form/InputField";
 import Button from "../global/Button";
-import RadioGroup from "../form/RadioGroup";
 import MaritalStatus from "./MaritalStatus";
-import { useOnboardingFormData } from "../../zustand/onboardingData.state";
-import { useGetUser } from "../../hooks/query/useUser";
-import { useToast } from "../../zustand/toast.state";
-import { useVerifyReferalCode } from "../../hooks/mutattions/useAuth";
 
 const validationSchema = Yup.object().shape({
   isReferred: Yup.string().required("required"),
@@ -27,11 +26,11 @@ const GetStarted: React.FC = () => {
   const toast = useToast();
   const { mutateAsync: verify, isPending } = useVerifyReferalCode();
   const { referral_id, setOnboardingFormData } = useOnboardingFormData();
-  const isReferredOption = [
-    { label: "yes", value: "yes" },
-    { label: "no", value: "no" },
-  ];
-  const initialValues = { referral_id: referral_id || "", isReferred: "" };
+  // const isReferredOption = [
+  //   { label: "yes", value: "yes" },
+  //   { label: "no", value: "no" },
+  // ];
+  const initialValues = { referral_id: referral_id || "", isReferred: "yes" };
   const goBack = () => {
     modal.open(<GetStarted />);
   };
@@ -79,10 +78,10 @@ const GetStarted: React.FC = () => {
 
       <div className="flex flex-col mt-5">
         <div className="text-2xl font-bold text-center">
-          Welcome to EasyLife Marriage Academy
+          Welcome to <br /> EasyLife Marriage Academy
         </div>
         <div className="w-full">
-          <img src="/images/welcome.svg" className="w-[55%] mx-auto" />
+          <img src="/images/welcome.svg" className="w-[45%] mx-auto" />
         </div>
       </div>
       <div className="flex flex-col justify-between mt-4">
@@ -96,7 +95,7 @@ const GetStarted: React.FC = () => {
             <Form className="flex flex-col justify-between">
               {/* <ValidateReferralCode code={values.referral_id} /> */}
               <div className="space-y-4">
-                <div className="space-y-4">
+                {/* <div className="space-y-4">
                   <div className="">Were you referred by someone?</div>
                   <RadioGroup
                     options={isReferredOption}
@@ -104,7 +103,7 @@ const GetStarted: React.FC = () => {
                     orientation="horizontal"
                     optionClassName="w-[calc(50%-8px)]"
                   />
-                </div>
+                </div> */}
                 {values.isReferred === "yes" && (
                   <div className="flex flex-col gap-4">
                     <InputField
@@ -114,10 +113,11 @@ const GetStarted: React.FC = () => {
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                     <p className="text-xs text-gray-400 w-full">
-                      Please enter the Marketer ID to proceed with the payment.
-                      This is required to ensure that the payment is correctly
-                      attributed to the right marketer. If you do not have a
-                      Marketer ID, please contact your marketer for assistance.
+                      Please enter the Referral ID to proceed with
+                      registeration. This is required to ensure that the payment
+                      is correctly attributed to the right marketer. If you do
+                      not have a Marketer ID, please contact your marketer for
+                      assistance.
                     </p>
                   </div>
                 )}

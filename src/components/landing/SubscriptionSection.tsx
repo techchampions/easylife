@@ -10,7 +10,8 @@ const subscriptions = [
       " General Marriage Trainings",
       " Marriage Connections ",
       " Coordinated Godly Match Making ",
-      "Intending Couples Discovery (Get Aways) Vacations",
+      "Singles Group Picnics For Relationship Connections And Intending Spouse Discovery",
+      // "Intending Couples Discovery (Get Aways) Vacations",
       "Online / Offline Marriage Counseling",
     ],
   },
@@ -22,7 +23,8 @@ const subscriptions = [
       "Relationship Coaching / Marriage Mentorship",
       " General Marriage Trainings",
       " Marriage Reconciliations ",
-      "Couples Relaxation (Get Aways) Vacations",
+      "Couples Group Relaxation Vacations For Marital Love Renewal",
+      // "Couples Relaxation (Get Aways) Vacations",
       "Online / Offline Marriage Counseling",
     ],
   },
@@ -37,8 +39,8 @@ const SubscriptionSection = () => {
         <p className="2xl:text-xl">
           Subscribe to{" "}
           <span className="uppercase">EasyLife marriage academy</span> to have
-          unlimited access to the platforms features and benefits, the avialable
-          plan are as follows:
+          unlimited access to the platforms features and benefits, the available
+          plans are as follows:
         </p>
       </div>
       <div className="grid sm:grid-cols-2 gap-4">

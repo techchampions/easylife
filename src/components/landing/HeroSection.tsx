@@ -15,7 +15,7 @@ const HeroSection = () => {
           <div className=" px-5 md:px-10 w-[80%] md:w-auto mx-auto lg:ml-10 mt-18 md:mt-24 lg:p-8 lg:py-16 lg:mt-12">
             <div className="relative">
               <h1 className="text-4xl md:text-5xl xl:text-7xl 2xl:text-[80px] font-bold text-gray-900 z-10 relative leading-tight">
-                Discover Love <br /> Renew Love <br /> One Swipe at a <br />{" "}
+                Discover Love, <br /> Renew Love <br /> One Swipe at a <br />{" "}
                 Time
                 <span className="sm:flex hidden text-gray-600 text-sm md:text-base flex-row font-base ml-0 md:ml-20">
                   Building Happy Homes
