@@ -1,7 +1,7 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 import React from "react";
+import * as Yup from "yup";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import InputField from "../../form/InputField";
@@ -20,6 +20,7 @@ const HusbandAssessment: React.FC = () => {
     about_wife_positive,
     marriage_issues,
     changes_to_wife,
+    other_issues,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
@@ -27,6 +28,7 @@ const HusbandAssessment: React.FC = () => {
     aboutSpousePositive: about_wife_positive || "",
     aboutSpouseNegative: about_wife_negative || "",
     changesToSpouse: changes_to_wife || "",
+    other_issues: other_issues || "",
   };
   const goBack = () => {
     modal.open(<MarriageHistory />);
@@ -120,7 +122,7 @@ const HusbandAssessment: React.FC = () => {
                       counseling team to know?{" "}
                     </div>
                     <InputField
-                      name="changesToSpouse"
+                      name="other_issues"
                       type="textarea"
                       placeholder="Please indictate if here."
                       className="text-2xl font-bold rounded-xl py-3"

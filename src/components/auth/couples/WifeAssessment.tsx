@@ -1,13 +1,13 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 import React from "react";
+import * as Yup from "yup";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import InputField from "../../form/InputField";
 import Button from "../../global/Button";
-import MarriageHistory from "./MarriageHistory";
 import ProfilePicture from "../singles/ProfilePicture";
+import MarriageHistory from "./MarriageHistory";
 
 const validationSchema = Yup.object().shape({
   marriage_issues: Yup.string().required("required"),
@@ -20,6 +20,7 @@ const WifeAssessment: React.FC = () => {
     about_husband_positive,
     marriage_issues,
     changes_to_husband,
+    other_issues,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
@@ -27,6 +28,7 @@ const WifeAssessment: React.FC = () => {
     aboutSpousePositive: about_husband_positive || "",
     aboutSpouseNegative: about_husband_negative || "",
     changesToSpouse: changes_to_husband || "",
+    other_issues: other_issues || "",
   };
   const goBack = () => {
     modal.open(<MarriageHistory />);
@@ -57,7 +59,7 @@ const WifeAssessment: React.FC = () => {
           onSubmit={(values) => {
             setOnboardingFormData({
               marriage_issues: values.marriage_issues,
-
+              other_issues: values.other_issues,
               about_husband_positive: values.aboutSpousePositive,
               about_husband_negative: values.aboutSpouseNegative,
             });
@@ -119,7 +121,7 @@ const WifeAssessment: React.FC = () => {
                       counseling team to know?{" "}
                     </div>
                     <InputField
-                      name="changesToSpouse"
+                      name="other_issues"
                       type="textarea"
                       placeholder="Please indictate if here."
                       className="text-2xl font-bold rounded-xl py-3"
