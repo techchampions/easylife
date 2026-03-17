@@ -523,3 +523,12 @@ interface GetMentorshipsResponsePostById {
   data: Mentorship;
   message: string;
 }
+
+interface InitializePaymentPayload {
+  plan_id: number;
+  payment_type: "mentorship" | "renewal";
+}
+interface ErrorResponse {
+  success: boolean;
+  message: string;
+}

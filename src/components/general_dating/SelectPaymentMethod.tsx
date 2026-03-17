@@ -1,11 +1,31 @@
 import { CreditCard, Wallet2 } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useInitialPayment } from "../../hooks/mutattions/useSubscription";
 import { formatPrice } from "../../utils/formatter";
 import Button from "../global/Button";
-
-const SelectPaymentMethod = () => {
-  const paymentMethods = ["paystack", "wallet"];
+interface Prop {
+  item: {
+    id: number;
+    title: string;
+    price: number;
+    duration: number;
+    list: string[];
+    type: string;
+  };
+}
+const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
+  const { mutate: initiatePayment, isPending } = useInitialPayment();
+  const paymentMethods = ["flutterwave", "wallet"];
   const [selectedMethod, setselectedMethod] = useState("");
+  const makePayment = () => {
+    if (selectedMethod === "flutterwave") {
+      const payload: InitializePaymentPayload = {
+        plan_id: item.id,
+        payment_type: "mentorship",
+      };
+      initiatePayment(payload);
+    }
+  };
   return (
     <div className="w-sm space-y-2">
       <div className="text-2xl font-bold">Select Payment Method:</div>
@@ -20,7 +40,7 @@ const SelectPaymentMethod = () => {
                 selectedMethod === method ? "bg-secondary text-white" : ""
               }`}
             >
-              {method === "paystack" && <CreditCard />}
+              {method === "flutterwave" && <CreditCard />}
               {method === "wallet" && <Wallet2 />}
               <div className="capitalize">{method}</div>
             </div>
@@ -32,20 +52,24 @@ const SelectPaymentMethod = () => {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Amount</span>
-                <span className="font-medium">{formatPrice(50000)}</span>
+                <span className="font-medium">{formatPrice(item.price)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">VAT</span>
-                <span className="font-medium">{formatPrice(500)}</span>
+                <span className="text-gray-600">Plan</span>
+                <span className="font-medium">{item.title}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Duration</span>
+                <span className="font-medium">{item.duration} months</span>
               </div>
               <div className="flex justify-between pt-2 border-t border-gray-200">
                 <span className="text-gray-600">Subtotal</span>
-                <span className="font-medium">{formatPrice(50000)}</span>
+                <span className="font-medium">{formatPrice(item.price)}</span>
               </div>
               <div className="flex justify-between text-base font-semibold">
                 <span>Total payable</span>
                 <span className="text-green-600">
-                  {formatPrice(50000 + 500)}
+                  {formatPrice(item.price)}
                 </span>
               </div>
             </div>
@@ -54,7 +78,12 @@ const SelectPaymentMethod = () => {
       </div>
 
       <div className="">
-        <Button label="Make Payment" />
+        <Button
+          label="Make Payment"
+          disabled={!selectedMethod || isPending}
+          isLoading={isPending}
+          onClick={makePayment}
+        />
       </div>
     </div>
   );

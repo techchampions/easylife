@@ -6,6 +6,7 @@ import SelectPaymentMethod from "./SelectPaymentMethod";
 
 interface Props {
   item: {
+    id: number;
     title: string;
     price: number;
     duration: number;
@@ -41,7 +42,7 @@ const PlanCard: React.FC<Props> = ({ item }) => {
       <Button
         label="Subscribe"
         onClick={() => {
-          modal.openStrong(<SelectPaymentMethod />);
+          modal.openStrong(<SelectPaymentMethod item={item} />);
         }}
       />
     </div>

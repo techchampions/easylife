@@ -3,9 +3,10 @@ import PlanCard from "./PlanCard";
 
 const subscriptions = [
   {
+    id: 1,
     title: "Singles Plan",
     price: 50,
-    duration: 3,
+    duration: 6,
     type: "single",
     list: [
       "Relationship Coaching / Marriage Mentorship",
@@ -15,9 +16,10 @@ const subscriptions = [
     ],
   },
   {
+    id: 2,
     title: "Couples Plan",
     price: 60,
-    duration: 6,
+    duration: 12,
     type: "married",
     list: [
       "Relationship Coaching / Marriage Mentorship",
