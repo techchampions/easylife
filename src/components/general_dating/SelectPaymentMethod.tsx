@@ -1,6 +1,9 @@
 import { CreditCard, Wallet2 } from "lucide-react";
 import React, { useState } from "react";
-import { useInitialPayment } from "../../hooks/mutattions/useSubscription";
+import {
+  useInitialPayment,
+  useWalletPayment,
+} from "../../hooks/mutattions/useSubscription";
 import { formatPrice } from "../../utils/formatter";
 import Button from "../global/Button";
 interface Prop {
@@ -15,15 +18,20 @@ interface Prop {
 }
 const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
   const { mutate: initiatePayment, isPending } = useInitialPayment();
+  const { mutate: payWithWallet, isPending: loadingWallet } =
+    useWalletPayment();
   const paymentMethods = ["flutterwave", "wallet"];
   const [selectedMethod, setselectedMethod] = useState("");
   const makePayment = () => {
+    const payload: InitializePaymentPayload = {
+      plan_id: item.id,
+      payment_type: "mentorship",
+    };
     if (selectedMethod === "flutterwave") {
-      const payload: InitializePaymentPayload = {
-        plan_id: item.id,
-        payment_type: "mentorship",
-      };
       initiatePayment(payload);
+    }
+    if (selectedMethod === "wallet") {
+      payWithWallet(payload);
     }
   };
   return (
@@ -80,8 +88,8 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
       <div className="">
         <Button
           label="Make Payment"
-          disabled={!selectedMethod || isPending}
-          isLoading={isPending}
+          disabled={!selectedMethod || isPending || loadingWallet}
+          isLoading={isPending || loadingWallet}
           onClick={makePayment}
         />
       </div>

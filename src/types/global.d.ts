@@ -532,3 +532,25 @@ interface ErrorResponse {
   success: boolean;
   message: string;
 }
+interface PaymentObject {
+  id: number;
+  user_id: number;
+  plan_id: number;
+  amount_paid: number;
+  payment_method: string;
+  payment_type: string;
+  status: number;
+  reference: string;
+  is_coupon: number;
+  coupon_id: number;
+  created_at: string;
+  updated_at: string;
+  amount: number;
+  naira_amount: number;
+  naira_amount_paid: number;
+}
+interface InitializePaymentResponse {
+  success: boolean;
+  message: string;
+  payment: PaymentObject;
+}
