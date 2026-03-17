@@ -52,6 +52,7 @@ export const useFlutterWave = () => {
       };
 
       const flutterwave = (window as any).FlutterwaveCheckout(config);
+      console.log(flutterwave);
     } catch (error) {
       console.error("Failed to load Flutterwave:", error);
       // Optionally show an error message to the user
