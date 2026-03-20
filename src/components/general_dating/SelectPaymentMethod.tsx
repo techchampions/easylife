@@ -4,6 +4,7 @@ import {
   useInitialPayment,
   useWalletPayment,
 } from "../../hooks/mutattions/useSubscription";
+import { useGetWalletBalance } from "../../hooks/query/useUser";
 import { formatPrice } from "../../utils/formatter";
 import Button from "../global/Button";
 interface Prop {
@@ -17,10 +18,11 @@ interface Prop {
   };
 }
 const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
+  const { data } = useGetWalletBalance();
   const { mutate: initiatePayment, isPending } = useInitialPayment();
   const { mutate: payWithWallet, isPending: loadingWallet } =
     useWalletPayment();
-  const paymentMethods = ["flutterwave", "wallet"];
+  const paymentMethods = ["wallet", "flutterwave"];
   const [selectedMethod, setselectedMethod] = useState("");
   const makePayment = () => {
     const payload: InitializePaymentPayload = {
@@ -34,8 +36,27 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
       payWithWallet(payload);
     }
   };
+  const WalletBalance = () => {
+    return (
+      <div className="flex gap-4 justify-between items-center">
+        <span className="text-xs">Balance:</span>
+        <span className="text-right text-green-500 font-bold">
+          {formatPrice(data?.balance || 0)}
+        </span>
+      </div>
+    );
+  };
+  const FlutterIcons = () => {
+    return (
+      <div className="flex items-center gap-1">
+        <img src="/public/images/Mastercard.png" className=" h-5" />
+        <img src="/public/images/Visa.png" className=" h-5" />
+        <img src="/public/images/verve.svg" className=" h-5" />
+      </div>
+    );
+  };
   return (
-    <div className="w-sm space-y-2">
+    <div className="w-xs md:w-sm space-y-2">
       <div className="text-2xl font-bold">Select Payment Method:</div>
       {/* <hr className="w-4/5 text-gray-200 my-2" /> */}
       <div className="space-y-2">
@@ -44,13 +65,17 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
             <div
               onClick={() => setselectedMethod(method)}
               key={method}
-              className={`w-2/3 cursor-pointer p-4 rounded-xl flex gap-2 items-center font-bold border border-gray-200 ${
+              className={`w-2/3 cursor-pointer px-4 py-2 rounded-xl flex gap-2 font-bold border border-gray-200 ${
                 selectedMethod === method ? "bg-secondary text-white" : ""
               }`}
             >
-              {method === "flutterwave" && <CreditCard />}
-              {method === "wallet" && <Wallet2 />}
-              <div className="capitalize">{method}</div>
+              {method === "flutterwave" && <CreditCard size={30} />}
+              {method === "wallet" && <Wallet2 size={30} />}
+              <div className="flex-1">
+                <div className="capitalize">{method}</div>
+                {method === "flutterwave" && <FlutterIcons />}
+                {method === "wallet" && <WalletBalance />}
+              </div>
             </div>
           ))}
         </div>

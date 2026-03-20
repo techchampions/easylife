@@ -1,15 +1,15 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 import React from "react";
+import * as Yup from "yup";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import LocationAutocomplete from "../../form/AutoLocationInput";
 import InputField from "../../form/InputField";
-import Button from "../../global/Button";
-import SpouseBasicInfo from "./SpouseBasicInfo";
-import MarriageHistory from "./MarriageHistory";
 import TagsInput from "../../form/TagsInputFied";
+import Button from "../../global/Button";
+import MarriageHistory from "./MarriageHistory";
+import SpouseBasicInfo from "./SpouseBasicInfo";
 
 const validationSchema = Yup.object().shape({
   //   address: Yup.string().required("required"),
@@ -137,7 +137,7 @@ const SpouseBasicInfo2: React.FC = () => {
                     <InputField
                       name="spouse_nationality"
                       type="text"
-                      placeholder="Eg. Nigerian, Ghanian"
+                      placeholder="Enter your nationality"
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
@@ -147,7 +147,7 @@ const SpouseBasicInfo2: React.FC = () => {
                       <InputField
                         name="spouse_race_or_tribe"
                         type="text"
-                        placeholder="Eg. Yoruba, Ibo"
+                        placeholder="Enter your race or tribe"
                         className="text-2xl font-bold rounded-xl py-3"
                       />
                     </div>
