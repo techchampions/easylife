@@ -1,10 +1,10 @@
-import React from "react";
-import Header from "../../components/global/Header";
-import ItemMessagePlaceholder from "../../components/general_dating/ItemMessagePaceholder";
 import { MessageCircle } from "lucide-react";
+import React from "react";
 import ConversationList from "../../components/general_dating/ConversationList";
-import { useGetCoonversations } from "../../hooks/query/useMessaging";
+import ItemMessagePlaceholder from "../../components/general_dating/ItemMessagePaceholder";
+import Header from "../../components/global/Header";
 import { ConversationListSkeleton } from "../../components/loaders/ConversationSkeleton";
+import { useGetCoonversations } from "../../hooks/query/useMessaging";
 
 const Messages: React.FC = () => {
   const { data, isLoading, isError } = useGetCoonversations();
@@ -24,7 +24,7 @@ const Messages: React.FC = () => {
         <ConversationListSkeleton />
       ) : (
         <div className="p-3 md:p-0">
-          {data?.conversations ? (
+          {data?.conversations && data.conversations.length > 0 ? (
             <div className="min-h-[78vh] bg-white p-8 rounded-3xl">
               <ConversationList conversation={data?.conversations} />
             </div>

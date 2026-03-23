@@ -107,7 +107,8 @@ const HusbandAssessment: React.FC = () => {
                   </div>
                   <div className="space-y-1">
                     <div className="text-lg">
-                      What changes and adjustments would you like your Wife
+                      What changes and adjustments would you like your Wife to
+                      do
                     </div>
                     <InputField
                       name="changesToSpouse"

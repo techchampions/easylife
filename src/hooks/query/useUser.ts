@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { useUserStore } from "../../zustand/user.state";
+import { useEffect } from "react";
+import api from "../../services/api.service";
 import {
   getNotifications,
   getUser,
   verifyReferalCode,
 } from "../../services/endpoints";
-import { useEffect } from "react";
+import { useUserStore } from "../../zustand/user.state";
 
 export const useGetUser = () => {
   const { setUser, setIsLoggedIn, token } = useUserStore();
@@ -37,5 +38,18 @@ export const useVerifyReferalCode = (referal_code: string) => {
     queryKey: ["referal_code_exists", referal_code],
     queryFn: () => verifyReferalCode(referal_code),
     enabled: !!referal_code,
+  });
+};
+interface WalletResponse {
+  success: boolean;
+  balance: number;
+}
+export const useGetWalletBalance = () => {
+  return useQuery({
+    queryKey: ["wallet"],
+    queryFn: async (): Promise<WalletResponse> => {
+      const res = await api.get(`/wallet/balance`);
+      return res.data;
+    },
   });
 };
