@@ -19,6 +19,9 @@ export const useInitialPayment = () => {
       queryClient.invalidateQueries({
         queryKey: ["user"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["user-profile"],
+      });
       const message = data.message || "Initialized payment";
       showToast(message, "success");
     },
@@ -43,6 +46,9 @@ export const useWalletPayment = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: ["user"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["user-profile"],
       });
       const message = data.message || "Initialized payment";
       showToast(message, "success");

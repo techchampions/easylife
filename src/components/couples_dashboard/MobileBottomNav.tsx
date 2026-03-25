@@ -1,6 +1,6 @@
+import { CirclePile, Home, MessageCircle, Search } from "lucide-react";
 import React from "react";
 import MobileNavItem from "./MobileNavItem";
-import { CirclePile, Home, MessageCircle, Search } from "lucide-react";
 // import { useUserStore } from "../../zustand/user.state";
 const MobileBottomNav: React.FC = () => {
   // const { user } = useUserStore();
@@ -28,7 +28,7 @@ const MobileBottomNav: React.FC = () => {
     },
   ];
   return (
-    <nav className="fixed bottom-2 left-0 right-0 w-[95%] mx-auto flex md:hidden justify-around px-2 py-4 bg-white shadow-md rounded-2xl">
+    <nav className="fixed bottom-2 left-0 right-0 w-[95%] mx-auto flex md:hidden justify-around px-2 py-1 bg-white shadow-md rounded-2xl">
       {NAVITEMS.map((item, index) => (
         <MobileNavItem
           key={index}

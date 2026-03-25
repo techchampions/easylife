@@ -205,6 +205,10 @@ interface Plan {
   id: number;
   name: string;
   price: number;
+  duration: number;
+  features: string[];
+  created_at: string;
+  updated_at: string;
 }
 interface UserFilterParams {
   keyword?: string;
@@ -553,4 +557,24 @@ interface InitializePaymentResponse {
   success: boolean;
   message: string;
   payment: PaymentObject;
+}
+
+interface SubHistoryRespone {
+  success: boolean;
+  subscriptionHistories: SubscriptionHistory[];
+}
+interface SubscriptionHistory {
+  id: number;
+  user_id: number;
+  subscription_type: string;
+  plan_id: number;
+  payment_id: number;
+  start_date: string;
+  expiry_date: string;
+  status: string;
+  is_renewal: boolean;
+  previous_subscription_id: number;
+  amount_paid: string;
+  created_at: string;
+  updated_at: string;
 }

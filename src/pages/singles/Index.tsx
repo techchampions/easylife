@@ -1,8 +1,9 @@
 import React from "react";
 // import Header from "../../components/global/Header";
+import { UserCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import MatchCardList from "../../components/general_dating/MatchCardList";
 import { useGetAllUsers } from "../../hooks/query/useGetAllUsers";
-import { Link } from "react-router-dom";
 
 const SinglesPageIndex: React.FC = () => {
   const { data, isLoading, isError } = useGetAllUsers(1);
@@ -12,13 +13,16 @@ const SinglesPageIndex: React.FC = () => {
   return (
     <div>
       {/* <Header name="Welcome to EasyLife Singles Portal" /> */}
-      <div className="bg-white rounded-2xl p-5 my-2 md:my-5 w-[95%] md:w-full mx-auto flex items-center justify-between">
+      <div className="bg-white rounded-2xl p-5 my-2 md:my-5 w-[95%] md:w-full mx-auto flex items-end justify-between">
         <div className="font-bold">
           <div className="text-gray-500">Welcome to</div>
           <div className="capitalize text-2xl md:text-4xl ">
             EasyLife Singles Portal
           </div>
         </div>
+        <Link to={`/dashboard/settings`} className="">
+          <UserCircle />
+        </Link>
       </div>
       <div className="px-4 mb-4 space-y-2">
         <p className="text-left">

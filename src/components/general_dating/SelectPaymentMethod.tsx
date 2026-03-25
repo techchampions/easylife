@@ -13,7 +13,7 @@ interface Prop {
     title: string;
     price: number;
     duration: number;
-    list: string[];
+    list?: string[];
     type: string;
   };
 }
@@ -49,9 +49,9 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
   const FlutterIcons = () => {
     return (
       <div className="flex items-center gap-1">
-        <img src="/public/images/Mastercard.png" className=" h-5" />
-        <img src="/public/images/Visa.png" className=" h-5" />
-        <img src="/public/images/verve.svg" className=" h-5" />
+        <img src="/images/Mastercard.png" className=" h-5" />
+        <img src="/images/Visa.png" className=" h-5" />
+        <img src="/images/verve.svg" className=" h-5" />
       </div>
     );
   };

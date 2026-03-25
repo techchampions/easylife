@@ -1,14 +1,14 @@
-import Button from "../global/Button";
-import { useModal } from "../../zustand/modal.state";
-import Login from "./Login";
 import { Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useModal } from "../../zustand/modal.state";
+import Button from "../global/Button";
+import Login from "./Login";
 import Signup from "./Signup";
 
 const Welcome = () => {
   const modal = useModal();
   return (
-    <div className="space-y-3 flex flex-col px-4 w-md max-w-sm md:max-w-md">
+    <div className="space-y-3 flex flex-col px-4 w-md max-w-xs md:max-w-md">
       <div className="">
         <img src="/images/intro.png" alt="" className="w-[55%] mx-auto" />
         <div className="pb-4 text-center">

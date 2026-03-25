@@ -19,8 +19,8 @@ const MobileNavItem: React.FC<NavItemProps> = ({
       to={path}
       end={true}
       className={({ isActive }) =>
-        `flex flex-col items-center ${
-          isActive ? "text-secondary" : " text-gray-500"
+        `flex flex-col items-center p-2 rounded-xl w-18.75 ${
+          isActive ? "text-secondary bg-secondary/10" : " text-gray-500"
         }`
       }
     >
