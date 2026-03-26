@@ -26,7 +26,7 @@ export const useLogin = () => {
     mutationFn: login,
     onSuccess: (response) => {
       queryClient.invalidateQueries({
-        queryKey: ["user"],
+        queryKey: ["user-profile"],
       });
       // const username = response.user.first_name || response.user.username;
       // setUser(response.user);

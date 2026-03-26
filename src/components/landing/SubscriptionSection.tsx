@@ -1,11 +1,13 @@
+import { useGetPlans } from "../../hooks/query/useGetPlans";
 import PlanCard from "./Plancard";
 
-const subscriptions = [
+const subscriptions: Plan[] = [
   {
-    title: "Singles Plan",
+    id: 1,
+    name: "Singles Plan",
     price: 50,
     duration: 6,
-    list: [
+    features: [
       "Relationship Coaching / Marriage Mentorship",
       " General Marriage Trainings",
       " Marriage Connections ",
@@ -14,12 +16,15 @@ const subscriptions = [
       // "Intending Couples Discovery (Get Aways) Vacations",
       "Online / Offline Marriage Counseling",
     ],
+    created_at: "",
+    updated_at: "",
   },
   {
-    title: "Couples Plan",
+    id: 2,
+    name: "Couples Plan",
     price: 60,
     duration: 12,
-    list: [
+    features: [
       "Relationship Coaching / Marriage Mentorship",
       " General Marriage Trainings",
       " Marriage Reconciliations ",
@@ -27,9 +32,13 @@ const subscriptions = [
       // "Couples Relaxation (Get Aways) Vacations",
       "Online / Offline Marriage Counseling",
     ],
+    created_at: "",
+    updated_at: "",
   },
 ];
 const SubscriptionSection = () => {
+  const { data } = useGetPlans();
+  const plans = data || subscriptions;
   return (
     <div className="w-full md:w-[70%] mx-auto space-y-10">
       <div className="text-center space-y-4">
@@ -44,7 +53,7 @@ const SubscriptionSection = () => {
         </p>
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
-        {subscriptions.map((item, i) => (
+        {plans.map((item, i) => (
           <PlanCard item={item} key={i} />
         ))}
       </div>
