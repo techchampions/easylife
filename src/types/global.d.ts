@@ -206,6 +206,7 @@ interface Plan {
   name: string;
   price: number;
   duration: number;
+  type: string;
   features: string[];
   created_at: string;
   updated_at: string;

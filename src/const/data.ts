@@ -1,0 +1,36 @@
+export const subscriptions: Plan[] = [
+  {
+    id: 1,
+    name: "Singles Plan",
+    price: 50,
+    duration: 6,
+    type: "single",
+    features: [
+      "Relationship Coaching / Marriage Mentorship",
+      " General Marriage Trainings",
+      " Marriage Connections ",
+      " Coordinated Godly Match Making ",
+      "Singles Physical Camp Meetings Where You Can Meet Someone To Marry Personally.",
+      // "Singles Group Picnics For Relationship Connections And Intending Spouse Discovery",
+      "Online / Offline Marriage Counseling",
+    ],
+    created_at: "",
+    updated_at: "",
+  },
+  {
+    id: 2,
+    name: "Couples Plan",
+    price: 60,
+    duration: 12,
+    type: "married",
+    features: [
+      "Relationship Coaching / Marriage Mentorship",
+      " General Marriage Trainings",
+      " Marriage Reconciliations ",
+      "Couples Physical Camp Meetings For Fun, Relaxation, Vacations, All For Marital Love Renewal",
+      "Online / Offline Marriage Counseling",
+    ],
+    created_at: "",
+    updated_at: "",
+  },
+];

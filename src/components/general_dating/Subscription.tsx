@@ -1,33 +1,7 @@
+import { subscriptions } from "../../const/data";
 import { useUserStore } from "../../zustand/user.state";
 import PlanCard from "./PlanCard";
 
-const subscriptions = [
-  {
-    id: 1,
-    title: "Singles Plan",
-    price: 50,
-    duration: 6,
-    type: "single",
-    list: [
-      "Relationship Coaching / Marriage Mentorship",
-      " General Marriage Trainings",
-      " Marriage Connections ",
-      " Coordinated Godly Match Making ",
-    ],
-  },
-  {
-    id: 2,
-    title: "Couples Plan",
-    price: 60,
-    duration: 12,
-    type: "married",
-    list: [
-      "Relationship Coaching / Marriage Mentorship",
-      " General Marriage Trainings",
-      " Marriage Reconciliations ",
-    ],
-  },
-];
 const Subscription = () => {
   const { user } = useUserStore();
   const plan = subscriptions.find((item) => item.type === user?.marital_status);
