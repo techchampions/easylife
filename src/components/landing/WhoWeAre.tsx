@@ -9,6 +9,7 @@ const CONTENT = {
     " We run physical marriage bonding / reconciliation camp meetings for married couples.",
     " We run online match making sessions for singles.",
     " We run online marriage bonding / reconciliation sessions for married couples.",
+    "Are you a Single Mother / Father, Separated, Divorced, and wish to remarry? Find your new spouse here without delays.",
   ],
 };
 const WhoWeAre: React.FC = () => {
