@@ -10,10 +10,10 @@ import Button from "../global/Button";
 interface Prop {
   item: {
     id: number;
-    title: string;
+    name: string;
     price: number;
     duration: number;
-    list?: string[];
+    features?: string[];
     type: string;
   };
 }
@@ -58,7 +58,6 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
   return (
     <div className="w-xs md:w-sm space-y-2">
       <div className="text-2xl font-bold">Select Payment Method:</div>
-      {/* <hr className="w-4/5 text-gray-200 my-2" /> */}
       <div className="space-y-2">
         <div className="space-x-1 flex">
           {paymentMethods.map((method) => (
@@ -89,7 +88,7 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Plan</span>
-                <span className="font-medium">{item.title}</span>
+                <span className="font-medium">{item.name}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Duration</span>

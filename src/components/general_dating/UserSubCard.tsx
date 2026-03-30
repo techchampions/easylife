@@ -72,7 +72,7 @@ const UserSubCard: React.FC<Props> = ({ isLoading, isError, activeSub }) => {
     if (activeSub) {
       const item = {
         id: activeSub.plan_id,
-        title: activeSub.subscription_type,
+        name: activeSub.subscription_type,
         price: Number(activeSub.amount_paid),
         duration: 0,
         type: activeSub.subscription_type,
