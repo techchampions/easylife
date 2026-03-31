@@ -1,16 +1,16 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { useModal } from "../../zustand/modal.state";
-import MaritalStatus from "./MaritalStatus";
-import InputField from "../form/InputField";
-import Button from "../global/Button";
-import DatePickerInput from "../form/DatePickerInput";
-import BasicInfo2 from "./BasicInfo2";
-import { useOnboardingFormData } from "../../zustand/onboardingData.state";
+import * as Yup from "yup";
 import { formatDateSimple } from "../../utils/formatter";
+import { useModal } from "../../zustand/modal.state";
+import { useOnboardingFormData } from "../../zustand/onboardingData.state";
+import DatePickerInput from "../form/DatePickerInput";
+import InputField from "../form/InputField";
 import RadioGroup from "../form/RadioGroup";
+import Button from "../global/Button";
+import BasicInfo2 from "./BasicInfo2";
+import MaritalStatus from "./MaritalStatus";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required("required"),
