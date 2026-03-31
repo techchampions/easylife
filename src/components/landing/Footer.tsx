@@ -85,7 +85,7 @@ const Footer = () => {
           <h3 className=" font-semibold mb-4 2xl:text-3xl">Contact</h3>
           <ul className="space-y-3 text-sm 2xl:text-xl">
             <li className="flex items-center gap-2">
-              <Mail size={16} /> support@easylife.com
+              <Mail size={16} /> support@demarriageacademy.com
             </li>
             <li className="flex items-center gap-2">
               <Phone size={16} /> +39 351 251 3290 (Whatsapp only)
