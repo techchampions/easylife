@@ -19,6 +19,13 @@ type ApiError = {
 };
 
 // AUTHENTICATION TYPES
+interface LoginResponse {
+  success: boolean;
+  message: string;
+  token: string;
+  otpVerified: boolean;
+  profileCompleted: boolean;
+}
 
 interface LoginPayload {
   email: string;

@@ -1,12 +1,12 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
+import * as Yup from "yup";
 import { useModal } from "../../zustand/modal.state";
-import Button from "../global/Button";
-import RadioGroup from "../form/RadioGroup";
-import BasicInfo from "./BasicInfo";
 import { useOnboardingFormData } from "../../zustand/onboardingData.state";
+import RadioGroup from "../form/RadioGroup";
+import Subscription from "../general_dating/Subscription";
+import Button from "../global/Button";
 import GetStarted from "./GetStarted";
 
 const validationSchema = Yup.object().shape({
@@ -29,7 +29,7 @@ const MaritalStatus: React.FC = () => {
     setOnboardingFormData({
       marital_status: values.marital_status,
     });
-    modal.open(<BasicInfo />);
+    modal.open(<Subscription />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md">

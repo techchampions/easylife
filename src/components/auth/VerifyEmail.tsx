@@ -1,28 +1,41 @@
 import {
-  useState,
-  useRef,
   useEffect,
+  useRef,
+  useState,
   type ChangeEvent,
   type KeyboardEvent,
 } from "react";
-import Button from "../global/Button";
 import { useSendOTP, useVerifyOTP } from "../../hooks/mutattions/useAuth";
+import Button from "../global/Button";
 
 interface OTPProps {
   length?: number;
+  shouldAutoSend?: boolean;
 }
 
-const VerifyEmail: React.FC<OTPProps> = ({ length = 4 }) => {
+const VerifyEmail: React.FC<OTPProps> = ({
+  length = 4,
+  shouldAutoSend = false,
+}) => {
   const { mutate: verify, isPending } = useVerifyOTP();
   const { mutate: resend, isPending: isResending, isSuccess } = useSendOTP();
   const [otp, setOtp] = useState<string[]>(new Array(length).fill(""));
   const [timer, setTimer] = useState<number>(59);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
-
+  const autoSentRef = useRef<boolean>(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>(
     new Array(length).fill(null)
   );
+
+  // Auto-send OTP only when needed (e.g., after login)
+  useEffect(() => {
+    if (shouldAutoSend && !autoSentRef.current) {
+      autoSentRef.current = true;
+      resend();
+      setTimer(59);
+    }
+  }, [shouldAutoSend, resend]);
 
   useEffect(() => {
     if (timer > 0) {
@@ -64,27 +77,6 @@ const VerifyEmail: React.FC<OTPProps> = ({ length = 4 }) => {
     setIsSubmitting(true);
     const enteredOtp = otp.join("");
     verify(enteredOtp);
-    // openModal(<GetStarted />);
-    // const enteredOtp = otp.join("");
-    // try {
-    //   const response = await apiClient.post("/verify-otp", {
-    //     otp: enteredOtp,
-    //   });
-    //   setIsSubmitting(true);
-    //   if (response.data.success) {
-    //     showToast("OTP verified successfully!", "success");
-    //     if (token) {
-    //       setStep("onboarding complete");
-    //       setHasCompletedOnboarding(true);
-    //       setIsLoggedIn(true);
-    //     }
-    //     setStep("signup completed");
-    //   }
-    // } catch (error) {
-    //   showToast("OTP verification failed. Please try again.", "error");
-    //   console.error("OTP verification failed:", error);
-    // }
-    // setIsSubmitting(false);
   };
 
   const handleResendOTP = async () => {

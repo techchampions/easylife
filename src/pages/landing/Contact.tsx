@@ -27,7 +27,9 @@ const Contact = () => {
                   </div>
                   <div className="text-lg font-medium">Email us</div>
                 </div>
-                <div className="">help@easylife.com</div>
+                <div className="wrap-break-word">
+                  support@demarriageacademy.com
+                </div>
               </div>
               <div className="bg-white p-4 rounded-xl space-y-2">
                 <div className="flex gap-2 items-center">
@@ -36,7 +38,7 @@ const Contact = () => {
                   </div>
                   <div className="text-lg font-medium">Call us</div>
                 </div>
-                <div className="">+234 901 2345 678</div>
+                <div className="">+39 351 251 3290 (Whatsapp only)</div>
               </div>
             </div>
             <div className="bg-white p-4 rounded-xl space-y-4">
@@ -47,8 +49,8 @@ const Contact = () => {
                 <div className="text-lg font-medium">Our Offices</div>
               </div>
               <ul className="w-3/4 list-disc ml-5 text-sm space-y-0">
-                <li>123 Green Mold str, Suite 401, Ikeja Lagos, IKD902133.</li>
-                <li>123 Green Mold str, Suite 401, Ikeja Lagos, IKD902133.</li>
+                {/* <li>123 Green Mold str, Suite 401, Ikeja Lagos, IKD902133.</li>
+                <li>123 Green Mold str, Suite 401, Ikeja Lagos, IKD902133.</li> */}
               </ul>
             </div>
           </div>

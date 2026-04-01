@@ -284,7 +284,7 @@ const ProfilePicture: React.FC = () => {
 
             proceed(payload, {
               onSuccess() {
-                modal.openStrong(<Congrats />);
+                modal.open(<Congrats />);
               },
             });
           }}

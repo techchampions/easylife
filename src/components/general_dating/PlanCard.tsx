@@ -24,7 +24,7 @@ const PlanCard: React.FC<Props> = ({ item }) => {
 
         <ul className="space-y-3 p-2">
           {item.features.map((list, idx) => (
-            <li key={idx} className="flex items-center-safe gap-2">
+            <li key={idx} className="flex items-start gap-2">
               {" "}
               <CheckCircle size={15} />
               <div className="flex-1 text-sm">{list}</div>
@@ -35,7 +35,7 @@ const PlanCard: React.FC<Props> = ({ item }) => {
       <Button
         label="Subscribe"
         onClick={() => {
-          modal.openStrong(<SelectPaymentMethod item={item} />);
+          modal.open(<SelectPaymentMethod item={item} />);
         }}
       />
     </div>

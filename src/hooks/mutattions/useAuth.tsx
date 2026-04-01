@@ -38,9 +38,8 @@ export const useLogin = () => {
       } else {
         if (response.otpVerified === false) {
           showToast(`welcome back, Please verify your email`, "info");
-          modal.open(<VerifyEmail />);
-        }
-        if (response.profileCompleted === false) {
+          modal.open(<VerifyEmail shouldAutoSend={true} />);
+        } else if (response.profileCompleted === false) {
           showToast(`welcome back, Please complete your profile`, "info");
           modal.open(<GetStarted />);
         }
@@ -82,7 +81,7 @@ export const useRegister = () => {
       setUser(response.user);
       setIsLoggedIn(true);
       setToken(response.token);
-      modal.open(<GetStarted />);
+      modal.open(<VerifyEmail />);
     },
     onError: (error: AxiosError<RegisterError>) => {
       // Check if this is an Axios error with response data
