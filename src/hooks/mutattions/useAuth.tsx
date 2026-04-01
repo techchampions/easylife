@@ -82,7 +82,7 @@ export const useRegister = () => {
       setUser(response.user);
       setIsLoggedIn(true);
       setToken(response.token);
-      modal.open(<GetStarted />);
+      modal.open(<VerifyEmail />);
     },
     onError: (error: AxiosError<RegisterError>) => {
       // Check if this is an Axios error with response data

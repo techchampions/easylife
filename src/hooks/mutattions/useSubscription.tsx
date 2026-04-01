@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
+import BasicInfo from "../../components/auth/BasicInfo";
 import api from "../../services/api.service";
 import { useModal } from "../../zustand/modal.state";
 import { useToast } from "../../zustand/toast.state";
@@ -52,7 +53,7 @@ export const useWalletPayment = () => {
       });
       const message = data.message || "Initialized payment";
       showToast(message, "success");
-      modal.close();
+      modal.open(<BasicInfo />);
     },
     onError: (error: AxiosError<ErrorResponse>) => {
       // Handle any other

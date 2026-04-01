@@ -1,12 +1,27 @@
+import { ArrowLeft } from "lucide-react";
 import { subscriptions } from "../../const/data";
-import { useUserStore } from "../../zustand/user.state";
+import { useModal } from "../../zustand/modal.state";
+import { useOnboardingFormData } from "../../zustand/onboardingData.state";
+import MaritalStatus from "../auth/MaritalStatus";
 import PlanCard from "./PlanCard";
 
 const Subscription = () => {
-  const { user } = useUserStore();
-  const plan = subscriptions.find((item) => item.type === user?.marital_status);
+  const { marital_status } = useOnboardingFormData();
+  const modal = useModal();
+  const plan = subscriptions.find((item) => item.type === marital_status);
+  const goBack = () => {
+    modal.open(<MaritalStatus />);
+  };
+
   return (
     <div className="max-w-xs md:max-w-md max-h-[75vh] overflow-y-auto scrollbar-hide space-y-5">
+      <div
+        className="flex items-center gap-2 cursor-pointer absolute top-4 left-4"
+        onClick={goBack}
+      >
+        <ArrowLeft /> Back
+      </div>
+
       <div className="text-center space-y-2">
         <h2 className="text-lg md:text-2xl font-black">
           EasyLife Marriage Academy Subscription
@@ -14,7 +29,7 @@ const Subscription = () => {
         <p className="text-xs md:text-sm">
           Subscribe to{" "}
           <span className="capitalize font-bold">
-            {user?.marital_status} EasyLife marriage academy{" "}
+            {marital_status} EasyLife marriage academy{" "}
           </span>{" "}
           to have unlimited access to the platforms features and benefits.
         </p>
