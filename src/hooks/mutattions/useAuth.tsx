@@ -38,9 +38,8 @@ export const useLogin = () => {
       } else {
         if (response.otpVerified === false) {
           showToast(`welcome back, Please verify your email`, "info");
-          modal.open(<VerifyEmail />);
-        }
-        if (response.profileCompleted === false) {
+          modal.open(<VerifyEmail shouldAutoSend={true} />);
+        } else if (response.profileCompleted === false) {
           showToast(`welcome back, Please complete your profile`, "info");
           modal.open(<GetStarted />);
         }

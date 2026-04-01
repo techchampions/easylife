@@ -1,6 +1,5 @@
 import api from "./api.service";
-
-export const login = async (payload: LoginPayload) => {
+export const login = async (payload: LoginPayload): Promise<LoginResponse> => {
   const formData = new FormData();
   if (payload.email !== undefined)
     formData.append("email", payload.email.toString());
