@@ -96,6 +96,7 @@ const BasicInfo2: React.FC = () => {
               address: values.location.address,
               state: values.location.state,
               city: values.location.city,
+              country: values.location.country,
             });
             if (marital_status) {
               if (marital_status === "married") modal.open(<SpouseBasicInfo />);
