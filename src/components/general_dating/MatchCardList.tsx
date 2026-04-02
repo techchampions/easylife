@@ -1,7 +1,7 @@
-import React from "react";
-import MatchCard from "./MatchCard";
-import ItemMessagePlaceholder from "./ItemMessagePaceholder";
 import { UserRoundSearch } from "lucide-react";
+import React from "react";
+import ItemMessagePlaceholder from "./ItemMessagePaceholder";
+import MatchCard from "./MatchCard";
 import { SkeletonGrid } from "./SkeletonCard";
 interface Props {
   users: UserListItem[];
@@ -29,11 +29,13 @@ const MatchCardList: React.FC<Props> = ({ users, isError, isLoading }) => {
       {Array.isArray(users) && users.length > 0 ? (
         users.map((user, index) => <MatchCard key={index} user={user} />)
       ) : (
-        <ItemMessagePlaceholder
-          title="No users found"
-          message="Try again later."
-          icon={<UserRoundSearch />}
-        />
+        <div className="col-span-2 md:col-span-3">
+          <ItemMessagePlaceholder
+            title="No users found"
+            message="Try again later."
+            icon={<UserRoundSearch />}
+          />
+        </div>
       )}
     </div>
   );

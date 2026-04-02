@@ -6,14 +6,14 @@ import {
   ThumbsUp,
 } from "lucide-react";
 import React from "react";
-import { useGetMentorshipPost } from "../../hooks/query/useMentorship";
+import { Link } from "react-router-dom";
 import {
   useDislikePost,
   useLikePost,
 } from "../../hooks/mutattions/useMentorship";
-import FeedsSkeleton from "../loaders/FeedSkeleton";
-import { Link } from "react-router-dom";
+import { useGetMentorshipPost } from "../../hooks/query/useMentorship";
 import ItemMessagePlaceholder from "../general_dating/ItemMessagePaceholder";
+import FeedsSkeleton from "../loaders/FeedSkeleton";
 const FeedsList: React.FC = () => {
   // const navigate = useNavigate();
   const { data, isLoading, isError } = useGetMentorshipPost();
@@ -28,6 +28,15 @@ const FeedsList: React.FC = () => {
       <ItemMessagePlaceholder
         title="Failed to get posts"
         message="Server error... unable to retrieve posts at the moment."
+        icon={<Newspaper />}
+      />
+    );
+  }
+  if (feeds.length < 1) {
+    return (
+      <ItemMessagePlaceholder
+        title="No Post Found"
+        message="Not found... no posts found at the moment."
         icon={<Newspaper />}
       />
     );
