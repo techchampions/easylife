@@ -21,7 +21,7 @@ const VerifyEmail: React.FC<OTPProps> = ({
   const { mutate: resend, isPending: isResending, isSuccess } = useSendOTP();
   const [otp, setOtp] = useState<string[]>(new Array(length).fill(""));
   const [timer, setTimer] = useState<number>(59);
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  // const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const autoSentRef = useRef<boolean>(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>(
@@ -74,7 +74,7 @@ const VerifyEmail: React.FC<OTPProps> = ({
   };
 
   const handleSubmit = async () => {
-    setIsSubmitting(true);
+    // setIsSubmitting(true);
     const enteredOtp = otp.join("");
     verify(enteredOtp);
   };
@@ -125,7 +125,7 @@ const VerifyEmail: React.FC<OTPProps> = ({
         }`}
         onClick={handleSubmit}
         disabled={isDisabled || isPending}
-        isLoading={isSubmitting || isPending}
+        isLoading={isPending}
       />
 
       <p className="text-sm text-gray-500">

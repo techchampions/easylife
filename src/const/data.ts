@@ -8,6 +8,7 @@ export const subscriptions: Plan[] = [
     features: [
       "Relationship Coaching / Marriage Mentorship",
       "General Marriage Trainings",
+      "Daily Marriage Lessons (For Singles), To Ensure Your Glorious Marital Settlement.",
       "Marriage Connections ",
       "Coordinated Godly Match Making ",
       "Singles Physical Camp Meetings Where You Can Meet Someone To Marry Personally.",

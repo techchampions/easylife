@@ -51,7 +51,9 @@ export const getUserByID = async (
   return response.data;
 };
 
-export const verifyOTP = async (otp: number | string) => {
+export const verifyOTP = async (
+  otp: number | string
+): Promise<VerifyOTPResponse> => {
   const payload = new FormData();
   if (otp !== undefined) payload.append("otp", otp.toString());
 

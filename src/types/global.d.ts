@@ -60,6 +60,10 @@ interface VerifyReferalCodeResponse {
   success: boolean;
   is_exist: boolean;
 }
+interface VerifyOTPResponse {
+  success: boolean;
+  message: string;
+}
 
 // TOAST TYPES
 type ToastType = "success" | "error" | "info" | "message";
