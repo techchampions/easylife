@@ -4,6 +4,8 @@ import React from "react";
 import * as Yup from "yup";
 import { useModal } from "../../zustand/modal.state";
 import { useOnboardingFormData } from "../../zustand/onboardingData.state";
+import { useToast } from "../../zustand/toast.state";
+import { useUserStore } from "../../zustand/user.state";
 import LocationAutocomplete from "../form/AutoLocationInput";
 import InputField from "../form/InputField";
 import TagsInput from "../form/TagsInputFied";
@@ -36,6 +38,8 @@ const validationSchema = Yup.object().shape({
 
 const BasicInfo2: React.FC = () => {
   const modal = useModal();
+  const toast = useToast();
+  const { user } = useUserStore();
   const {
     nationality,
     address,
@@ -93,10 +97,29 @@ const BasicInfo2: React.FC = () => {
               state: values.location.state,
               city: values.location.city,
             });
-            if (marital_status === "married") modal.open(<SpouseBasicInfo />);
-
-            if (marital_status === "single") modal.open(<BioData />);
-            console.log(marital_status);
+            if (marital_status) {
+              if (marital_status === "married") modal.open(<SpouseBasicInfo />);
+              if (marital_status === "single") modal.open(<BioData />);
+            } else if (user?.plan) {
+              if (user.plan.id === 1) {
+                setOnboardingFormData({
+                  marital_status: "single",
+                });
+                modal.open(<BioData />);
+              }
+              if (user.plan.id === 2) {
+                setOnboardingFormData({
+                  marital_status: "married",
+                });
+                modal.open(<SpouseBasicInfo />);
+              }
+            } else {
+              toast.showToast(
+                "Marital status not set... go back to set",
+                "info"
+              );
+            }
+            // console.log(marital_status);
           }}
         >
           {({ isValid, values, setFieldValue }) => {

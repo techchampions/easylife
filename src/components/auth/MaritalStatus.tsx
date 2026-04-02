@@ -39,12 +39,12 @@ const MaritalStatus: React.FC = () => {
   };
 
   const handleProceed = async (values: typeof initialValues) => {
+    setOnboardingFormData({
+      marital_status: values.marital_status,
+    });
     if (user?.plan) {
       modal.open(<BasicInfo />);
     } else {
-      setOnboardingFormData({
-        marital_status: values.marital_status,
-      });
       modal.open(<Subscription />);
     }
   };
