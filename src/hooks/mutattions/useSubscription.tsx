@@ -51,9 +51,13 @@ export const useWalletPayment = () => {
       queryClient.invalidateQueries({
         queryKey: ["user-profile"],
       });
-      const message = data.message || "Initialized payment";
-      showToast(message, "success");
-      modal.open(<BasicInfo />);
+      if (data.success) {
+        const message = data.message || "Initialized payment";
+        showToast(message, "success");
+        modal.open(<BasicInfo />);
+      } else {
+        showToast(data.message, "error");
+      }
     },
     onError: (error: AxiosError<ErrorResponse>) => {
       // Handle any other

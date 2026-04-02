@@ -30,19 +30,23 @@ export const useLogin = () => {
       });
       // const username = response.user.first_name || response.user.username;
       // setUser(response.user);
-      setToken(response.token);
-      setIsLoggedIn(true);
-      if (response.otpVerified && response.profileCompleted) {
-        showToast(`Logged in Successfully`, "success");
-        modal.close();
-      } else {
-        if (response.otpVerified === false) {
-          showToast(`welcome back, Please verify your email`, "info");
-          modal.open(<VerifyEmail shouldAutoSend={true} />);
-        } else if (response.profileCompleted === false) {
-          showToast(`welcome back, Please complete your profile`, "info");
-          modal.open(<GetStarted />);
+      if (response.success) {
+        setToken(response.token);
+        setIsLoggedIn(true);
+        if (response.otpVerified && response.profileCompleted) {
+          showToast(response.message, "success");
+          modal.close();
+        } else {
+          if (response.otpVerified === false) {
+            showToast(`welcome back, Please verify your email`, "info");
+            modal.open(<VerifyEmail shouldAutoSend={true} />);
+          } else if (response.profileCompleted === false) {
+            showToast(`welcome back, Please complete your profile`, "info");
+            modal.open(<GetStarted />);
+          }
         }
+      } else {
+        showToast(response.message, "error");
       }
     },
     onError: (error: AxiosError<LoginError>) => {
@@ -171,12 +175,16 @@ export const useVerifyOTP = () => {
 
   return useMutation({
     mutationFn: verifyOTP,
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: ["user"],
       });
-      showToast(`Account verified successfully`, "success");
-      modal.open(<GetStarted />);
+      if (data.success) {
+        showToast(data.message, "success");
+        modal.open(<GetStarted />);
+      } else {
+        showToast(data.message, "error");
+      }
     },
     onError: (error: AxiosError<RegisterError>) => {
       showToast("failed otp verification", "error");

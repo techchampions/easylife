@@ -1,4 +1,4 @@
-import { CreditCard, Wallet2 } from "lucide-react";
+import { CreditCard, Info, Wallet2 } from "lucide-react";
 import React, { useState } from "react";
 import {
   useInitialPayment,
@@ -109,13 +109,23 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
         </div>
       </div>
 
-      <div className="">
+      <div className="space-y-2">
         <Button
           label="Make Payment"
           disabled={!selectedMethod || isPending || loadingWallet}
           isLoading={isPending || loadingWallet}
           onClick={makePayment}
         />
+        <div className="flex gap-2 text-xs bg-primary/20 p-2 text-left rounded-xl font-medium text-primary">
+          <Info />
+          <div className="flex-1">
+            For wallet funding, please contact support at +39 351 251 3290
+            (Whatsapp only) or send a mail to{" "}
+            <a href="mailto:support@demarriageacademy.com">
+              support@demarriageacademy.com
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
