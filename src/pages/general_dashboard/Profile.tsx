@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
 import { Edit, MapPin } from "lucide-react";
-import Header from "../../components/global/Header";
-import { useUserStore } from "../../zustand/user.state";
-import { calculateAge } from "../../utils/calculate_age";
-import { useModal } from "../../zustand/modal.state";
+import React from "react";
 import UpdateProfile from "../../components/general_dating/UpdateProfile";
+import Header from "../../components/global/Header";
+import { calculateAge } from "../../utils/calculate_age";
+import { formatDate } from "../../utils/formatter";
+import { useModal } from "../../zustand/modal.state";
+import { useUserStore } from "../../zustand/user.state";
 
 const ProfileScreen: React.FC = () => {
   const { user } = useUserStore();
@@ -48,10 +49,10 @@ const ProfileScreen: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <p className="text-white mt-4 text-lg">
+              {/* <p className="text-white mt-4 text-lg">
                 So long as you have food in your mouth, you have solved all
                 questions for the time being.
-              </p>
+              </p> */}
             </div>
           </div>
           {/* About Section */}
@@ -74,11 +75,13 @@ const ProfileScreen: React.FC = () => {
               </div>
               <div>
                 <p className="text-gray-500">No. of children:</p>
-                <p className="font-medium">No kids</p>
+                <p className="font-medium">
+                  {user?.number_of_children || "..."}
+                </p>
               </div>
               <div>
                 <p className="text-gray-500">Work as:</p>
-                <p className="font-medium">Businesswoman</p>
+                <p className="font-medium">{user?.occupation || "..."}</p>
               </div>
               <div>
                 <p className="text-gray-500">Religion:</p>
@@ -94,13 +97,13 @@ const ProfileScreen: React.FC = () => {
               </div>
               <div>
                 <p className="text-gray-500">Languages:</p>
-                <p className="font-medium capitalize">
-                  {user?.language}, Russian
-                </p>
+                <p className="font-medium capitalize">{user?.language}</p>
               </div>
               <div>
-                <p className="text-gray-500">Marijuana:</p>
-                <p className="font-medium">Yes</p>
+                <p className="text-gray-500">Date of Birth:</p>
+                <p className="font-medium">
+                  {formatDate(user?.date_of_birth || "")}
+                </p>
               </div>
             </div>
           </div>

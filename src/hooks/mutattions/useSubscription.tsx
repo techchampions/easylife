@@ -67,3 +67,35 @@ export const useWalletPayment = () => {
     },
   });
 };
+export const useRenewSubWithWallet = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (
+      payload: InitializePaymentPayload
+    ): Promise<InitializePaymentResponse> => {
+      const res = await api.post(`/wallet/pay`, payload);
+      return res.data;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["user"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["user-profile"],
+      });
+      if (data.success) {
+        const message = data.message || "Initialized payment";
+        showToast(message, "success");
+      } else {
+        showToast(data.message, "error");
+      }
+    },
+    onError: (error: AxiosError<ErrorResponse>) => {
+      // Handle any other
+
+      const message = error.response?.data.message || "Failed to initialize";
+      showToast(message, "error");
+    },
+  });
+};

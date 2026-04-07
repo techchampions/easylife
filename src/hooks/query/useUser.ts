@@ -9,7 +9,8 @@ import {
 import { useUserStore } from "../../zustand/user.state";
 
 export const useGetUser = () => {
-  const { setUser, setIsLoggedIn, token } = useUserStore();
+  const { setUser, setIsLoggedIn, setActiveSubscription, token } =
+    useUserStore();
   const queryResult = useQuery<GetUserResponse, Error>({
     queryKey: ["user-profile"],
     queryFn: getUser,
@@ -19,9 +20,10 @@ export const useGetUser = () => {
   useEffect(() => {
     if (queryResult.data?.success) {
       setUser(queryResult.data.user);
+      setActiveSubscription(queryResult.data.activeSubscription);
       //   setIsLoggedIn(true);
     }
-  }, [queryResult.data, setUser, setIsLoggedIn]);
+  }, [queryResult.data, setUser, setIsLoggedIn, setActiveSubscription]);
 
   return queryResult;
 };

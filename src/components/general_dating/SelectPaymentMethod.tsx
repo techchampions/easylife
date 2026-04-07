@@ -2,6 +2,7 @@ import { CreditCard, Info, Wallet2 } from "lucide-react";
 import React, { useState } from "react";
 import {
   useInitialPayment,
+  useRenewSubWithWallet,
   useWalletPayment,
 } from "../../hooks/mutattions/useSubscription";
 import { useGetWalletBalance } from "../../hooks/query/useUser";
@@ -16,23 +17,29 @@ interface Prop {
     features?: string[];
     type: string;
   };
+  isRenewal?: boolean;
 }
-const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
+const SelectPaymentMethod: React.FC<Prop> = ({ item, isRenewal = false }) => {
   const { data } = useGetWalletBalance();
   const { mutate: initiatePayment, isPending } = useInitialPayment();
   const { mutate: payWithWallet, isPending: loadingWallet } =
     useWalletPayment();
+  const { mutate: renewWithWallet, isPending: isRenewing } =
+    useRenewSubWithWallet();
   const paymentMethods = ["wallet", "flutterwave"];
   const [selectedMethod, setselectedMethod] = useState("");
   const makePayment = () => {
     const payload: InitializePaymentPayload = {
       plan_id: item.id,
-      payment_type: "mentorship",
+      payment_type: isRenewal ? "renewal" : "mentorship",
     };
     if (selectedMethod === "flutterwave") {
       initiatePayment(payload);
     }
     if (selectedMethod === "wallet") {
+      if (isRenewal) {
+        renewWithWallet(payload);
+      }
       payWithWallet(payload);
     }
   };
@@ -112,8 +119,8 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item }) => {
       <div className="space-y-2">
         <Button
           label="Make Payment"
-          disabled={!selectedMethod || isPending || loadingWallet}
-          isLoading={isPending || loadingWallet}
+          disabled={!selectedMethod || isPending || loadingWallet || isRenewing}
+          isLoading={isPending || loadingWallet || isRenewing}
           onClick={makePayment}
         />
         <div className="flex gap-2 text-xs bg-primary/20 p-2 text-left rounded-xl font-medium text-primary">

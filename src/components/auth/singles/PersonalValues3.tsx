@@ -1,7 +1,7 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 import React from "react";
+import * as Yup from "yup";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import InputField from "../../form/InputField";
@@ -62,7 +62,7 @@ const PersonalValues3: React.FC = () => {
                     <InputField
                       name="single_user_selling_point"
                       type="textarea"
-                      placeholder="Please inidicate here."
+                      placeholder="Please indicate here."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
@@ -74,7 +74,7 @@ const PersonalValues3: React.FC = () => {
                     <InputField
                       name="single_user_table_pack"
                       type="textarea"
-                      placeholder="Please inidicate here."
+                      placeholder="Please indicate here."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>

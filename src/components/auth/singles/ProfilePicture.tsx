@@ -6,6 +6,7 @@ import { useOnboarding } from "../../../hooks/mutattions/useOnboarding";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import ImageInput from "../../form/ImageInput";
+import MultiImageInput from "../../form/MultipleImageInput";
 import Button from "../../global/Button";
 import Congrats from "../Congrats";
 import PersonalValues3 from "./PersonalValues3";
@@ -63,17 +64,23 @@ const ProfilePicture: React.FC = () => {
     other_issues,
     profile_picture,
     spouse_profile_picture,
+    photos,
     marital_status,
+    occupation,
+    living_alone,
+    career_growth,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
     profile_picture: profile_picture || null,
     spouse_profile_picture: spouse_profile_picture || null,
+    photos: photos || null,
     // phoneNumber: "",
     // spousephoneNumber: "",
   };
   const validationSchema = Yup.object().shape({
-    profilePicture: Yup.mixed().required("required"),
+    profile_picture: Yup.mixed().required("required"),
+    photos: Yup.mixed().required("required"),
     // phoneNumber: Yup.string()
     //   .required("Phone number is required")
     //   .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
@@ -85,7 +92,7 @@ const ProfilePicture: React.FC = () => {
     //     .min(10, "Phone number too short"),
     // }),
     ...(marital_status === "married" && {
-      spouseProfilePicture: Yup.mixed().required(
+      spouse_profile_picture: Yup.mixed().required(
         "Spouse's picture is required"
       ),
     }),
@@ -272,6 +279,16 @@ const ProfilePicture: React.FC = () => {
             if (other_issues) {
               payload.append("other_issues", other_issues);
             }
+            if (occupation) {
+              payload.append("occupation", occupation);
+            }
+            if (living_alone) {
+              payload.append("living_alone", living_alone);
+            }
+            if (career_growth) {
+              payload.append("career_growth", career_growth);
+            }
+
             if (values.profile_picture) {
               payload.append("profile_picture", values.profile_picture);
             }
@@ -280,6 +297,11 @@ const ProfilePicture: React.FC = () => {
                 "spouse_profile_picture",
                 values.spouse_profile_picture
               );
+            }
+            if (values.photos) {
+              values.photos.forEach((photo) => {
+                payload.append("photos", photo);
+              });
             }
 
             proceed(payload, {
@@ -291,7 +313,7 @@ const ProfilePicture: React.FC = () => {
         >
           {({ isValid }) => (
             <Form className="flex flex-col gap-8 justify-between min-h-55">
-              <div className="space-y-7">
+              <div className="space-y-7 ">
                 <div
                   className={
                     marital_status === "married"
@@ -301,7 +323,7 @@ const ProfilePicture: React.FC = () => {
                 >
                   {/* <div className="text-lg">What`s your email address?</div> */}
                   <ImageInput
-                    name="profilePicture"
+                    name="profile_picture"
                     label="Profile Photo"
                     infoText="Upload a clear photo of face"
                     width={marital_status === "married" ? 175 : 200}
@@ -310,7 +332,7 @@ const ProfilePicture: React.FC = () => {
                   />
                   {marital_status === "married" && (
                     <ImageInput
-                      name="spouseProfilePicture"
+                      name="spouse_profile_picture"
                       label="Spouse's Photo"
                       infoText="Upload a clear photo of face"
                       width={175}
@@ -319,27 +341,13 @@ const ProfilePicture: React.FC = () => {
                     />
                   )}
                 </div>
-                {/* <div
-                  className={`grid ${
-                    marital_status === "married" && "md:grid-cols-2"
-                  } gap-2`}
-                >
-                  <div className="space-y-1">
-                    <div className="text-base">What`s your phone No.?</div>
-                    <InputField name="phoneNumber" placeholder="Phone number" />
-                  </div>
-                  {marital_status === "married" && (
-                    <div className="space-y-1">
-                      <div className="text-base">
-                        What`s your Spouse phone No.?
-                      </div>
-                      <InputField
-                        name="spousephoneNumber"
-                        placeholder="Phone number"
-                      />
-                    </div>
-                  )}
-                </div> */}
+                <div className="">
+                  <MultiImageInput
+                    name="photos"
+                    label="Photo gallery"
+                    infoText="Please add atleast one image to your photo gallery."
+                  />
+                </div>
               </div>
               <div className="flex justify-center w-full gap-4 mt-4">
                 <Button
