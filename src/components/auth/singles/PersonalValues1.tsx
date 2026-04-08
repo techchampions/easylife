@@ -1,32 +1,29 @@
 import { Form, Formik } from "formik";
-import { ArrowLeft, ArrowRight, Info } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
 import * as Yup from "yup";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import InputField from "../../form/InputField";
 import Button from "../../global/Button";
-import PersonalValues1 from "./PersonalValues1";
-import PersonalValues3 from "./PersonalValues3";
+import PersonalValues from "./PersonalValues";
+import PersonalValues2 from "./PersonsalValues2";
 
 const validationSchema = Yup.object().shape({
-  single_user_type_of_spouse: Yup.string().required("required"),
-  single_user_tolerance: Yup.string().required("required"),
+  strenght: Yup.string().required("required"),
+  weakness: Yup.string().required("required"),
 });
 
-const PersonalValues2: React.FC = () => {
+const PersonalValues1: React.FC = () => {
   const modal = useModal();
-  const {
-    setOnboardingFormData,
-    single_user_type_of_spouse,
-    single_user_tolerance,
-  } = useOnboardingFormData();
+  const { setOnboardingFormData, single_user_strength, single_user_weakness } =
+    useOnboardingFormData();
   const initialValues = {
-    single_user_type_of_spouse: single_user_type_of_spouse || "",
-    single_user_tolerance: single_user_tolerance || "",
+    strenght: single_user_strength || "",
+    weakness: single_user_weakness || "",
   };
   const goBack = () => {
-    modal.open(<PersonalValues1 />);
+    modal.open(<PersonalValues />);
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh]">
@@ -37,7 +34,9 @@ const PersonalValues2: React.FC = () => {
         <ArrowLeft /> Back
       </div>
 
-      <div className="flex flex-col mt-5"></div>
+      <div className="flex flex-col mt-5">
+        {/* <div className="text-2xl font-bold">Personal Values</div> */}
+      </div>
       <div className="flex flex-col justify-between mt-7">
         <Formik
           initialValues={initialValues}
@@ -45,10 +44,10 @@ const PersonalValues2: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              single_user_type_of_spouse: values.single_user_type_of_spouse,
-              single_user_tolerance: values.single_user_tolerance,
+              single_user_strength: values.strenght,
+              single_user_weakness: values.weakness,
             });
-            modal.open(<PersonalValues3 />);
+            modal.open(<PersonalValues2 />);
           }}
         >
           {({ isValid }) => {
@@ -57,23 +56,23 @@ const PersonalValues2: React.FC = () => {
                 <div className="space-y-5">
                   <div className="space-y-1">
                     <div className="text-xl font-bold">
-                      What will you never tolerate or endure from a spouse?
+                      What is your areas of strength?
                     </div>
                     <InputField
-                      name="single_user_tolerance"
+                      name="strenght"
                       type="textarea"
-                      placeholder="Please inidicate here."
+                      placeholder="Indicate your strenghts here"
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
                   <div className="space-y-1">
                     <div className="text-xl font-bold">
-                      What kind of spouse are you looking for?
+                      What is your areas of weakness?
                     </div>
                     <InputField
-                      name="single_user_type_of_spouse"
+                      name="weakness"
                       type="textarea"
-                      placeholder="Please inidicate here."
+                      placeholder="Indicate your weaknesses here"
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
@@ -85,7 +84,6 @@ const PersonalValues2: React.FC = () => {
                     type="submit"
                     loadingText="Checking email..."
                     disabled={!isValid}
-                    icon={!isValid ? <Info /> : null}
                     rightIcon={<ArrowRight />}
                   />
                 </div>
@@ -98,4 +96,4 @@ const PersonalValues2: React.FC = () => {
   );
 };
 
-export default PersonalValues2;
+export default PersonalValues1;

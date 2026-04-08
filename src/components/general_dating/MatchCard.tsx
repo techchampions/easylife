@@ -1,4 +1,4 @@
-import { Heart, Loader2, MessageCircle, Star } from "lucide-react";
+import { Heart, Loader2, MessageCircle, Star, UserCircle } from "lucide-react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { useUserStore } from "../../zustand/user.state";
@@ -30,24 +30,28 @@ const MatchCard: React.FC<Props> = ({ user }) => {
         to={`/dashboard/matchprofile/${user.id}`}
         className="flex-1 overflow-hidden rounded-2xl relative"
       >
-        <img
-          src={
-            user.profile_picture ||
-            "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
-          }
-          alt=""
-          className="object-cover h-full w-full"
-        />
+        {user.profile_picture ? (
+          <img
+            src={user.profile_picture}
+            alt=""
+            className="object-cover h-full w-full"
+          />
+        ) : (
+          <div className="bg-gray-600 text-gray-400 w-full h-full flex items-center justify-center">
+            <UserCircle className="w-20 h-20" />
+          </div>
+        )}
         <div className="absolute bottom-0 bg-linear-to-t from-black to-transparent text-white px-2 py-4 w-full">
           <div className="flex items-center gap-2">
-            <img
-              src={
-                user.profile_picture ||
-                "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
-              }
-              alt=""
-              className="h-7 w-7 rounded-full bg-amber-300 object-cover"
-            />
+            {user.profile_picture ? (
+              <img
+                src={user.profile_picture}
+                alt=""
+                className="h-7 w-7 rounded-full bg-amber-300 object-cover"
+              />
+            ) : (
+              <UserCircle className="h-7 w-7 text-gray-200" />
+            )}
 
             <div className="">
               {user.first_name} {user.last_name}

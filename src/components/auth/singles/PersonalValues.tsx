@@ -1,32 +1,39 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
+import * as Yup from "yup";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import InputField from "../../form/InputField";
+import RadioGroup from "../../form/RadioGroup";
 import Button from "../../global/Button";
-import PersonalValues2 from "./PersonsalValues2";
 import BioData from "../BioData";
+import PersonalValues1 from "./PersonalValues1";
 
 const validationSchema = Yup.object().shape({
-  strenght: Yup.string().required("required"),
-  weakness: Yup.string().required("required"),
+  occupation: Yup.string().required("required"),
+  living_alone: Yup.string().required("required"),
+  career_growth: Yup.string().required("required"),
 });
 
 const PersonalValues: React.FC = () => {
   const modal = useModal();
-  const { setOnboardingFormData, single_user_strength, single_user_weakness } =
+  const { occupation, career_growth, living_alone, setOnboardingFormData } =
     useOnboardingFormData();
+  const livingAloneOptions = [
+    { label: "yes", value: "yes" },
+    { label: "no", value: "no" },
+  ];
   const initialValues = {
-    strenght: single_user_strength || "",
-    weakness: single_user_weakness || "",
+    occupation: occupation || "",
+    career_growth: career_growth || "",
+    living_alone: living_alone || "",
   };
   const goBack = () => {
     modal.open(<BioData />);
   };
   return (
-    <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh]">
+    <div className="flex flex-col w-md max-w-xs md:max-w-md max-h-[75vh] overflow-y-scroll scrollbar-hide">
       <div
         className="flex items-center gap-2 cursor-pointer absolute top-4 left-4"
         onClick={goBack}
@@ -35,7 +42,7 @@ const PersonalValues: React.FC = () => {
       </div>
 
       <div className="flex flex-col mt-5">
-        {/* <div className="text-2xl font-bold">Personal Values</div> */}
+        <div className="text-2xl font-bold">Applicant's Personal values</div>
       </div>
       <div className="flex flex-col justify-between mt-7">
         <Formik
@@ -44,10 +51,11 @@ const PersonalValues: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              single_user_strength: values.strenght,
-              single_user_weakness: values.weakness,
+              occupation: values.occupation,
+              career_growth: values.career_growth,
+              living_alone: values.living_alone,
             });
-            modal.open(<PersonalValues2 />);
+            modal.open(<PersonalValues1 />);
           }}
         >
           {({ isValid }) => {
@@ -55,24 +63,31 @@ const PersonalValues: React.FC = () => {
               <Form className="flex flex-col gap-8 justify-between min-h-55">
                 <div className="space-y-5">
                   <div className="space-y-1">
-                    <div className="text-xl font-bold">
-                      What is your areas of strength?
-                    </div>
+                    <div className="text-lg">Are you living alone?</div>
+                    <RadioGroup
+                      options={livingAloneOptions}
+                      name="living_alone"
+                      orientation="horizontal"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-lg">What do you do for a living? </div>
                     <InputField
-                      name="strenght"
-                      type="textarea"
-                      placeholder="Indicate your strenghts here"
+                      name="occupation"
+                      type="text"
+                      placeholder="Please indictate if any."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
                   <div className="space-y-1">
-                    <div className="text-xl font-bold">
-                      What is your areas of weakness?
+                    <div className="text-lg">
+                      In your job, business, career, ministry, etc, where do you
+                      see yourself in the next 5 years?
                     </div>
                     <InputField
-                      name="weakness"
+                      name="career_growth"
                       type="textarea"
-                      placeholder="Indicate your weaknesses here"
+                      placeholder="Please indictate if any."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
@@ -82,7 +97,7 @@ const PersonalValues: React.FC = () => {
                     label="Proceed"
                     className="bg-secondary"
                     type="submit"
-                    loadingText="Checking email..."
+                    loadingText="Loading..."
                     disabled={!isValid}
                     rightIcon={<ArrowRight />}
                   />

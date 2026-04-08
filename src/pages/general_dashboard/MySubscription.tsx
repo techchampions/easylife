@@ -2,9 +2,11 @@ import SubscriptionHistory from "../../components/general_dating/SubscriptionHis
 import UserSubCard from "../../components/general_dating/UserSubCard";
 import Header from "../../components/global/Header";
 import { useFetchSubscription } from "../../hooks/query/useGetPlans";
+import { useUserStore } from "../../zustand/user.state";
 
 const MySubscription = () => {
   const { data, isError, isLoading } = useFetchSubscription();
+  const { activeSubscription } = useUserStore();
   const subs = data?.subscriptionHistories || [];
   const activeSub = subs.find((i) => i.status === "active");
   return (
@@ -12,7 +14,7 @@ const MySubscription = () => {
       <Header name="My Subscription" />
       <div className="p-3 space-y-5">
         <UserSubCard
-          activeSub={activeSub}
+          activeSub={activeSubscription || undefined}
           isLoading={isLoading}
           isError={isError || !activeSub}
         />

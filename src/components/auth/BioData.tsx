@@ -1,13 +1,13 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
+import * as Yup from "yup";
 import { useModal } from "../../zustand/modal.state";
+import { useOnboardingFormData } from "../../zustand/onboardingData.state";
 import InputField from "../form/InputField";
+import RadioGroup from "../form/RadioGroup";
 import Button from "../global/Button";
 import BasicInfo2 from "./BasicInfo2";
-import RadioGroup from "../form/RadioGroup";
-import { useOnboardingFormData } from "../../zustand/onboardingData.state";
 import PersonalValues from "./singles/PersonalValues";
 
 const validationSchema = Yup.object().shape({

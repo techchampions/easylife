@@ -4,8 +4,9 @@ import React from "react";
 import { useGetAllUsersInfinite } from "../../hooks/query/useGetAllUsers";
 // import InfiniteScroll from "react-infinite-scroll-component";
 // import LoadingMore from "../../components/loaders/LoadingMore";
-import CouplesLoveContainer from "../../components/couples_dashboard/CouplesLoveContainer";
+import { Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+import CouplesLoveContainer from "../../components/couples_dashboard/CouplesLoveContainer";
 
 const Index: React.FC = () => {
   // const { data, fetchNextPage, hasNextPage, isLoading, isError } =
@@ -17,13 +18,16 @@ const Index: React.FC = () => {
     <div>
       {/* <Header name="Home" /> */}
       <div className="p-3">
-        <div className="bg-white rounded-2xl p-5 my-2 md:my-5 w-full mx-auto flex items-center justify-between">
+        <div className="bg-white rounded-2xl p-5 my-2 md:my-5 w-full mx-auto flex items-end justify-between">
           <div className="font-bold">
             <div className="text-gray-500">Welcome to</div>
             <div className="capitalize text-2xl md:text-4xl ">
               EasyLife Couples Portal
             </div>
           </div>
+          <Link to={`/dashboard/settings`} className="">
+            <Settings />
+          </Link>
         </div>
       </div>
       <div className="px-4 mb-4 space-y-2">

@@ -56,6 +56,11 @@ export const useOnboardingFormData = create<OnboardingFormData>((set) => ({
   other_issues: "",
   spouse_phone: "",
   gender: "",
+
+  occupation: "",
+  career_growth: "",
+  living_alone: "",
+  photos: null,
   setOnboardingFormData: (details) =>
     set((state) => ({ ...state, ...details })),
 
@@ -116,5 +121,9 @@ export const useOnboardingFormData = create<OnboardingFormData>((set) => ({
       other_issues: "",
       spouse_phone: "",
       gender: "",
+      occupation: "",
+      career_growth: "",
+      living_alone: "",
+      photos: null,
     }),
 }));

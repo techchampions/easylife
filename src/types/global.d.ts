@@ -80,6 +80,7 @@ interface ToastStore {
 interface GetUserResponse {
   success: boolean;
   user: User;
+  activeSubscription: SubscriptionHistory;
   interests: string[] | null;
   photos: string[] | null;
   permission: Permission;
@@ -189,6 +190,15 @@ interface User {
 
   created_at: string;
   updated_at: string;
+  wallet: Wallet;
+}
+interface Wallet {
+  id: number;
+  user_id: number;
+  balance: string;
+  currency: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface Permission {
@@ -238,12 +248,14 @@ interface DiscoverResponse {
 
 type UserState = {
   user: User | null;
+  activeSubscription: SubscriptionHistory | null;
   acceptCookies: boolean;
   token: string;
   isLoggedIn: boolean;
   setToken: (token: string) => void;
   setIsLoggedIn: (status: boolean) => void;
   setUser: (user: User) => void; // 👈 add this  getUser: () => Promise<void>;
+  setActiveSubscription: (activeSubscription: SubscriptionHistory) => void; // 👈 add this  getUser: () => Promise<void>;
   setAcceptCookies: (accept: boolean) => void;
   reset: () => void;
 };
@@ -318,9 +330,14 @@ type OnboardingFormData = {
   single_user_table_pack: string;
   single_user_phone: string;
   profile_picture: File | null;
+  photos: File[] | null;
   spouse_profile_picture: File | null;
   other_issues: string;
   spouse_phone: string;
+
+  occupation: string;
+  career_growth: string;
+  living_alone: string;
   setOnboardingFormData: (
     details: Partial<
       Omit<

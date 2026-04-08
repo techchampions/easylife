@@ -1,6 +1,7 @@
 import { CheckCircle, CircleOff, RefreshCw } from "lucide-react";
 import type React from "react";
 import Button from "../../components/global/Button";
+import { subscriptions } from "../../const/data";
 import { formatDate, formatPrice } from "../../utils/formatter";
 import { useModal } from "../../zustand/modal.state";
 import { useUserStore } from "../../zustand/user.state";
@@ -12,33 +13,33 @@ interface Props {
 }
 const UserSubCardSkeleton = () => {
   return (
-    <div className="bg-linear-to-tr from-primary to-black p-7 rounded-3xl animate-pulse">
+    <div className="bg-linear-to-tr from-primary to-black p-7 rounded-3xl ">
       <div className="space-y-8 text-white flex flex-col">
         <div className="flex-1 space-y-4 md:flex md:items-center md:justify-between">
           <div className="flex-1">
             <div className="text-center md:text-left">
               <div className="flex gap-4 justify-center md:justify-start">
                 {/* Plan type skeleton */}
-                <div className="h-8 w-32 bg-white/20 rounded-lg" />
+                <div className="h-8 w-32 bg-white/20 rounded-lg animate-pulse" />
                 {/* Status badge skeleton */}
-                <div className="h-8 w-20 bg-green-500/30 rounded-lg" />
+                <div className="h-8 w-20 bg-green-500/30 rounded-lg animate-pulse" />
               </div>
               <div className="mt-3 space-y-2">
                 {/* Expiry date skeleton */}
-                <div className="h-4 w-40 bg-white/20 rounded" />
+                <div className="h-4 w-40 bg-white/20 rounded animate-pulse" />
                 {/* Date range skeleton */}
-                <div className="h-4 w-48 bg-white/20 rounded" />
+                <div className="h-4 w-48 bg-white/20 rounded animate-pulse" />
               </div>
             </div>
-            <div className="h-1 rounded-[100%] w-1/2 mx-auto bg-white/30 md:hidden mt-3" />
+            <div className="h-1 rounded-[100%] w-1/2 mx-auto bg-white/30 md:hidden mt-3 animate-pulse" />
           </div>
 
           {/* Benefits list skeleton */}
           <ul className="space-y-3 p-2 flex-1">
             {[1, 2, 3, 4].map((idx) => (
               <li key={idx} className="flex items-center-safe gap-2">
-                <div className="w-4 h-4 bg-white/20 rounded-full" />
-                <div className="flex-1 h-4 bg-white/20 rounded" />
+                <div className="w-4 h-4 bg-white/20 rounded-full animate-pulse" />
+                <div className="flex-1 h-4 bg-white/20 rounded animate-pulse" />
               </li>
             ))}
           </ul>
@@ -47,8 +48,8 @@ const UserSubCardSkeleton = () => {
         {/* Buttons skeleton */}
         <div className="w-full flex justify-end">
           <div className="grid grid-cols-3 gap-4 w-full md:w-2/3">
-            <div className="h-10 bg-red-500/50 rounded-lg" />
-            <div className="h-10 bg-white/20 rounded-lg col-span-2" />
+            <div className="h-10 bg-red-500/50 rounded-lg animate-pulse" />
+            <div className="h-10 bg-white/20 rounded-lg col-span-2 animate-pulse" />
           </div>
         </div>
       </div>
@@ -59,12 +60,8 @@ const UserSubCardSkeleton = () => {
 const UserSubCard: React.FC<Props> = ({ isLoading, isError, activeSub }) => {
   const { user } = useUserStore();
   const modal = useModal();
-  const list = [
-    "Relationship Coaching / Marriage Mentorship",
-    " General Marriage Trainings",
-    " Marriage Connections ",
-    " Coordinated Godly Match Making ",
-  ];
+  const sub = subscriptions.find((sub) => sub.id === activeSub?.plan_id);
+
   if (isLoading || isError) {
     return <UserSubCardSkeleton />;
   }
@@ -74,7 +71,7 @@ const UserSubCard: React.FC<Props> = ({ isLoading, isError, activeSub }) => {
         id: activeSub.plan_id,
         name: activeSub.subscription_type,
         price: Number(activeSub.amount_paid),
-        duration: 0,
+        duration: sub?.duration || 0,
         type: activeSub.subscription_type,
       };
       modal.open(<SelectPaymentMethod item={item} />);
@@ -109,7 +106,7 @@ const UserSubCard: React.FC<Props> = ({ isLoading, isError, activeSub }) => {
           </div>
 
           <ul className="space-y-3 p-2">
-            {list.map((list, idx) => (
+            {sub?.features.map((list, idx) => (
               <li key={idx} className="flex items-center-safe gap-2">
                 {" "}
                 <CheckCircle size={15} />
