@@ -17,6 +17,8 @@ export const register = async (payload: RegisterPayload) => {
     formData.append("email", payload.email.toString());
   if (payload.password !== undefined)
     formData.append("password", payload.password.toString());
+  if (payload.referral_id !== undefined)
+    formData.append("referral_id", payload.referral_id.toString());
 
   const response = await api.post("/register", formData, {
     headers: { "Content-Type": "application/json" },

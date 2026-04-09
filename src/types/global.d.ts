@@ -34,6 +34,7 @@ interface LoginPayload {
 interface RegisterPayload {
   email: string;
   password: string;
+  referral_id: string;
 }
 interface PasswordPayload {
   otp: string;
