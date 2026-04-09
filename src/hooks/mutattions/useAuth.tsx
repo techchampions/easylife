@@ -104,6 +104,12 @@ export const useRegister = () => {
         if (errorData.password?.[0]) {
           errorMessages.push(errorData.password[0]);
         }
+        if (errorData.referral?.[0]) {
+          errorMessages.push(errorData.referral[0]);
+        }
+        if (errorData.referral_id?.[0]) {
+          errorMessages.push(errorData.referral_id[0]);
+        }
 
         // Show all errors in a single toast or multiple toasts
         if (errorMessages.length > 0) {

@@ -34,6 +34,7 @@ interface LoginPayload {
 interface RegisterPayload {
   email: string;
   password: string;
+  referral_id: string;
 }
 interface PasswordPayload {
   otp: string;
@@ -50,7 +51,13 @@ type LoginError = {
 };
 type RegisterError = {
   error: string;
-  errors: { username: string[]; email: string[]; password: string[] };
+  errors: {
+    username: string[];
+    email: string[];
+    password: string[];
+    referral: string[];
+    referral_id: string[];
+  };
 };
 interface ForgotPasswordError {
   message: string;
