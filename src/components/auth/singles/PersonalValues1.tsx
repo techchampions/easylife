@@ -56,7 +56,7 @@ const PersonalValues1: React.FC = () => {
                 <div className="space-y-5">
                   <div className="space-y-1">
                     <div className="text-xl font-bold">
-                      What is your areas of strength?
+                      What are your virtues?
                     </div>
                     <InputField
                       name="strenght"
@@ -67,7 +67,7 @@ const PersonalValues1: React.FC = () => {
                   </div>
                   <div className="space-y-1">
                     <div className="text-xl font-bold">
-                      What is your areas of weakness?
+                      What are your weakness?
                     </div>
                     <InputField
                       name="weakness"

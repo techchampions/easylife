@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import * as Yup from "yup";
 import { formatDateSimple } from "../../utils/formatter";
 import { useModal } from "../../zustand/modal.state";
@@ -26,7 +26,6 @@ const validationSchema = Yup.object().shape({
 
 const BasicInfo: React.FC = () => {
   const modal = useModal();
-  const [emailToCheck, setEmailToCheck] = useState("");
   const genderOption = [
     { label: "male", value: "male" },
     { label: "female", value: "female" },
@@ -36,6 +35,7 @@ const BasicInfo: React.FC = () => {
     setOnboardingFormData,
     first_name,
     last_name,
+    other_names,
     gender,
     single_user_phone,
     date_of_birth,
@@ -44,6 +44,7 @@ const BasicInfo: React.FC = () => {
   const initialValues = {
     first_name: first_name || "",
     last_name: last_name || "",
+    other_names: other_names || "",
     gender: gender || "",
     phone: single_user_phone || "",
     date_of_birth: date_of_birth || "",
@@ -52,15 +53,6 @@ const BasicInfo: React.FC = () => {
   };
   const goBack = () => {
     modal.open(<MaritalStatus />);
-  };
-  const CheckEmail = ({ email }: { email: string }) => {
-    useEffect(() => {
-      if (email && email !== emailToCheck) {
-        setEmailToCheck(email);
-      }
-    }, [email]);
-
-    return null;
   };
   return (
     <div className="flex flex-col w-md max-w-xs md:max-w-md mx-h-[65vh] max-h-[75vh] overflow-y-scroll scrollbar-hide">
@@ -83,6 +75,7 @@ const BasicInfo: React.FC = () => {
             setOnboardingFormData({
               first_name: values.first_name,
               last_name: values.last_name,
+              other_names: values.other_names,
               single_user_phone: values.phone,
               gender: values.gender,
               date_of_birth: formatDateSimple(values.date_of_birth),
@@ -91,41 +84,53 @@ const BasicInfo: React.FC = () => {
             modal.open(<BasicInfo2 />);
           }}
         >
-          {({ isValid, values }) => {
+          {({ isValid }) => {
             return (
               <Form className="flex flex-col gap-8 justify-between min-h-55">
-                <CheckEmail email={values.phone} />
                 <div className="space-y-5">
                   <div className="space-y-1">
-                    <div className="text-lg">What is your name?</div>
+                    {/* <div className="text-lg">What is your name?</div> */}
                     <div className="grid md:grid-cols-2 gap-2">
                       <InputField
                         name="first_name"
+                        label="First name"
                         type="text"
                         placeholder="First Name"
                         className="text-2xl font-bold rounded-xl py-3"
                       />
                       <InputField
                         name="last_name"
+                        label="Lat name"
                         type="text"
                         placeholder="Last Name"
                         className="text-2xl font-bold rounded-xl py-3"
                       />
+                      <div className="md:col-span-2">
+                        <InputField
+                          name="other_names"
+                          label="Other names"
+                          type="text"
+                          placeholder="Other Names"
+                          className="text-2xl font-bold rounded-xl py-3"
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <div className="text-lg">What is your Phone No.?</div>
+                    {/* <div className="text-lg">What is your Phone No.?</div> */}
                     <InputField
                       name="phone"
+                      label="Phone Number"
                       type="text"
                       placeholder="Phone Number"
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
                   <div className="space-y-1">
-                    <div className="text-lg">What is your gender?</div>
+                    {/* <div className="text-lg">What is your gender?</div> */}
                     <RadioGroup
                       options={genderOption}
+                      label="Gender"
                       name="gender"
                       orientation="horizontal"
                       optionClassName="min-w-[calc(50%-8px)]"
@@ -133,16 +138,18 @@ const BasicInfo: React.FC = () => {
                   </div>
 
                   <div className="space-y-1">
-                    <div className="text-lg">What is your date of birth?</div>
+                    {/* <div className="text-lg">What is your date of birth?</div> */}
                     <DatePickerInput
+                      label="Date of Birth"
                       name="date_of_birth"
                       placeholder={`DD-MM-YYYY`}
                     />
                   </div>
                   <div className="space-y-1">
-                    <div className="text-lg">Where is your place of birth?</div>
+                    {/* <div className="text-lg">Where is your place of birth?</div> */}
                     <InputField
                       name="place_of_birth"
+                      label="Place of Birth"
                       type="text"
                       placeholder="Place of birth"
                       className="text-2xl font-bold rounded-xl py-3"

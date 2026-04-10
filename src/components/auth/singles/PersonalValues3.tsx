@@ -10,19 +10,16 @@ import PersonalValues2 from "./PersonsalValues2";
 import ProfilePicture from "./ProfilePicture";
 
 const validationSchema = Yup.object().shape({
-  single_user_selling_point: Yup.string().required("required"),
+  why_get_married: Yup.string().required("required"),
   single_user_table_pack: Yup.string().required("required"),
 });
 
 const PersonalValues3: React.FC = () => {
   const modal = useModal();
-  const {
-    setOnboardingFormData,
-    single_user_selling_point,
-    single_user_table_pack,
-  } = useOnboardingFormData();
+  const { setOnboardingFormData, why_get_married, single_user_table_pack } =
+    useOnboardingFormData();
   const initialValues = {
-    single_user_selling_point: single_user_selling_point || "",
+    why_get_married: why_get_married || "",
     single_user_table_pack: single_user_table_pack || "",
   };
   const goBack = () => {
@@ -45,7 +42,7 @@ const PersonalValues3: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              single_user_selling_point: values.single_user_selling_point,
+              why_get_married: values.why_get_married,
               single_user_table_pack: values.single_user_table_pack,
             });
             modal.open(<ProfilePicture />);
@@ -57,10 +54,10 @@ const PersonalValues3: React.FC = () => {
                 <div className="space-y-5">
                   <div className="space-y-1">
                     <div className="text-xl font-bold">
-                      Why should your spouse to be marry you?{" "}
+                      Why do you want to get married?{" "}
                     </div>
                     <InputField
-                      name="single_user_selling_point"
+                      name="why_get_married"
                       type="textarea"
                       placeholder="Please indicate here."
                       className="text-2xl font-bold rounded-xl py-3"
@@ -68,8 +65,8 @@ const PersonalValues3: React.FC = () => {
                   </div>
                   <div className="space-y-1">
                     <div className="text-xl font-bold">
-                      What are you bringing to the table into this marriage to
-                      make it successful and enjoyable?{" "}
+                      What do you have that will interest this potential spouse
+                      to marry you?{" "}
                     </div>
                     <InputField
                       name="single_user_table_pack"

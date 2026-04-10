@@ -345,6 +345,18 @@ type OnboardingFormData = {
   occupation: string;
   career_growth: string;
   living_alone: string;
+
+  husband_marriage_issues: string;
+  wife_marriage_issues: string;
+  spouse_denomination: string;
+  spouse_address: string;
+  spouse_state: string;
+  spouse_country: string;
+  spouse_phone_number: string;
+  why_get_married: string;
+  denomination: string;
+  other_names: string;
+  spouse_other_names: string;
   setOnboardingFormData: (
     details: Partial<
       Omit<

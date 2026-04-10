@@ -6,6 +6,7 @@ import { useModal } from "../../zustand/modal.state";
 import { useOnboardingFormData } from "../../zustand/onboardingData.state";
 import { useToast } from "../../zustand/toast.state";
 import { useUserStore } from "../../zustand/user.state";
+import LocationAutocomplete from "../form/AutoLocationInput";
 import InputField from "../form/InputField";
 import TagsInput from "../form/TagsInputFied";
 import Button from "../global/Button";
@@ -14,9 +15,18 @@ import BioData from "./BioData";
 import SpouseBasicInfo from "./couples/SpouseBasicInfo";
 
 const validationSchema = Yup.object().shape({
-  address: Yup.string().required("required"),
-  state: Yup.string().required("required"),
-  country: Yup.string().required("required"),
+  //   address: Yup.string().required("required"),
+  location: Yup.object()
+    .shape({
+      address: Yup.string(),
+      city: Yup.string(),
+      state: Yup.string(),
+      country: Yup.string(),
+      lat: Yup.number(),
+      lng: Yup.number(),
+    })
+    .required("required"),
+
   nationality: Yup.string().required("required"),
   race_or_tribe: Yup.string().required("required"),
   religion: Yup.string().required("required"),
@@ -26,7 +36,7 @@ const validationSchema = Yup.object().shape({
     .min(1, "Add at least one interest"),
 });
 
-const BasicInfo2: React.FC = () => {
+const OldBasicInfo2: React.FC = () => {
   const modal = useModal();
   const toast = useToast();
   const { user } = useUserStore();
@@ -34,19 +44,24 @@ const BasicInfo2: React.FC = () => {
     nationality,
     address,
     state,
+    city,
     country,
     religion,
-    denomination,
     language,
     race_or_tribe,
     marital_status,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
+    location: {
+      address: address || "",
+      city: city || "",
+      state: state || "",
+      country: country || "",
+      lat: "",
+      lng: "",
+    },
     address: address || "",
-    state: state || "",
-    country: country || "",
-    denomination: denomination || "",
     nationality: nationality || "",
     race_or_tribe: race_or_tribe || "",
     religion: religion || "",
@@ -78,10 +93,10 @@ const BasicInfo2: React.FC = () => {
               religion: values.religion,
               language: values.languages,
               nationality: values.nationality,
-              denomination: values.denomination,
-              address: values.address,
-              state: values.state,
-              country: values.country,
+              address: values.location.address,
+              state: values.location.state,
+              city: values.location.city,
+              country: values.location.country,
             });
             if (marital_status) {
               if (marital_status === "married") modal.open(<SpouseBasicInfo />);
@@ -108,37 +123,46 @@ const BasicInfo2: React.FC = () => {
             // console.log(marital_status);
           }}
         >
-          {({ isValid }) => {
+          {({ isValid, values, setFieldValue }) => {
             return (
               <Form className="flex flex-col gap-8 justify-between min-h-55">
                 <div className="space-y-5">
                   <div className="space-y-1">
-                    <div className="text-lg">Current address:</div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <InputField
-                        name="state"
-                        label="State"
-                        placeholder="State"
-                      />
-                      <InputField
-                        name="country"
-                        label="Country"
-                        placeholder="Country"
-                      />
-                      <div className="col-span-2">
-                        <InputField
-                          name="address"
-                          label="Address"
-                          placeholder="Address"
-                        />
-                      </div>
+                    <div className="text-lg">
+                      What is your residential address?
                     </div>
+                    <LocationAutocomplete
+                      value={values.address}
+                      onChange={(value) => setFieldValue("address", value)}
+                      onSelect={(locationData) => {
+                        setFieldValue("location", {
+                          address:
+                            locationData.formattedAddress ||
+                            locationData.address,
+                          city: locationData.city || "",
+                          state: locationData.state || "",
+                          country: locationData.country || "",
+                          lat: locationData.lat,
+                          lng: locationData.lng,
+                        });
+                      }}
+                      onError={(error) => {
+                        console.error("Location error:", error);
+                      }}
+                      placeholder="Enter your address"
+                      helperText="Start typing to see suggestions"
+                      required
+                      searchOptions={{
+                        types: ["address"], // Search for addresses only
+                      }}
+                      debounce={400}
+                      clearOnBlur={false}
+                    />
                   </div>
                   <div className="space-y-1">
-                    {/* <div className="text-lg">What is your Nationality?</div> */}
+                    <div className="text-lg">What is your Nationality?</div>
                     <InputField
                       name="nationality"
-                      label="Nationality"
                       type="text"
                       placeholder="Enter you nationality"
                       className="text-2xl font-bold rounded-xl py-3"
@@ -146,40 +170,27 @@ const BasicInfo2: React.FC = () => {
                   </div>
                   <div className="grid md:grid-cols-2 gap-2">
                     <div className="space-y-1">
-                      {/* <div className="text-lg">What is your race/tribe?</div> */}
+                      <div className="text-lg">What is your race/tribe?</div>
                       <InputField
                         name="race_or_tribe"
-                        label="Race/Tribe"
                         type="text"
                         placeholder="Enter your race or tribe"
                         className="text-2xl font-bold rounded-xl py-3"
                       />
                     </div>
                     <div className="space-y-1">
-                      {/* <div className="text-lg">What is your religion?</div> */}
+                      <div className="text-lg">What is your religion?</div>
                       <InputField
                         name="religion"
-                        label="Religion"
                         type="text"
                         placeholder="Eg. Christainity, Islam"
                         className="text-2xl font-bold rounded-xl py-3"
                       />
                     </div>
-                    <div className="space-y-1 md:col-span-2">
-                      {/* <div className="text-lg">What is your religion?</div> */}
-                      <InputField
-                        name="denomination"
-                        label="Denomination"
-                        type="text"
-                        placeholder="Denomination"
-                        className="text-2xl font-bold rounded-xl py-3"
-                      />
-                    </div>
                   </div>
                   <div className="space-y-1">
-                    {/* <div className="text-lg">Languages spoken?</div> */}
+                    <div className="text-lg">Languages spoken?</div>
                     <TagsInput
-                      label="Languages spoken"
                       name="languages"
                       placeholder="E.g. English... (press enter)"
                       className="font-bold rounded-xl"
@@ -214,4 +225,4 @@ const BasicInfo2: React.FC = () => {
   );
 };
 
-export default BasicInfo2;
+export default OldBasicInfo2;

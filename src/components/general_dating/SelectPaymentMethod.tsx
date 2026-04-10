@@ -8,6 +8,7 @@ import {
 import { useGetWalletBalance } from "../../hooks/query/useUser";
 import { formatPrice } from "../../utils/formatter";
 import Button from "../global/Button";
+import CryptoWalletAddress from "../global/CopyText";
 interface Prop {
   item: {
     id: number;
@@ -63,7 +64,7 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item, isRenewal = false }) => {
     );
   };
   return (
-    <div className="w-xs md:w-sm space-y-2">
+    <div className="w-xs md:w-sm space-y-2 max-h-[85vh] overflow-y-auto scrollbar-hide">
       <div className="text-2xl font-bold">Select Payment Method:</div>
       <div className="space-y-2">
         <div className="space-x-1 flex">
@@ -85,6 +86,17 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item, isRenewal = false }) => {
             </div>
           ))}
         </div>
+        <div className="bg-green-500/20 p-2 rounded-lg text-green-950 flex gap-2">
+          <img src="/images/usdt.png" alt="" className="w-10 h-10" />
+          <div className="flex-1 text-left text-xs">
+            <b>USDT Funding</b> Pay ${item.price} to our USDT (TRC 20) Wallet
+            shown below. After payment, send transaction receipt plus your email
+            address to Easylifesupport on Whatsapp to <b>+39 351 251 3290</b>.
+            Your account will be funded after payment is confirmed.
+            <CryptoWalletAddress address="TMLTSCTQJAG5kRgmZ9oGf1aKkUet9rT2Vk" />
+          </div>
+        </div>
+
         <div className="p-4 border border-gray-200 rounded-2xl flex flex-col">
           <h3 className="font-semibold text-lg mb-3">Payment Summary</h3>
           <div className="flex-1">
@@ -125,7 +137,7 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item, isRenewal = false }) => {
         />
         <div className="flex gap-2 text-xs bg-primary/20 p-2 text-left rounded-xl font-medium text-primary">
           <Info />
-          <div className="flex-1">
+          <div className="flex-1 wrap-break-word">
             For wallet funding, please contact support at +39 351 251 3290
             (Whatsapp only) or send a mail to{" "}
             <a href="mailto:support@demarriageacademy.com">

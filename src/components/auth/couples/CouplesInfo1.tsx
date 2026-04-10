@@ -1,7 +1,7 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
+import * as Yup from "yup";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import InputField from "../../form/InputField";
@@ -74,7 +74,7 @@ const CouplesInfo1: React.FC = () => {
                     <InputField
                       name="why_signup"
                       type="textarea"
-                      placeholder="Please indictate if any."
+                      placeholder="Please indicate if any."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
