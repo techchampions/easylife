@@ -63,20 +63,22 @@ const PersonalValues: React.FC = () => {
               <Form className="flex flex-col gap-8 justify-between min-h-55">
                 <div className="space-y-5">
                   <div className="space-y-1">
+                    <div className="text-lg">What do you do for a living? </div>
+                    <InputField
+                      name="occupation"
+                      type="text"
+                      placeholder="Please indicate if any."
+                      className="text-2xl font-bold rounded-xl py-3"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
                     <div className="text-lg">Are you living alone?</div>
                     <RadioGroup
                       options={livingAloneOptions}
                       name="living_alone"
                       orientation="horizontal"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="text-lg">What do you do for a living? </div>
-                    <InputField
-                      name="occupation"
-                      type="text"
-                      placeholder="Please indictate if any."
-                      className="text-2xl font-bold rounded-xl py-3"
+                      optionClassName="min-w-[calc(50%-8px)]"
                     />
                   </div>
                   <div className="space-y-1">
@@ -87,7 +89,7 @@ const PersonalValues: React.FC = () => {
                     <InputField
                       name="career_growth"
                       type="textarea"
-                      placeholder="Please indictate if any."
+                      placeholder="Please indicate if any."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>

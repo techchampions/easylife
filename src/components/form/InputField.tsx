@@ -1,6 +1,6 @@
 "use client";
 
-import { Field, ErrorMessage, useField } from "formik";
+import { ErrorMessage, Field, useField } from "formik";
 import { Info } from "lucide-react";
 import React from "react";
 
@@ -14,6 +14,7 @@ interface InputFieldProps {
     | "checkbox"
     | "textarea";
   placeholder?: string;
+  label?: string;
   name: string;
   icon?: React.ReactNode;
   rightIcon?: React.ReactNode;
@@ -23,6 +24,7 @@ interface InputFieldProps {
 
 const InputField: React.FC<InputFieldProps> = ({
   type = "text",
+  label,
   placeholder,
   name,
   icon,
@@ -36,10 +38,11 @@ const InputField: React.FC<InputFieldProps> = ({
 
   return (
     <div className="w-full">
+      {label && <div className="text-sm text-gray-500">{label}</div>}
       <div
         className={`w-full relative flex ${
           isTextarea ? "flex-col" : "flex-row"
-        } border bg-transaparent rounded-lg py-3 ${
+        } border bg-transaparent rounded-xl font-bold py-3 ${
           hasError ? "border-red-500" : "border-zinc-200"
         } ${className}`}
       >

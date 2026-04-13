@@ -54,7 +54,6 @@ const ProfilePicture: React.FC = () => {
     single_user_selling_point,
     single_user_table_pack,
     why_signup,
-    marriage_issues,
     about_husband_negative,
     about_husband_positive,
     about_wife_negative,
@@ -69,6 +68,18 @@ const ProfilePicture: React.FC = () => {
     occupation,
     living_alone,
     career_growth,
+    husband_marriage_issues,
+    wife_marriage_issues,
+    spouse_denomination,
+    spouse_address,
+    spouse_state,
+    spouse_country,
+    spouse_phone_number,
+    why_get_married,
+    denomination,
+    other_names,
+    spouse_other_names,
+
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
@@ -273,8 +284,41 @@ const ProfilePicture: React.FC = () => {
             if (changes_to_wife) {
               payload.append("changes_to_wife", changes_to_wife);
             }
-            if (marriage_issues) {
-              payload.append("marriage_issues", marriage_issues);
+            if (husband_marriage_issues) {
+              payload.append(
+                "husband_marriage_issues",
+                husband_marriage_issues
+              );
+            }
+            if (wife_marriage_issues) {
+              payload.append("wife_marriage_issues", wife_marriage_issues);
+            }
+            if (spouse_address) {
+              payload.append("spouse_address", spouse_address);
+            }
+            if (spouse_country) {
+              payload.append("spouse_country", spouse_country);
+            }
+            if (spouse_state) {
+              payload.append("spouse_state", spouse_state);
+            }
+            if (spouse_denomination) {
+              payload.append("spouse_denomination", spouse_denomination);
+            }
+            if (spouse_phone_number) {
+              payload.append("spouse_phone_number", spouse_phone_number);
+            }
+            if (denomination) {
+              payload.append("denomination", denomination);
+            }
+            if (why_get_married) {
+              payload.append("why_get_married", why_get_married);
+            }
+            if (other_names) {
+              payload.append("other_names", other_names);
+            }
+            if (spouse_other_names) {
+              payload.append("spouse_other_names", spouse_other_names);
             }
             if (other_issues) {
               payload.append("other_issues", other_issues);

@@ -151,6 +151,7 @@ import {
   useVerifyReferalCode,
 } from "../../hooks/mutattions/useAuth";
 import { useModal } from "../../zustand/modal.state";
+import { useToast } from "../../zustand/toast.state";
 import CheckboxField from "../form/CheckboxField";
 import InputField from "../form/InputField";
 import InputFieldQuery from "../form/InputFieldQuery";
@@ -159,6 +160,7 @@ import Login from "./Login";
 
 const Signup = () => {
   const modal = useModal();
+  const { showToast } = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [success, setSuccess] = useState(false);
   const [currentReferralCode, setCurrentReferralCode] = useState("");
@@ -211,6 +213,7 @@ const Signup = () => {
         if (response.is_exist) {
           setSuccess(true);
         } else {
+          showToast("Invalid referral code", "error");
           setSuccess(false);
         }
       } catch (error) {
@@ -218,7 +221,7 @@ const Signup = () => {
         setSuccess(false);
       }
     },
-    [verify, currentReferralCode, success]
+    [verify, currentReferralCode, success, showToast]
   );
 
   return (

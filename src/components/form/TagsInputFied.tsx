@@ -2,10 +2,11 @@
 
 import { ErrorMessage, useField } from "formik";
 import { X } from "lucide-react";
-import { useState, type KeyboardEvent, useRef, useEffect } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 
 interface TagsInputProps {
   name: string;
+  label?: string;
   placeholder?: string;
   maxTags?: number;
   className?: string;
@@ -13,6 +14,7 @@ interface TagsInputProps {
 
 export default function TagsInput({
   name,
+  label,
   placeholder = "Type and press Enter...",
   maxTags = 10,
   className = "",
@@ -64,6 +66,7 @@ export default function TagsInput({
 
   return (
     <div className={`w-full`} ref={containerRef}>
+      {label && <div className="text-gray-500 text-sm">{label}</div>}
       <div
         className={` w-full p-3 flex flex-wrap gap-2 items-center border rounded-lg bg-transparent transition  ${className}
           ${hasError ? "border-red-500" : "border-zinc-200"}`}

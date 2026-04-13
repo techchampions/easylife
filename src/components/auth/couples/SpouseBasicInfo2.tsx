@@ -4,7 +4,6 @@ import React from "react";
 import * as Yup from "yup";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
-import LocationAutocomplete from "../../form/AutoLocationInput";
 import InputField from "../../form/InputField";
 import TagsInput from "../../form/TagsInputFied";
 import Button from "../../global/Button";
@@ -12,21 +11,14 @@ import MarriageHistory from "./MarriageHistory";
 import SpouseBasicInfo from "./SpouseBasicInfo";
 
 const validationSchema = Yup.object().shape({
-  //   address: Yup.string().required("required"),
-  location: Yup.object()
-    .shape({
-      address: Yup.string(),
-      city: Yup.string(),
-      state: Yup.string(),
-      country: Yup.string(),
-      lat: Yup.number(),
-      lng: Yup.number(),
-    })
-    .required("required"),
+  spouse_address: Yup.string().required("required"),
+  spouse_state: Yup.string().required("required"),
+  spouse_country: Yup.string().required("required"),
 
   spouse_nationality: Yup.string().required("required"),
   spouse_race_or_tribe: Yup.string().required("required"),
   spouse_religion: Yup.string().required("required"),
+  spouse_denomination: Yup.string().required("required"),
   spouse_languages: Yup.array()
     .of(Yup.string().trim().min(2))
     .max(12, "Too many interests")
@@ -37,25 +29,20 @@ const SpouseBasicInfo2: React.FC = () => {
   const modal = useModal();
   const {
     spouse_nationality,
-    address,
-    state,
-    city,
-    country,
+    spouse_address,
+    spouse_state,
+    spouse_denomination,
+    spouse_country,
     spouse_religion,
     spouse_language,
     spouse_race_or_tribe,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
-    location: {
-      address: address || "",
-      city: city || "",
-      state: state || "",
-      country: country || "",
-      lat: "",
-      lng: "",
-    },
-    address: address || "",
+    spouse_address: spouse_address || "",
+    spouse_denomination: spouse_denomination || "",
+    spouse_state: spouse_state || "",
+    spouse_country: spouse_country || "",
     spouse_nationality: spouse_nationality || "",
     spouse_race_or_tribe: spouse_race_or_tribe || "",
     spouse_religion: spouse_religion || "",
@@ -87,64 +74,70 @@ const SpouseBasicInfo2: React.FC = () => {
               spouse_religion: values.spouse_religion,
               spouse_language: values.spouse_languages,
               spouse_nationality: values.spouse_nationality,
-              address: values.location.address,
-              state: values.location.state,
-              city: values.location.city,
+              spouse_address: values.spouse_address,
+              spouse_state: values.spouse_state,
+              spouse_denomination: values.spouse_denomination,
             });
             modal.open(<MarriageHistory />);
           }}
         >
-          {({ isValid, values, setFieldValue }) => {
+          {({ isValid }) => {
             return (
               <Form className="flex flex-col gap-8 justify-between min-h-55">
                 <div className="space-y-5">
                   <div className="space-y-1">
                     <div className="text-lg">
-                      What is your residential address?
+                      Residential address:
+                      <div className="grid grid-cols-2 gap-2">
+                        <InputField
+                          name="spouse_state"
+                          label="State"
+                          placeholder="State"
+                        />
+                        <InputField
+                          name="spouse_country"
+                          label="Country"
+                          placeholder="Country"
+                        />
+                        <div className="col-span-2">
+                          <InputField
+                            name="spouse_address"
+                            label="Address"
+                            placeholder="Address"
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <LocationAutocomplete
-                      value={values.address}
-                      onChange={(value) => setFieldValue("address", value)}
-                      onSelect={(locationData) => {
-                        setFieldValue("location", {
-                          address:
-                            locationData.formattedAddress ||
-                            locationData.address,
-                          city: locationData.city || "",
-                          state: locationData.state || "",
-                          country: locationData.country || "",
-                          lat: locationData.lat,
-                          lng: locationData.lng,
-                        });
-                      }}
-                      onError={(error) => {
-                        console.error("Location error:", error);
-                      }}
-                      placeholder="Enter your address"
-                      helperText="Start typing to see suggestions"
-                      required
-                      searchOptions={{
-                        types: ["address"], // Search for addresses only
-                      }}
-                      debounce={400}
-                      clearOnBlur={false}
-                    />
                   </div>
                   <div className="space-y-1">
-                    <div className="text-lg">
+                    {/* <div className="text-lg">
                       What is your spouse_Nationality?
-                    </div>
+                    </div> */}
                     <InputField
+                      label="Nationality"
                       name="spouse_nationality"
                       type="text"
                       placeholder="Enter your nationality"
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
+                  <div className="space-y-1">
+                    {/* <div className="text-lg">
+                      What is your spouse_Nationality?
+                    </div> */}
+                    <InputField
+                      label="Denomination"
+                      name="spouse_denomination"
+                      type="text"
+                      placeholder="Enter your denomination"
+                      className="text-2xl font-bold rounded-xl py-3"
+                    />
+                  </div>
                   <div className="grid md:grid-cols-2 gap-2">
                     <div className="space-y-1">
-                      <div className="text-lg">What is your race/tribe?</div>
+                      {/* <div className="text-lg">What is your race/tribe?</div> */}
                       <InputField
+                        label="Race/Tribe"
                         name="spouse_race_or_tribe"
                         type="text"
                         placeholder="Enter your race or tribe"
@@ -152,8 +145,9 @@ const SpouseBasicInfo2: React.FC = () => {
                       />
                     </div>
                     <div className="space-y-1">
-                      <div className="text-lg">What is your religion?</div>
+                      {/* <div className="text-lg">What is your religion?</div> */}
                       <InputField
+                        label="Religion"
                         name="spouse_religion"
                         type="text"
                         placeholder="Eg. Christainity, Islam"
@@ -162,8 +156,9 @@ const SpouseBasicInfo2: React.FC = () => {
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <div className="text-lg">spouse_Languages spoken?</div>
+                    {/* <div className="text-lg">spouse_Languages spoken?</div> */}
                     <TagsInput
+                      label="Languages spoken"
                       name="spouse_languages"
                       placeholder="E.g. English... (press enter)"
                       className=" font-bold rounded-xl"

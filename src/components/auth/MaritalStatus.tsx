@@ -69,7 +69,7 @@ const MaritalStatus: React.FC = () => {
         >
           {({ isValid }) => (
             <Form className="flex flex-col justify-between">
-              <div className="w-[65%] mx-auto">
+              <div className="w-[55%] mx-auto">
                 <img
                   src="/images/relationship.svg"
                   className="w-full h-full "
@@ -85,7 +85,7 @@ const MaritalStatus: React.FC = () => {
                   </div>
                 </div>
               ) : (
-                <div className="space-y-4 my-5">
+                <div className="space-y-4 mb-5">
                   <div className="space-y-4">
                     <div className="text-2xl font-bold">
                       What is your marital status?

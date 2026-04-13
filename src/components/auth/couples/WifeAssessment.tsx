@@ -10,7 +10,7 @@ import ProfilePicture from "../singles/ProfilePicture";
 import MarriageHistory from "./MarriageHistory";
 
 const validationSchema = Yup.object().shape({
-  marriage_issues: Yup.string().required("required"),
+  husband_marriage_issues: Yup.string().required("required"),
   aboutSpousePositive: Yup.string().required("required"),
 });
 const WifeAssessment: React.FC = () => {
@@ -18,13 +18,13 @@ const WifeAssessment: React.FC = () => {
   const {
     about_husband_negative,
     about_husband_positive,
-    marriage_issues,
+    husband_marriage_issues,
     changes_to_husband,
     other_issues,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
-    marriage_issues: marriage_issues || "",
+    husband_marriage_issues: husband_marriage_issues || "",
     aboutSpousePositive: about_husband_positive || "",
     aboutSpouseNegative: about_husband_negative || "",
     changesToSpouse: changes_to_husband || "",
@@ -58,7 +58,7 @@ const WifeAssessment: React.FC = () => {
           validateOnMount
           onSubmit={(values) => {
             setOnboardingFormData({
-              marriage_issues: values.marriage_issues,
+              husband_marriage_issues: values.husband_marriage_issues,
               other_issues: values.other_issues,
               about_husband_positive: values.aboutSpousePositive,
               about_husband_negative: values.aboutSpouseNegative,
@@ -76,9 +76,9 @@ const WifeAssessment: React.FC = () => {
                       want resolved?{" "}
                     </div>
                     <InputField
-                      name="marriage_issues"
+                      name="husband_marriage_issues"
                       type="textarea"
-                      placeholder="Please indictate if here."
+                      placeholder="Please indicate if here."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
@@ -89,7 +89,7 @@ const WifeAssessment: React.FC = () => {
                     <InputField
                       name="aboutSpousePositive"
                       type="textarea"
-                      placeholder="Please indictate if here."
+                      placeholder="Please indicate if here."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
@@ -100,7 +100,7 @@ const WifeAssessment: React.FC = () => {
                     <InputField
                       name="aboutSpouse"
                       type="textarea"
-                      placeholder="Please indictate if here."
+                      placeholder="Please indicate if here."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
@@ -112,7 +112,7 @@ const WifeAssessment: React.FC = () => {
                     <InputField
                       name="changesToSpouse"
                       type="textarea"
-                      placeholder="Please indictate if here."
+                      placeholder="Please indicate if here."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
@@ -124,7 +124,7 @@ const WifeAssessment: React.FC = () => {
                     <InputField
                       name="other_issues"
                       type="textarea"
-                      placeholder="Please indictate if here."
+                      placeholder="Please indicate if here."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>

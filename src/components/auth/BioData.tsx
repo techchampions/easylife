@@ -102,7 +102,7 @@ const BioData: React.FC = () => {
                     <InputField
                       name="healthX"
                       type="textarea"
-                      placeholder="Please indictate if any."
+                      placeholder="Please indicate if any."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
@@ -113,7 +113,7 @@ const BioData: React.FC = () => {
                     <InputField
                       name="disabilities"
                       type="textarea"
-                      placeholder="Please indictate if any."
+                      placeholder="Please indicate if any."
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
