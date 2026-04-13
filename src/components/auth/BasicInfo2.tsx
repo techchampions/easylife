@@ -2,11 +2,13 @@ import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
 import * as Yup from "yup";
+import { countries } from "../../const/data";
 import { useModal } from "../../zustand/modal.state";
 import { useOnboardingFormData } from "../../zustand/onboardingData.state";
 import { useToast } from "../../zustand/toast.state";
 import { useUserStore } from "../../zustand/user.state";
 import InputField from "../form/InputField";
+import SelectField from "../form/SelectField";
 import TagsInput from "../form/TagsInputFied";
 import Button from "../global/Button";
 import BasicInfo from "./BasicInfo";
@@ -113,22 +115,22 @@ const BasicInfo2: React.FC = () => {
               <Form className="flex flex-col gap-8 justify-between min-h-55">
                 <div className="space-y-5">
                   <div className="space-y-1">
-                    <div className="text-lg">Current address:</div>
                     <div className="grid grid-cols-2 gap-2">
+                      <SelectField
+                        options={countries}
+                        name="country"
+                        label="Country of residence"
+                        placeholder="Country"
+                      />
                       <InputField
                         name="state"
                         label="State"
                         placeholder="State"
                       />
-                      <InputField
-                        name="country"
-                        label="Country"
-                        placeholder="Country"
-                      />
                       <div className="col-span-2">
                         <InputField
                           name="address"
-                          label="Address"
+                          label="Current Address"
                           placeholder="Address"
                         />
                       </div>

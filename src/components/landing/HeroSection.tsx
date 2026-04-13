@@ -1,11 +1,11 @@
 import { useModal } from "../../zustand/modal.state";
-import Welcome from "../auth/Welcome";
+import SpouseBasicInfo from "../auth/couples/SpouseBasicInfo";
 import Button from "../global/Button";
 
 const HeroSection = () => {
   const modal = useModal();
   const getStarted = () => {
-    modal.open(<Welcome />);
+    modal.open(<SpouseBasicInfo />);
   };
 
   return (
