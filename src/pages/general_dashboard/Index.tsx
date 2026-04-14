@@ -12,7 +12,11 @@ const Index: React.FC = () => {
   // const { data, fetchNextPage, hasNextPage, isLoading, isError } =
   useGetAllUsersInfinite();
   // const users = data?.pages.flatMap((page) => page.users) || [];
-  const pills = ["discover", "Subscribe", "messages"];
+  const pills = [
+    { name: "discover", link: "discover" },
+    { name: "subscribe", link: "my-subscription" },
+    { name: "messages", link: "messages" },
+  ];
 
   return (
     <div>
@@ -38,11 +42,11 @@ const Index: React.FC = () => {
         <div className="grid grid-cols-3 md:grid-cols-4 gap-2 text-center">
           {pills.map((pill) => (
             <Link
-              to={`/dashboard/${pill}`}
+              to={`/dashboard/${pill.link}`}
               className="capitalize border-2 border-secondary text-secondary hover:bg-secondary hover:text-white px-4 py-2 rounded-lg"
-              key={pill}
+              key={pill.link}
             >
-              {pill}
+              {pill.name}
             </Link>
           ))}
         </div>
