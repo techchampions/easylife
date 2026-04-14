@@ -1,27 +1,24 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
 import SideNav from "../../components/couples_dashboard/LeftSideNav";
 import MobileBottomNav from "../../components/couples_dashboard/MobileBottomNav";
 import RightSideBar from "../../components/general_dating/RightSideBar";
-import Subscription from "../../components/general_dating/Subscription";
-import { useModal } from "../../zustand/modal.state";
-import { useUserStore } from "../../zustand/user.state";
 
 const CouplesLayout: React.FC = () => {
-  const modal = useModal();
-  const { user } = useUserStore();
-  const hasSubscribed = !!user?.plan;
-  const openedRef = useRef(false);
+  // const modal = useModal();
+  // const { user } = useUserStore();
+  // const hasSubscribed = !!user?.plan;
+  // const openedRef = useRef(false);
 
-  useEffect(() => {
-    if (!hasSubscribed && !openedRef.current) {
-      openedRef.current = true;
-      if (modal.isOpen) {
-        return;
-      }
-      modal.openStrong(<Subscription />);
-    }
-  }, [hasSubscribed, modal]);
+  // useEffect(() => {
+  //   if (!hasSubscribed && !openedRef.current) {
+  //     openedRef.current = true;
+  //     if (modal.isOpen) {
+  //       return;
+  //     }
+  //     modal.openStrong(<Subscription />);
+  //   }
+  // }, [hasSubscribed, modal]);
 
   return (
     <div className="bg-secondary/5 min-h-screen w-screen min-w-screen max-w-screen max-h-screen overflow-hidden grid md:grid-cols-4">
