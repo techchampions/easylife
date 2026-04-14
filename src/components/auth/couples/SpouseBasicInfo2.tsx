@@ -2,9 +2,11 @@ import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 import React from "react";
 import * as Yup from "yup";
+import { countries } from "../../../const/data";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import InputField from "../../form/InputField";
+import SelectField from "../../form/SelectField";
 import TagsInput from "../../form/TagsInputFied";
 import Button from "../../global/Button";
 import MarriageHistory from "./MarriageHistory";
@@ -86,26 +88,25 @@ const SpouseBasicInfo2: React.FC = () => {
               <Form className="flex flex-col gap-8 justify-between min-h-55">
                 <div className="space-y-5">
                   <div className="space-y-1">
-                    <div className="text-lg">
-                      Residential address:
-                      <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-2">
+                      <SelectField
+                        options={countries}
+                        name="spouse_country"
+                        label="Country of residence"
+                        placeholder="Country"
+                      />
+
+                      <InputField
+                        name="spouse_state"
+                        label="State"
+                        placeholder="State"
+                      />
+                      <div className="col-span-2">
                         <InputField
-                          name="spouse_state"
-                          label="State"
-                          placeholder="State"
+                          name="spouse_address"
+                          label="Current Address"
+                          placeholder="Address"
                         />
-                        <InputField
-                          name="spouse_country"
-                          label="Country"
-                          placeholder="Country"
-                        />
-                        <div className="col-span-2">
-                          <InputField
-                            name="spouse_address"
-                            label="Address"
-                            placeholder="Address"
-                          />
-                        </div>
                       </div>
                     </div>
                   </div>

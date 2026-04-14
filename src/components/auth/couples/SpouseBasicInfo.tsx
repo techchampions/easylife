@@ -83,17 +83,17 @@ const SpouseBasicInfo: React.FC = () => {
                     {/* <div className="text-lg">What is your name?</div> */}
                     <div className="grid md:grid-cols-2 gap-2">
                       <InputField
+                        name="spouse_last_name"
+                        label="Surname"
+                        type="text"
+                        placeholder="Surname"
+                        className="text-2xl font-bold rounded-xl py-3"
+                      />
+                      <InputField
                         name="spouse_first_name"
                         label="First name"
                         type="text"
                         placeholder="First Name"
-                        className="text-2xl font-bold rounded-xl py-3"
-                      />
-                      <InputField
-                        name="spouse_last_name"
-                        label="Last name"
-                        type="text"
-                        placeholder="Last Name"
                         className="text-2xl font-bold rounded-xl py-3"
                       />
                       <div className="md:col-span-2">

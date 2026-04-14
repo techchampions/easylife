@@ -86,16 +86,19 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item, isRenewal = false }) => {
             </div>
           ))}
         </div>
-        <div className="bg-green-500/20 p-2 rounded-lg text-green-950 flex gap-2">
+        <div className="bg-green-500/20 p-2 rounded-lg text-green-950 flex gap-2 w-full">
           <img src="/images/usdt.png" alt="" className="w-10 h-10" />
           <div className="flex-1 text-left text-xs">
-            <b>USDT Funding</b> Pay ${item.price} to our USDT (TRC 20) Wallet
-            shown below. After payment, send transaction receipt plus your email
-            address to Easylifesupport on Whatsapp to <b>+39 351 251 3290</b>.
-            Your account will be funded after payment is confirmed.
-            <CryptoWalletAddress address="TMLTSCTQJAG5kRgmZ9oGf1aKkUet9rT2Vk" />
+            <div className="wrap-break-word">
+              <b>USDT Funding</b> Pay ${item.price} to our USDT (TRC 20) Wallet
+              shown below. After payment, send transaction receipt plus your
+              email address to Easylifesupport on Whatsapp to{" "}
+              <b className="wrap-break-word">+39 351 251 3290</b>. Your account
+              will be funded after payment is confirmed.
+            </div>
           </div>
         </div>
+        <CryptoWalletAddress address="TMLTSCTQJAG5kRgmZ9oGf1aKkUet9rT2Vk" />
 
         <div className="p-4 border border-gray-200 rounded-2xl flex flex-col">
           <h3 className="font-semibold text-lg mb-3">Payment Summary</h3>

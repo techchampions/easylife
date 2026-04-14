@@ -1,4 +1,4 @@
-import { Field, ErrorMessage, useField } from "formik";
+import { ErrorMessage, Field, useField } from "formik";
 import { ChevronDown, Info } from "lucide-react";
 import React from "react";
 
@@ -28,7 +28,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
 
   return (
     <div className="w-full text-left">
-      <div className="text-sm">{label}</div>
+      <div className="text-sm text-gray-500">{label}</div>
 
       <div
         className={`w-full relative flex flex-row items-center border rounded-xl py-3 ${
