@@ -74,7 +74,7 @@ const UserSubCard: React.FC<Props> = ({ isLoading, isError, activeSub }) => {
         duration: sub?.duration || 0,
         type: activeSub.subscription_type,
       };
-      modal.open(<SelectPaymentMethod item={item} />);
+      modal.open(<SelectPaymentMethod item={item} isRenewal />);
     }
   };
 
@@ -82,10 +82,10 @@ const UserSubCard: React.FC<Props> = ({ isLoading, isError, activeSub }) => {
     <div className="bg-linear-to-tr from-primary to-black p-7 rounded-3xl">
       <div className="space-y-8 text-white flex flex-col">
         <div className="flex-1 space-y-4 md:flex md:items-center md:justify-between">
-          <div className="">
+          <div className="md:w-1/3">
             <div className="text-center md:text-left">
-              <div className="flex gap-4 justify-center">
-                <div className="text-2xl font-semibold">
+              <div className="flex gap-4 justify-center items-center">
+                <div className="text-2xl md:text-xl font-semibold">
                   {user?.marital_status === "married" ? "Couples" : "Singles"}{" "}
                   Plan
                 </div>
@@ -105,7 +105,7 @@ const UserSubCard: React.FC<Props> = ({ isLoading, isError, activeSub }) => {
             <div className="h-1 rounded-[100%] w-1/2 mx-auto bg-white/70 md:hidden mt-3" />
           </div>
 
-          <ul className="space-y-3 p-2">
+          <ul className="space-y-3 p-2 md:w-2/3">
             {sub?.features.map((list, idx) => (
               <li key={idx} className="flex items-center-safe gap-2">
                 {" "}
@@ -116,7 +116,7 @@ const UserSubCard: React.FC<Props> = ({ isLoading, isError, activeSub }) => {
           </ul>
         </div>
         <div className="w-full flex justify-end">
-          <div className="grid grid-cols-3 gap-4 w-full md:w-2/3">
+          <div className="grid grid-cols-3 gap-2 w-full md:w-2/3">
             <Button
               label="Cancel"
               className="bg-red-500"
