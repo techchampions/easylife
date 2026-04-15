@@ -5,8 +5,12 @@ import {
   useRenewSubWithWallet,
   useWalletPayment,
 } from "../../hooks/mutattions/useSubscription";
+import { usePaystackPayment } from "../../hooks/payments/usePaystack";
 import { useGetWalletBalance } from "../../hooks/query/useUser";
 import { formatPrice } from "../../utils/formatter";
+import { useModal } from "../../zustand/modal.state";
+import { useUserStore } from "../../zustand/user.state";
+import BasicInfo from "../auth/BasicInfo";
 import Button from "../global/Button";
 import CryptoWalletAddress from "../global/CopyText";
 interface Prop {
@@ -21,21 +25,40 @@ interface Prop {
   isRenewal?: boolean;
 }
 const SelectPaymentMethod: React.FC<Prop> = ({ item, isRenewal = false }) => {
+  const { user } = useUserStore();
+  const modal = useModal();
   const { data } = useGetWalletBalance();
   const { mutate: initiatePayment, isPending } = useInitialPayment();
+  const paystack = usePaystackPayment();
   const { mutate: payWithWallet, isPending: loadingWallet } =
     useWalletPayment();
   const { mutate: renewWithWallet, isPending: isRenewing } =
     useRenewSubWithWallet();
-  const paymentMethods = ["wallet", "flutterwave"];
+  const paymentMethods = ["wallet", "paystack"];
   const [selectedMethod, setselectedMethod] = useState("");
   const makePayment = () => {
     const payload: InitializePaymentPayload = {
       plan_id: item.id,
       payment_type: isRenewal ? "renewal" : "mentorship",
     };
-    if (selectedMethod === "flutterwave") {
-      initiatePayment(payload);
+    if (selectedMethod === "paystack") {
+      initiatePayment(payload, {
+        onSuccess(data) {
+          paystack({
+            email: user?.email || "",
+            reference: data.payment.reference || "",
+            amount: data.payment.naira_amount || 0,
+            onSuccess() {
+              if (isRenewal) {
+                modal.close();
+              } else {
+                modal.open(<BasicInfo />);
+              }
+            },
+            onClose() {},
+          });
+        },
+      });
     }
     if (selectedMethod === "wallet") {
       if (isRenewal) {
@@ -76,11 +99,11 @@ const SelectPaymentMethod: React.FC<Prop> = ({ item, isRenewal = false }) => {
                 selectedMethod === method ? "bg-secondary text-white" : ""
               }`}
             >
-              {method === "flutterwave" && <CreditCard size={30} />}
+              {method === "paystack" && <CreditCard size={30} />}
               {method === "wallet" && <Wallet2 size={30} />}
               <div className="flex-1">
                 <div className="capitalize">{method}</div>
-                {method === "flutterwave" && <FlutterIcons />}
+                {method === "paystack" && <FlutterIcons />}
                 {method === "wallet" && <WalletBalance />}
               </div>
             </div>

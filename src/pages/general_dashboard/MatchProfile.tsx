@@ -32,8 +32,10 @@ const MatchProfileScreen: React.FC = () => {
         receiver: user.id,
       };
       startChat(payload, {
-        onSuccess() {
-          navigate(`/couples/messages/${user?.id}`);
+        onSuccess(data) {
+          navigate(
+            `/dashboard/messages/${user.id}/chat/${data.compose.conversation}`
+          );
         },
       });
     }
@@ -79,15 +81,15 @@ const MatchProfileScreen: React.FC = () => {
                   </div>
                 </div>
                 <div className="text-white mt-4 flex items-center gap-5">
-                  <div className="bg-yellow-500/50 rounded-full text-yellow-400 p-2">
+                  <div className="bg-yellow-500/50 rounded-full cursor-pointer text-yellow-400 p-2">
                     <Star />
                   </div>
-                  <div className="bg-red-500/50 rounded-full text-red-400 p-2">
+                  <div className="bg-red-500/50 rounded-full cursor-pointer text-red-400 p-2">
                     <Heart />
                   </div>
                   <div
                     onClick={handleChatUser}
-                    className="bg-primary/50 rounded-full text-blue-400 p-2"
+                    className="bg-primary/50 rounded-full cursor-pointer text-blue-400 p-2"
                   >
                     {isPending ? (
                       <Loader2 className="animate-spin" />
