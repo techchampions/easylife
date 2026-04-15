@@ -105,12 +105,12 @@ const MultiImageInput: React.FC<MultiImageInputProps> = ({
         </div>
       )}
 
-      <div className="grid grid-cols-3 gap-2">
+      <div className="flex overflow-x-auto scrollbar-hide w-full items-center gap-2">
         {/* Existing images */}
         {images.map((image, index) => (
           <div
             key={index}
-            className="relative border border-gray-200 rounded-2xl overflow-hidden bg-gray-100 h-30"
+            className="relative border border-gray-200 bg-gray-100 h-40 w-40 shrink-0 overflow-hidden rounded-xl"
           >
             <img
               src={getImageUrl(image)}
@@ -154,7 +154,7 @@ const MultiImageInput: React.FC<MultiImageInputProps> = ({
         {/* Add new image button */}
         {images.length < maxFiles && (
           <div
-            className="relative rounded-2xl overflow-hidden bg-gray-50 w-30 h-30 hover:bg-gray-100 transition cursor-pointer"
+            className="relative rounded-2xl overflow-hidden bg-gray-50 w-40 h-40 hover:bg-gray-100 transition cursor-pointer"
             // style={{
             //   width: typeof width === "number" ? `${width}px` : width,
             //   height: typeof height === "number" ? `${height}px` : height,

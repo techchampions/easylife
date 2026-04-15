@@ -1,13 +1,13 @@
 import { Form, Formik } from "formik";
+import { useState } from "react";
+import { useOnboarding } from "../../hooks/mutattions/useOnboarding";
+import { useModal } from "../../zustand/modal.state";
+import { useUserStore } from "../../zustand/user.state";
+import DatePickerInput from "../form/DatePickerInput";
+import ImageInput from "../form/ImageInput";
+import InputField from "../form/InputField";
 import RadioGroup from "../form/RadioGroup";
 import Button from "../global/Button";
-import { useOnboarding } from "../../hooks/mutattions/useOnboarding";
-import { useUserStore } from "../../zustand/user.state";
-import InputField from "../form/InputField";
-import DatePickerInput from "../form/DatePickerInput";
-import { useModal } from "../../zustand/modal.state";
-import ImageInput from "../form/ImageInput";
-import { useState } from "react";
 
 const genderOPtions = [
   {
@@ -49,6 +49,8 @@ const UpdateProfile = () => {
     state: user?.state || "",
     country: user?.country || "",
     marital_status: user?.marital_status || "",
+    denomination: user?.denomination || "",
+    occupation: user?.occupation || "",
   };
   const { mutate, isPending } = useOnboarding();
   const modal = useModal();
@@ -218,6 +220,26 @@ const UserForm = () => {
             name="religion"
             type="text"
             placeholder="Religion"
+            className=""
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <div className="space-y-0">
+          <div className="">Denomination</div>
+          <InputField
+            name="denomination"
+            type="text"
+            placeholder="Denomination"
+            className=""
+          />
+        </div>
+        <div className="space-y-0">
+          <div className="">Occupation</div>
+          <InputField
+            name="occupation"
+            type="text"
+            placeholder="Occupation"
             className=""
           />
         </div>

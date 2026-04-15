@@ -1,12 +1,12 @@
+import { Form, Formik } from "formik";
+import { Search, SlidersHorizontal, UserRoundSearch, X } from "lucide-react";
 import React, { useState } from "react";
-import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import InputField from "../../components/form/InputField";
-import Button from "../../components/global/Button";
-import { Search, SlidersHorizontal, UserRoundSearch, X } from "lucide-react";
-import MatchCardList from "../../components/general_dating/MatchCardList";
-import { useFilterUsers } from "../../hooks/query/useGetAllUsers";
 import ItemMessagePlaceholder from "../../components/general_dating/ItemMessagePaceholder";
+import MatchCardList from "../../components/general_dating/MatchCardList";
+import Button from "../../components/global/Button";
+import { useFilterUsers } from "../../hooks/query/useGetAllUsers";
 
 const Discover: React.FC = () => {
   const [params, setParams] = useState<UserFilterParams>({

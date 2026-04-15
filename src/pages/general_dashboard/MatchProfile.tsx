@@ -1,21 +1,22 @@
 "use client";
 
-import React from "react";
 import {
   Heart,
+  Images,
   Info,
   Loader2,
   MapPin,
   MessageCircle,
   Star,
 } from "lucide-react";
-import Header from "../../components/global/Header";
-import { calculateAge } from "../../utils/calculate_age";
-import { useSendMessage } from "../../hooks/mutattions/useMessaging";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetUserByID } from "../../hooks/query/useGetAllUsers";
-import ProfileLoadingSkeleton from "../../components/loaders/ProfileSkeleton";
 import ItemMessagePlaceholder from "../../components/general_dating/ItemMessagePaceholder";
+import Header from "../../components/global/Header";
+import ProfileLoadingSkeleton from "../../components/loaders/ProfileSkeleton";
+import { useSendMessage } from "../../hooks/mutattions/useMessaging";
+import { useGetUserByID } from "../../hooks/query/useGetAllUsers";
+import { calculateAge } from "../../utils/calculate_age";
 
 const MatchProfileScreen: React.FC = () => {
   const { mutate: startChat, isPending } = useSendMessage();
@@ -23,6 +24,7 @@ const MatchProfileScreen: React.FC = () => {
   const id = params.id;
   const { data, isLoading, isError } = useGetUserByID(id || "");
   const user = data?.user_profile;
+  const photos = user?.photos || [];
   const navigate = useNavigate();
   const handleChatUser = () => {
     if (user) {
@@ -56,8 +58,8 @@ const MatchProfileScreen: React.FC = () => {
             {/* Header with Profile Picture */}
             <div className="relative rounded-2xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
-                alt="Dasha Daria"
+                src={user?.profile_picture || ""}
+                alt={user?.last_name || ""}
                 className="w-full h-96 object-cover"
               />
 
@@ -66,7 +68,7 @@ const MatchProfileScreen: React.FC = () => {
                   <div>
                     <h1 className="text-3xl font-bold text-white">
                       {user?.first_name && user.last_name
-                        ? "John Doe"
+                        ? `${user.first_name} ${user.last_name}`
                         : "Upadte your profile"}
                       , {calculateAge(user?.date_of_birth || "")} Yrs
                     </h1>
@@ -124,7 +126,7 @@ const MatchProfileScreen: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-gray-500">Work as:</p>
-                  <p className="font-medium">Businesswoman</p>
+                  <p className="font-medium">{user?.occupation}</p>
                 </div>
                 <div>
                   <p className="text-gray-500">Religion:</p>
@@ -136,9 +138,7 @@ const MatchProfileScreen: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-gray-500">Languages:</p>
-                  <p className="font-medium capitalize">
-                    {user?.language}, Russian
-                  </p>
+                  <p className="font-medium capitalize">{user?.language}</p>
                 </div>
               </div>
             </div>
@@ -148,21 +148,29 @@ const MatchProfileScreen: React.FC = () => {
               <h2 className="text-xl font-semibold text-gray-800 mb-6">
                 Gallery
               </h2>
-
-              <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide w-full">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-40 h-40 shrink-0 overflow-hidden rounded-md"
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
-                      alt=""
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
+              {photos.length > 0 ? (
+                <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide w-full">
+                  {photos.map((photo, i) => (
+                    <div
+                      key={i}
+                      className="w-40 h-40 shrink-0 overflow-hidden rounded-md"
+                    >
+                      <img
+                        src={photo}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <ItemMessagePlaceholder
+                  title="No Photos"
+                  message="No photo added to gallery"
+                  icon={<Images />}
+                  size="small"
+                />
+              )}
             </div>
           </div>
         </div>
