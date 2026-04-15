@@ -198,6 +198,7 @@ interface User {
   created_at: string;
   updated_at: string;
   wallet: Wallet;
+  denomination: string;
 }
 interface Wallet {
   id: number;

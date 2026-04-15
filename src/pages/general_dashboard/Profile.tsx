@@ -2,6 +2,7 @@
 
 import { Edit, MapPin } from "lucide-react";
 import React from "react";
+import PhotoGallery from "../../components/general_dating/PhotoGallery";
 import UpdateProfile from "../../components/general_dating/UpdateProfile";
 import Header from "../../components/global/Header";
 import { calculateAge } from "../../utils/calculate_age";
@@ -92,8 +93,8 @@ const ProfileScreen: React.FC = () => {
                 <p className="font-medium">{user?.race_or_tribe}</p>
               </div>
               <div>
-                <p className="text-gray-500">Drink:</p>
-                <p className="font-medium">Sometimes</p>
+                <p className="text-gray-500">Denomination:</p>
+                <p className="font-medium">{user?.denomination}</p>
               </div>
               <div>
                 <p className="text-gray-500">Languages:</p>
@@ -107,6 +108,7 @@ const ProfileScreen: React.FC = () => {
               </div>
             </div>
           </div>
+          <PhotoGallery />
         </div>
       </div>
     </>
