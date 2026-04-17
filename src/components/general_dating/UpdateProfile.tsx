@@ -1,34 +1,35 @@
 import { Form, Formik } from "formik";
 import { useState } from "react";
+import { countries } from "../../const/data";
 import { useOnboarding } from "../../hooks/mutattions/useOnboarding";
 import { useModal } from "../../zustand/modal.state";
 import { useUserStore } from "../../zustand/user.state";
 import DatePickerInput from "../form/DatePickerInput";
 import ImageInput from "../form/ImageInput";
 import InputField from "../form/InputField";
-import RadioGroup from "../form/RadioGroup";
+import SelectField from "../form/SelectField";
 import Button from "../global/Button";
 
-const genderOPtions = [
-  {
-    label: "male",
-    value: "male",
-  },
-  {
-    label: "female",
-    value: "female",
-  },
-];
-const maritalStatusOPtions = [
-  {
-    label: "married",
-    value: "married",
-  },
-  {
-    label: "single",
-    value: "single",
-  },
-];
+// const genderOPtions = [
+//   {
+//     label: "male",
+//     value: "male",
+//   },
+//   {
+//     label: "female",
+//     value: "female",
+//   },
+// ];
+// const maritalStatusOPtions = [
+//   {
+//     label: "married",
+//     value: "married",
+//   },
+//   {
+//     label: "single",
+//     value: "single",
+//   },
+// ];
 const UpdateProfile = () => {
   const { user } = useUserStore();
   const initialValues = {
@@ -37,20 +38,34 @@ const UpdateProfile = () => {
     spouse_first_name: user?.spouse_first_name || "",
     last_name: user?.last_name || "",
     spouse_last_name: user?.spouse_last_name || "",
+    spouse_other_names: user?.spouse_other_names || "",
+    other_names: user?.other_names || "",
     phone: user?.single_user_phone || "",
+    spouse_phone_number: user?.spouse_phone_number || "",
     date_of_birth: user?.date_of_birth || "",
+    place_of_birth: user?.place_of_birth || "",
+    spouse_place_of_birth: user?.spouse_place_of_birth || "",
     spouse_date_of_birth: user?.spouse_date_of_birth || "",
     profile_picture: user?.profile_picture || null,
     spouse_profile_picture: user?.spouse_profile_picture || null,
     tribe: user?.race_or_tribe || "",
+    language: user?.language || "",
+    spouse_language: user?.spouse_language || "",
     spouse_tribe: user?.spouse_race_or_tribe || "",
     religion: user?.religion || "",
     spouse_religion: user?.spouse_religion || "",
     state: user?.state || "",
     country: user?.country || "",
+    address: user?.address || "",
+    spouse_state: user?.spouse_state || "",
+    spouse_country: user?.spouse_country || "",
+    spouse_address: user?.spouse_address || "",
     marital_status: user?.marital_status || "",
     denomination: user?.denomination || "",
     occupation: user?.occupation || "",
+    spouse_denomination: user?.spouse_denomination || "",
+    spouse_occupation: user?.spouse_occupation || "",
+    short_bio: user?.short_bio || "",
   };
   const { mutate, isPending } = useOnboarding();
   const modal = useModal();
@@ -147,22 +162,56 @@ const UserForm = () => {
         <div className="">Full Name</div>
         <div className="grid md:grid-cols-2 gap-2">
           <InputField
+            name="last_name"
+            type="text"
+            placeholder="Surname"
+            className=""
+          />
+          <InputField
             name="first_name"
             type="text"
             placeholder="First Name"
             className=""
           />
+          <div className="md:col-span-2">
+            <InputField
+              name="other_names"
+              type="text"
+              placeholder="Other Names"
+              className=""
+            />
+          </div>
+        </div>
+      </div>{" "}
+      <div className="grid md:grid-cols-2 gap-2">
+        <div className="space-y-0">
+          <div className="">Date of birth</div>
+          <DatePickerInput name="date_of_birth" placeholder={`DD-MM-YYYY`} />
+        </div>
+        <div className="space-y-0">
+          <div className="">Place of birth</div>
+          <InputField name="place_of_birth" placeholder="Place of birth" />
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <div className="space-y-0">
+          <div className="">Phone Number</div>
           <InputField
-            name="last_name"
+            name="phone"
             type="text"
-            placeholder="Last Name"
+            placeholder="Phone Number"
             className=""
           />
         </div>
-      </div>{" "}
-      <div className="space-y-0">
-        <div className="">Date of birth</div>
-        <DatePickerInput name="date_of_birth" placeholder={`DD-MM-YYYY`} />
+        <div className="space-y-0">
+          <div className="">Language</div>
+          <InputField
+            name="language"
+            type="text"
+            placeholder='E.g.("English, Yoruba, Igbo")'
+            className=""
+          />
+        </div>
       </div>
       <div className="grid grid-cols-2 gap-2">
         <div className="space-y-0">
@@ -176,15 +225,24 @@ const UserForm = () => {
         </div>
         <div className="space-y-0">
           <div className="">Country</div>
-          <InputField
+          <SelectField
+            options={countries}
             name="country"
-            type="text"
             placeholder="Country"
             className=""
           />
         </div>
+        <div className="space-y-0 col-span-2">
+          <div className="">Address</div>
+          <InputField
+            name="address"
+            type="text"
+            placeholder="Address"
+            className=""
+          />
+        </div>
       </div>
-      <div className="grid md:grid-cols-2 gap-2">
+      {/* <div className="grid md:grid-cols-2 gap-2">
         <div className="space-y-0">
           <label htmlFor="gender">Gender</label>
           <RadioGroup
@@ -203,7 +261,7 @@ const UserForm = () => {
             optionClassName="min-w-[calc(50%-8px)] md:min-w-[calc(25%-8px)]"
           />
         </div>
-      </div>
+      </div> */}
       <div className="grid grid-cols-2 gap-2">
         <div className="space-y-0">
           <div className="">Tribe/Race</div>
@@ -244,6 +302,15 @@ const UserForm = () => {
           />
         </div>
       </div>
+      <div className="space-y-0">
+        <div className="">Short bio </div>
+        <InputField
+          name="short_bio"
+          type="textarea"
+          placeholder="Please enter a short bio here."
+          className=""
+        />
+      </div>
     </div>
   );
 };
@@ -265,31 +332,68 @@ const SpouseForm = () => {
         <div className="">Full Name</div>
         <div className="grid md:grid-cols-2 gap-2">
           <InputField
+            name="spouse_last_name"
+            type="text"
+            placeholder="Surname"
+            className=""
+          />
+          <InputField
             name="spouse_first_name"
             type="text"
             placeholder="First Name"
             className=""
           />
+          <div className="md:col-span-2">
+            <InputField
+              name="spouse_other_names"
+              type="text"
+              placeholder="Other Names"
+              className=""
+            />
+          </div>
+        </div>
+      </div>{" "}
+      <div className="grid md:grid-cols-2 gap-2">
+        <div className="space-y-0">
+          <div className="">Date of birth</div>
+          <DatePickerInput
+            name="spouse_date_of_birth"
+            placeholder={`DD-MM-YYYY`}
+          />
+        </div>
+        <div className="space-y-0">
+          <div className="">Place of birth</div>
           <InputField
-            name="spouse_last_name"
+            name="spouse_place_of_birth"
+            placeholder="Place of birth"
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <div className="space-y-0">
+          <div className="">Phone Number</div>
+          <InputField
+            name="spouse_phone_number"
             type="text"
-            placeholder="Last Name"
+            placeholder="Phone Number"
             className=""
           />
         </div>
-      </div>{" "}
-      <div className="space-y-0">
-        <div className="">Date of birth</div>
-        <DatePickerInput
-          name="spouse_date_of_birth"
-          placeholder={`DD-MM-YYYY`}
-        />
+        <div className="space-y-0">
+          <div className="">Language</div>
+          <InputField
+            name="spouse_language"
+            type="text"
+            placeholder='E.g.("English, Yoruba, Igbo")'
+            className=""
+          />
+        </div>
       </div>
       <div className="grid grid-cols-2 gap-2">
         <div className="space-y-0">
           <div className="">State/Region</div>
           <InputField
-            name="state"
+            name="spouse_state"
             type="text"
             placeholder="State"
             className=""
@@ -297,10 +401,19 @@ const SpouseForm = () => {
         </div>
         <div className="space-y-0">
           <div className="">Country</div>
-          <InputField
-            name="country"
-            type="text"
+          <SelectField
+            options={countries}
+            name="spouse_country"
             placeholder="Country"
+            className=""
+          />
+        </div>
+        <div className="space-y-0 col-span-2">
+          <div className="">Address</div>
+          <InputField
+            name="spouse_address"
+            type="text"
+            placeholder="Address"
             className=""
           />
         </div>
@@ -321,6 +434,26 @@ const SpouseForm = () => {
             name="spouse_religion"
             type="text"
             placeholder="Religion"
+            className=""
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <div className="space-y-0">
+          <div className="">Denomination</div>
+          <InputField
+            name="spouse_denomination"
+            type="text"
+            placeholder="Denomination"
+            className=""
+          />
+        </div>
+        <div className="space-y-0">
+          <div className="">Occupation</div>
+          <InputField
+            name="spouse_occupation"
+            type="text"
+            placeholder="Occupation"
             className=""
           />
         </div>

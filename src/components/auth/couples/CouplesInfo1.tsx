@@ -16,10 +16,15 @@ const validationSchema = Yup.object().shape({
 
 const CouplesInfo1: React.FC = () => {
   const modal = useModal();
-  const { why_signup, marriage_length, setOnboardingFormData } =
-    useOnboardingFormData();
+  const {
+    why_signup,
+    marriage_length,
+    number_of_children,
+    setOnboardingFormData,
+  } = useOnboardingFormData();
   const initialValues = {
     marriageLength: marriage_length || "",
+    number_of_children: number_of_children || "",
     why_signup: why_signup || "",
   };
   const goBack = () => {
@@ -62,6 +67,17 @@ const CouplesInfo1: React.FC = () => {
                       name="marriageLength"
                       type="text"
                       placeholder="number of years married"
+                      className="text-2xl font-bold rounded-xl py-3"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-lg">
+                      Number of children in current marriage
+                    </div>
+                    <InputField
+                      name="number_of_children"
+                      type="text"
+                      placeholder="number of children"
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>

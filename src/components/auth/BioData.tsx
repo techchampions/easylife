@@ -2,6 +2,7 @@ import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
 import * as Yup from "yup";
+import { heightOptions, sizeOptions } from "../../const/data";
 import { useModal } from "../../zustand/modal.state";
 import { useOnboardingFormData } from "../../zustand/onboardingData.state";
 import InputField from "../form/InputField";
@@ -26,19 +27,6 @@ const BioData: React.FC = () => {
     disabilities,
     setOnboardingFormData,
   } = useOnboardingFormData();
-  const heightOptions = [
-    { label: "short", value: "short" },
-    { label: "average", value: "average" },
-    { label: "tall", value: "tall" },
-    { label: "very tall", value: "very tall" },
-  ];
-  const sizeOptions = [
-    { label: "SM", value: "SM" },
-    { label: "M", value: "M" },
-    { label: "L", value: "L" },
-    { label: "XL", value: "XL" },
-    { label: "XXL", value: "XXL" },
-  ];
   const initialValues = {
     height: height || "",
     size: size || "",

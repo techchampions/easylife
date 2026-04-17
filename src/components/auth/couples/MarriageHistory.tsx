@@ -1,13 +1,15 @@
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
+import * as Yup from "yup";
+import { YesNoOptions } from "../../../const/data";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
+import { useToast } from "../../../zustand/toast.state";
+import InputField from "../../form/InputField";
 import RadioGroup from "../../form/RadioGroup";
 import Button from "../../global/Button";
 import CouplesInfo1 from "../couples/CouplesInfo1";
-import { useToast } from "../../../zustand/toast.state";
 import SpouseBasicInfo2 from "./SpouseBasicInfo2";
 
 const validationSchema = Yup.object().shape({
@@ -27,14 +29,12 @@ const MarriageHistory: React.FC = () => {
     previously_married,
     marital_status,
     prev_marriage_children,
+    number_of_children_prev_marriage,
   } = useOnboardingFormData();
-  const prevMarriageOption = [
-    { label: "yes", value: "yes" },
-    { label: "no", value: "no" },
-  ];
   const initialValues = {
     previously_married: previously_married || "",
     prev_marriage_children: prev_marriage_children || "",
+    number_of_children_prev_marriage: number_of_children_prev_marriage || "",
   };
   const goBack = () => {
     modal.open(<SpouseBasicInfo2 />);
@@ -80,24 +80,36 @@ const MarriageHistory: React.FC = () => {
                     Have you been previously married?
                   </div>
                   <RadioGroup
-                    options={prevMarriageOption}
+                    options={YesNoOptions}
                     name="previously_married"
                     orientation="horizontal"
                     optionClassName="min-w-[calc(50%-8px)]"
                   />
                 </div>
                 {values.previously_married === "yes" && (
-                  <div className="space-y-4">
-                    <div className="text-2xl font-bold">
-                      Do you have children from your previous marriage?
+                  <>
+                    <div className="space-y-4">
+                      <div className="text-2xl font-bold">
+                        Do you have children from your previous marriage?
+                      </div>
+                      <RadioGroup
+                        options={YesNoOptions}
+                        name="prev_marriage_children"
+                        orientation="horizontal"
+                        optionClassName="min-w-[calc(50%-8px)]"
+                      />
                     </div>
-                    <RadioGroup
-                      options={prevMarriageOption}
-                      name="prev_marriage_children"
-                      orientation="horizontal"
-                      optionClassName="min-w-[calc(50%-8px)]"
-                    />
-                  </div>
+                    <div className="space-y-1">
+                      <div className="text-2xl font-bold">
+                        Number of children in previous marriage
+                      </div>
+                      <InputField
+                        name="number_of_children_prev_marriage"
+                        placeholder="Number of children."
+                        className=""
+                      />
+                    </div>
+                  </>
                 )}
               </div>
               <div className="flex justify-center w-full gap-4 mt-4">

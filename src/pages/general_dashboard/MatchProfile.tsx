@@ -2,6 +2,7 @@
 
 import {
   Heart,
+  Image,
   Images,
   Info,
   Loader2,
@@ -59,11 +60,15 @@ const MatchProfileScreen: React.FC = () => {
           <div className="space-y-10">
             {/* Header with Profile Picture */}
             <div className="relative rounded-2xl overflow-hidden">
-              <img
-                src={user?.profile_picture || ""}
-                alt={user?.last_name || ""}
-                className="w-full h-96 object-cover"
-              />
+              {user?.profile_picture ? (
+                <img
+                  src={user?.profile_picture || ""}
+                  alt={user?.last_name || ""}
+                  className="w-full h-96 object-cover"
+                />
+              ) : (
+                <Image className="w-full h-96" />
+              )}
 
               <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-6 pt-10">
                 <div className="flex items-end justify-between">
