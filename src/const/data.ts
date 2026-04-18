@@ -238,3 +238,29 @@ export const countries: Country[] = [
   { value: "Zambia", label: "Zambia" },
   { value: "Zimbabwe", label: "Zimbabwe" },
 ];
+export const heightOptions = [
+  { label: "short", value: "short" },
+  { label: "average", value: "average" },
+  { label: "tall", value: "tall" },
+  { label: "very tall", value: "very tall" },
+];
+export const sizeOptions = [
+  { label: "SM", value: "SM" },
+  { label: "M", value: "M" },
+  { label: "L", value: "L" },
+  { label: "XL", value: "XL" },
+  { label: "XXL", value: "XXL" },
+  { label: "XXXL", value: "XXXL" },
+];
+export const genotypeOptions = [
+  { label: "AA", value: "AA" },
+  { label: "AS", value: "AS" },
+  { label: "AC", value: "AC" },
+  { label: "SC", value: "SC" },
+  { label: "CC", value: "CC" },
+  { label: "SS", value: "SS" },
+];
+export const YesNoOptions = [
+  { label: "yes", value: "yes" },
+  { label: "no", value: "no" },
+];

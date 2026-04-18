@@ -103,6 +103,7 @@ interface User {
 
   first_name: string | null;
   last_name: string | null;
+  other_names: string | null;
 
   country: string | null;
   state: string | null;
@@ -160,13 +161,20 @@ interface User {
   // Spouse info
   spouse_first_name: string | null;
   spouse_last_name: string | null;
+  spouse_other_names: string | null;
   spouse_email: string | null;
+  spouse_phone_number: string | null;
+  spouse_state: string | null;
+  spouse_country: string | null;
+  spouse_address: string | null;
   spouse_date_of_birth: string | null;
   spouse_place_of_birth: string | null;
   spouse_nationality: string | null;
   spouse_race_or_tribe: string | null;
   spouse_religion: string | null;
   spouse_language: string | null;
+  spouse_denomination: string | null;
+  spouse_occupation: string | null;
   spouse_height: string | null;
   spouse_size: string | null;
   spouse_health_challenges: string | null;
@@ -199,6 +207,10 @@ interface User {
   updated_at: string;
   wallet: Wallet;
   denomination: string;
+  career_growth: string;
+  living_alone: string;
+  why_get_married: string;
+  prev_marriage_children: string;
 }
 interface Wallet {
   id: number;
@@ -358,6 +370,8 @@ type OnboardingFormData = {
   denomination: string;
   other_names: string;
   spouse_other_names: string;
+  number_of_children: string;
+  number_of_children_prev_marriage: string;
   setOnboardingFormData: (
     details: Partial<
       Omit<
@@ -494,8 +508,8 @@ interface ConversationUser {
 
 interface Conversation {
   id: number;
-  sender: ConversationUser;
-  receiver: ConversationUser;
+  sender: ConversationUser | null;
+  receiver: ConversationUser | null;
   sender_unread: number;
   receiver_unread: number;
   conversation: string;

@@ -1,3 +1,4 @@
+import { UserCircle } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { formatTimeAgo } from "../../utils/formatter";
@@ -12,37 +13,49 @@ const ConversationList: React.FC<Props> = ({ conversation }) => {
       <div className="divide-y divide-zinc-200">
         {conversation.map((item, index) => {
           const receiverID =
-            item.receiver.id === user?.id ? item.sender.id : item.receiver.id;
+            item.receiver && item.sender
+              ? item.receiver.id === user?.id
+                ? item.sender.id
+                : item.receiver.id
+              : null;
           const profilePicture =
-            item.receiver.id === user?.id
-              ? item.sender.profile_picture
-              : item.receiver.profile_picture;
+            item.receiver && item.sender
+              ? item.receiver.id === user?.id
+                ? item.sender.profile_picture
+                : item.receiver.profile_picture
+              : null;
 
           const fullName =
-            item.receiver.id === user?.id
-              ? `${item.sender.first_name} ${item.sender.last_name}`
-              : `${item.receiver.first_name} ${item.receiver.last_name}`;
+            item.receiver && item.sender
+              ? item.receiver.id === user?.id
+                ? `${item.sender.first_name} ${item.sender.last_name}`
+                : `${item.receiver.first_name} ${item.receiver.last_name}`
+              : "error sender or reciver is null";
           return (
             <Link
               to={`/dashboard/messages/${receiverID}/chat/${item.conversation}`}
               className="flex items-center gap-2 py-2 w-full hover:bg-gray-50 text-gray-800 cursor-pointer"
               key={index}
             >
-              <img
-                src={
-                  profilePicture ||
-                  "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
-                }
-                alt=""
-                className="w-10 h-10 object-cover rounded-full"
-              />
+              {profilePicture ? (
+                <img
+                  src={
+                    profilePicture
+                    // "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+                  }
+                  alt=""
+                  className="w-10 h-10 object-cover rounded-full"
+                />
+              ) : (
+                <UserCircle className="w-10 h-10" />
+              )}
               <div className="flex-1">
                 <div className="font-medium">
                   {fullName}
                   {/* {item.receiver.first_name} {item.receiver.last_name} */}
                 </div>
                 <div className="flex items-center justify-between w-full">
-                  <div className="text-sm text-zinc-500 flex-1">
+                  <div className="text-sm text-zinc-500 flex-1 line-clamp-1">
                     {item.last_message || "Start chatting"}
                   </div>
                   <div className="text-sm text-zinc-500 text-right">

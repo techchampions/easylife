@@ -1,6 +1,3 @@
-import React from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import ItemMessagePlaceholder from "../../components/general_dating/ItemMessagePaceholder";
 import {
   Bell,
   ChevronLeft,
@@ -8,10 +5,13 @@ import {
   Settings,
   UserCircle,
 } from "lucide-react";
+import React from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import ItemMessagePlaceholder from "../../components/general_dating/ItemMessagePaceholder";
 // import ChatArea from "../../components/general_dating/ChatArea";
-import { useGetMessages } from "../../hooks/query/useMessaging";
-import { useGetUserByID } from "../../hooks/query/useGetAllUsers";
 import ChatArea from "../../components/general_dating/ChatArea2";
+import { useGetUserByID } from "../../hooks/query/useGetAllUsers";
+import { useGetMessages } from "../../hooks/query/useMessaging";
 
 const ChatScreen: React.FC = () => {
   const params = useParams();
@@ -27,7 +27,7 @@ const ChatScreen: React.FC = () => {
         <div className="flex gap-2 items-center">
           <div
             onClick={() => navigate(-1)}
-            className="rounded-full p-2 flex justify-center items-center hover:bg-gray-200"
+            className="rounded-full cursor-pointer p-2 flex justify-center items-center hover:bg-gray-200"
           >
             <ChevronLeft />
           </div>
@@ -40,7 +40,7 @@ const ChatScreen: React.FC = () => {
               alt=""
               className="w-10 h-10 rounded-full object-cover"
             />
-            <div className="text-left capitalize text-lg font-bold">
+            <div className="text-left capitalize text-lg font-bold line-clamp-1">
               {user?.first_name} {user?.last_name}
             </div>
           </div>

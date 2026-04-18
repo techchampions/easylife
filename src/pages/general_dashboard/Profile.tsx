@@ -1,9 +1,11 @@
 "use client";
 
-import { Edit, MapPin } from "lucide-react";
+import { Edit, FileEdit, Image, MapPin } from "lucide-react";
 import React from "react";
 import PhotoGallery from "../../components/general_dating/PhotoGallery";
+import UpdateCouplesValues from "../../components/general_dating/UpdateCouplesValues";
 import UpdateProfile from "../../components/general_dating/UpdateProfile";
+import UpdateSinglePersonalValues from "../../components/general_dating/UpdateSinglePersonalValues";
 import Header from "../../components/global/Header";
 import { calculateAge } from "../../utils/calculate_age";
 import { formatDate } from "../../utils/formatter";
@@ -13,6 +15,14 @@ import { useUserStore } from "../../zustand/user.state";
 const ProfileScreen: React.FC = () => {
   const { user } = useUserStore();
   const modal = useModal();
+  const handleUpdatePRofile = () => modal.open(<UpdateProfile />);
+  const handleUpdateValues = () => {
+    if (user?.marital_status === "married") {
+      modal.open(<UpdateCouplesValues />);
+    } else {
+      modal.open(<UpdateSinglePersonalValues />);
+    }
+  };
   return (
     <>
       <Header name="Profile" />
@@ -20,16 +30,20 @@ const ProfileScreen: React.FC = () => {
         <div className="space-y-10">
           {/* Header with Profile Picture */}
           <div className="relative rounded-2xl overflow-hidden">
-            <img
-              src={
-                user?.profile_picture ||
-                "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
-              }
-              alt="Dasha Daria"
-              className="w-full h-96 object-cover"
-            />
+            {user?.profile_picture ? (
+              <img
+                src={
+                  user?.profile_picture
+                  // "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+                }
+                alt="Dasha Daria"
+                className="w-full h-96 object-cover"
+              />
+            ) : (
+              <Image className="w-full h-96" />
+            )}
             <div
-              onClick={() => modal.open(<UpdateProfile />)}
+              onClick={handleUpdatePRofile}
               className="cursor-pointer absolute top-4 right-4 bg-secondary/50 p-2 rounded-full text-white"
             >
               {" "}
@@ -45,9 +59,28 @@ const ProfileScreen: React.FC = () => {
                     , {calculateAge(user?.date_of_birth || "")} Yrs
                   </h1>
                   <p className="text-white flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-green-400" />
+                    <MapPin className="text-green-400" size={14} />
                     {user?.state}, {user?.country}
                   </p>
+                </div>
+              </div>
+              <div className="flex items-end text-white">
+                <div className="flex-1">{user?.short_bio || "..."}</div>
+              </div>
+              <div className="flex items-center gap-2 mt-2 text-sm">
+                <div
+                  onClick={handleUpdatePRofile}
+                  className="cursor-pointer flex items-center gap-2 text-white bg-secondary/50 hover:bg-secondary/95 py-2 px-4 rounded-xl"
+                >
+                  <Edit size={15} />
+                  <div className="">Edit Profile</div>
+                </div>
+                <div
+                  onClick={handleUpdateValues}
+                  className="cursor-pointer flex items-center gap-2 text-white bg-yellow-500/50 hover:bg-yellow-500/80 py-2 px-4 rounded-xl"
+                >
+                  <FileEdit size={15} />
+                  <div className="">Edit Values</div>
                 </div>
               </div>
               {/* <p className="text-white mt-4 text-lg">
@@ -68,11 +101,25 @@ const ProfileScreen: React.FC = () => {
               </div>
               <div>
                 <p className="text-gray-500">Relationship:</p>
-                <p className="font-medium capitalize">{user?.marital_status}</p>
+                <p className="font-medium capitalize">
+                  {user?.marital_status || "..."}
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-500">Gender:</p>
+                <p className="font-medium capitalize">
+                  {user?.gender || "..."}
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-500">Genotype:</p>
+                <p className="font-medium capitalize">
+                  {user?.genotype || "..."}
+                </p>
               </div>
               <div>
                 <p className="text-gray-500">Place of birth:</p>
-                <p className="font-medium">{user?.place_of_birth}</p>
+                <p className="font-medium">{user?.place_of_birth || "..."}</p>
               </div>
               <div>
                 <p className="text-gray-500">No. of children:</p>
@@ -86,24 +133,26 @@ const ProfileScreen: React.FC = () => {
               </div>
               <div>
                 <p className="text-gray-500">Religion:</p>
-                <p className="font-medium">{user?.religion}</p>
+                <p className="font-medium">{user?.religion || "..."}</p>
               </div>
               <div>
                 <p className="text-gray-500">Race/Tribe:</p>
-                <p className="font-medium">{user?.race_or_tribe}</p>
+                <p className="font-medium">{user?.race_or_tribe || "..."}</p>
               </div>
               <div>
                 <p className="text-gray-500">Denomination:</p>
-                <p className="font-medium">{user?.denomination}</p>
+                <p className="font-medium">{user?.denomination || "..."}</p>
               </div>
               <div>
                 <p className="text-gray-500">Languages:</p>
-                <p className="font-medium capitalize">{user?.language}</p>
+                <p className="font-medium capitalize">
+                  {user?.language || "..."}
+                </p>
               </div>
               <div>
                 <p className="text-gray-500">Date of Birth:</p>
                 <p className="font-medium">
-                  {formatDate(user?.date_of_birth || "")}
+                  {formatDate(user?.date_of_birth || "...")}
                 </p>
               </div>
             </div>

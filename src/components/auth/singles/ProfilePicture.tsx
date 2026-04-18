@@ -79,7 +79,8 @@ const ProfilePicture: React.FC = () => {
     denomination,
     other_names,
     spouse_other_names,
-
+    number_of_children,
+    number_of_children_prev_marriage,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
@@ -331,6 +332,15 @@ const ProfilePicture: React.FC = () => {
             }
             if (career_growth) {
               payload.append("career_growth", career_growth);
+            }
+            if (number_of_children) {
+              payload.append("number_of_children", number_of_children);
+            }
+            if (number_of_children_prev_marriage) {
+              payload.append(
+                "number_of_children_prev_marriage",
+                number_of_children_prev_marriage
+              );
             }
 
             if (values.profile_picture) {

@@ -26,8 +26,8 @@ const SinglesPageIndex: React.FC = () => {
       </div>
       <div className="px-4 mb-4 space-y-2">
         <p className="text-left">
-          Find the right partner today subscribe to EasyLife Marriage academy
-          and enjoy unlimited access to discover you partner
+          Find your right partner today. Click on DISCOVER to find your match.
+          Click on MESSAGES to start a conversation with him or her.{" "}
         </p>
         <div className="grid grid-cols-3 md:grid-cols-4 gap-2 text-center">
           {pills.map((pill) => (
