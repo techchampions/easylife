@@ -122,18 +122,6 @@ const SpouseBasicInfo2: React.FC = () => {
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
-                  <div className="space-y-1">
-                    {/* <div className="text-lg">
-                      What is your spouse_Nationality?
-                    </div> */}
-                    <InputField
-                      label="Denomination"
-                      name="spouse_denomination"
-                      type="text"
-                      placeholder="Enter your denomination"
-                      className="text-2xl font-bold rounded-xl py-3"
-                    />
-                  </div>
                   <div className="grid md:grid-cols-2 gap-2">
                     <div className="space-y-1">
                       {/* <div className="text-lg">What is your race/tribe?</div> */}
@@ -156,6 +144,19 @@ const SpouseBasicInfo2: React.FC = () => {
                       />
                     </div>
                   </div>
+                  <div className="space-y-1">
+                    {/* <div className="text-lg">
+                      What is your spouse_Nationality?
+                    </div> */}
+                    <InputField
+                      label="Denomination"
+                      name="spouse_denomination"
+                      type="text"
+                      placeholder="Enter your denomination"
+                      className="text-2xl font-bold rounded-xl py-3"
+                    />
+                  </div>
+
                   <div className="space-y-1">
                     {/* <div className="text-lg">spouse_Languages spoken?</div> */}
                     <InputField
