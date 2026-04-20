@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { YesNoOptions } from "../../../const/data";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
-import InputField from "../../form/InputField";
+import NumberInput from "../../form/NumberInput";
 import RadioGroup from "../../form/RadioGroup";
 import Button from "../../global/Button";
 import CouplesInfo1 from "../couples/CouplesInfo1";
@@ -18,6 +18,14 @@ const validationSchema = Yup.object().shape({
     then: (schema) => schema.required("required"),
     otherwise: (schema) => schema.notRequired(),
   }),
+  number_of_children_prev_marriage: Yup.string().when(
+    "prev_marriage_children",
+    {
+      is: "yes",
+      then: (schema) => schema.required("required"),
+      otherwise: (schema) => schema.notRequired(),
+    }
+  ),
 });
 
 const MarriageHistory: React.FC = () => {
@@ -31,7 +39,7 @@ const MarriageHistory: React.FC = () => {
   const initialValues = {
     previously_married: previously_married || "",
     prev_marriage_children: prev_marriage_children || "",
-    number_of_children_prev_marriage: number_of_children_prev_marriage || "",
+    number_of_children_prev_marriage: number_of_children_prev_marriage || 0,
   };
   const goBack = () => {
     modal.open(<SpouseBasicInfo2 />);
@@ -93,16 +101,19 @@ const MarriageHistory: React.FC = () => {
                         optionClassName="min-w-[calc(50%-8px)]"
                       />
                     </div>
-                    <div className="space-y-1">
-                      <div className="text-2xl font-bold">
-                        Number of children in previous marriage
+                    {values.prev_marriage_children === "yes" && (
+                      <div className="space-y-1">
+                        <div className="text-2xl font-bold">
+                          Number of children in previous marriage
+                        </div>
+                        <NumberInput
+                          name="number_of_children_prev_marriage"
+                          placeholder="Number of children."
+                          min={0}
+                          className=""
+                        />
                       </div>
-                      <InputField
-                        name="number_of_children_prev_marriage"
-                        placeholder="Number of children."
-                        className=""
-                      />
-                    </div>
+                    )}
                   </>
                 )}
               </div>

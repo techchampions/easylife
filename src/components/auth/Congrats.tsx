@@ -1,5 +1,6 @@
-import { CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import React from "react";
+import LinkButton from "../global/LinkButton";
 
 const Congrats: React.FC = () => {
   // const modal = useModal();
@@ -14,16 +15,13 @@ const Congrats: React.FC = () => {
           <div className="text-2xl font-bold">Congratulations!</div>
           <div className="text-gray-700">
             You have successfully signed up on Easylife Marriage Academy. Please
-            click the button to make payment for your subscription{" "}
+            click the button below to view your dashboard. Thank you{" "}
           </div>
-          {/* <Button
+          <LinkButton
             label="Proceed"
             rightIcon={<ArrowRight />}
-            onClick={() => {
-              modal.openStrong(<Subscription />);
-            }}
             className="mt-5 bg-secondary"
-          /> */}
+          />
         </div>
       </div>
     </div>

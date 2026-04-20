@@ -175,7 +175,7 @@ const ProfilePicture: React.FC = () => {
               payload.append("religion", religion);
             }
             if (language) {
-              payload.append("language", language[0]);
+              payload.append("language", language);
             }
             if (height) {
               payload.append("height", height);
