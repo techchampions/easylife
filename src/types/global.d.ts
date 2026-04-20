@@ -320,13 +320,13 @@ type OnboardingFormData = {
   nationality: string;
   race_or_tribe: string;
   religion: string;
-  language: string[];
+  language: string;
   height: string;
   size: string;
   spouse_nationality: string;
   spouse_race_or_tribe: string;
   spouse_religion: string;
-  spouse_language: string[];
+  spouse_language: string;
   spouse_height: string;
   spouse_size: string;
   health_challenges: string;

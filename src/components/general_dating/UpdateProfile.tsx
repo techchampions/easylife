@@ -6,6 +6,7 @@ import { useModal } from "../../zustand/modal.state";
 import { useUserStore } from "../../zustand/user.state";
 import DatePickerInput from "../form/DatePickerInput";
 import ImageInput from "../form/ImageInput";
+import ImageInputAndCrop from "../form/ImageInputAndCrop";
 import InputField from "../form/InputField";
 import SelectField from "../form/SelectField";
 import Button from "../global/Button";
@@ -149,7 +150,7 @@ const UserForm = () => {
   return (
     <div className="space-y-4">
       <div className="">
-        <ImageInput
+        <ImageInputAndCrop
           name="profile_picture"
           label="Profile Photo"
           infoText="Upload a clear photo of face"

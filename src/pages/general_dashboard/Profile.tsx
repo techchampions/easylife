@@ -51,8 +51,8 @@ const ProfileScreen: React.FC = () => {
             </div>
             <div className="absolute inset-0 backdrop-blur-3xl"></div>
             <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-primary to-transparent p-6">
-              <div className="flex gap-4">
-                <div className="h-25 md:h-40 w-25 md:w-40 rounded-full overflow-hidden border-4 border-white bg-gray-200">
+              <div className="md:flex gap-4">
+                <div className="h-30 md:h-40 w-30 md:w-40 rounded-full overflow-hidden border-4 border-white bg-gray-200">
                   {user?.profile_picture ? (
                     <img
                       src={user?.profile_picture || ""}

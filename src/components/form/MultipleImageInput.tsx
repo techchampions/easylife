@@ -1,6 +1,7 @@
 import { ErrorMessage, useField } from "formik";
 import { Info, Plus, X } from "lucide-react";
 import React, { useCallback, useRef } from "react";
+import { useToast } from "../../zustand/toast.state";
 
 interface MultiImageInputProps {
   name: string;
@@ -21,6 +22,7 @@ const MultiImageInput: React.FC<MultiImageInputProps> = ({
   maxFileSize = 5 * 1024 * 1024, // 5MB
   maxFiles = 6,
 }) => {
+  const { showToast } = useToast();
   const [field, meta, helpers] = useField<File[]>(name);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const hasError = meta.touched && meta.error;
@@ -30,14 +32,19 @@ const MultiImageInput: React.FC<MultiImageInputProps> = ({
   const validateFile = useCallback(
     (file: File): string | null => {
       if (!acceptedFileTypes.includes(file.type)) {
+        showToast("Unsupported file format", "error");
         return "Unsupported file format";
       }
       if (file.size > maxFileSize) {
+        showToast(
+          `File size too large (max ${maxFileSize / 1024 / 1024}MB)`,
+          "error"
+        );
         return `File size too large (max ${maxFileSize / 1024 / 1024}MB)`;
       }
       return null;
     },
-    [acceptedFileTypes, maxFileSize]
+    [acceptedFileTypes, maxFileSize, showToast]
   );
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
