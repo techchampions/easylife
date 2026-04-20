@@ -130,9 +130,9 @@ const ProfileScreen: React.FC = () => {
                 </p>
               </div>
               <div>
-                <p className="text-gray-500">Genotype:</p>
+                <p className="text-gray-500">Phone No.:</p>
                 <p className="font-medium capitalize">
-                  {user?.genotype || "..."}
+                  {user?.single_user_phone || "..."}
                 </p>
               </div>
               <div>
