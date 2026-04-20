@@ -7,7 +7,6 @@ import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import InputField from "../../form/InputField";
 import SelectField from "../../form/SelectField";
-import TagsInput from "../../form/TagsInputFied";
 import Button from "../../global/Button";
 import MarriageHistory from "./MarriageHistory";
 import SpouseBasicInfo from "./SpouseBasicInfo";
@@ -21,10 +20,11 @@ const validationSchema = Yup.object().shape({
   spouse_race_or_tribe: Yup.string().required("required"),
   spouse_religion: Yup.string().required("required"),
   spouse_denomination: Yup.string().required("required"),
-  spouse_languages: Yup.array()
-    .of(Yup.string().trim().min(2))
-    .max(12, "Too many interests")
-    .min(1, "Add at least one interest"),
+  spouse_languages: Yup.string().required("required"),
+  // spouse_languages: Yup.array()
+  //   .of(Yup.string().trim().min(2))
+  //   .max(12, "Too many interests")
+  //   .min(1, "Add at least one interest"),
 });
 
 const SpouseBasicInfo2: React.FC = () => {
@@ -158,11 +158,11 @@ const SpouseBasicInfo2: React.FC = () => {
                   </div>
                   <div className="space-y-1">
                     {/* <div className="text-lg">spouse_Languages spoken?</div> */}
-                    <TagsInput
+                    <InputField
                       label="Languages spoken"
                       name="spouse_languages"
-                      placeholder="E.g. English... (press enter)"
-                      className=" font-bold rounded-xl"
+                      placeholder="E.g. English..."
+                      className="text-2xl font-bold rounded-xl"
                     />
                   </div>
                 </div>

@@ -264,3 +264,7 @@ export const YesNoOptions = [
   { label: "yes", value: "yes" },
   { label: "no", value: "no" },
 ];
+export const MaritalStatusOption = [
+  { label: "single", value: "single" },
+  { label: "married", value: "married" },
+];

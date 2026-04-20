@@ -2,8 +2,9 @@ import { Form, Formik } from "formik";
 import { ArrowLeft, ArrowRight, PartyPopper } from "lucide-react";
 import React from "react";
 import * as Yup from "yup";
+import { MaritalStatusOption } from "../../const/data";
+import { useUpdateMaritalStatus } from "../../hooks/mutattions/useUser";
 import { useModal } from "../../zustand/modal.state";
-import { useOnboardingFormData } from "../../zustand/onboardingData.state";
 import { useUserStore } from "../../zustand/user.state";
 import RadioGroup from "../form/RadioGroup";
 import Subscription from "../general_dating/Subscription";
@@ -18,11 +19,7 @@ const validationSchema = Yup.object().shape({
 const MaritalStatus: React.FC = () => {
   const modal = useModal();
   const { user } = useUserStore();
-  const { setOnboardingFormData, marital_status } = useOnboardingFormData();
-  const statusOption = [
-    { label: "single", value: "single" },
-    { label: "married", value: "married" },
-  ];
+  const { mutate, isPending } = useUpdateMaritalStatus();
   let plan_marital_status = "";
   if (user?.plan) {
     if (user.plan.id === 1) {
@@ -30,8 +27,8 @@ const MaritalStatus: React.FC = () => {
     } else if (user.plan.id === 2) {
       plan_marital_status = "married";
     }
-  } else if (marital_status) {
-    plan_marital_status = marital_status;
+  } else if (user?.marital_status) {
+    plan_marital_status = user.marital_status;
   }
   const initialValues = { marital_status: plan_marital_status || "" };
   const goBack = () => {
@@ -39,13 +36,21 @@ const MaritalStatus: React.FC = () => {
   };
 
   const handleProceed = async (values: typeof initialValues) => {
-    setOnboardingFormData({
+    const payload = {
       marital_status: values.marital_status,
-    });
+    };
     if (user?.plan) {
       modal.open(<BasicInfo />);
     } else {
-      modal.open(<Subscription />);
+      if (user?.marital_status !== values.marital_status) {
+        mutate(payload, {
+          onSuccess() {
+            modal.open(<Subscription />);
+          },
+        });
+      } else {
+        modal.open(<Subscription />);
+      }
     }
   };
   return (
@@ -91,7 +96,7 @@ const MaritalStatus: React.FC = () => {
                       What is your marital status?
                     </div>
                     <RadioGroup
-                      options={statusOption}
+                      options={MaritalStatusOption}
                       name="marital_status"
                       orientation="horizontal"
                       optionClassName="min-w-[calc(50%-8px)]"
@@ -104,7 +109,8 @@ const MaritalStatus: React.FC = () => {
                   label="Proceed"
                   className="bg-secondary rounded-lg"
                   type="submit"
-                  disabled={!isValid}
+                  isLoading={isPending}
+                  disabled={!isValid || isPending}
                   rightIcon={<ArrowRight />}
                 />
               </div>

@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useOnboarding } from "../../../hooks/mutattions/useOnboarding";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
+import { useUserStore } from "../../../zustand/user.state";
 import ImageInput from "../../form/ImageInput";
 import MultiImageInput from "../../form/MultipleImageInput";
 import Button from "../../global/Button";
@@ -64,7 +65,6 @@ const ProfilePicture: React.FC = () => {
     profile_picture,
     spouse_profile_picture,
     photos,
-    marital_status,
     occupation,
     living_alone,
     career_growth,
@@ -83,6 +83,8 @@ const ProfilePicture: React.FC = () => {
     number_of_children_prev_marriage,
     setOnboardingFormData,
   } = useOnboardingFormData();
+  const { user } = useUserStore();
+  const marital_status = user?.marital_status || "single";
   const initialValues = {
     profile_picture: profile_picture || null,
     spouse_profile_picture: spouse_profile_picture || null,

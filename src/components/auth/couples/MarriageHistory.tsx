@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import { YesNoOptions } from "../../../const/data";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
-import { useToast } from "../../../zustand/toast.state";
 import InputField from "../../form/InputField";
 import RadioGroup from "../../form/RadioGroup";
 import Button from "../../global/Button";
@@ -23,11 +22,9 @@ const validationSchema = Yup.object().shape({
 
 const MarriageHistory: React.FC = () => {
   const modal = useModal();
-  const { showToast } = useToast();
   const {
     setOnboardingFormData,
     previously_married,
-    marital_status,
     prev_marriage_children,
     number_of_children_prev_marriage,
   } = useOnboardingFormData();
@@ -48,9 +45,6 @@ const MarriageHistory: React.FC = () => {
           ? values.prev_marriage_children
           : "",
     });
-    if (!marital_status)
-      showToast("Marital status not selected... pls review form", "info");
-    // if (marital_status === "single") modal.open(<BioData />);
     modal.open(<CouplesInfo1 />);
   };
   return (
