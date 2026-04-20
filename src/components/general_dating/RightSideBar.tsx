@@ -1,10 +1,10 @@
 import { Mail, MapPin, MessageCircle, UserCircle } from "lucide-react";
 import React from "react";
-import { useUserStore } from "../../zustand/user.state";
 import { Link } from "react-router-dom";
 import { useGetCoonversations } from "../../hooks/query/useMessaging";
-import ConversationList from "./ConversationList";
+import { useUserStore } from "../../zustand/user.state";
 import { ConversationListSkeleton } from "../loaders/ConversationSkeleton";
+import ConversationList from "./ConversationList";
 import ItemMessagePlaceholder from "./ItemMessagePaceholder";
 
 const RightSideBar: React.FC = () => {
@@ -15,8 +15,16 @@ const RightSideBar: React.FC = () => {
     <div className="space-y-4 p-5 hidden md:flex flex-col w-full">
       <div className="bg-white rounded-2xl p-5 w-full">
         <div className="flex items-start gap-2">
-          <div className="w-fit">
-            <UserCircle size={40} />
+          <div className="w-12 h-12 rounded-full overflow-hidden">
+            {user?.profile_picture ? (
+              <img
+                src={user.profile_picture}
+                alt=""
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <UserCircle className="w-full h-full" />
+            )}
           </div>
 
           {/* 👇 THIS is the key */}

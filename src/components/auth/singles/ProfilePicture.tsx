@@ -6,7 +6,7 @@ import { useOnboarding } from "../../../hooks/mutattions/useOnboarding";
 import { useModal } from "../../../zustand/modal.state";
 import { useOnboardingFormData } from "../../../zustand/onboardingData.state";
 import { useUserStore } from "../../../zustand/user.state";
-import ImageInput from "../../form/ImageInput";
+import ImageInputAndCrop from "../../form/ImageInputAndCrop";
 import MultiImageInput from "../../form/MultipleImageInput";
 import Button from "../../global/Button";
 import Congrats from "../Congrats";
@@ -14,6 +14,7 @@ import PersonalValues3 from "./PersonalValues3";
 
 const ProfilePicture: React.FC = () => {
   const modal = useModal();
+  const { setIsLoggedIn } = useUserStore();
   const { mutate: proceed, isPending } = useOnboarding();
   const {
     referral_id,
@@ -89,22 +90,10 @@ const ProfilePicture: React.FC = () => {
     profile_picture: profile_picture || null,
     spouse_profile_picture: spouse_profile_picture || null,
     photos: photos || null,
-    // phoneNumber: "",
-    // spousephoneNumber: "",
   };
   const validationSchema = Yup.object().shape({
     profile_picture: Yup.mixed().required("required"),
     photos: Yup.mixed().required("required"),
-    // phoneNumber: Yup.string()
-    //   .required("Phone number is required")
-    //   .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
-    //   .min(10, "Phone number too short"),
-    // ...(marital_status === "married" && {
-    //   spousephoneNumber: Yup.string()
-    //     .required("Phone number is required")
-    //     .matches(/^[0-9+\-\s()]+$/, "Invalid phone number")
-    //     .min(10, "Phone number too short"),
-    // }),
     ...(marital_status === "married" && {
       spouse_profile_picture: Yup.mixed().required(
         "Spouse's picture is required"
@@ -234,7 +223,7 @@ const ProfilePicture: React.FC = () => {
               payload.append("spouse_religion", spouse_religion);
             }
             if (spouse_language) {
-              payload.append("spouse_language", spouse_language[0]);
+              payload.append("spouse_language", spouse_language);
             }
             if (spouse_height) {
               payload.append("spouse_height", spouse_height);
@@ -362,6 +351,7 @@ const ProfilePicture: React.FC = () => {
 
             proceed(payload, {
               onSuccess() {
+                setIsLoggedIn(true);
                 modal.open(<Congrats />);
               },
             });
@@ -378,7 +368,7 @@ const ProfilePicture: React.FC = () => {
                   }
                 >
                   {/* <div className="text-lg">What`s your email address?</div> */}
-                  <ImageInput
+                  <ImageInputAndCrop
                     name="profile_picture"
                     label="Profile Photo"
                     infoText="Upload a clear photo of face"
@@ -387,7 +377,7 @@ const ProfilePicture: React.FC = () => {
                     className="w-fit!"
                   />
                   {marital_status === "married" && (
-                    <ImageInput
+                    <ImageInputAndCrop
                       name="spouse_profile_picture"
                       label="Spouse's Photo"
                       infoText="Upload a clear photo of face"

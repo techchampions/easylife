@@ -212,6 +212,7 @@ const Signup = () => {
         const response = await verify(code);
         if (response.is_exist) {
           setSuccess(true);
+          showToast("Valid referral code", "success");
         } else {
           showToast("Invalid referral code", "error");
           setSuccess(false);

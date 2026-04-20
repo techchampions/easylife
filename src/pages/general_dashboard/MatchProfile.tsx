@@ -151,8 +151,10 @@ const MatchProfileScreen: React.FC = () => {
                   <p className="font-medium">{user?.place_of_birth}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500">No. of children:</p>
-                  <p className="font-medium">No kids</p>
+                  <p className="text-gray-500">Gender:</p>
+                  <p className="font-medium capitalize">
+                    {user?.gender || "..."}
+                  </p>
                 </div>
                 <div>
                   <p className="text-gray-500">Work as:</p>
