@@ -1,13 +1,14 @@
 import { ArrowLeft } from "lucide-react";
 import { subscriptions } from "../../const/data";
 import { useModal } from "../../zustand/modal.state";
-import { useOnboardingFormData } from "../../zustand/onboardingData.state";
+import { useUserStore } from "../../zustand/user.state";
 import MaritalStatus from "../auth/MaritalStatus";
 import PlanCard from "./PlanCard";
 
 const Subscription = () => {
-  const { marital_status } = useOnboardingFormData();
+  const { user } = useUserStore();
   const modal = useModal();
+  const marital_status = user?.marital_status || "single";
   const plan = subscriptions.find((item) => item.type === marital_status);
   const goBack = () => {
     modal.open(<MaritalStatus />);

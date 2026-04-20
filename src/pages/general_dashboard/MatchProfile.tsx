@@ -69,38 +69,61 @@ const MatchProfileScreen: React.FC = () => {
               ) : (
                 <Image className="w-full h-96" />
               )}
+              <div className="absolute inset-0 backdrop-blur-3xl"></div>
 
-              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-6 pt-10">
-                <div className="flex items-end justify-between">
-                  <div>
-                    <h1 className="text-3xl font-bold text-white">
-                      {user?.first_name && user.last_name
-                        ? `${user.first_name} ${user.last_name}`
-                        : "Upadte your profile"}
-                      , {calculateAge(user?.date_of_birth || "")} Yrs
-                    </h1>
-                    <p className="text-white flex items-center gap-2">
-                      <MapPin className="w-5 h-5 text-green-400" />
-                      {user?.state}, {user?.country}
-                    </p>
-                  </div>
-                </div>
-                <div className="text-white mt-4 flex items-center gap-5">
-                  <div className="bg-yellow-500/50 rounded-full cursor-pointer text-yellow-400 p-2">
-                    <Star />
-                  </div>
-                  <div className="bg-red-500/50 rounded-full cursor-pointer text-red-400 p-2">
-                    <Heart />
-                  </div>
-                  <div
-                    onClick={handleChatUser}
-                    className="bg-primary/50 rounded-full cursor-pointer text-blue-400 p-2"
-                  >
-                    {isPending ? (
-                      <Loader2 className="animate-spin" />
+              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black to-transparent p-6 pt-10">
+                <div className="flex gap-4">
+                  <div className="h-25 md:h-40 w-25 md:w-40 rounded-full overflow-hidden border-4 border-white bg-gray-200">
+                    {user?.profile_picture ? (
+                      <img
+                        src={user?.profile_picture || ""}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
                     ) : (
-                      <MessageCircle />
+                      <Image className="w-full h-full" />
                     )}
+                  </div>
+
+                  <div className="flex-1">
+                    <div className="flex items-end justify-between">
+                      <div>
+                        <h1 className="text-3xl font-bold text-white">
+                          {user?.first_name && user.last_name
+                            ? `${user.first_name} ${user.last_name}`
+                            : "Upadte your profile"}
+                          , {calculateAge(user?.date_of_birth || "")} Yrs
+                        </h1>
+                        <p className="text-white flex items-center gap-2">
+                          <MapPin className="w-5 h-5 text-green-400" />
+                          {user?.state}, {user?.country}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-end text-white py-2">
+                      <div className="flex-1 text-sm md:text-base line-clamp-4 md:line-clamp-6">
+                        {user?.short_bio || "..."}
+                      </div>
+                    </div>
+
+                    <div className="text-white mt-0 flex items-center gap-5">
+                      <div className="bg-yellow-500/50 rounded-full cursor-pointer text-yellow-400 p-2">
+                        <Star />
+                      </div>
+                      <div className="bg-red-500/50 rounded-full cursor-pointer text-red-400 p-2">
+                        <Heart />
+                      </div>
+                      <div
+                        onClick={handleChatUser}
+                        className="bg-primary/50 rounded-full cursor-pointer text-blue-400 p-2"
+                      >
+                        {isPending ? (
+                          <Loader2 className="animate-spin" />
+                        ) : (
+                          <MessageCircle />
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

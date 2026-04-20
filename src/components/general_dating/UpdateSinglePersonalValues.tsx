@@ -2,8 +2,9 @@ import { Form, Formik } from "formik";
 import { Save, X } from "lucide-react";
 import React from "react";
 import * as Yup from "yup";
-import { genotypeOptions, heightOptions, sizeOptions } from "../../const/data";
+import { heightOptions, sizeOptions, YesNoOptions } from "../../const/data";
 import { useOnboarding } from "../../hooks/mutattions/useOnboarding";
+import { useModal } from "../../zustand/modal.state";
 import { useUserStore } from "../../zustand/user.state";
 import InputField from "../form/InputField";
 import RadioGroup from "../form/RadioGroup";
@@ -17,11 +18,8 @@ const validationSchema = Yup.object().shape({
 
 const UpdateSinglePersonalValues: React.FC = () => {
   const { user } = useUserStore();
+  const { close } = useModal();
   const { mutate, isPending } = useOnboarding();
-  const livingAloneOptions = [
-    { label: "yes", value: "yes" },
-    { label: "no", value: "no" },
-  ];
   const initialValues = {
     occupation: user?.occupation || "",
     career_growth: user?.career_growth || "",
@@ -66,7 +64,7 @@ const UpdateSinglePersonalValues: React.FC = () => {
             return (
               <Form className="flex flex-col gap-8 justify-between min-h-55">
                 <div className="space-y-5">
-                  <div className="space-y-1">
+                  {/* <div className="space-y-1">
                     <div className="">What is your genotype?</div>
                     <RadioGroup
                       options={genotypeOptions}
@@ -74,7 +72,7 @@ const UpdateSinglePersonalValues: React.FC = () => {
                       optionClassName="min-w-[calc(33%-8px)]"
                       orientation="horizontal"
                     />
-                  </div>
+                  </div> */}
                   <div className="space-y-1">
                     <div className="">What is your height?</div>
                     <RadioGroup
@@ -124,7 +122,7 @@ const UpdateSinglePersonalValues: React.FC = () => {
                   <div className="space-y-1">
                     <div className="">Are you living alone?</div>
                     <RadioGroup
-                      options={livingAloneOptions}
+                      options={YesNoOptions}
                       name="living_alone"
                       orientation="horizontal"
                       optionClassName="min-w-[calc(50%-8px)]"
@@ -205,7 +203,12 @@ const UpdateSinglePersonalValues: React.FC = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-3 w-full gap-4 mt-4">
-                  <Button label="Close" icon={<X />} className="bg-black!" />
+                  <Button
+                    label="Close"
+                    icon={<X />}
+                    className="bg-black!"
+                    onClick={close}
+                  />
                   <Button
                     label="Save"
                     className="bg-secondary col-span-2"

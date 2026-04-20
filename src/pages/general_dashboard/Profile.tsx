@@ -37,7 +37,7 @@ const ProfileScreen: React.FC = () => {
                   // "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
                 }
                 alt="Dasha Daria"
-                className="w-full h-96 object-cover"
+                className="w-full h-96 object-center"
               />
             ) : (
               <Image className="w-full h-96" />
@@ -49,38 +49,56 @@ const ProfileScreen: React.FC = () => {
               {" "}
               <Edit />
             </div>
-            <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-6">
-              <div className="flex items-end justify-between">
-                <div>
-                  <h1 className="text-3xl font-bold text-white">
-                    {user?.first_name && user.last_name
-                      ? user?.first_name + " " + user.last_name
-                      : "Upadte your profile"}
-                    , {calculateAge(user?.date_of_birth || "")} Yrs
-                  </h1>
-                  <p className="text-white flex items-center gap-2">
-                    <MapPin className="text-green-400" size={14} />
-                    {user?.state}, {user?.country}
-                  </p>
+            <div className="absolute inset-0 backdrop-blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-primary to-transparent p-6">
+              <div className="flex gap-4">
+                <div className="h-25 md:h-40 w-25 md:w-40 rounded-full overflow-hidden border-4 border-white bg-gray-200">
+                  {user?.profile_picture ? (
+                    <img
+                      src={user?.profile_picture || ""}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <Image className="w-full h-full" />
+                  )}
                 </div>
-              </div>
-              <div className="flex items-end text-white">
-                <div className="flex-1">{user?.short_bio || "..."}</div>
-              </div>
-              <div className="flex items-center gap-2 mt-2 text-sm">
-                <div
-                  onClick={handleUpdatePRofile}
-                  className="cursor-pointer flex items-center gap-2 text-white bg-secondary/50 hover:bg-secondary/95 py-2 px-4 rounded-xl"
-                >
-                  <Edit size={15} />
-                  <div className="">Edit Profile</div>
-                </div>
-                <div
-                  onClick={handleUpdateValues}
-                  className="cursor-pointer flex items-center gap-2 text-white bg-yellow-500/50 hover:bg-yellow-500/80 py-2 px-4 rounded-xl"
-                >
-                  <FileEdit size={15} />
-                  <div className="">Edit Values</div>
+                <div className="flex-1">
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <h1 className="text-3xl font-bold text-white">
+                        {user?.first_name && user.last_name
+                          ? user?.first_name + " " + user.last_name
+                          : "Upadte your profile"}
+                        , {calculateAge(user?.date_of_birth || "")} Yrs
+                      </h1>
+                      <p className="text-white flex items-center gap-2">
+                        <MapPin className="text-green-400" size={14} />
+                        {user?.state}, {user?.country}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-end text-white py-2">
+                    <div className="flex-1 line-clamp-4 md:line-clamp-6 text-sm md:text-base">
+                      {user?.short_bio || "..."}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 mt-2 text-sm">
+                    <div
+                      onClick={handleUpdatePRofile}
+                      className="cursor-pointer flex items-center gap-2 text-white bg-secondary/50 hover:bg-secondary/95 py-2 px-4 rounded-xl"
+                    >
+                      <Edit size={15} />
+                      <div className="">Edit Profile</div>
+                    </div>
+                    <div
+                      onClick={handleUpdateValues}
+                      className="cursor-pointer flex items-center gap-2 text-white bg-yellow-500/50 hover:bg-yellow-500/80 py-2 px-4 rounded-xl"
+                    >
+                      <FileEdit size={15} />
+                      <div className="">Edit Values</div>
+                    </div>
+                  </div>
                 </div>
               </div>
               {/* <p className="text-white mt-4 text-lg">

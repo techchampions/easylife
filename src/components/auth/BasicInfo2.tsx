@@ -9,11 +9,11 @@ import { useToast } from "../../zustand/toast.state";
 import { useUserStore } from "../../zustand/user.state";
 import InputField from "../form/InputField";
 import SelectField from "../form/SelectField";
-import TagsInput from "../form/TagsInputFied";
 import Button from "../global/Button";
 import BasicInfo from "./BasicInfo";
 import BioData from "./BioData";
 import SpouseBasicInfo from "./couples/SpouseBasicInfo";
+import MaritalStatus from "./MaritalStatus";
 
 const validationSchema = Yup.object().shape({
   address: Yup.string().required("required"),
@@ -22,10 +22,11 @@ const validationSchema = Yup.object().shape({
   nationality: Yup.string().required("required"),
   race_or_tribe: Yup.string().required("required"),
   religion: Yup.string().required("required"),
-  languages: Yup.array()
-    .of(Yup.string().trim().min(2))
-    .max(12, "Too many interests")
-    .min(1, "Add at least one interest"),
+  languages: Yup.string().required("required"),
+  // languages: Yup.array()
+  //   .of(Yup.string().trim().min(2))
+  //   .max(12, "Too many interests")
+  //   .min(1, "Add at least one interest"),
 });
 
 const BasicInfo2: React.FC = () => {
@@ -41,7 +42,6 @@ const BasicInfo2: React.FC = () => {
     denomination,
     language,
     race_or_tribe,
-    marital_status,
     setOnboardingFormData,
   } = useOnboardingFormData();
   const initialValues = {
@@ -85,20 +85,15 @@ const BasicInfo2: React.FC = () => {
               state: values.state,
               country: values.country,
             });
-            if (marital_status) {
-              if (marital_status === "married") modal.open(<SpouseBasicInfo />);
-              if (marital_status === "single") modal.open(<BioData />);
+            if (user?.marital_status) {
+              if (user.marital_status === "married")
+                modal.open(<SpouseBasicInfo />);
+              if (user.marital_status === "single") modal.open(<BioData />);
             } else if (user?.plan) {
               if (user.plan.id === 1) {
-                setOnboardingFormData({
-                  marital_status: "single",
-                });
                 modal.open(<BioData />);
               }
               if (user.plan.id === 2) {
-                setOnboardingFormData({
-                  marital_status: "married",
-                });
                 modal.open(<SpouseBasicInfo />);
               }
             } else {
@@ -106,6 +101,7 @@ const BasicInfo2: React.FC = () => {
                 "Marital status not set... go back to set",
                 "info"
               );
+              modal.open(<MaritalStatus />);
             }
             // console.log(marital_status);
           }}
@@ -142,7 +138,7 @@ const BasicInfo2: React.FC = () => {
                       name="nationality"
                       label="Nationality"
                       type="text"
-                      placeholder="Enter you nationality"
+                      placeholder="Enter your nationality"
                       className="text-2xl font-bold rounded-xl py-3"
                     />
                   </div>
@@ -180,11 +176,11 @@ const BasicInfo2: React.FC = () => {
                   </div>
                   <div className="space-y-1">
                     {/* <div className="text-lg">Languages spoken?</div> */}
-                    <TagsInput
+                    <InputField
                       label="Languages spoken"
                       name="languages"
                       placeholder="E.g. English... (press enter)"
-                      className="font-bold rounded-xl"
+                      className="font-bold rounded-xl text-2xl"
                     />
                   </div>
                 </div>

@@ -32,15 +32,17 @@ export const useLogin = () => {
       // setUser(response.user);
       if (response.success) {
         setToken(response.token);
-        setIsLoggedIn(true);
         if (response.otpVerified && response.profileCompleted) {
+          setIsLoggedIn(true);
           showToast(response.message, "success");
           modal.close();
         } else {
           if (response.otpVerified === false) {
+            setIsLoggedIn(false);
             showToast(`welcome back, Please verify your email`, "info");
             modal.open(<VerifyEmail shouldAutoSend={true} />);
           } else if (response.profileCompleted === false) {
+            setIsLoggedIn(false);
             showToast(`welcome back, Please complete your profile`, "info");
             modal.open(<GetStarted />);
           }
@@ -83,7 +85,7 @@ export const useRegister = () => {
       });
       showToast(response.message || "Registered successfully", "success");
       setUser(response.user);
-      setIsLoggedIn(true);
+      setIsLoggedIn(false);
       setToken(response.token);
       modal.open(<VerifyEmail />);
     },

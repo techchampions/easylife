@@ -16,11 +16,11 @@ export const usePaystackPayment = () => {
     onClose,
   }: PaystackProps) => {
     const paystack = (window as any).PaystackPop?.setup({
-      key: "pk_test_b9e752c6a78ba66ac52db02d686bedf6ccd3a6ac", // 🔁 Replace with your Paystack public key
+      key: "pk_live_d32600ca57ada137b1805d9e7fdfb5fd2d9f3fd8", // 🔁 Replace with your Paystack public key
       email,
       ref: reference,
       amount: amount * 100, // convert to kobo
-      currency: "NGN",
+      currency: "USD",
       callback: onSuccess,
       onClose,
     });
