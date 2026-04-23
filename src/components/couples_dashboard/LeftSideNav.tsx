@@ -10,10 +10,20 @@ import {
   UserCircle,
 } from "lucide-react";
 import { useLogout } from "../../hooks/mutattions/useAuth";
+import { useGetCoonversations } from "../../hooks/query/useMessaging";
 import NavItem from "./NavItem";
 
 function SideNav() {
   const { mutate: logout } = useLogout();
+  const { data } = useGetCoonversations();
+  const unread = data?.conversations.reduce((total, msg) => {
+    return total + (msg.sender_unread || 0);
+  }, 0);
+  const councellingConversations = data?.conversations.find(
+    (item) => item.receiver?.id === 121
+  );
+  const unreadCouncel = councellingConversations?.sender_unread;
+
   const navItems = [
     {
       label: "Home",
@@ -29,11 +39,13 @@ function SideNav() {
       label: "Messages",
       icon: <MessageCircle className="w-4 h-4" />,
       path: `/dashboard/messages`,
+      badge: unread,
     },
     {
       label: "Counseling",
       icon: <HeartHandshake className="w-4 h-4" />,
       path: `/dashboard/counselling`,
+      badge: unreadCouncel,
     },
     {
       label: "Mentorship",
@@ -68,6 +80,7 @@ function SideNav() {
               label={item.label}
               icon={item.icon}
               path={item.path}
+              badge={item.badge}
             />
           ))}
         </nav>

@@ -12,22 +12,27 @@ import ItemMessagePlaceholder from "../../components/general_dating/ItemMessageP
 import ChatArea from "../../components/general_dating/ChatArea2";
 import { useStartCounsellingSession } from "../../hooks/mutattions/useMessaging";
 import { useGetUserByID } from "../../hooks/query/useGetAllUsers";
-import { useGetMessages } from "../../hooks/query/useMessaging";
+import {
+  useGetCoonversations,
+  useGetMessages,
+} from "../../hooks/query/useMessaging";
 
 const CounselingPage: React.FC = () => {
   const { mutate: startChat, isPending: isStartingChat } =
     useStartCounsellingSession();
-  const [counselID, setcounselID] = useState<string>();
-  const [receiver, setReceiver] = useState<number>();
+  const { data: conversationData } = useGetCoonversations();
+  const counsellor = conversationData?.conversations.find(
+    (item) => item.receiver?.id === 121
+  );
+  const [counselID, setcounselID] = useState<string>(
+    counsellor?.conversation || ""
+  );
+  const [receiver, setReceiver] = useState<number>(121);
   const { data: userData } = useGetUserByID(receiver || "");
   const user = userData?.user_profile;
   const { data, isLoading } = useGetMessages(counselID || "");
   const navigate = useNavigate();
   const handleStartCounceling = () => {
-    // const payload = {
-    //   receiver: receiver,
-    // };
-
     startChat(undefined, {
       onSuccess(data) {
         setcounselID(data.chatid);
