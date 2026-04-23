@@ -10,6 +10,7 @@ import Toast from "../components/global/Toast";
 import { useGetUser } from "../hooks/query/useUser";
 import SocialFeedPage from "../pages/couples/Mentorship";
 import ChatScreen from "../pages/general_dashboard/ChatScreen";
+import CounselingPage from "../pages/general_dashboard/Counselling";
 import Discover from "../pages/general_dashboard/Discover";
 import Index from "../pages/general_dashboard/Index";
 import MatchProfileScreen from "../pages/general_dashboard/MatchProfile";
@@ -66,6 +67,7 @@ const AppRoutes = () => {
                   path="messages/:receiver/chat/:conversation_id"
                   element={<ChatScreen />}
                 />
+                <Route path="counselling" element={<CounselingPage />} />
                 <Route path="notifications" element={<Notifications />} />
                 <Route path="profile" element={<ProfileScreen />} />
                 <Route

@@ -1,11 +1,16 @@
 import { Search } from "lucide-react";
 import React from "react";
+import Button from "../global/Button";
 
 interface ItemMessagePlaceholderProps {
   title?: string;
   message?: string;
   icon?: React.ReactNode; // This allows you to pass any React element as an icon
   size?: "screen" | "small";
+  isAction?: boolean;
+  action?: () => void;
+  actionText?: string;
+  isLoading?: boolean;
 }
 
 const ItemMessagePlaceholder: React.FC<ItemMessagePlaceholderProps> = ({
@@ -13,6 +18,10 @@ const ItemMessagePlaceholder: React.FC<ItemMessagePlaceholderProps> = ({
   message,
   icon,
   size = "screen",
+  isAction = false,
+  isLoading = false,
+  action,
+  actionText,
 }) => {
   return (
     <div
@@ -31,6 +40,14 @@ const ItemMessagePlaceholder: React.FC<ItemMessagePlaceholderProps> = ({
       >
         {message}
       </p>
+      {isAction && (
+        <Button
+          label={actionText || ""}
+          onClick={action}
+          isLoading={isLoading}
+          className="w-fit! px-6 mt-5"
+        />
+      )}
     </div>
   );
 };

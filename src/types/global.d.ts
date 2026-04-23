@@ -457,6 +457,13 @@ interface MessagesResponse {
   receiver: string;
   compose: Compose;
 }
+interface CounsellingMessagesResponse {
+  success: boolean;
+  messages: Message[];
+  chatid: string;
+  chats: Compose;
+  admin: User;
+}
 
 interface Compose {
   id: number;

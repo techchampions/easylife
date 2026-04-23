@@ -1,6 +1,7 @@
 import {
   Bell,
   CirclePile,
+  HeartHandshake,
   Home,
   LogOut,
   MessageCircle,
@@ -8,8 +9,8 @@ import {
   Settings,
   UserCircle,
 } from "lucide-react";
-import NavItem from "./NavItem";
 import { useLogout } from "../../hooks/mutattions/useAuth";
+import NavItem from "./NavItem";
 
 function SideNav() {
   const { mutate: logout } = useLogout();
@@ -28,6 +29,11 @@ function SideNav() {
       label: "Messages",
       icon: <MessageCircle className="w-4 h-4" />,
       path: `/dashboard/messages`,
+    },
+    {
+      label: "Counseling",
+      icon: <HeartHandshake className="w-4 h-4" />,
+      path: `/dashboard/counselling`,
     },
     {
       label: "Mentorship",

@@ -1,21 +1,22 @@
-import React from "react";
 import {
-  User,
-  Lock,
   CreditCard,
+  HeartHandshake,
   // Shield,
   // FileText,
   HelpCircle,
-  Trash2,
+  Lock,
   LogOut,
+  Trash2,
+  User,
 } from "lucide-react";
-import Header from "../../components/global/Header";
-import { useModal } from "../../zustand/modal.state";
-import UpdateProfile from "../../components/general_dating/UpdateProfile";
-import UpdatePassword from "../../components/general_dating/UpdatePassword";
-import DeleteAccount from "../../components/general_dating/DeleteAccount";
-import { useLogout } from "../../hooks/mutattions/useAuth";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import DeleteAccount from "../../components/general_dating/DeleteAccount";
+import UpdatePassword from "../../components/general_dating/UpdatePassword";
+import UpdateProfile from "../../components/general_dating/UpdateProfile";
+import Header from "../../components/global/Header";
+import { useLogout } from "../../hooks/mutattions/useAuth";
+import { useModal } from "../../zustand/modal.state";
 
 const Settings = () => {
   const modal = useModal();
@@ -42,6 +43,13 @@ const Settings = () => {
       color: "text-gray-700",
       onclick: () => navigate("/dashboard/my-subscription"),
     },
+    {
+      icon: HeartHandshake,
+      label: "Counselling",
+      color: "text-gray-700",
+      onclick: () => navigate("/dashboard/counselling"),
+    },
+
     // { icon: Shield, label: "Privacy", color: "text-gray-700" },
     // { icon: FileText, label: "Terms and Policies", color: "text-gray-700" },
     { icon: HelpCircle, label: "Help & Support", color: "text-gray-700" },
