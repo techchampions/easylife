@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.min.css";
 // OR
 import { CalendarDays, Info } from "lucide-react";
 import "react-datepicker/dist/react-datepicker.css";
+import { formatDateSimple } from "../../utils/formatter";
 interface DatePickerInputProps {
   name: string;
   label?: string;
@@ -30,7 +31,8 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
   const [field, meta] = useField(name);
 
   const handleChange = (date: Date | null) => {
-    setFieldValue(name, date);
+    const formatedDate = formatDateSimple(String(date));
+    setFieldValue(name, formatedDate);
   };
   const hasError = meta.touched && meta.error;
 

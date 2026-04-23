@@ -124,6 +124,13 @@ export const sendMessage = async (
   });
   return response.data;
 };
+export const startCounsellingSession =
+  async (): Promise<CounsellingMessagesResponse> => {
+    const response = await api.post("/chat/intialise-admin-counselling", {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data;
+  };
 
 export const getMessages = async (
   conversation_id: string
