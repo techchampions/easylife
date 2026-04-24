@@ -11,11 +11,13 @@ import {
 } from "lucide-react";
 import { useLogout } from "../../hooks/mutattions/useAuth";
 import { useGetCoonversations } from "../../hooks/query/useMessaging";
+import { useUserStore } from "../../zustand/user.state";
 import NavItem from "./NavItem";
 
 function SideNav() {
   const { mutate: logout } = useLogout();
   const { data } = useGetCoonversations();
+  const { user } = useUserStore();
   const unread = data?.conversations.reduce((total, msg) => {
     return total + (msg.sender_unread || 0);
   }, 0);
@@ -30,11 +32,15 @@ function SideNav() {
       icon: <Home className="w-4 h-4" />,
       path: `/dashboard`,
     },
-    {
-      label: "Discover",
-      icon: <Search className="w-4 h-4" />,
-      path: `/dashboard/discover`,
-    },
+    ...(user?.marital_status === "single"
+      ? [
+          {
+            label: "Discover",
+            icon: <Search className="w-4 h-4" />,
+            path: `/dashboard/discover`,
+          },
+        ]
+      : []),
     {
       label: "Messages",
       icon: <MessageCircle className="w-4 h-4" />,
@@ -77,7 +83,7 @@ function SideNav() {
           {navItems.map((item, index) => (
             <NavItem
               key={index}
-              label={item.label}
+              label={item?.label}
               icon={item.icon}
               path={item.path}
               badge={item.badge}

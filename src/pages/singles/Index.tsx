@@ -31,7 +31,7 @@ const SinglesPageIndex: React.FC = () => {
             {pills.map((pill) => (
               <Link
                 to={`/dashboard/${pill}`}
-                className="capitalize border-2 border-secondary text-secondary hover:bg-secondary hover:text-white px-4 py-2 rounded-lg"
+                className="capitalize text-sm md:text-base truncate border-2 border-secondary text-secondary hover:bg-secondary hover:text-white px-4 py-2 rounded-lg"
                 key={pill}
               >
                 {pill}

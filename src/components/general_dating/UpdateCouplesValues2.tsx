@@ -1,11 +1,12 @@
 import { Form, Formik } from "formik";
-import { Save, X } from "lucide-react";
+import { Save } from "lucide-react";
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { YesNoOptions } from "../../const/data";
 import { useOnboarding } from "../../hooks/mutattions/useOnboarding";
 import { useUserStore } from "../../zustand/user.state";
 import InputField from "../form/InputField";
+import NumberInput from "../form/NumberInput";
 import RadioGroup from "../form/RadioGroup";
 import Button from "../global/Button";
 import HusbandForm from "./HusbandForm";
@@ -20,7 +21,7 @@ const validationSchema = Yup.object().shape({
   }),
 });
 
-const UpdateCouplesValues: React.FC = () => {
+const UpdateCouplesValues2: React.FC = () => {
   const { user } = useUserStore();
   const { mutate, isPending } = useOnboarding();
 
@@ -52,11 +53,7 @@ const UpdateCouplesValues: React.FC = () => {
     mutate(payload);
   };
   return (
-    <div className="flex flex-col w-md max-w-xs md:max-w-md max-h-[75vh] overflow-y-scroll scrollbar-hide">
-      <div className="flex flex-col mb-5 ">
-        <div className="text-2xl font-bold">Update Couple's Assessment</div>
-        <hr className="w-4/5 text-gray-300" />
-      </div>
+    <div className="bg-white p-4 md:p-8 mt-4 rounded-2xl">
       <div className="flex flex-col justify-between mt-0">
         <Formik
           initialValues={initialValues}
@@ -66,46 +63,55 @@ const UpdateCouplesValues: React.FC = () => {
         >
           {({ isValid, values }) => (
             <Form className="flex flex-col justify-between">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl flex-1 font-semibold text-gray-800">
+                  Couple's values
+                </h2>
+                <Button
+                  label="Save changes"
+                  loadingText="Saving..."
+                  icon={<Save size={15} />}
+                  type="submit"
+                  isLoading={isPending}
+                  disabled={isPending || !isValid}
+                  className="w-fit! px-5 text-sm"
+                />
+              </div>
+
               <div className="space-y-8 my-5">
-                <div className="space-y-1">
-                  <div className="">Have you been previously married?</div>
+                <div className="grid md:grid-cols-2 gap-2">
                   <RadioGroup
+                    label="Have you been previously married?"
                     options={YesNoOptions}
                     name="previously_married"
                     orientation="horizontal"
+                    className=""
                     optionClassName="min-w-[calc(50%-8px)]"
                   />
-                </div>
-                {values.previously_married === "yes" && (
-                  <div className="space-y-1">
-                    <div className="">
-                      Number of children in previous marriage
-                    </div>
-                    <InputField
+                  {values.previously_married === "yes" && (
+                    <NumberInput
+                      label="Number of children from previous marriage"
                       name="number_of_children"
                       placeholder="Number of children."
                       className=""
                     />
-                  </div>
-                )}
-                <div className="space-y-1">
-                  <div className="">How long have you been married?</div>
-                  <InputField
+                  )}
+                </div>
+                <div className="grid md:grid-cols-2 gap-2">
+                  <NumberInput
+                    label="How long have you been married?"
                     name="marriageLength"
-                    type="text"
                     placeholder="Number of years married"
                     className=""
                   />
-                </div>
-
-                <div className="space-y-1">
-                  <div className="">Number of children in current marriage</div>
-                  <InputField
+                  <NumberInput
+                    label="Number of children in current marriage"
                     name="number_of_children"
                     placeholder="Number of children."
                     className=""
                   />
                 </div>
+
                 <div className="sticky top-0 z-40 p-0 bg-white">
                   <div className="relative grid grid-cols-2 gap-2 bg-gray-100 rounded-lg h-11.25 mb-5">
                     <div
@@ -121,7 +127,14 @@ const UpdateCouplesValues: React.FC = () => {
                         key={i}
                         onClick={() => settab(t)}
                       >
-                        {t == "male" ? "Husband" : "Wife"}
+                        <div className="hidden md:block">
+                          {t == "male"
+                            ? "Husband's Assessment"
+                            : "Wife's Assessment"}
+                        </div>
+                        <div className="block md:hidden">
+                          {t == "male" ? "Husband" : "Wife"}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -133,29 +146,15 @@ const UpdateCouplesValues: React.FC = () => {
                 <div className={`${tab == "female" ? "block" : "hidden"}`}>
                   <WifeForm />
                 </div>
-                <InputField
-                  label="Are there other things about the marriage you may wish the counseling team to know?"
-                  name="other_issues"
-                  type="textarea"
-                  placeholder="Please indicate if here."
-                  className=""
-                />
-              </div>
-              <div className="grid grid-cols-2 w-full gap-4 mt-4">
-                <Button
-                  label="Cancel"
-                  icon={<X />}
-                  className="bg-black! rounded-lg"
-                  disabled={isPending}
-                />
-                <Button
-                  label="Save"
-                  icon={<Save />}
-                  className="bg-secondary rounded-lg"
-                  type="submit"
-                  isLoading={isPending}
-                  disabled={!isValid || isPending}
-                />
+                <div className="">
+                  <InputField
+                    label="Are there other things about the marriage you may wish the counseling team to know?"
+                    name="other_issues"
+                    type="textarea"
+                    placeholder="Please indicate if here."
+                    className=""
+                  />
+                </div>
               </div>
             </Form>
           )}
@@ -165,4 +164,4 @@ const UpdateCouplesValues: React.FC = () => {
   );
 };
 
-export default UpdateCouplesValues;
+export default UpdateCouplesValues2;

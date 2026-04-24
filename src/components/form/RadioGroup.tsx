@@ -10,6 +10,7 @@ interface Option {
 interface RadioGroupProps {
   name: string;
   label?: string;
+  disables?: boolean;
   options: Option[];
   className?: string;
   optionClassName?: string;
@@ -19,6 +20,7 @@ interface RadioGroupProps {
 const RadioGroup: React.FC<RadioGroupProps> = ({
   name,
   label,
+  disables = false,
   options,
   className = "",
   optionClassName = "",
@@ -30,7 +32,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
   return (
     <div className={`w-full ${className}`}>
       {label && (
-        <p className="mb-2 font-medium text-gray-700 text-sm">{label}</p>
+        <p className="mb-1 font-medium text-gray-700 text-sm">{label}</p>
       )}
 
       <div
@@ -83,6 +85,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
               <input
                 type="radio"
                 {...field}
+                disabled={disables}
                 value={option.value}
                 checked={isSelected}
                 onChange={() => helpers.setValue(option.value)}

@@ -30,6 +30,7 @@ const InputField: React.FC<InputFieldProps> = ({
   icon,
   rightIcon,
   className = "",
+
   rows = 4,
 }) => {
   const [field, meta] = useField(name);
@@ -38,11 +39,11 @@ const InputField: React.FC<InputFieldProps> = ({
 
   return (
     <div className="w-full">
-      {label && <div className="text-sm text-gray-500">{label}</div>}
+      {label && <div className="text-sm mb-1 text-gray-500">{label}</div>}
       <div
         className={`w-full relative flex ${
           isTextarea ? "flex-col" : "flex-row"
-        } border bg-transaparent rounded-xl font-bold py-3 ${
+        } border bg-transaparent rounded-xl py-3 ${
           hasError ? "border-red-500" : "border-zinc-200"
         } ${className}`}
       >

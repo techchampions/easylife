@@ -4,6 +4,8 @@ import { Edit, FileEdit, Image, MapPin } from "lucide-react";
 import React from "react";
 import PhotoGallery from "../../components/general_dating/PhotoGallery";
 import UpdateCouplesValues from "../../components/general_dating/UpdateCouplesValues";
+import UpdateCouplesValues2 from "../../components/general_dating/UpdateCouplesValues2";
+import UpdatePersonalValues from "../../components/general_dating/UpdatePersonalValues";
 import UpdateProfile from "../../components/general_dating/UpdateProfile";
 import UpdateSinglePersonalValues from "../../components/general_dating/UpdateSinglePersonalValues";
 import Header from "../../components/global/Header";
@@ -108,7 +110,7 @@ const ProfileScreen: React.FC = () => {
             </div>
           </div>
           {/* About Section */}
-          <div className="p-8 bg-white rounded-2xl mt-4">
+          <div className="p-4 md:p-8 bg-white rounded-2xl mt-4">
             <h2 className="text-xl font-semibold text-gray-800 mb-6">About</h2>
             <div className="grid grid-cols-2 gap-6 text-sm">
               <div>
@@ -175,6 +177,9 @@ const ProfileScreen: React.FC = () => {
               </div>
             </div>
           </div>
+
+          {user?.marital_status === "single" && <UpdatePersonalValues />}
+          {user?.marital_status === "married" && <UpdateCouplesValues2 />}
           <PhotoGallery />
         </div>
       </div>

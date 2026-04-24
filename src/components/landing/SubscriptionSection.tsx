@@ -1,9 +1,10 @@
 import { subscriptions } from "../../const/data";
+import { useGetPlans } from "../../hooks/query/useGetPlans";
 import PlanCard from "./Plancard";
 
 const SubscriptionSection = () => {
-  // const { data } = useGetPlans();
-  const plans = subscriptions;
+  const { data } = useGetPlans();
+  const plans = data || subscriptions;
   return (
     <div className="w-full md:w-[70%] mx-auto space-y-10">
       <div className="text-center space-y-4">

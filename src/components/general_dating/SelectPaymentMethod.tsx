@@ -18,6 +18,7 @@ interface Prop {
     id: number;
     name: string;
     price: number;
+    naira_price: number;
     duration: number;
     features?: string[];
     type: string;
