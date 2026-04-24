@@ -246,6 +246,7 @@ interface Plan {
   id: number;
   name: string;
   price: number;
+  naira_price: number;
   duration: number;
   type: string;
   features: string[];

@@ -11,10 +11,10 @@ const CouplesLoveContainer: React.FC = () => {
         <Heart fill="red" size={100} stroke="#f9f4f7" />
       </div>
 
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-2 gap-2 md:gap-5">
         <div className="col-span-1">
           <div className="space-y-2">
-            <div className="h-82 w-full rounded-2xl overflow-hidden">
+            <div className="h-75 md:h-95 w-full rounded-2xl overflow-hidden">
               {user?.profile_picture ? (
                 <img
                   src={user?.profile_picture}
@@ -25,7 +25,7 @@ const CouplesLoveContainer: React.FC = () => {
                 <UserCircle />
               )}
             </div>
-            <div className="bg-white rounded-2xl px-4 py-2">
+            <div className="bg-white rounded-2xl px-4 py-2 text-sm md:text-base">
               <div className="">
                 <span>Name: </span>
                 <span>
@@ -47,7 +47,7 @@ const CouplesLoveContainer: React.FC = () => {
         </div>
         <div className="col-span-1">
           <div className="space-y-2">
-            <div className="h-82 w-full rounded-2xl overflow-hidden bg-gray-500 flex items-center justify-center">
+            <div className="h-75 md:h-95 w-full rounded-2xl overflow-hidden bg-gray-500 flex items-center justify-center">
               {user?.spouse_profile_picture ? (
                 <img
                   src={user?.spouse_profile_picture || ""}
@@ -58,7 +58,7 @@ const CouplesLoveContainer: React.FC = () => {
                 <UserCircle className="text-gray-200 w-20 h-20" />
               )}
             </div>
-            <div className="bg-white rounded-2xl px-4 py-2">
+            <div className="bg-white rounded-2xl px-4 py-2 text-sm md:text-base">
               <div className="">
                 <span>Name: </span>
                 <span>

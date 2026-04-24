@@ -20,7 +20,7 @@ export const usePaystackPayment = () => {
       email,
       ref: reference,
       amount: amount * 100, // convert to kobo
-      currency: "USD",
+      currency: "NGN",
       callback: onSuccess,
       onClose,
     });

@@ -3,6 +3,7 @@ export const subscriptions: Plan[] = [
     id: 1,
     name: "Singles Plan",
     price: 50,
+    naira_price: 75000,
     duration: 6,
     type: "single",
     features: [
@@ -22,6 +23,7 @@ export const subscriptions: Plan[] = [
     id: 2,
     name: "Couples Plan",
     price: 60,
+    naira_price: 90000,
     duration: 12,
     type: "married",
     features: [

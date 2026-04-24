@@ -18,6 +18,7 @@ const Congrats: React.FC = () => {
             click the button below to view your dashboard. Thank you{" "}
           </div>
           <LinkButton
+            link="#"
             label="Proceed"
             rightIcon={<ArrowRight />}
             className="mt-5 bg-secondary"

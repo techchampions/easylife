@@ -7,9 +7,11 @@ import PlanCard from "./PlanCard";
 
 const Subscription = () => {
   const { user } = useUserStore();
+  // const { data } = useGetPlans();
   const modal = useModal();
   const marital_status = user?.marital_status || "single";
   const plan = subscriptions.find((item) => item.type === marital_status);
+  // const plan = data?.find((item) => sub?.id === item.id);
   const goBack = () => {
     modal.open(<MaritalStatus />);
   };

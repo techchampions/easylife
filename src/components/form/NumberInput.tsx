@@ -108,7 +108,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
     <div className="w-full text-left">
       {label && (
         <div
-          className={`text-xs mb-1 ${
+          className={`text-sm mb-1 ${
             theme === "dark" ? "text-gray-300" : "text-gray-600"
           }`}
         >

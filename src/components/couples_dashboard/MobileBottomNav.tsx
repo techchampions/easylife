@@ -1,30 +1,70 @@
-import { CirclePile, Home, MessageCircle, Search } from "lucide-react";
+import {
+  CirclePile,
+  HeartHandshake,
+  Home,
+  MessageCircle,
+  Search,
+} from "lucide-react";
 import React from "react";
+import { useGetCoonversations } from "../../hooks/query/useMessaging";
+import { useUserStore } from "../../zustand/user.state";
 import MobileNavItem from "./MobileNavItem";
 // import { useUserStore } from "../../zustand/user.state";
 const MobileBottomNav: React.FC = () => {
-  // const { user } = useUserStore();
+  const { user } = useUserStore();
+  const { data } = useGetCoonversations();
+
+  const unread = data?.conversations.reduce((total, msg) => {
+    return total + (msg.sender_unread || 0);
+  }, 0);
+  const councellingConversations = data?.conversations.find(
+    (item) => item.receiver?.id === 121
+  );
+  const unreadCouncel = councellingConversations?.sender_unread;
+  console.log(unread, unreadCouncel);
   const NAVITEMS = [
     {
       label: "Home",
       icon: <Home size={25} />,
       path: `/dashboard`,
-      // path: `/${user?.marital_status === "married" ? "couples" : "singles"}`,
     },
-    {
-      label: "Discover",
-      icon: <Search size={25} />,
-      path: `/dashboard/discover`,
-    },
-    {
-      label: "Mentorship",
-      icon: <CirclePile size={25} />,
-      path: `/dashboard/mentorship`,
-    },
+    ...(user?.marital_status === "single"
+      ? [
+          {
+            label: "Discover",
+            icon: <Search size={25} />,
+            path: `/dashboard/discover`,
+          },
+        ]
+      : [
+          {
+            label: "Counselling",
+            icon: <HeartHandshake size={25} />,
+            path: `/dashboard/counselling`,
+            badgeCount: unreadCouncel,
+          },
+        ]),
+    ...(user?.marital_status === "married"
+      ? [
+          {
+            label: "Mentorship",
+            icon: <CirclePile size={25} />,
+            path: `/dashboard/mentorship`,
+          },
+        ]
+      : [
+          {
+            label: "Counselling",
+            icon: <HeartHandshake size={25} />,
+            path: `/dashboard/counselling`,
+            badgeCount: unreadCouncel,
+          },
+        ]),
     {
       label: "Messages",
       icon: <MessageCircle size={25} />,
       path: `/dashboard/messages`,
+      badgeCount: unread,
     },
   ];
   return (
@@ -35,6 +75,7 @@ const MobileBottomNav: React.FC = () => {
           label={item.label}
           icon={item.icon}
           path={item.path}
+          badgeCount={item.badgeCount}
         />
       ))}
     </nav>

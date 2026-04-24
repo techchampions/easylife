@@ -174,6 +174,81 @@ const MatchProfileScreen: React.FC = () => {
                 </div>
               </div>
             </div>
+            {user?.marital_status === "single" && (
+              <div className="p-8 bg-white rounded-2xl mt-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-6">
+                  Personal Values
+                </h2>
+                <div className="space-y-3 grid md:grid-cols-2">
+                  <div className="">
+                    <div className="text-gray-500">Strengths:</div>
+                    <div className="ml-4 text-sm">
+                      {user?.single_user_strength || "..."}
+                    </div>
+                  </div>
+                  <div className="">
+                    <div className="text-gray-500">Weakness:</div>
+                    <div className="ml-4 text-sm">
+                      {user?.single_user_weakness || "..."}
+                    </div>
+                  </div>
+                  <div className="">
+                    <div className="text-gray-500">Health challenges:</div>
+                    <div className="ml-4 text-sm">
+                      {user?.health_challenges || "..."}
+                    </div>
+                  </div>
+                  <div className="">
+                    <div className="text-gray-500">Disabilities:</div>
+                    <div className="ml-4 text-sm">
+                      {user?.disabilities || "..."}
+                    </div>
+                  </div>
+                  <div className="">
+                    <div className="text-gray-500">Career goals:</div>
+                    <div className="ml-4 text-sm">
+                      {user?.career_growth || "..."}
+                    </div>
+                  </div>
+                  <div className="">
+                    <div className="text-gray-500">Living alone:</div>
+                    <div className="ml-4 text-sm">
+                      {user?.living_alone || "..."}
+                    </div>
+                  </div>
+                  <div className="">
+                    <div className="text-gray-500">
+                      What i dislikes in a partner:
+                    </div>
+                    <div className="ml-4 text-sm">
+                      {user?.single_user_tolerance || "..."}
+                    </div>
+                  </div>
+                  <div className="">
+                    <div className="text-gray-500">My type of partner:</div>
+                    <div className="ml-4 text-sm">
+                      {user?.single_user_type_of_spouse || "..."}
+                    </div>
+                  </div>
+                  <div className="">
+                    <div className="text-gray-500">
+                      What i bring to the table:
+                    </div>
+                    <div className="ml-4 text-sm">
+                      {user?.single_user_table_pack || "..."}
+                    </div>
+                  </div>
+                  <div className="">
+                    <div className="text-gray-500">
+                      Why i want to get married:
+                    </div>
+                    <div className="ml-4 text-sm">
+                      {user?.why_get_married || "..."}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* PHOTO GALLERY */}
             <div className="p-8 bg-white rounded-2xl mt-4">

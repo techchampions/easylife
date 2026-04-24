@@ -12,7 +12,7 @@ const MobileNavItem: React.FC<NavItemProps> = ({
   label,
   icon,
   path,
-  badgeCount,
+  badgeCount = 0,
 }) => {
   return (
     <NavLink
@@ -26,8 +26,8 @@ const MobileNavItem: React.FC<NavItemProps> = ({
     >
       <div className={`relative `}>
         {icon}
-        {badgeCount && badgeCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+        {badgeCount > 0 && (
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-fit px-1 h-4 flex items-center justify-center rounded-full">
             {badgeCount}
           </span>
         )}
