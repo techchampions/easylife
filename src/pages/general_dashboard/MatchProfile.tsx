@@ -218,7 +218,7 @@ const MatchProfileScreen: React.FC = () => {
                   </div>
                   <div className="">
                     <div className="text-gray-500">
-                      What i dislikes in a partner:
+                      What i dislike in a partner:
                     </div>
                     <div className="ml-4 text-sm">
                       {user?.single_user_tolerance || "..."}
